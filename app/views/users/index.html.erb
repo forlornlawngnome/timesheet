@@ -35,7 +35,7 @@
 		    <td><%= link_to user.full_name, admin_view_user_path(user), method: :get %></td>
 			<td><%= user.admin?%></td>
 			<td><%= user.email %></td>
-			<td><%= user.phone %></td>
+			<td><%= number_to_phone(user.phone , area_code: true) %></td>
 			<td><%= user.school.name rescue ""%></td>
 			<td class=<%="#{tools_in}"%>><%= user.tools %></td>
 			<td class=<%="#{conduct_in}"%>><%= user.conduct %></td>

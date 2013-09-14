@@ -11,7 +11,7 @@
 
 	<p>
 	<b>Phone Number:</b>
-	<%= @user.phone %>
+	<%= number_to_phone(@user.phone , area_code: true) %>
 	</p>
 	<p>
 	<b>ID Number:</b>
