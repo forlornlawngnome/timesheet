@@ -1,5 +1,5 @@
 <%if current_user.try(:admin)%>
-<%= form_for(@user, :url => admin_update_user_path(@user)) do |f| %>
+<%= form_for(@user, :url => admin_save_user_path(@user)) do |f| %>
 
 <div class="row">
 	<div class="col-lg-2">
