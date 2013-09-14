@@ -3,7 +3,7 @@ Timesheet::Application.routes.draw do
 
 
   resources :timelogs 
-  resources :users, only: [:index, :remove, :view, :edit, :new, :create, :update]
+  resources :users, only: [:index, :remove, :view, :edit, :new, :create, :save]
 
   get "welcome/index"
 
@@ -17,7 +17,7 @@ Timesheet::Application.routes.draw do
   match 'users/delete/:id' => 'users#remove', :via => :delete, :as => :admin_remove_user
   match 'users/view/:id' => 'users#view', :via => :get, :as => :admin_view_user
   match 'users/edit/:id' => 'users#edit', :via => :get, :as => :admin_edit_user
-  match 'users/update/:id' => 'users#save', :va => :put, :as => :admin_update_user
+  match 'users/save/:id' => 'users#save', :va => :put, :as => :admin_save_user
   match 'users/new' => 'users#new', :via => :get, :as => :admin_new_user
   match 'users/create' => 'users#create', :via => :post, :as => :admin_create_user
   # The priority is based upon order of creation:
