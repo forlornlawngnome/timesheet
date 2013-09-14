@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>Timesheet</title>
+	  <%= stylesheet_link_tag    "application", :media => "all" %>
+	  <%= javascript_include_tag "application" %>
+	  <%= csrf_meta_tags %>
+	</head>
+	<body style = "padding-top: 70px;">
+		<div class="container">
+			<% if user_signed_in? %>
+				<%=render "/layouts/navIn"%>
+			<% else %>
+				<%=render "/layouts/navOut"%>
+			<%end%>
+			
+			<%if notice%>
+				<div class="alert alert-success"><%= notice %></div>
+			<%elsif alert%>
+				<div class="alert alert-warning"><%= alert %></div>
+			<%end%>
+		
+
+			<%= yield %>
+		</div>
+
+	</body>
+</html>

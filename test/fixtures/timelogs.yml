@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  owner: 
+  timein: 2013-08-30 16:03:15
+  timeout_timestamp: MyString
+
+two:
+  owner: 
+  timein: 2013-08-30 16:03:15
+  timeout_timestamp: MyString

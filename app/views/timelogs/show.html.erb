@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+<%if current_user.try(:admin)%>
+<p>
+  <b>User:</b>
+  <%= @timelog.user.try(:full_name)%>
+</p>
+
+<p>
+  <b>Timein:</b>
+  <%= @timelog.timein %>
+</p>
+
+<p>
+  <b>Timeout timestamp:</b>
+  <%= @timelog.timeout %>
+</p>
+
+<p>
+  <b>Hours Logged:</b>
+  <%= Time.at(@timelog.time_logged).utc.strftime("%H:%M:%S") %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_timelog_path(@timelog) %> |
+<%= link_to 'Back', timelogs_path %>
+<%end%>

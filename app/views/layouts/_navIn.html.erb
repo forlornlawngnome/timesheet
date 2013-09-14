@@ -1,0 +1,22 @@
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <%=link_to "Zebracorns", root_path, :class=>"navbar-brand"%>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div>
+    <ul class="nav navbar-nav">
+		<%if current_user.try(:admin)%>
+			<li><%=link_to "Student Login", studentlogin_path%></li>
+			<li><%=link_to "Students", users_path%></li>
+		<%end%>
+		<li><%=link_to "Profile", admin_view_user_path(current_user)%></li>
+    </ul>
+    
+    <ul class="nav navbar-nav navbar-right pull-right">
+      <li><%= link_to('Edit registration', edit_user_registration_path) %></li>
+      <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>

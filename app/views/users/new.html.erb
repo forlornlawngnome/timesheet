@@ -1,0 +1,49 @@
+<%if current_user.try(:admin)%>
+<%= form_for(:user, :as => :post, :url => admin_create_user_path, :html =>{ :class=>"form-horizontal", :role=>"form"}) do |f| %>
+	<div class="row">
+		<div class="col-lg-2">
+		</div>
+		<div class="col-lg-8">
+			<h3>New User</h3>
+			<hr />
+		    <div><%= f.label "First Name" %><br />
+		    <%= f.text_field :name_first, :class=>"input-small"%></div>
+		  	
+		    <div><%= f.label "Last Name" %><br />
+		    <%= f.text_field :name_last, :class=>"input-small" %></div>
+			
+		    <div><%= f.label :email %><br />
+		    <%= f.email_field :email, :class=>"input-small" %></div>
+			
+		    <div class="row">
+				<div class="col-lg-6"><%= f.label :password %>
+		    <%= f.password_field :password, :class=>"input-small" %></div>
+		    <div class="col-lg-6"><%= f.label :password_confirmation %>
+		    <%= f.password_field :password_confirmation, :class=>"input-small" %></div>
+				</div>
+  
+		    <div><%= f.label :phone %><br />
+		    <%= f.telephone_field :phone, :class=>"input-small" %></div>
+  
+		    <div><%= f.label :school %><br />
+		    <%= collection_select(:user, :school_id, School.order("lower(name)"), :id, :name, :include_blank=> true, :class=>"input-small")  %></div>
+			
+		    <div><%= f.label "User ID Number" %><br />
+		    <%= f.text_field :userid, :class=>"input-small" %></div>
+  
+		    <div><%= f.label "Tool Use Forms?" %>
+		    <%= f.check_box :tools %></div>
+  
+		    <div><%= f.label "Code of Conduct Forms?" %>
+		    <%= f.check_box :conduct %></div>
+  
+		    <%if current_user.try(:admin)%>
+		  		<div><%= f.label "Admin?" %>
+		  		<%=f.check_box :admin=%></div>
+		    <%end%>
+			<div class="col-lg-2 pull-right"><%= f.submit "Save", :class=>"btn btn-primary btn-small btn-block" %></div>
+		</div>
+	</div>
+<%end%>
+  
+<% end %>

@@ -1,0 +1,55 @@
+<%if current_user.try(:admin) || current_user.id == params[:id].to_f%>
+	<p>
+	<b>Name:</b>
+	<%= @user.full_name %>
+	</p>
+
+	<p>
+	<b>Email:</b>
+	<%= @user.email %>
+	</p>
+
+	<p>
+	<b>Phone Number:</b>
+	<%= @user.phone %>
+	</p>
+	<p>
+	<b>ID Number:</b>
+	<%= @user.userid %>
+	</p>
+	<b>Tool Use Form:</b>
+	<%= @user.tools %>
+	</p>
+	<b>Code of Conduct:</b>
+	<%= @user.conduct %>
+	</p>
+
+	<hr />
+	<%all_logs = @user.grouped_logs%>
+	<table class="table table-hover">
+	<%getWeeks.each do |day|%>	
+		<tr>
+			<th><%=day[0].strftime("%m/%d/%Y")%></th>
+			<%logs = all_logs.select {|k,v| k.strftime("%m/%d/%Y") == day[0].strftime("%m/%d/%Y")}%>
+				<%total = 0%>
+				<%logs.each do |day|%>
+					<%day[1].each do |log|%>
+						<%total = total+log.time_logged%>
+					<%end%>
+				<%end%>
+			<%if current_user.try(:admin)%>
+				<td><%=Time.at(total).utc.strftime("%H:%M:%S")%></td>
+				<td><%=logs.first[1].count rescue '0'%></td>
+			<%end%>
+			<%if total>6.hours && !logs.first.nil? && logs.first[1].count>1%>
+				<td>True</td>
+			<%else%>
+				<td>False</td>
+			<%end%> 
+		<tr>
+	<%end%>
+	</table>
+
+	<%= link_to 'Edit', "edit_timelog_path(@timelog)" %> |
+	<%= link_to 'Back', users_path %>
+<%end%>

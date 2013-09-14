@@ -1,0 +1,29 @@
+
+<h1>Listing timelogs</h1>
+<%if current_user.try(:admin)%>
+<table>
+  <tr>
+    <th>User</th>
+    <th>Timein</th>
+    <th>Timeout timestamp</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @timelogs.each do |timelog| %>
+  <tr>
+    <td><%= "#{timelog.user.name_first} #{timelog.user.name_last}" %></td>
+    <td><%= timelog.timein %></td>
+    <td><%= timelog.timeout %></td>
+    <td><%= link_to 'Show', timelog %></td>
+    <td><%= link_to 'Edit', edit_timelog_path(timelog) %></td>
+    <td><%= link_to 'Destroy', timelog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Timelog', new_timelog_path %>
+<%end%>

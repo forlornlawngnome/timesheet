@@ -1,0 +1,51 @@
+<h1>New timelog</h1>
+<%if current_user.try(:admin)%>
+<%= form_for @timelog do |f| %>
+  <% if @timelog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@timelog.errors.count, "error") %> prohibited this timelog from being saved:</h2>
+
+      <ul>
+      <% @timelog.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <%="User Number" %><br />
+    <%= text_field_tag :owner_userid%>
+	<%= javascript_tag "$('#owner_userid').focus()" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit", :name => 'multi' %>
+  </div>
+  
+<%end%>
+<hr />
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>In/Out</th>
+			<th>Time</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%@logs.each do |log|%>
+			<tr>
+				<td><%=log.user.full_name%></td>
+				<%if log.timeout.nil?%>
+					<td>In</td>
+					<td><%=log.timein.strftime("%I:%M:%S %p")%></td>
+				<%else%>
+					<td>Out</td>
+					<td><%=log.timeout.strftime("%I:%M:%S %p")%></td>
+				<%end%>
+			</tr>
+		<%end%>
+	</tbody>
+</table>
+
+<%end%>

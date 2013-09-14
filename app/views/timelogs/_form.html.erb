@@ -1,0 +1,29 @@
+<%= form_for(@timelog) do |f| %>
+  <% if @timelog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@timelog.errors.count, "error") %> prohibited this timelog from being saved:</h2>
+
+      <ul>
+      <% @timelog.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user %><br />
+	<%= collection_select(:timelog, :user_id, User.all, :id, :full_name)%>
+  </div>
+  <div class="field">
+    <%= f.label :timein %><br />
+    <%= f.datetime_select :timein %>
+  </div>
+  <div class="field">
+    <%= f.label :timeout %><br />
+    <%= f.datetime_select :timeout %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit", :name => 'single'  %>
+  </div>
+<% end %>
