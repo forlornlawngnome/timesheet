@@ -42,14 +42,16 @@ class TimelogsController < ApplicationController
   def create
     if params[:multi]
       student = User.find_by_userid(params[:owner_userid])
-      if student.signed_in
+      if student.nil?
+        redirect_to studentlogin_path, alert: "No Student Exists with this ID"
+      elsif student.signed_in
         timelog = student.signed_in
         timelog.timeout = Time.now
         timelog.updated_at = Time.now
         if timelog.save
           redirect_to studentlogin_path, notice: "Signed Out: #{student.full_name}" 
         else
-          redirect_to studentlogin_path, notice: "Failed to Sign Out: #{student.full_name}" 
+          redirect_to studentlogin_path, alert: "Failed to Sign Out: #{student.full_name}" 
         end
       else
         timelog = Timelog.new
@@ -60,7 +62,7 @@ class TimelogsController < ApplicationController
         if timelog.save
           redirect_to studentlogin_path, notice: "Signed In: #{student.full_name}" 
         else
-          redirect_to studentlogin_path, notice: "Failed to Sign In: #{student.full_name}" 
+          redirect_to studentlogin_path, alert: "Failed to Sign In: #{student.full_name}" 
         end
         
       end

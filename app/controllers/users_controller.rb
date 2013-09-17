@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   # GET /timelogs
   # GET /timelogs.json
   def index
-    @users = User.all
+    @users = User.order("name_first")
 
     respond_to do |format|
       format.html # index.html.erb
