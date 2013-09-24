@@ -11,6 +11,9 @@
 			<li><%=link_to "Student Login", studentlogin_path%></li>
 			<li><%=link_to "Students", users_path%></li>
 		<%end%>
+		<%if current_user.email == "signup@team900.org"%>
+			<li><%=link_to "Student Login", studentlogin_path%></li>
+		<%end%>
 		<li><%=link_to "Profile", admin_view_user_path(current_user)%></li>
     </ul>
     
