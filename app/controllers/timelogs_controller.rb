@@ -41,7 +41,7 @@ class TimelogsController < ApplicationController
   # POST /timelogs.json
   def create
     if params[:multi]
-      student = User.find_by_userid(params[:owner_userid])
+      student = User.find_by_userid(params[:owner_userid].downcase)
       if student.nil?
         redirect_to studentlogin_path, alert: "No Student Exists with this ID"
       elsif student.signed_in

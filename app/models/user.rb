@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  
+  before_save :lowercaseID
   has_many :timelogs
   belongs_to :school
   
@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   
   validates_uniqueness_of :userid
   
+  def lowercaseID
+    self.userid = self.userid.downcase
+  end
   def signed_in
     if self.timelogs.in_today.nil? || self.timelogs.in_today.empty?
       return false
