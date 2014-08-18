@@ -2,6 +2,13 @@ module ApplicationHelper
   def self.TimeZone
     'Eastern Time (US & Canada)'
   end
+  def self.zone
+    zone = ActiveSupport::TimeZone.new(ApplicationHelper.TimeZone)
+  end
+  def self.TimeOffset
+    time = DateTime.now
+    time.in_time_zone(ApplicationHelper.zone).formatted_offset
+  end
   def self.toLocalTime(time)
     time.in_time_zone(ApplicationHelper.TimeZone)
   end

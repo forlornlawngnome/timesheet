@@ -15,4 +15,6 @@
 //= require twitter/bootstrap
 //= require_tree .
 //= require local_time
+//= require moment
+//= require bootstrap-datetimepicker
 

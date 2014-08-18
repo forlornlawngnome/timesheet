@@ -17,13 +17,22 @@
   </div>
   <div class="field">
     <%= f.label :timein %><br />
-    <%= f.text_field :timein, :value=> Time.now.in_time_zone(ApplicationHelper.TimeZone) %>
+    <%= f.text_field :timein, :value=> Time.now.in_time_zone(ApplicationHelper.TimeZone),  :'data-date-format'=>"YYYY-MM-DD HH:mm:ss #{ApplicationHelper.TimeOffset}" %>
   </div>
   <div class="field">
     <%= f.label :timeout %><br />
-    <%= f.text_field :timeout, :value=> Time.now.in_time_zone(ApplicationHelper.TimeZone)%>
+    <%= f.text_field :timeout, :value=> Time.now.in_time_zone(ApplicationHelper.TimeZone),  :'data-date-format'=>"YYYY-MM-DD HH:mm:ss #{ApplicationHelper.TimeOffset}" %>
   </div>
-
+  <script type="text/javascript">
+      $(function () {
+          $('#timelog_timein').datetimepicker();
+      });
+  </script>
+  <script type="text/javascript">
+      $(function () {
+          $('#timelog_timeout').datetimepicker();
+      });
+  </script>
   <div class="actions">
     <%= f.submit "Submit", :name => 'single'  %>
   </div>

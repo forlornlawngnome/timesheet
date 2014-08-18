@@ -15,6 +15,10 @@
 			<li><%=link_to "Student Login", studentlogin_path%></li>
 		<%end%>
 		<li><%=link_to "Profile", admin_view_user_path(current_user)%></li>
+		<%if current_user.try(:admin)%>
+			<li><%=link_to "Timelogs", timelogs_path%></li>
+			<li><%=link_to "New Timelog", new_timelog_path%></li>
+		<%end%>
     </ul>
     
     <ul class="nav navbar-nav navbar-right pull-right">
