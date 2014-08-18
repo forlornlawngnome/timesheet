@@ -68,7 +68,7 @@ class TimelogsController < ApplicationController
       end
     elsif params[:single]
       @timelog = Timelog.new(params[:timelog])
-
+    
       respond_to do |format|
         if @timelog.save
           format.html { redirect_to @timelog, notice: 'Timelog was successfully created.' }

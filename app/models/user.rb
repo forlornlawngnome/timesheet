@@ -27,14 +27,25 @@ class User < ActiveRecord::Base
   def full_name
     return "#{self.name_first} #{self.name_last}"
   end
+  def build_hours
+    total = 0
+    self.timelogs.each do |log|
+      if log.timein>ApplicationHelper.getStartBuildDate
+        total = total + log.time_logged
+      end
+    end
+    return Time.at(total).utc.strftime("%H:%M:%S")
+  end
   def total_hours
     total = 0
     self.timelogs.each do |log|
+      if log.timein>ApplicationHelper.getStartDate
         total = total + log.time_logged
+      end
     end
     return Time.at(total).utc.strftime("%H:%M:%S")
   end
   def grouped_logs
-    self.timelogs.order('timein asc').group_by{ |u| u.timein.beginning_of_week }
+    self.timelogs.order('timein asc').group_by{ |u| ApplicationHelper.toLocalTime(u.timein.beginning_of_week) }
   end
 end

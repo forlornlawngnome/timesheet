@@ -30,6 +30,7 @@ gem 'therubyracer'  # If using Ruby
 gem 'jquery-rails'
 gem 'less-rails-bootstrap', '~> 3.0.0.wip', github: 'sinfin/less-rails-bootstrap-3'
 
+gem 'local_time'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

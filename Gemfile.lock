@@ -70,6 +70,8 @@ GEM
       actionpack (>= 3.1)
       less (~> 2.3.1)
     libv8 (3.16.14.3)
+    local_time (1.0.0)
+      coffee-rails
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -146,6 +148,7 @@ DEPENDENCIES
   devise-encryptable
   jquery-rails
   less-rails-bootstrap (~> 3.0.0.wip)!
+  local_time
   pg
   rails (= 3.2.13)
   rails_12factor

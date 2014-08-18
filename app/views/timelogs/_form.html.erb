@@ -17,12 +17,13 @@
   </div>
   <div class="field">
     <%= f.label :timein %><br />
-    <%= f.datetime_select :timein %>
+    <%= f.text_field :timein, :value=> Time.now.in_time_zone(ApplicationHelper.TimeZone) %>
   </div>
   <div class="field">
     <%= f.label :timeout %><br />
-    <%= f.datetime_select :timeout %>
+    <%= f.text_field :timeout, :value=> Time.now.in_time_zone(ApplicationHelper.TimeZone)%>
   </div>
+
   <div class="actions">
     <%= f.submit "Submit", :name => 'single'  %>
   </div>

@@ -38,10 +38,10 @@
 				<td><%=log.user.full_name%></td>
 				<%if log.timeout.nil?%>
 					<td>In</td>
-					<td><%=log.timein.strftime("%I:%M:%S %p")%></td>
+					<td><%=local_time log.timein, "%I:%M:%S %p"%></td>
 				<%else%>
 					<td>Out</td>
-					<td><%=log.timeout.strftime("%I:%M:%S %p")%></td>
+					<td><%=local_time log.timeout, "%I:%M:%S %p"%></td>
 				<%end%>
 			</tr>
 		<%end%>

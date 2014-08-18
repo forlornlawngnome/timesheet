@@ -7,12 +7,12 @@
 
 <p>
   <b>Timein:</b>
-  <%= @timelog.timein %>
+  <%= local_time @timelog.timein %>
 </p>
 
 <p>
   <b>Timeout timestamp:</b>
-  <%= @timelog.timeout %>
+  <%= local_time @timelog.timeout rescue ""%>
 </p>
 
 <p>

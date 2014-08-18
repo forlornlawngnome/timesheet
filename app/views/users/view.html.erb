@@ -23,14 +23,20 @@
 	<b>Code of Conduct:</b>
 	<%= @user.conduct %>
 	</p>
+	<b>Build Season Hours:</b>
+	<%= @user.build_hours %>
+	</p>
+	<b>Total Hours:</b>
+	<%= @user.total_hours %>
+	</p>
 
 	<hr />
 	<%all_logs = @user.grouped_logs%>
 	<table class="table table-hover">
 	<%getWeeks.each do |day|%>	
 		<tr>
-			<th><%=day[0].strftime("%m/%d/%Y")%></th>
-			<%logs = all_logs.select {|k,v| k.strftime("%m/%d/%Y") == day[0].strftime("%m/%d/%Y")}%>
+			<th><%=ApplicationHelper.toLocalTime(day[0]).strftime("%m/%d/%Y")%></th>
+			<%logs = all_logs.select {|k,v| k.strftime("%m/%d/%Y") == ApplicationHelper.toLocalTime(day[0]).strftime("%m/%d/%Y")}%>
 				<%total = 0%>
 				<%logs.each do |day|%>
 					<%day[1].each do |log|%>
@@ -39,13 +45,26 @@
 				<%end%>
 			<%if current_user.try(:admin)%>
 				<td><%=Time.at(total).utc.strftime("%H:%M:%S")%></td>
-				<td><%=logs.first[1].count rescue '0'%></td>
+				<%breakdown = logs.first[1].group_by{|a| a.timein.strftime("%m/%d/%Y")} rescue 0%>
+				<td><%=count = breakdown.count rescue 0%></td>
 			<%end%>
-			<%if total>6.hours && !logs.first.nil? && logs.first[1].count>1%>
-				<td>True</td>
+	
+			<%#This part has to do with requirements. Change based on your requirements. Methods can be found in Application Helper%>
+			<%if isPreSeason day[1][5]%>
+				<%if !logs.first.nil? && meetingsPreSeason(count)%>
+					<td class="success">True</td>
+				<%else%>
+					<td class="danger">False</td>
+				<%end%>
+			<%elsif isBuildSeason day[1][5]%>
+				<%if hoursBuildSeason(total) && !logs.first.nil? && meetingsBuildSeason(count)%>
+					<td class="success">True</td>
+				<%else%>
+					<td class="danger">False</td>
+				<%end%> 
 			<%else%>
-				<td>False</td>
-			<%end%> 
+				<td></td>
+			<%end%>
 		<tr>
 	<%end%>
 	</table>

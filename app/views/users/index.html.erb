@@ -12,6 +12,7 @@
 			<th>Tool use Form</th>
 			<th>Code of Conduct</th>
 			<th>User ID Number</th>
+			<th>Total Hours in Build Season</th>
 			<th>Total Hours</th>
 		    <th></th>
 		    <th></th>
@@ -30,6 +31,7 @@
 		<%else%>
 			<%conduct_in="danger"%>
 		<%end%>
+
 		
 		  <tr>
 		    <td><%= link_to user.full_name, admin_view_user_path(user), method: :get %></td>
@@ -40,6 +42,7 @@
 			<td class=<%="#{tools_in}"%>><%= user.tools %></td>
 			<td class=<%="#{conduct_in}"%>><%= user.conduct %></td>
 			<td><%= user.userid %></td>
+			<td><%= user.build_hours %></td>
 			<td><%= user.total_hours %></td>
 			<td><%=link_to '', admin_edit_user_path(user), :class=>"glyphicon glyphicon-pencil" %></td>
 		    <td><%= link_to '', admin_remove_user_path(user), :class=>"glyphicon glyphicon-trash", method: :delete, data: { confirm: "You sure? #{user.email}" } %></td>
