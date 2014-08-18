@@ -18,6 +18,7 @@
 		<%if current_user.try(:admin)%>
 			<li><%=link_to "Timelogs", timelogs_path%></li>
 			<li><%=link_to "New Timelog", new_timelog_path%></li>
+			<li><%=link_to "New User", new_user_path%></li>
 		<%end%>
     </ul>
     
