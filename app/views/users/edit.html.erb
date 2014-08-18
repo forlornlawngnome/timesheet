@@ -16,8 +16,8 @@
 	    <div><%= f.label :email %><br />
 	    <%= f.email_field :email, :class=>"input-small" %></div>
 		
-	    <div><%= f.label :phone %><br />
-	    <%= f.telephone_field :phone, :class=>"input-small" %></div>
+	    <div><%= f.label :phone %><br /><small>Numbers Only Ex: 1112225555</small>
+	    <%= f.number_field :phone, :class=>"input-small" %></div>
 
 	    <div><%= f.label :school %><br />
 	    <%= collection_select(:user, :school_id, School.order("lower(name)"), :id, :name, :include_blank=> true, :class=>"input-small")  %></div>
