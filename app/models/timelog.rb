@@ -7,7 +7,7 @@ class Timelog < ActiveRecord::Base
   
   ##It views today as the current day UNLESS it is before 1am. If it is before 1am, then it defaults to the previous day as "today"
   scope :in_today, where("timein >= ? AND timeout IS NULL",ApplicationHelper.today.utc)
-  scope :today, where("updated_at >= ? ",ApplicationHelper.today.utc).order("updated_at DESC")
+  scope :today, where("timein >= ? ",ApplicationHelper.today.utc).order("updated_at DESC")
 
   
   private
