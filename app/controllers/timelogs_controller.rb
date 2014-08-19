@@ -115,6 +115,8 @@ class TimelogsController < ApplicationController
     @timelog = Timelog.new
     @logs = Timelog.today.all
     
+
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @timelog }

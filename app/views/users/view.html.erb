@@ -1,73 +1,106 @@
 <%if current_user.try(:admin) || current_user.id == params[:id].to_f%>
 	<p>
-	<b>Name:</b>
-	<%= @user.full_name %>
+		<b>Name:</b>
+		<%= @user.full_name %>
 	</p>
 
 	<p>
-	<b>Email:</b>
-	<%= @user.email %>
+		<b>Email:</b>
+		<%= @user.email %>
 	</p>
 
 	<p>
-	<b>Phone Number:</b>
-	<%= number_to_phone(@user.phone , area_code: true) %>
+		<b>Phone Number:</b>
+		<%= number_to_phone(@user.phone , area_code: true) %>
 	</p>
 	<p>
-	<b>ID Number:</b>
-	<%= @user.userid %>
+		<b>ID Number:</b>
+		<%= @user.userid %>
 	</p>
-	<b>Tool Use Form:</b>
-	<%= @user.tools %>
+	<p>
+		<b>Tool Use Form:</b>
+		<%= @user.tools %>
 	</p>
-	<b>Code of Conduct:</b>
-	<%= @user.conduct %>
+	<p>
+		<b>Code of Conduct:</b>
+		<%= @user.conduct %>
 	</p>
-	<b>Build Season Hours:</b>
-	<%= @user.build_hours %>
+	<p>
+		<b>Build Season Hours:</b>
+		<%= @user.build_hours %>
 	</p>
-	<b>Total Hours:</b>
-	<%= @user.total_hours %>
+	<p>
+		<b>Total Hours:</b>
+		<%= @user.total_hours %>
 	</p>
 	
 	<hr />
+	
 	<%all_logs = @user.grouped_logs%>
 	<table class="table table-hover">
-	<%getWeeks.each do |day|%>	
-		<tr>
-			<th><%=ApplicationHelper.toLocalTime(day[0]).strftime("%m/%d/%Y")%></th>
-			<%logs = all_logs.select {|k,v| k.strftime("%m/%d/%Y") == ApplicationHelper.toLocalTime(day[0]).strftime("%m/%d/%Y")}%>
-				<%total = 0%>
-				<%logs.each do |day|%>
-					<%day[1].each do |log|%>
-						<%total = total+log.time_logged%>
+		<%getWeeks.each do |day|%>	
+			<tr>
+				<th><%=ApplicationHelper.toLocalTime(day[0]).strftime("%m/%d/%Y")%></th>
+				<%logs = all_logs.select {|k,v| k.strftime("%m/%d/%Y") == ApplicationHelper.toLocalTime(day[0]).strftime("%m/%d/%Y")}%>
+					<%total = 0%>
+					<%logs.each do |day|%>
+						<%day[1].each do |log|%>
+							<%total = total+log.time_logged%>
+						<%end%>
 					<%end%>
+				<%if current_user.try(:admin)%>
+					<td><%=Time.at(total).utc.strftime("%H:%M:%S")%></td>
+					<%breakdown = logs.first[1].group_by{|a| a.timein.strftime("%m/%d/%Y")} rescue 0%>
+					<td><%=count = breakdown.count rescue 0%></td>
 				<%end%>
-			<%if current_user.try(:admin)%>
-				<td><%=Time.at(total).utc.strftime("%H:%M:%S")%></td>
-				<%breakdown = logs.first[1].group_by{|a| a.timein.strftime("%m/%d/%Y")} rescue 0%>
-				<td><%=count = breakdown.count rescue 0%></td>
-			<%end%>
 	
-			<%#This part has to do with requirements. Change based on your requirements. Methods can be found in Application Helper%>
-			<%if isPreSeason day[1][5]%>
-				<%if !logs.first.nil? && meetingsPreSeason(count)%>
-					<td class="success">True</td>
+				<%#This part has to do with requirements. Change based on your requirements. Methods can be found in Application Helper%>
+				<%if isPreSeason day[1][5]%>
+					<%if !logs.first.nil? && meetingsPreSeason(count)%>
+						<td class="success">True</td>
+					<%else%>
+						<td class="danger">False</td>
+					<%end%>
+				<%elsif isBuildSeason day[1][5]%>
+					<%if hoursBuildSeason(total) && !logs.first.nil? && meetingsBuildSeason(count)%>
+						<td class="success">True</td>
+					<%else%>
+						<td class="danger">False</td>
+					<%end%> 
 				<%else%>
-					<td class="danger">False</td>
+					<td></td>
 				<%end%>
-			<%elsif isBuildSeason day[1][5]%>
-				<%if hoursBuildSeason(total) && !logs.first.nil? && meetingsBuildSeason(count)%>
-					<td class="success">True</td>
-				<%else%>
-					<td class="danger">False</td>
-				<%end%> 
-			<%else%>
-				<td></td>
-			<%end%>
-		<tr>
-	<%end%>
+			<tr>
+		<%end%>
 	</table>
+
+	<hr />
+	<h3>All Timelogs</h3>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Time In</th>
+				<th>Time Out</th>
+				<th>Total Time</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%@user.timelogs.where("timein >= ?", ApplicationHelper.getStartDate).order("timein DESC").each do |log|%>
+				<tr>
+					<td>
+						<%=local_time log.timein%>
+					</td>
+					<td>
+						<%=local_time log.timeout%>
+					</td>
+					<td>
+						<%=Time.at(log.time_logged).utc.strftime("%H:%M:%S")%>
+					</td>
+				</tr>
+			<%end%>
+		</tbody>
+	</table>
+	<hr />
 
 	<%= link_to 'Edit', "edit_timelog_path(@timelog)" %> |
 	<%= link_to 'Back', users_path %>

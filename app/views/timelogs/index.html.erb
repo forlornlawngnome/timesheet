@@ -14,7 +14,7 @@
 <% @timelogs.each do |timelog| %>
   <tr>
     <td><%= "#{timelog.user.name_first rescue ""} #{timelog.user.name_last rescue ""}" %></td>
-    <td><%= local_time timelog.timein %></td>
+    <td><%= local_time timelog.timein rescue ""%></td>
     <td><%= local_time timelog.timeout rescue ""%></td>
     <td><%= link_to 'Show', timelog %></td>
     <td><%= link_to 'Edit', edit_timelog_path(timelog) %></td>

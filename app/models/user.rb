@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   def build_hours
     total = 0
     self.timelogs.each do |log|
-      if log.timein>ApplicationHelper.getStartBuildDate
+      if log.timein > ApplicationHelper.getStartBuildDate
         total = total + log.time_logged
       end
     end

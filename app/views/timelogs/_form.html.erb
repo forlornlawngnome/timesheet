@@ -17,11 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :timein %><br />
-    <%= f.text_field :timein, :value=> Time.now.in_time_zone(ApplicationHelper.TimeZone),  :'data-date-format'=>"YYYY-MM-DD HH:mm:ss #{ApplicationHelper.TimeOffset}" %>
+    <%= f.text_field :timein, :value=> ApplicationHelper.toLocalTime(@timelog.timein),  :'data-date-format'=>"YYYY-MM-DD HH:mm:ss #{ApplicationHelper.TimeOffset}"  rescue  f.text_field :timein,  :'data-date-format'=>"YYYY-MM-DD HH:mm:ss #{ApplicationHelper.TimeOffset}" %>
   </div>
   <div class="field">
     <%= f.label :timeout %><br />
-    <%= f.text_field :timeout, :value=> Time.now.in_time_zone(ApplicationHelper.TimeZone),  :'data-date-format'=>"YYYY-MM-DD HH:mm:ss #{ApplicationHelper.TimeOffset}" %>
+    <%= f.text_field :timeout, :value=> ApplicationHelper.toLocalTime(@timelog.timeout),  :'data-date-format'=>"YYYY-MM-DD HH:mm:ss #{ApplicationHelper.TimeOffset}" rescue f.text_field :timeout,  :'data-date-format'=>"YYYY-MM-DD HH:mm:ss #{ApplicationHelper.TimeOffset}" %>
   </div>
   <script type="text/javascript">
       $(function () {
