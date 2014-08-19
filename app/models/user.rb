@@ -46,6 +46,6 @@ class User < ActiveRecord::Base
     return Time.at(total).utc.strftime("%H:%M:%S")
   end
   def grouped_logs
-    self.timelogs.order('timein asc').group_by{ |u| ApplicationHelper.toLocalTime(u.timein.beginning_of_week) }
+    self.timelogs.order('timein asc').group_by{ |u| ApplicationHelper.toLocalTime(u.timein).beginning_of_week }
   end
 end

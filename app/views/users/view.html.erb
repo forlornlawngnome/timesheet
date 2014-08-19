@@ -40,8 +40,8 @@
 	<table class="table table-hover">
 		<%getWeeks.each do |day|%>	
 			<tr>
-				<th><%=ApplicationHelper.toLocalTime(day[0]).strftime("%m/%d/%Y")%></th>
-				<%logs = all_logs.select {|k,v| k.strftime("%m/%d/%Y") == ApplicationHelper.toLocalTime(day[0]).strftime("%m/%d/%Y")}%>
+				<th><%=day[0]%></th>
+				<%logs = all_logs.select {|k,v| k.strftime("%m/%d/%Y") == day[0]}%>
 					<%total = 0%>
 					<%logs.each do |day|%>
 						<%day[1].each do |log|%>
@@ -53,7 +53,6 @@
 					<%breakdown = logs.first[1].group_by{|a| a.timein.strftime("%m/%d/%Y")} rescue 0%>
 					<td><%=count = breakdown.count rescue 0%></td>
 				<%end%>
-	
 				<%#This part has to do with requirements. Change based on your requirements. Methods can be found in Application Helper%>
 				<%if isPreSeason day[1][5]%>
 					<%if !logs.first.nil? && meetingsPreSeason(count)%>
@@ -76,7 +75,7 @@
 
 	<hr />
 	<h3>All Timelogs</h3>
-	<table class="table">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>Time In</th>
@@ -85,7 +84,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%@user.timelogs.where("timein >= ?", ApplicationHelper.getStartDate).order("timein DESC").each do |log|%>
+			<%@user.timelogs.where("timein >= ?", ApplicationHelper.getStartDate).order("timein ASC").each do |log|%>
 				<tr>
 					<td>
 						<%=local_time log.timein%>

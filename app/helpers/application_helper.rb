@@ -40,7 +40,7 @@ module ApplicationHelper
   end
   def getWeeks
     start = ApplicationHelper.getStartDate
-    (start..Date.today).group_by{ |u| u.beginning_of_week }
+    (start..Date.today).group_by{ |u| ApplicationHelper.toLocalTime(u).beginning_of_week.strftime("%m/%d/%Y") }
   end
   
   def hoursBuildSeason(hours)
