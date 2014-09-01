@@ -3,6 +3,16 @@
 This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 
+# Installing/Running
+
+#### Prerequisites 
+* PostgreSQL
+* Ruby on Rails 3.2.13
+
+#### Suggestions
+I suggest using [heroku](https://www.heroku.com/) to host it. It's free (as long as you use no more than 1 thread a month), it allows access from any computer, and has postgres and RoR installed by default.
+
+
 # Changing settings
 
 There are some settings which can be changed to adapt this for your team.
