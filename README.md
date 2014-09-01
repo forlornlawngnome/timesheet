@@ -31,6 +31,13 @@ I highly suggest that you install it someplace with remote access. That way time
 	$ cd timesheet
 	$ bundle install
 ```
+4.  Modify code/[settings](#changing-settings) to fit your needs (you should probably modify config/database.yml to password protect your database)
+5.  Start the server
+```
+	$ rails server -p <port> -e production
+		Note: This app uses the default rails server, you probably want to switch to thin, passenger or unicorn for better options and stability. Heroku has this by default
+		Note: By default rails uses port 3000, that would make the url on a local machine localhost:3000 by default websites normally run on 80 (http) or 443 (https). Some machines don't allow servers open on these ports and Apache or custom routing tables can be used.
+```
 
 # Changing settings
 
