@@ -9,14 +9,27 @@ There are some settings which can be changed to adapt this for your team.
 These can be found in app/helpers/application_helper.rb
 
 #### Timezone
-[Description]  The time zone associated with the times. It will determine what times show up, when the end of the day is, etc.
-[Method]  self.TimeZone
-[Default]  Eastern Standard Time
-[Modification]  Change the string to one of the approved rails timezones. 
-  * To get the timezones, you can run the command rake time:zones:all (computer must have RoR installed)
-  * More info on getting timezone list: http://codedecoder.wordpress.com/2013/09/09/timezone-in-rails/
-  * Timezones are also listed below
-	
+<dl>
+	<dt>Description</dt>
+	<dd>
+		The time zone associated with the times. It will determine what times show up, when the end of the day is, etc.
+	</dd>
+	<dt>Method</dt>
+	<dd>
+		self.TimeZone
+	</dd>
+	<dt>Default</dt>
+	<dd>
+		Eastern Standard Time
+	</dd>
+	<dt>Modification</dt>
+	<dd>
+		Change the string to one of the approved rails timezones. 
+		* To get the timezones, you can run the command rake time:zones:all (computer must have RoR installed)
+  	  	* More info on getting timezone list: http://codedecoder.wordpress.com/2013/09/09/timezone-in-rails/
+  	  	* Timezones are also listed below
+	</dd>
+</dl>
 
 #### Start of Year
 [Description]  This is when the 'year' begins. Views of weeks start with the first day in the month
