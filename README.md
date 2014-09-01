@@ -8,7 +8,7 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 There are some settings which can be changed to adapt this for your team.
 These can be found in app/helpers/application_helper.rb
 
-#### <ins>Timezone</ins>
+### <ins>Timezone</ins>
 <dl>
 	<dt>Description</dt>
 	<dd>
