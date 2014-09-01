@@ -14,13 +14,14 @@ I suggest using [heroku](https://www.heroku.com/) to host it. It's free (as long
 
 To install on heroku:
 1.  Pull from git run this command in the command line:
-	
 	<blockquote> 
 		$ git clone [repository url] <br />
 		Note: The repository url can be found on the side of the github page 
 	</blockquote>
 2.  Modify code/[settings](#changing-settings) to fit your needs
 3.  [Push to Heroku](https://devcenter.heroku.com/articles/getting-started-with-ruby#deploy-the-app)
+
+
 #### Install elsewhere
 I highly suggest that you install it someplace with remote access. That way time requirements can be checked from anywhere.
 
