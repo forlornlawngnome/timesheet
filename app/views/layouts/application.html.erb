@@ -2,6 +2,7 @@
 <html>
 	<head>
 	  <title>Timesheet</title>
+	  <%= favicon_link_tag 'zebracorn-32.ico' %>
 	  <%= stylesheet_link_tag    "application", :media => "all" %>
 	  <%= javascript_include_tag "application" %>
 	  <%= csrf_meta_tags %>
@@ -27,7 +28,7 @@
 		<hr />
 		<div class="container">
 			<div class="col-md-6 pull-right">
-				<small>Created by FRC Team 900 - Zebracorns</small>
+				<small>Created by FRC Team 900 - Zebracorns <%=link_to "<span class=\"glyphicon glyphicon-info-sign\"></span>".html_safe, credits_path%></small>
 			</div>
 		</div>
 

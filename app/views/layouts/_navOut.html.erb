@@ -9,6 +9,7 @@
     <ul class="nav navbar-nav navbar-right pull-right">
       <li><%= link_to('Login', new_user_session_path)  %> </li>
 	  <li><%= link_to('Register', new_user_registration_path)  %></li>
+	  <li><%=link_to "<span class=\"glyphicon glyphicon-info-sign\"></span>".html_safe, credits_path%></li>
     </ul>
   </div><!-- /.navbar-collapse -->
 </nav>

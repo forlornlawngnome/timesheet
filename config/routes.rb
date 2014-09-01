@@ -20,6 +20,7 @@ Timesheet::Application.routes.draw do
   match 'users/save/:id' => 'users#save', :va => :put, :as => :admin_save_user
   match 'users/new' => 'users#new', :via => :get, :as => :admin_new_user
   match 'users/create' => 'users#create', :via => :post, :as => :admin_create_user
+  match 'welcome/acknowledgements' => 'welcome#acknowledgements', :as=> :credits
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

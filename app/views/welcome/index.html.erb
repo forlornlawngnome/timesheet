@@ -3,23 +3,23 @@
 <p>Sign in your own account to update your account Info</p>
 
 <hr />
-<h2>Important Links</h2>
 
-	<%if current_user.try(:admin) || current_user.email == "signup@team900.org"%>
+<%if !current_user.nil? && current_user.try(:admin)%>
+	<h2>Important Links</h2>
+	<%if current_user.email == "signup@team900.org"%>
 		<h4>Check-in Page</h4>
 		<li><%=link_to "Student Login", studentlogin_path%></li>
 	<%end%>
 
-	<%if current_user.try(:admin)%>
-		<h4>User Management</h4>
-			<li><%=link_to "All Users (Students)", users_path%></li>
-			<li><%=link_to "New User", new_user_path%></li>
-			<li><%=link_to "Profile", admin_view_user_path(current_user)%></li>
-		 <h4>Timelogs</h4>
-       		<li><%=link_to "Timelogs", timelogs_path%></li>
-			<li><%=link_to "New Timelog", new_timelog_path%></li>
-		      
- 		 <h4>Schools</h4> 
-       		<li><%=link_to "Schools", schools_path%></li>
-			<li><%=link_to "New School", new_school_path%></li>
-	<%end%>
+	<h4>User Management</h4>
+		<li><%=link_to "All Users (Students)", users_path%></li>
+		<li><%=link_to "New User", new_user_path%></li>
+		<li><%=link_to "Profile", admin_view_user_path(current_user)%></li>
+	 <h4>Timelogs</h4>
+   		<li><%=link_to "Timelogs", timelogs_path%></li>
+		<li><%=link_to "New Timelog", new_timelog_path%></li>
+	      
+	 <h4>Schools</h4> 
+   		<li><%=link_to "Schools", schools_path%></li>
+		<li><%=link_to "New School", new_school_path%></li>
+<%end%>
