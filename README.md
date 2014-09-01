@@ -17,7 +17,7 @@ To install on heroku:
 	<li>
 		Pull from git run this command in the command line:
 	
-<blockquote> $ git clone <repository url> 
+<blockquote> $ git clone <repository url> <br />
 Note: The repository url can be found on the side of the github page </blockquote>
 </li>
 	<li>Modify code/[settings](#changing-settings) to fit your needs </li>
