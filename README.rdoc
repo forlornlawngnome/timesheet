@@ -1,3 +1,5 @@
+=begin rdoc
+
 = Licensing
 
 This work is licensed under a {Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License}[http://creativecommons.org/licenses/by-nc-sa/4.0/].
@@ -263,3 +265,4 @@ These can be found in app/helpers/application_helper.rb
   * Samoa
   * Tokelau Is.
 
+=end
