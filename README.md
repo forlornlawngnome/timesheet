@@ -18,8 +18,7 @@ To install on heroku:
 		Pull from git run this command in the command line:
 	
 	<blockquote> 
-		$ git clone [repository url]
-		<br />
+		$ git clone [repository url] <br />
 		Note: The repository url can be found on the side of the github page 
 	</blockquote>
 </li>
@@ -32,22 +31,23 @@ I highly suggest that you install it someplace with remote access. That way time
 <ol>
 	<li>Install Ruby on Rails (I suggest http://rvm.io/)</li>
 	<li>Install PostgreSQL (http://www.postgresql.org/)</li>
-	<li>Pull down the code and set it up</li>
-```
-$ git clone <repository url>
-Note: The repository url can be found on the side of the github page
-$ cd timesheet
-$ bundle install
-```
+	<li>Pull down the code and set it up
+		<blockquote> 
+			$ git clone [repository url] <br />
+			Note: The repository url can be found on the side of the github page <br />
+			$ cd timesheet <br />
+			$ bundle install <br />
+		</blockquote>
+	</li>
 
 	<li>Modify code/[settings](#changing-settings) to fit your needs (you should probably modify config/database.yml to password protect your database)
-	<li>Start the server</li>
-		
-```
-$ rails server -p <port> -e production
-Note: This app uses the default rails server, you probably want to switch to thin, passenger or unicorn for better options and stability. Heroku has this by default
-Note: By default rails uses port 3000, that would make the url on a local machine localhost:3000 by default websites normally run on 80 (http) or 443 (https). Some machines don't allow servers open on these ports and Apache or custom routing tables can be used.
-```
+	<li>Start the server
+		<blockquote>
+			$ rails server -p [port] -e production <br />
+			Note: This app uses the default rails server, you probably want to switch to thin, passenger or unicorn for better options and stability. Heroku has this by default <br />
+			Note: By default rails uses port 3000, that would make the url on a local machine localhost:3000 by default websites normally run on 80 (http) or 443 (https). Some machines don't allow servers open on these ports and Apache or custom routing tables can be used. <br />
+		</blockquote>
+	</li>
 
 </ol>
 
