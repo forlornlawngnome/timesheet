@@ -12,8 +12,11 @@ module ApplicationHelper
   def self.toLocalTime(time)
     time.in_time_zone(ApplicationHelper.TimeZone)
   end
+  def self.getStartMonth
+    7
+  end
   def self.getStartYear
-    if Date.today.month > 7
+    if Date.today.month > ApplicationHelper.getStartMonth
       start = Date.today.year
     else
       start = Date.today.year-1
@@ -22,7 +25,7 @@ module ApplicationHelper
   end
   def self.getStartDate
     ##This has the year starting at the beginning of July
-    DateTime.new(ApplicationHelper.getStartYear, 7, 1, 0, 0, 0)
+    DateTime.new(ApplicationHelper.getStartYear, ApplicationHelper.getStartMonth, 1, 0, 0, 0)
   end
   def self.getStartBuildDate
     ##This has the year starting at the beginning of July
@@ -54,10 +57,10 @@ module ApplicationHelper
   end
   
   def isPreSeason(time)
-    Date.today.month > 7 
+    Date.today.month > ApplicationHelper.getStartMonth 
   end
   def isBuildSeason(time)
-    Date.today.month < 7 
+    Date.today.month < ApplicationHelper.getStartMonth
   end
 
 end
