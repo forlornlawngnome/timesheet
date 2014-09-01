@@ -22,9 +22,9 @@ To install on heroku:
 #### Install elsewhere
 I highly suggest that you install it someplace with remote access. That way time requirements can be checked from anywhere.
 
-1. Install Ruby on Rails (I suggest http://rvm.io/)
-2. Install PostgreSQL (http://www.postgresql.org/)
-3. Pull down the code and set it up
+1.  Install Ruby on Rails (I suggest http://rvm.io/)
+2.  Install PostgreSQL (http://www.postgresql.org/)
+3.  Pull down the code and set it up
 ```
 	$ git clone <repository url>
 		Note: The repository url can be found on the side of the github page
