@@ -13,28 +13,24 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 I suggest using [heroku](https://www.heroku.com/) to host it. It's free (as long as you use no more than 1 thread a month), it allows access from any computer, and has postgres and RoR installed by default.
 
 To install on heroku:
-1. Pull from git run this command in the command line:
+1.  Pull from git run this command in the command line:
 	git clone <repository url>
 	The repository url can be found on the side of the github page
-2. Modify code/[settings](#changing-settings) to fit your needs 
-3. [Push to Heroku](https://devcenter.heroku.com/articles/getting-started-with-ruby#deploy-the-app)
+2.  Modify code/[settings](#changing-settings) to fit your needs 
+3.  [Push to Heroku](https://devcenter.heroku.com/articles/getting-started-with-ruby#deploy-the-app)
 
 #### Install elsewhere
 I highly suggest that you install it someplace with remote access. That way time requirements can be checked from anywhere.
 
 1. Install Ruby on Rails (I suggest http://rvm.io/)
 2. Install PostgreSQL (http://www.postgresql.org/)
-3. Pull from git run this command in the command line:
-	'''
+3. Pull down the code and set it up
+```
 	$ git clone <repository url>
-	'''
-	The repository url can be found on the side of the github page
-4. '''
+		Note: The repository url can be found on the side of the github page
 	$ cd timesheet
-	'''
-5. '''
 	$ bundle install
-	'''
+```
 
 # Changing settings
 
