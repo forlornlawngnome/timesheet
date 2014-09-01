@@ -25,9 +25,11 @@ These can be found in app/helpers/application_helper.rb
 > 	<dt>Modification</dt>
 > 	<dd>
 > 		Change the string to one of the approved rails timezones. 
-> 			* To get the timezones, you can run the command rake time:zones:all (computer must have RoR installed)
->   	  	* More info on getting timezone list: http://codedecoder.wordpress.com/2013/09/09/timezone-in-rails/
->   	  	* Timezones are also listed below
+>		<ul>
+> 		 	<li>To get the timezones, you can run the command rake time:zones:all (computer must have RoR installed)</li>
+>   	  	<li> More info on getting timezone list: http://codedecoder.wordpress.com/2013/09/09/timezone-in-rails/</li>
+>   	  	<li> Timezones are also listed below</li>
+>		</ul>
 > 	</dd>
 > </dl>
 
