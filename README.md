@@ -71,9 +71,9 @@ These can be found in app/helpers/application_helper.rb
 > 	<dt>Modification</dt>
 > 	<dd>
 > 		Change the 1 in the partial line below to correspond with the number of hours after midnight to cut off
-> ```
+> <p>
 > 	Time.now.in_time_zone  ...  + 1.hours
-> ```
+> </p>
 > 	</dd>
 > </dl>
 	
