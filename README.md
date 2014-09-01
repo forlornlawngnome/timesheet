@@ -32,7 +32,7 @@ I highly suggest that you install it someplace with remote access. That way time
 <ol>
 	<li>Install Ruby on Rails (I suggest http://rvm.io/)</li>
 	<li>Install PostgreSQL (http://www.postgresql.org/)</li>
-	<li>Pull down the code and set it up
+	<li>Pull down the code and set it up</li>
 		
 ```
 $ git clone <repository url>
@@ -40,8 +40,6 @@ Note: The repository url can be found on the side of the github page
 $ cd timesheet
 $ bundle install
 ```
-
-</li>
 	<li>Modify code/[settings](#changing-settings) to fit your needs (you should probably modify config/database.yml to password protect your database)
 	<li>Start the server
 		
