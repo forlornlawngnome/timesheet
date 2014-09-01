@@ -33,8 +33,8 @@ I highly suggest that you install it someplace with remote access. That way time
 $ git clone [repository url] <br />
 $ cd timesheet <br />
 $ bundle install <br />
-Note: The repository url can be found on the side of the github page
 </blockquote>
+Note: The repository url can be found on the side of the github page
 4. Modify code/[settings](#changing-settings) to fit your needs (you should probably modify config/database.yml to password protect your database)
 5. Start the server
 <blockquote>
