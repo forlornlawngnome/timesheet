@@ -3,12 +3,12 @@
 This work is licensed under a {Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License}[http://creativecommons.org/licenses/by-nc-sa/4.0/].
 
 
-= Changing settings
+# Changing settings
 
 There are some settings which can be changed to adapt this for your team.
 These can be found in app/helpers/application_helper.rb
 
-=== Timezone
+#### Timezone
 [Description]  The time zone associated with the times. It will determine what times show up, when the end of the day is, etc.
 [Method]  self.TimeZone
 [Default]  Eastern Standard Time
@@ -18,40 +18,40 @@ These can be found in app/helpers/application_helper.rb
   * Timezones are also listed below
 	
 
-==== Start of Year
+#### Start of Year
 [Description]  This is when the 'year' begins. Views of weeks start with the first day in the month
 [Method]  self.getStartMonth
 [Default]  1st of July
 [Modification]  Change the 7 (July) to the integer corresponding to the month you want to begin
 
 		
-==== Last Out
+#### Last Out
 [Description]  The last possible time to sign out for the day. If a record isn't signed out by then, only 1 minute is credited for the day.
 [Method]  self.today
 [Default]  1 am
 [Modification]  Change the 1 in the partial line below to correspond with the number of hours after midnight to cut off
    Time.now.in_time_zone  ...  + 1.hours
 	
-==== Build Season Hours Required
+#### Build Season Hours Required
 [Description]  The minimum number of hours required from a student during build season. This is used in the student view. Will show true/false based on meeting the different criteria
 [Method]  hoursBuildSeason(hours)
 [Default]  6 hours
 [Modification]  Change the 6 to the number of hours required
 	
-==== Build Season Meetings Required
+#### Build Season Meetings Required
 [Description]  The minimum number of meetings required from a student during build season. This is used in the student view. Will show true/false based on meeting the different criteria
 [Method]  meetingsBuildSeason(hours)
 [Default]  2 Meeting
 [Modification]  Change the 2 to the number of meetings required
 
-==== Pre Season Meetings Required
+#### Pre Season Meetings Required
 [Description]  The minimum number of meetings required from a student during build season. This is used in the student view. Will show true/false based on meeting the different criteria
 [Method]  meetingsBuildSeason(hours)
 [Default]  1 Meeting
 [Modification]  Change the 2 to the number of meetings required
 
 
-= Timezones
+# Timezones
 * UTC -11:00 
   * American Samoa
   * International Date Line West
