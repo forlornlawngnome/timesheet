@@ -1,6 +1,6 @@
 # Licensing
 
-This work is licensed under a {Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License}[http://creativecommons.org/licenses/by-nc-sa/4.0/].
+This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 
 # Changing settings
@@ -30,7 +30,9 @@ These can be found in app/helpers/application_helper.rb
 [Method]  self.today
 [Default]  1 am
 [Modification]  Change the 1 in the partial line below to correspond with the number of hours after midnight to cut off
-   Time.now.in_time_zone  ...  + 1.hours
+```
+	Time.now.in_time_zone  ...  + 1.hours
+```
 	
 #### Build Season Hours Required
 [Description]  The minimum number of hours required from a student during build season. This is used in the student view. Will show true/false based on meeting the different criteria
