@@ -8,7 +8,7 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 There are some settings which can be changed to adapt this for your team.
 These can be found in app/helpers/application_helper.rb
 
-### <ins>Timezone</ins>
+### Timezone
 > <dl>
 > 	<dt>Description</dt>
 > 	<dd>
@@ -31,39 +31,109 @@ These can be found in app/helpers/application_helper.rb
 > 	</dd>
 > </dl>
 
-#### Start of Year
-[Description]  This is when the 'year' begins. Views of weeks start with the first day in the month
-[Method]  self.getStartMonth
-[Default]  1st of July
-[Modification]  Change the 7 (July) to the integer corresponding to the month you want to begin
+### Start of Year
+> <dl>
+> 	<dt>Description</dt>
+> 	<dd>
+> 		This is when the 'year' begins. Views of weeks start with the first day in the month
+> 	</dd>
+> 	<dt>Method</dt>
+> 	<dd>
+> 		self.getStartMonth
+> 	</dd>
+> 	<dt>Default</dt>
+> 	<dd>
+> 		1st of July
+> 	</dd>
+> 	<dt>Modification</dt>
+> 	<dd>
+> 		Change the 7 (July) to the integer corresponding to the month you want to begin
+> 	</dd>
+> </dl>
 
 		
-#### Last Out
-[Description]  The last possible time to sign out for the day. If a record isn't signed out by then, only 1 minute is credited for the day.
-[Method]  self.today
-[Default]  1 am
-[Modification]  Change the 1 in the partial line below to correspond with the number of hours after midnight to cut off
-```
-	Time.now.in_time_zone  ...  + 1.hours
-```
+### Last Out
+> <dl>
+> 	<dt>Description</dt>
+> 	<dd>
+> 		The last possible time to sign out for the day. If a record isn't signed out by then, only 1 minute is credited for the day.
+> 	</dd>
+> 	<dt>Method</dt>
+> 	<dd>
+> 		self.today
+> 	</dd>
+> 	<dt>Default</dt>
+> 	<dd>
+> 		1 am
+> 	</dd>
+> 	<dt>Modification</dt>
+> 	<dd>
+> 		Change the 1 in the partial line below to correspond with the number of hours after midnight to cut off
+> ```
+> 	Time.now.in_time_zone  ...  + 1.hours
+> ```
+> 	</dd>
+> </dl>
 	
-#### Build Season Hours Required
-[Description]  The minimum number of hours required from a student during build season. This is used in the student view. Will show true/false based on meeting the different criteria
-[Method]  hoursBuildSeason(hours)
-[Default]  6 hours
-[Modification]  Change the 6 to the number of hours required
+### Build Season Hours Required
+> <dl>
+> 	<dt>Description</dt>
+> 	<dd>
+> 		The minimum number of hours required from a student during build season. This is used in the student view. Will show true/false based >on meeting the different criteria
+> 	</dd>
+> 	<dt>Method</dt>
+> 	<dd>
+> 		hoursBuildSeason(hours)
+> 	</dd>
+> 	<dt>Default</dt>
+> 	<dd>
+> 		6 hours
+> 	</dd>
+> 	<dt>Modification</dt>
+> 	<dd>
+> 		Change the 6 to the number of hours required
+> 	</dd>
+> </dl>
 	
-#### Build Season Meetings Required
-[Description]  The minimum number of meetings required from a student during build season. This is used in the student view. Will show true/false based on meeting the different criteria
-[Method]  meetingsBuildSeason(hours)
-[Default]  2 Meeting
-[Modification]  Change the 2 to the number of meetings required
+### Build Season Meetings Required
+> <dl>
+> 	<dt>Description</dt>
+> 	<dd>
+> 		The minimum number of meetings required from a student during build season. This is used in the student view. Will show true/false >based on meeting the different criteria
+> 	</dd>
+> 	<dt>Method</dt>
+> 	<dd>
+> 		meetingsBuildSeason(hours)
+> 	</dd>
+> 	<dt>Default</dt>
+> 	<dd>
+> 		2 Meeting
+> 	</dd>
+> 	<dt>Modification</dt>
+> 	<dd>
+> 		Change the 2 to the number of meetings required
+> 	</dd>
+> </dl>
 
-#### Pre Season Meetings Required
-[Description]  The minimum number of meetings required from a student during build season. This is used in the student view. Will show true/false based on meeting the different criteria
-[Method]  meetingsBuildSeason(hours)
-[Default]  1 Meeting
-[Modification]  Change the 2 to the number of meetings required
+### Pre Season Meetings Required
+> <dl>
+> 	<dt>Description</dt>
+> 	<dd>
+> 		The minimum number of meetings required from a student during build season. This is used in the student view. Will show true/false >based on meeting the different criteria
+> 	</dd>
+> 	<dt>Method</dt>
+> 	<dd>
+> 		meetingsBuildSeason(hours)
+> 	</dd>
+> 	<dt>Default</dt>
+> 	<dd>
+> 		1 Meeting
+> 	</dd>
+> 	<dt>Modification</dt>
+> 	<dd>
+> 		Change the 2 to the number of meetings required
+> 	</dd>
+> </dl>
 
 
 # Timezones
