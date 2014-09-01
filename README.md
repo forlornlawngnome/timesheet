@@ -17,8 +17,8 @@ To install on heroku:
 1.  Pull from git run this command in the command line:
 <blockquote> 
 $ git clone [repository url] <br />
-Note: The repository url can be found on the side of the github page 
 </blockquote>
+Note: The repository url can be found on the side of the github page 
 2.  Modify code/[settings](#changing-settings) to fit your needs
 3.  [Push to Heroku](https://devcenter.heroku.com/articles/getting-started-with-ruby#deploy-the-app)
 
