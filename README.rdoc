@@ -20,9 +20,13 @@ These can be found in app/helpers/application_helper.rb
 
 ==== Start of Year
 [Description]	This is when the 'year' begins. Views of weeks start with the first day in the month
+
 [Method]	self.getStartMonth
+
 [Default]	1st of July
+
 [Modification]	Change the 7 (July) to the integer corresponding to the month you want to begin
+
 		
 ==== Last Out
 	Description: The last possible time to sign out for the day. If a record isn't signed out by then, only 1 minute is credited for the day.
