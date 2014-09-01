@@ -16,13 +16,13 @@ To install on heroku:
 <ol>
 	<li>
 		Pull from git run this command in the command line:
+	</li>
 		
 ```
 $ git clone <repository url>
 Note: The repository url can be found on the side of the github page
 ```
-
-	</li>
+	
 	<li>Modify code/[settings](#changing-settings) to fit your needs </li>
 	<li>[Push to Heroku](https://devcenter.heroku.com/articles/getting-started-with-ruby#deploy-the-app)</li>
 </ol>
@@ -33,15 +33,15 @@ I highly suggest that you install it someplace with remote access. That way time
 	<li>Install Ruby on Rails (I suggest http://rvm.io/)</li>
 	<li>Install PostgreSQL (http://www.postgresql.org/)</li>
 	<li>Pull down the code and set it up</li>
-		
 ```
 $ git clone <repository url>
 Note: The repository url can be found on the side of the github page
 $ cd timesheet
 $ bundle install
 ```
+
 	<li>Modify code/[settings](#changing-settings) to fit your needs (you should probably modify config/database.yml to password protect your database)
-	<li>Start the server
+	<li>Start the server</li>
 		
 ```
 $ rails server -p <port> -e production
@@ -49,7 +49,6 @@ Note: This app uses the default rails server, you probably want to switch to thi
 Note: By default rails uses port 3000, that would make the url on a local machine localhost:3000 by default websites normally run on 80 (http) or 443 (https). Some machines don't allow servers open on these ports and Apache or custom routing tables can be used.
 ```
 
-</li>
 </ol>
 
 # Changing settings
