@@ -47,7 +47,8 @@ Note: By default rails uses port 3000, that would make the url on a local machin
 # Changing settings
 
 There are some settings which can be changed to adapt this for your team.
-These can be found in app/helpers/application_helper.rb
+These can be found in config/initializers/constant.rb
+
 
 ### Timezone
 > <dl>
@@ -55,7 +56,7 @@ These can be found in app/helpers/application_helper.rb
 > 	<dd>
 > 		The time zone associated with the times. It will determine what times show up, when the end of the day is, etc.
 > 	</dd>
-> 	<dt>Method</dt>
+> 	<dt>Variable</dt>
 > 	<dd>
 > 		self.TimeZone
 > 	</dd>
@@ -80,9 +81,9 @@ These can be found in app/helpers/application_helper.rb
 > 	<dd>
 > 		This is when the 'year' begins. Views of weeks start with the first day in the month
 > 	</dd>
-> 	<dt>Method</dt>
+> 	<dt>Variable</dt>
 > 	<dd>
-> 		self.getStartMonth
+> 		YEAR_START
 > 	</dd>
 > 	<dt>Default</dt>
 > 	<dd>
@@ -93,7 +94,6 @@ These can be found in app/helpers/application_helper.rb
 > 		Change the 7 (July) to the integer corresponding to the month you want to begin
 > 	</dd>
 > </dl>
-
 		
 ### Last Out
 > <dl>
@@ -101,9 +101,9 @@ These can be found in app/helpers/application_helper.rb
 > 	<dd>
 > 		The last possible time to sign out for the day. If a record isn't signed out by then, only 1 minute is credited for the day.
 > 	</dd>
-> 	<dt>Method</dt>
+> 	<dt>Variable</dt>
 > 	<dd>
-> 		self.today
+> 		DAY_END
 > 	</dd>
 > 	<dt>Default</dt>
 > 	<dd>
@@ -111,7 +111,7 @@ These can be found in app/helpers/application_helper.rb
 > 	</dd>
 > 	<dt>Modification</dt>
 > 	<dd>
-> 		Change the 1 in the if statement to correspond with the number of hours after midnight to cut off
+> 		Change the 1 to correspond with the number of hours after midnight to cut off
 > 	</dd>
 > </dl>
 	
@@ -121,9 +121,9 @@ These can be found in app/helpers/application_helper.rb
 > 	<dd>
 > 		The minimum number of hours required from a student during build season. This is used in the student view. Will show true/false based >on meeting the different criteria
 > 	</dd>
-> 	<dt>Method</dt>
+> 	<dt>Variable</dt>
 > 	<dd>
-> 		hoursBuildSeason(hours)
+> 		BUILD_HOURS
 > 	</dd>
 > 	<dt>Default</dt>
 > 	<dd>
@@ -141,9 +141,9 @@ These can be found in app/helpers/application_helper.rb
 > 	<dd>
 > 		The minimum number of meetings required from a student during build season. This is used in the student view. Will show true/false >based on meeting the different criteria
 > 	</dd>
-> 	<dt>Method</dt>
+> 	<dt>Variable</dt>
 > 	<dd>
-> 		meetingsBuildSeason(hours)
+> 		BUILD_MEETINGS
 > 	</dd>
 > 	<dt>Default</dt>
 > 	<dd>
@@ -154,16 +154,16 @@ These can be found in app/helpers/application_helper.rb
 > 		Change the 2 to the number of meetings required
 > 	</dd>
 > </dl>
-
+	
 ### Pre Season Meetings Required
 > <dl>
 > 	<dt>Description</dt>
 > 	<dd>
 > 		The minimum number of meetings required from a student during build season. This is used in the student view. Will show true/false >based on meeting the different criteria
 > 	</dd>
-> 	<dt>Method</dt>
+> 	<dt>Variable</dt>
 > 	<dd>
-> 		meetingsBuildSeason(hours)
+> 		PRE_MEETINGS
 > 	</dd>
 > 	<dt>Default</dt>
 > 	<dd>

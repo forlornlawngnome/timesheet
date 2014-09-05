@@ -1,6 +1,6 @@
 module ApplicationHelper
   def self.TimeZone
-    'Eastern Time (US & Canada)'
+    TIMEZONE
   end
   def self.zone
     zone = ActiveSupport::TimeZone.new(ApplicationHelper.TimeZone)
@@ -13,7 +13,7 @@ module ApplicationHelper
     time.in_time_zone(ApplicationHelper.TimeZone)
   end
   def self.getStartMonth
-    7
+    YEAR_START
   end
   def self.getStartYear
     if Date.today.month > ApplicationHelper.getStartMonth
@@ -34,7 +34,7 @@ module ApplicationHelper
   def self.today
   
     #If it's before 1am...
-    if Time.now.in_time_zone(ApplicationHelper.TimeZone) < Time.now.in_time_zone(ApplicationHelper.TimeZone).beginning_of_day + 1.hours
+    if Time.now.in_time_zone(ApplicationHelper.TimeZone) < Time.now.in_time_zone(ApplicationHelper.TimeZone).beginning_of_day + DAY_END.hours
       #then pretend it's still yesterday to give kids time to sign out
       Time.now.in_time_zone(ApplicationHelper.TimeZone).beginning_of_day - 1.days
     else
@@ -47,13 +47,13 @@ module ApplicationHelper
   end
   
   def hoursBuildSeason(hours)
-    hours>6.hours
+    hours>BUILD_HOURS.hours
   end
   def meetingsBuildSeason(number)
-    number>=2
+    number>=BUILD_MEETINGS
   end
   def meetingsPreSeason(number)
-    number>=1
+    number>=PRE_MEETINGS
   end
   
   def isPreSeason(time)
