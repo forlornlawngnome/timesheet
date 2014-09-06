@@ -24,6 +24,15 @@
 		
 	    <div><%= f.label "User ID Number" %><br />
 	    <%= f.text_field :userid, :class=>"input-small" %></div>
+		
+	    <div class="row">
+			<div class="col-lg-6"><%= f.label :password %>
+		    	<%= f.password_field :password, :class=>"input-small" %>
+			</div>
+		    <div class="col-lg-6"><%= f.label :password_confirmation %>
+			    <%= f.password_field :password_confirmation, :class=>"input-small" %>
+			</div>
+		</div>
 
 	    <div><%= f.label "Tool Use Forms?" %>
 	    <%= f.check_box :tools %></div>
