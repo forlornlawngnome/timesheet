@@ -1,3 +1,6 @@
+# Project Intent
+This project is designed to work as a time tracker for FIRST robotics teams. Once installed, it can be displayed on a lab computer and students can sign in and out to track their hours. We suggest using a barcode/barcode scanner for the user id etc. It makes the sign in/out process very quick. (Hint: your local grocery store rewards card probably has one!)
+
 # Licensing
 
 This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
