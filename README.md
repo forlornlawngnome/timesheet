@@ -175,6 +175,25 @@ These can be found in config/initializers/constant.rb
 > 	</dd>
 > </dl>
 
+### Default Login
+> <dl>
+> 	<dt>Description</dt>
+> 	<dd>
+> 		A signin email which shows only student login page. Allows a computer to be set up and not monitored without giving access to student data.
+> 	</dd>
+> 	<dt>Variable</dt>
+> 	<dd>
+> 		DEFAULT_LOGIN
+> 	</dd>
+> 	<dt>Default</dt>
+> 	<dd>
+> 		"signup@team900.org"
+> 	</dd>
+> 	<dt>Modification</dt>
+> 	<dd>
+> 		Change the string to the email of an account. (Must register account in system)
+> 	</dd>
+> </dl>
 
 # Timezones
 * UTC -11:00 
