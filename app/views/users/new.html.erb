@@ -1,5 +1,4 @@
-<%if current_user.try(:admin)%>
-<%= form_for(:user, :as => :post, :url => admin_create_user_path, :html =>{ :class=>"form-horizontal", :role=>"form"}) do |f| %>
+<%= form_for @user do |f| %>
 	<div class="row">
 		<div class="col-lg-2">
 		</div>
@@ -45,5 +44,3 @@
 		</div>
 	</div>
 <%end%>
-  
-<% end %>

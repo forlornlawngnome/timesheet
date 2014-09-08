@@ -1,6 +1,6 @@
 <h1>Users</h1>
 
-<%if current_user.try(:admin)%>
+<%if !current_user.try(:admin)%>
 <table class="table table-hover">
 	<thead>
   	  	<tr>
@@ -33,7 +33,7 @@
 		<%end%>
 		
 		  <tr>
-		    <td><%= link_to user.full_name, admin_view_user_path(user), method: :get %></td>
+		    <td><%= link_to user.full_name, user_path(user), method: :get %></td>
 			<td><%= user.admin?%></td>
 			<td><%= user.email %></td>
 			<td><%= number_to_phone(user.phone , area_code: true) %></td>
@@ -43,8 +43,8 @@
 			<td><%= user.userid %></td>
 			<td><%= user.build_hours %></td>
 			<td><%= user.total_hours %></td>
-			<td><%=link_to '', admin_edit_user_path(user), :class=>"glyphicon glyphicon-pencil" %></td>
-		    <td><%= link_to '', admin_remove_user_path(user), :class=>"glyphicon glyphicon-trash", method: :delete, data: { confirm: "You sure? #{user.email}" } %></td>
+			<td><%=link_to '', edit_user_path(user), :class=>"glyphicon glyphicon-pencil" %></td>
+		    <td><%= link_to '', user, :class=>"glyphicon glyphicon-trash", method: :delete, data: { confirm: "You sure? #{user.email}" } %></td>
 		  </tr>
 		<% end %>
 	</tbody>
@@ -53,5 +53,5 @@
 
 <br />
 
-<%= link_to 'New User', admin_new_user_path %>
+<%= link_to 'New User', new_user_path %>
 <%end%>

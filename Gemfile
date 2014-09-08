@@ -13,8 +13,8 @@ group :production do
 end
 
 gem 'rails_12factor'
-gem 'devise'
-gem 'devise-encryptable'
+gem "bcrypt-ruby", :require => "bcrypt"
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

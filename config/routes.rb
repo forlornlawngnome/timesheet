@@ -3,24 +3,19 @@ Timesheet::Application.routes.draw do
 
 
   resources :timelogs 
-  resources :users, only: [:index, :remove, :view, :edit, :new, :create, :save]
+  resources :users, only: [:index, :remove, :show, :edit, :new, :create, :update]
+  resources :sessions
 
   get "welcome/index"
-
-  devise_for :users
   
-  devise_for :users, :path => "auth", :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register', :sign_up => 'cmon_let_me_in' }
-
   match 'studentlogin' => 'timelogs#student'
   match 'studentLogin' => 'timelogs#student'
-  
-  match 'users/delete/:id' => 'users#remove', :via => :delete, :as => :admin_remove_user
-  match 'users/view/:id' => 'users#view', :via => :get, :as => :admin_view_user
-  match 'users/edit/:id' => 'users#edit', :via => :get, :as => :admin_edit_user
-  match 'users/save/:id' => 'users#save', :va => :put, :as => :admin_save_user
-  match 'users/new' => 'users#new', :via => :get, :as => :admin_new_user
-  match 'users/create' => 'users#create', :via => :post, :as => :admin_create_user
   match 'welcome/acknowledgements' => 'welcome#acknowledgements', :as=> :credits
+  
+  get "log_out" => "sessions#destroy", :as => "log_out"
+  get "log_in" => "sessions#new", :as => "log_in"
+  get "sign_up" => "users#new", :as => "sign_up"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

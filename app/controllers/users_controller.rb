@@ -17,7 +17,7 @@ class UsersController < ApplicationController
         redirect_to users_path, notice: "User deleted."
     end
   end
-  def view
+  def show
     @user = User.find(params[:id])
 
     respond_to do |format|
@@ -27,16 +27,28 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
   end
-  def save
+  def update
     @user = User.find(params[:id])
-    respond_to do |format|
-      if @user.update_without_password(params[:user])
-        sign_in(current_user, :bypass => true)
-        format.html { redirect_to users_path, notice: 'User was successfully updated.' }
-        format.json { head :no_content }
+    if(!params[:user][:password].nil? && !params[:user][:password_confirmation].nil?)
+      if(params[:user][:password] == params[:user][:password_confirmation])
+        if @user.update_attributes(params[:user])
+          redirect_to users_path, notice: 'User was successfully updated.' 
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render action: "edit" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    else
+      respond_to do |format|
+        if @user.update_attributes(params[:user])
+          redirect_to users_path, notice: 'User was successfully updated.' 
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

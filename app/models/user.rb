@@ -1,19 +1,36 @@
 class User < ActiveRecord::Base
   before_save :lowercaseID
+  before_save :encrypt_password
   has_many :timelogs
   belongs_to :school
   
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :school, :school_id, :tools, :conduct, :email, :password, :password_confirmation, :remember_me, :name_first, :name_last, :phone, :admin, :userid
+  attr_accessible :school, :school_id, :tools, :conduct, :email, :password, :password_confirmation, :name_first, :name_last, :phone, :admin, :userid
   # attr_accessible :title, :body
+  attr_accessor :password
   
   validates_uniqueness_of :userid
+  validates_confirmation_of :password
+  validates_presence_of :password, :on => :create
+  validates_presence_of :email
+  validates_uniqueness_of :email
   
+  def self.authenticate(email, password)
+    user = find_by_email(email)
+    if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
+      user
+    else
+      nil
+    end
+  end
+
+  def encrypt_password
+    if password.present?
+      self.password_salt = BCrypt::Engine.generate_salt
+      self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+    end
+  end
   def lowercaseID
     self.userid = self.userid.downcase
   end
