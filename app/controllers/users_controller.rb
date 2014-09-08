@@ -63,7 +63,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     
-    if(User.all.count<10)
+    if(User.all.count<1)
       @user.admin = true
     end
 
