@@ -62,6 +62,10 @@ class UsersController < ApplicationController
   end
   def create
     @user = User.new(params[:user])
+    
+    if(User.all.count<10)
+      @user.admin = true
+    end
 
     respond_to do |format|
       if @user.save
