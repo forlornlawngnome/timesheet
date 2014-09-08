@@ -3,7 +3,7 @@ Timesheet::Application.routes.draw do
 
 
   resources :timelogs 
-  resources :users, only: [:index, :remove, :show, :edit, :new, :create, :update]
+  resources :users, only: [:index, :remove, :show, :edit, :new, :create, :update, :destroy]
   resources :sessions
 
   get "welcome/index"

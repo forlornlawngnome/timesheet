@@ -1,4 +1,4 @@
-<%!if current_user.try(:admin)%>
+<%if current_user.try(:admin)%>
 	<%= form_for @user do |f| %>
 
 	<div class="row">
