@@ -7,7 +7,7 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div>
     <ul class="nav navbar-nav">
-		<%if !current_user.try(:admin)%>
+		<%if current_user.try(:admin)%>
 			<li><%=link_to "Student Login", studentlogin_path%></li>
 			<li><%=link_to "Students", users_path%></li>
 		<%end%>
