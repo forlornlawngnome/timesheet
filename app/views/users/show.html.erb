@@ -84,18 +84,20 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%@user.timelogs.where("timein >= ?", ApplicationHelper.getStartDate).order("timein ASC").each do |log|%>
-				<tr>
-					<td>
-						<%=local_time log.timein%>
-					</td>
-					<td>
-						<%=local_time log.timeout%>
-					</td>
-					<td>
-						<%=Time.at(log.time_logged).utc.strftime("%H:%M:%S")%>
-					</td>
-				</tr>
+			<%if !@user.timelogs.empty?%>
+				<%@user.timelogs.where("timein >= ?", ApplicationHelper.getStartDate).order("timein ASC").each do |log|%>
+					<tr>
+						<td>
+							<%=local_time log.timein%>
+						</td>
+						<td>
+							<%=local_time log.timeout%>
+						</td>
+						<td>
+							<%=Time.at(log.time_logged).utc.strftime("%H:%M:%S")%>
+						</td>
+					</tr>
+				<%end%>
 			<%end%>
 		</tbody>
 	</table>
