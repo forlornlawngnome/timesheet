@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   
   scope :archived, :conditions => {:archive => true}
-  scope :active, where("archive IS NOT ?",true)
+  scope :active, where("archive IS NOT true")
   
   def self.authenticate(email, password)
     user = find_by_email(email)
