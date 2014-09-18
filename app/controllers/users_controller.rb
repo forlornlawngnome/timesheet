@@ -8,6 +8,14 @@ class UsersController < ApplicationController
       format.html # index.html.erb
     end
   end
+  
+  def current
+    @users = User.active.order("name_first")
+
+    respond_to do |format|
+      format.html # index.html.erb
+    end
+  end
 
   def remove
     @user = User.find(params[:id])

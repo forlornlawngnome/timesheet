@@ -88,10 +88,10 @@
 				<%@user.timelogs.where("timein >= ?", ApplicationHelper.getStartDate).order("timein ASC").each do |log|%>
 					<tr>
 						<td>
-							<%=local_time log.timein%>
+							<%=local_time log.timein rescue ""%>
 						</td>
 						<td>
-							<%=local_time log.timeout%>
+							<%=local_time log.timeout rescue ""%>
 						</td>
 						<td>
 							<%=Time.at(log.time_logged).utc.strftime("%H:%M:%S")%>

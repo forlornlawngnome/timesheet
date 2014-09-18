@@ -59,6 +59,11 @@ class TimelogsController < ApplicationController
         timelog.timein = Time.now
         timelog.updated_at = Time.now
         
+        student.archive=false
+        if !student.save
+          redirect_to studentlogin_path, alert: "Failed to Sign In: #{student.full_name}" 
+        end
+        
         if timelog.save
           redirect_to studentlogin_path, notice: "Signed In: #{student.full_name}" 
         else

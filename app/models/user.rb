@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :school, :school_id, :tools, :conduct, :email, :password, :password_confirmation, :name_first, :name_last, :phone, :admin, :userid
+  attr_accessible :school, :school_id, :tools, :conduct, :email, :password, :password_confirmation, :name_first, :name_last, :phone, :admin, :userid, :archive
   # attr_accessible :title, :body
   attr_accessor :password
   
@@ -15,6 +15,9 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create
   validates_presence_of :email
   validates_uniqueness_of :email
+  
+  scope :archived, :conditions => {:archive => true}
+  scope :active, where("archive IS NOT ?",true)
   
   def self.authenticate(email, password)
     user = find_by_email(email)

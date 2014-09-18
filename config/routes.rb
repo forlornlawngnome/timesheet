@@ -3,7 +3,7 @@ Timesheet::Application.routes.draw do
 
 
   resources :timelogs 
-  resources :users, only: [:index, :remove, :show, :edit, :new, :create, :update, :destroy]
+  resources :users, only: [:index, :remove, :show, :edit, :new, :create, :update, :destroy,]
   resources :sessions
 
   get "welcome/index"
@@ -11,6 +11,8 @@ Timesheet::Application.routes.draw do
   match 'studentlogin' => 'timelogs#student'
   match 'studentLogin' => 'timelogs#student'
   match 'welcome/acknowledgements' => 'welcome#acknowledgements', :as=> :credits
+  
+  match 'currentUser' => 'users#current', :as=>"students"
   
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"
