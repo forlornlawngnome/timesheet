@@ -12,7 +12,7 @@ Timesheet::Application.routes.draw do
   match 'studentLogin' => 'timelogs#student'
   match 'welcome/acknowledgements' => 'welcome#acknowledgements', :as=> :credits
   
-  match 'currentUser' => 'users#current', :as=>"students"
+  match 'currentStudents' => 'users#current', :as=>"students"
   
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"
