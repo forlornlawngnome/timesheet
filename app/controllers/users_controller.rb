@@ -10,7 +10,11 @@ class UsersController < ApplicationController
   end
   
   def current
-    @users = User.active.order("name_first")
+    if Rails.env.development? 
+      @users = User.where("archive is not ?",true).order("name_first")
+    else
+      @users = User.active.order("name_first")
+    end
 
     respond_to do |format|
       format.html # index.html.erb
