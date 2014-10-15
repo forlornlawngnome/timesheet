@@ -17,8 +17,15 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   
   scope :archived, :conditions => {:archive => true}
-  scope :active, where("users.archive IS NOT TRUE") ##Change back for production!!!
+  #scope :active, where("users.archive IS NOT 1") ##Change back for production!!!
   
+  def self.active
+    if Rails.env.production?
+      where("users.archive IS NOT true")
+    else
+      where("users.archive IS NOT 1")
+    end
+  end
   def self.authenticate(email, password)
     user = find_by_email(email)
     if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
