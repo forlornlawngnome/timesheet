@@ -63,7 +63,7 @@ class StatsController < ApplicationController
       log[1].each do |timelog|
         totalsum = totalsum+timelog.time_logged
         
-        if timelog.user.school == ismentor
+        if !timelog.user.nil? && timelog.user.school == ismentor
           mentorsum = mentorsum + timelog.time_logged
         else
           studentsum = studentsum + timelog.time_logged
