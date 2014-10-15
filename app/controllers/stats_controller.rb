@@ -13,7 +13,7 @@ class StatsController < ApplicationController
     @schoolArray.each do |school|
       @chartString = "#{@chartString},'#{school}'" 
     end
-    @chartString = "#{@chartString},'All'],".html_safe
+    @chartString = "#{@chartString}],".html_safe
   end
   def schools
     @allSchools = Hash.new{|h,k| h[k] = {}}

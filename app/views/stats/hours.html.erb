@@ -4,7 +4,7 @@ google.load("visualization", "1", {packages:["corechart"]});
      google.setOnLoadCallback(drawChart);
      function drawChart() {
        var data = google.visualization.arrayToDataTable([
-		  <%=@chartString%>
+		 <%=@chartString%>
 		 <%@allHoursSchools.each do |week|%>
          	['<%=week[0]%>',  
 			<%@schoolArray.each do |school|%>
@@ -14,16 +14,16 @@ google.load("visualization", "1", {packages:["corechart"]});
 					<%=week[1]['students'][school][0]%>,
 				<%end%> 
 			<%end%>
-			<%=week[1]['all']%>
 			],
 		 <%end%>
        ]);
 
        var options = {
-         title: 'Total Hours Per Week'
+         title: 'Total Hours Per Week',
+		 isStacked: true
        };
 
-       var chart = new google.visualization.LineChart(document.getElementById('per_week_students_div'));
+       var chart = new google.visualization.SteppedAreaChart(document.getElementById('per_week_students_div'));
 
        chart.draw(data, options);
      }
