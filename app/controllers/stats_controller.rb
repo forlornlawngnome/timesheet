@@ -90,7 +90,7 @@ class StatsController < ApplicationController
       #Calculate hours per school
       totalsumper=0
       schoolHours = Hash.new{|h,k| h[k] = []}
-      schools = log[1].group_by{|a|a.user.school}
+      schools = log[1].group_by{|a|a.user.school rescue "Other School"}
 
       schools.each do |school|
         sum=0
