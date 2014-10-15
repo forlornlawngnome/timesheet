@@ -1,0 +1,26 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+google.load("visualization", "1", {packages:["corechart"]});
+     google.setOnLoadCallback(drawChart);
+     function drawChart() {
+       var data = google.visualization.arrayToDataTable([
+         ['School', 'Number of Students', 'Total Student hours', 'Total Hours per Student' ],
+		 <%@allSchools.each do |school|%>
+         	['<%=school[0]%>',  <%=school[1][0]%>, <%=school[1][1]%>, <%=school[1][2]%>],
+		 <%end%>
+       ]);
+
+       var options = {
+         title: 'School breakdown'
+       };
+
+       var chart = new google.visualization.ColumnChart(document.getElementById('students_per_school_div'));
+
+       chart.draw(data, options);
+     }
+</script>
+
+
+
+
+<div id="students_per_school_div" style="width: 1100px; height: 600px;"></div>

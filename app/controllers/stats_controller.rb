@@ -10,6 +10,23 @@ class StatsController < ApplicationController
     end
     @chartString = "#{@chartString},'All'],".html_safe
   end
+  def schools
+    @allSchools = Hash.new{|h,k| h[k] = {}}
+    
+    School.order(:name).each do |school|
+      users = school.users.active
+      @allSchools[school.name][0] = users.count
+      
+      totalHours = 0
+      users.each do |user|
+        totalHours = totalHours + user.total_hours_number
+      end
+      totalHours = totalHours/(60*60)
+      perStudentHours = totalHours/users.count
+      @allSchools[school.name][1] = totalHours
+      @allSchools[school.name][2] = perStudentHours
+    end
+  end
   def schoolArray
     @schoolArray = []
     School.order(:name).each do |school|

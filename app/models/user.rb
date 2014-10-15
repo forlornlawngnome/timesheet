@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   
   scope :archived, :conditions => {:archive => true}
-  scope :active, where("archive IS NOT true")
+  scope :active, where("users.archive IS NOT 1") ##Change back for production!!!
   
   def self.authenticate(email, password)
     user = find_by_email(email)
@@ -64,6 +64,15 @@ class User < ActiveRecord::Base
       end
     end
     return Time.at(total).utc.strftime("%H:%M:%S")
+  end
+  def total_hours_number
+    total = 0
+    self.timelogs.each do |log|
+      if log.timein>ApplicationHelper.getStartDate
+        total = total + log.time_logged
+      end
+    end
+    total
   end
   def grouped_logs
     self.timelogs.order('timein asc').group_by{ |u| ApplicationHelper.toLocalTime(u.timein).beginning_of_week }

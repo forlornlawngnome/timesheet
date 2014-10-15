@@ -1,5 +1,6 @@
 Timesheet::Application.routes.draw do
   get "stats/hours"
+  get "stats/schools"
 
   resources :schools
 
