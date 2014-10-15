@@ -1,5 +1,6 @@
 class StatsController < ApplicationController
   def hours
+    calculateHours1
     calculateHours2
     
     schoolArray
@@ -18,7 +19,7 @@ class StatsController < ApplicationController
   end
   def calculateHours2
     ismentor = School.where("lower(name) = ?","mentor").first
-    @allHours = Hash.new{|h,k| h[k] = {}}
+    @allHoursSchools = Hash.new{|h,k| h[k] = {}}
     
     studentlogs = Timelog.where("timein >= ? ", ApplicationHelper.getStartDate).order("timein ASC")
     studentlogs = studentlogs.group_by{|a| a.timein.at_beginning_of_week}
@@ -40,8 +41,8 @@ class StatsController < ApplicationController
       end
       totalsum=totalsum/(60*60) #Convert from seconds to hours for the graph
       
-      @allHours[log[0].strftime("%m/%d/%Y")]["students"] = schoolHours
-      @allHours[log[0].strftime("%m/%d/%Y")]["all"] = totalsum
+      @allHoursSchools[log[0].strftime("%m/%d/%Y")]["students"] = schoolHours
+      @allHoursSchools[log[0].strftime("%m/%d/%Y")]["all"] = totalsum
     end
   end
   def calculateHours1
