@@ -8,7 +8,11 @@ google.load("visualization", "1", {packages:["corechart"]});
 		 <%@allHours.each do |week|%>
          	['<%=week[0]%>',  
 			<%@schoolArray.each do |school|%>
-				<%=week[1]['students'][school][0]%>, 
+				<%if week[1]['students'][school][0].nil?%>
+					0,
+				<%else%>
+					<%=week[1]['students'][school][0]%>,
+				<%end%> 
 			<%end%>
 			<%=week[1]['all']%>
 			],
