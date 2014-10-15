@@ -70,6 +70,10 @@ google.load("visualization", "1", {packages:["corechart"]});
      }
 </script>
 
+<%=form_tag do%>
+	<%= text_field_tag(:year) %>
+  	<%= submit_tag("Filter") %>
+<%end%>
 
 
 

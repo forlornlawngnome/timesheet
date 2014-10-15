@@ -19,6 +19,9 @@ module ApplicationHelper
   def self.toLocalTime(time)
     time.in_time_zone(ApplicationHelper.TimeZone)
   end
+  def self.getYearStart(year)
+    DateTime.new(year, ApplicationHelper.getStartMonth, 1, 0, 0, 0)
+  end
   def self.getStartMonth
     YEAR_START
   end

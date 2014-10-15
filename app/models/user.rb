@@ -72,10 +72,10 @@ class User < ActiveRecord::Base
     end
     return Time.at(total).utc.strftime("%H:%M:%S")
   end
-  def total_hours_number
+  def total_hours_number(date)
     total = 0
     self.timelogs.each do |log|
-      if log.timein>ApplicationHelper.getStartDate
+      if log.timein>date && log.timein < date+1.year
         total = total + log.time_logged
       end
     end
