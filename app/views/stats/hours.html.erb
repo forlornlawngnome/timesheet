@@ -49,10 +49,11 @@ google.load("visualization", "1", {packages:["corechart"]});
        ]);
 
        var options = {
-         title: 'Total Hours Per Week'
+         title: 'Total Hours Per Week',
+    	 curveType: 'function'
        };
 
-       var chart = new google.visualization.LineChart(document.getElementById('per_week_students_div'));
+       var chart = new google.visualization.LineChart(document.getElementById('per_week_students_div_curves'));
 
        chart.draw(data, options);
      }
@@ -63,9 +64,17 @@ google.load("visualization", "1", {packages:["corechart"]});
      google.setOnLoadCallback(drawChart);
      function drawChart() {
        var data = google.visualization.arrayToDataTable([
-         ['Date', 'Students', 'Mentors', 'All'],
-		 <%@allHours.each do |week|%>
-         	['<%=week[0]%>',  <%=week[1][0]%>, <%=week[1][1]%>, <%=week[1][2]%>],
+		 <%=@chartString%>
+		 <%@allHoursSchools.each do |week|%>
+         	['<%=week[0]%>',  
+			<%@schoolArray.each do |school|%>
+				<%if week[1]['students'][school][0].nil?%>
+					0,
+				<%else%>
+					<%=week[1]['students'][school][0]%>,
+				<%end%> 
+			<%end%>
+			],
 		 <%end%>
        ]);
 
@@ -73,7 +82,7 @@ google.load("visualization", "1", {packages:["corechart"]});
          title: 'Total Hours Per Week'
        };
 
-       var chart = new google.visualization.LineChart(document.getElementById('per_week_div_curves'));
+       var chart = new google.visualization.LineChart(document.getElementById('per_week_students_div'));
 
        chart.draw(data, options);
      }
@@ -107,6 +116,6 @@ google.load("visualization", "1", {packages:["corechart"]});
 
 
 <div id="per_week_students_div" style="width: 1100px; height: 600px;"></div>
-<div id="per_week_div_curves" style="width: 1100px; height: 600px;"></div>
+<div id="per_week_students_div_curves" style="width: 1100px; height: 600px;"></div>
 <div id="per_week_div" style="width: 1100px; height: 600px;"></div>
 <div id="cumulative_div" style="width: 1100px; height: 600px;"></div>
