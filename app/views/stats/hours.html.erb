@@ -27,28 +27,19 @@ google.load("visualization", "1", {packages:["corechart"]});
        chart.draw(data, options);
      }
 </script>
-
 <script type="text/javascript">
 google.load("visualization", "1", {packages:["corechart"]});
      google.setOnLoadCallback(drawChart);
      function drawChart() {
        var data = google.visualization.arrayToDataTable([
-		 <%=@chartString%>
-		 <%@allHoursSchools.each do |week|%>
-         	['<%=week[0]%>',  
-			<%@schoolArray.each do |school|%>
-				<%if week[1]['students'][school][0].nil?%>
-					0,
-				<%else%>
-					<%=week[1]['students'][school][0]%>,
-				<%end%> 
-			<%end%>
-			],
+         ['Date', 'Students', 'Mentors', 'All'],
+		 <%@allHours.each do |week|%>
+         	['<%=week[0]%>',  <%=week[1][0]%>, <%=week[1][1]%>, <%=week[1][2]%>],
 		 <%end%>
        ]);
 
        var options = {
-         title: 'Total Hours Per Week'
+         title: 'Total Hours Cumulative'
        };
 
        var chart = new google.visualization.LineChart(document.getElementById('per_week_div'));
