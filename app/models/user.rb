@@ -75,11 +75,18 @@ class User < ActiveRecord::Base
   def total_hours_number(date)
     total = 0
     self.timelogs.each do |log|
-      if log.timein>date && log.timein < date+1.year
+      if log.timein>=date && log.timein < date+1.year
         total = total + log.time_logged
       end
     end
     total
+  end
+  def has_hours(date)
+    logs = self.timelogs.where("timein >= ? and timein < ?",date,date+1.year)
+    if logs.size > 0
+      return true
+    end
+    return false
   end
   def grouped_logs
     self.timelogs.order('timein asc').group_by{ |u| ApplicationHelper.toLocalTime(u.timein).beginning_of_week }

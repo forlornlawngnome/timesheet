@@ -29,16 +29,20 @@ class StatsController < ApplicationController
     @totalStudents = 0
     
     School.order(:name).each do |school|
-      users = school.users.active
-      @allSchools[school.name][0] = users.count
-      @totalStudents = @totalStudents + users.count
+      users = school.users
       
       totalHours = 0
+      count = 0
       users.each do |user|
         totalHours = totalHours + user.total_hours_number(start)
+        if user.has_hours(start)
+          count = count+1
+        end
       end
       totalHours = totalHours/(60*60)
 
+      @allSchools[school.name][0] = count
+      @totalStudents = @totalStudents + count
 
       perStudentHours = totalHours/users.count rescue 0
      
