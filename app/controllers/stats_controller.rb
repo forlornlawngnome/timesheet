@@ -16,13 +16,22 @@ class StatsController < ApplicationController
     @chartString = "#{@chartString}],".html_safe
   end
   def schools
+    if (!params[:year].nil? && ! params[:year].empty?)
+      startDate = ApplicationHelper.getYearStart(params[:year].to_i)
+    else
+      startDate = ApplicationHelper.getStartDate
+    end
+    
     @allSchools = Hash.new{|h,k| h[k] = {}}
     
-    start = ApplicationHelper.getStartDate
+    start = startDate
+    
+    @totalStudents = 0
     
     School.order(:name).each do |school|
       users = school.users.active
       @allSchools[school.name][0] = users.count
+      @totalStudents = @totalStudents + users.count
       
       totalHours = 0
       users.each do |user|

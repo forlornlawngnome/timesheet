@@ -2,6 +2,7 @@ Timesheet::Application.routes.draw do
   get "stats/hours"
   post "stats/hours"
   get "stats/schools"
+  post "stats/schools"
 
   resources :schools
 
