@@ -44,7 +44,7 @@ class StatsController < ApplicationController
       @allSchools[school.name][0] = count
       @totalStudents = @totalStudents + count
 
-      perStudentHours = totalHours/users.count rescue 0
+      perStudentHours = totalHours/count rescue 0
      
       @allSchools[school.name][1] = totalHours
       @allSchools[school.name][2] = perStudentHours
