@@ -11,7 +11,7 @@ google.load("visualization", "1", {packages:["corechart"]});
        ]);
 
        var options = {
-         title: '<%=@range%>: Hours Per School'
+         title: '<%=@range%>: Total Hours Per School'
        };
 
        var chart = new google.visualization.ColumnChart(document.getElementById('hours_per_school_div'));
@@ -24,14 +24,14 @@ google.load("visualization", "1", {packages:["corechart"]});
      google.setOnLoadCallback(drawChart);
      function drawChart() {
        var data = google.visualization.arrayToDataTable([
-         ['School', 'Total Hours per Student' ],
+         ['School', 'Average Hours per Student' ],
 		 <%@allSchools.each do |school|%>
          	['<%=school[0]%>', <%=school[1][2]%>],
 		 <%end%>
        ]);
 
        var options = {
-         title: '<%=@range%>: Hours Per Student Per School'
+         title: '<%=@range%>: Average Hours Per Student Per School'
        };
 
        var chart = new google.visualization.ColumnChart(document.getElementById('hours_per_student_per_school_div'));
