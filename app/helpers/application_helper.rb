@@ -75,5 +75,12 @@ module ApplicationHelper
   def self.dateRange(time)
     "#{time.year}-#{(time+1.year).year}"
   end
-
+  def self.rangeBeginning
+    log = Timelog.order("timein").first
+    if log.timein.month < getStartMonth
+      ApplicationHelper.getYearStart((log.timein.year+1.year))
+    else
+      ApplicationHelper.getYearStart(log.timein.year)
+    end
+  end
 end
