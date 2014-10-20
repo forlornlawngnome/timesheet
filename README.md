@@ -5,6 +5,34 @@ This project is designed to work as a time tracker for FIRST robotics teams. Onc
 
 This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
+#Live Example
+There is a live example running on heroku at [http://frctimesheet.herokuapp.com/](http://frctimesheet.herokuapp.com/). The admin user is "admin@900.com" with a password of "zebracorns". An example student user is "test@900.com" with a password of "zebra".
+
+Feel free to create new users and timelogs etc. Please do NOT delete or modify these two users. 
+
+# Statistics/Reporting
+Statistics reporting has been implemented in a series of graphs. 
+
+Note: For mentors, we suggest setting up a school titled "Mentor". This way you can differentiate between student hours and mentor hours.
+
+The graphs availlable are:
+Stats By Week:
+<ul>
+	<li>Total Hours Per School Per Week</li>
+	<li>Average Hours Per Student Per School Per Week</li>
+	<li>Total Hours Per Week</li>
+	<li>Cumulative Hours</li>
+</ul>
+Stats By School:
+<ul>
+	<li>Total Hours Per School</li>
+	<li>Average Hours Per Student Per School</li>
+	<li>Number of Students Per School</li>
+</ul>
+
+# Screenshots
+The Homepage
+![Homepage](FRC900.github.com/timesheet/app/assets/images/Readme/Homepage.png)
 
 # Installing/Running
 
