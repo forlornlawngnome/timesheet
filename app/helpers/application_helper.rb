@@ -72,5 +72,8 @@ module ApplicationHelper
   def isBuildSeason(time)
     Date.today.month < ApplicationHelper.getStartMonth
   end
+  def self.dateRange(time)
+    "#{time.year}-#{(time+1.year).year}"
+  end
 
 end

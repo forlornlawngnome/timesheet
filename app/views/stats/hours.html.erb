@@ -19,7 +19,7 @@ google.load("visualization", "1", {packages:["corechart"]});
        ]);
 
        var options = {
-         title: 'Total Hours Per School Per Week'
+         title: '<%=@range%>: Total Hours Per School Per Week'
        };
 
        var chart = new google.visualization.LineChart(document.getElementById('per_week_per_school_div'));
@@ -47,7 +47,7 @@ google.load("visualization", "1", {packages:["corechart"]});
        ]);
 
        var options = {
-         title: 'Total Hours Per Student Per School Per Week'
+         title: '<%=@range%>: Average Hours Per Student Per School Per Week'
        };
 
        var chart = new google.visualization.LineChart(document.getElementById('per_week_per_student_per_school_div'));
@@ -67,7 +67,7 @@ google.load("visualization", "1", {packages:["corechart"]});
        ]);
 
        var options = {
-         title: 'Total Hours Per Week'
+         title: '<%=@range%>: Total Hours Per Week'
        };
 
        var chart = new google.visualization.LineChart(document.getElementById('per_week_div'));
@@ -87,7 +87,7 @@ google.load("visualization", "1", {packages:["corechart"]});
        ]);
 
        var options = {
-         title: 'Total Hours Cumulative'
+         title: '<%=@range%>: Total Cumulative Hours'
        };
 
        var chart = new google.visualization.LineChart(document.getElementById('cumulative_div'));

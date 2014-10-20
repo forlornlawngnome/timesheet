@@ -6,6 +6,7 @@ class StatsController < ApplicationController
       startDate = ApplicationHelper.getStartDate
     end
     
+    @range = ApplicationHelper.dateRange(startDate)
     calculateHours(startDate)
     
     schoolArray
@@ -21,6 +22,8 @@ class StatsController < ApplicationController
     else
       startDate = ApplicationHelper.getStartDate
     end
+    
+    @range = ApplicationHelper.dateRange(startDate)
     
     @allSchools = Hash.new{|h,k| h[k] = {}}
     

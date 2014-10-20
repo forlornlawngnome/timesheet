@@ -11,7 +11,7 @@ google.load("visualization", "1", {packages:["corechart"]});
        ]);
 
        var options = {
-         title: 'Hours Per School'
+         title: '<%=@range%>: Hours Per School'
        };
 
        var chart = new google.visualization.ColumnChart(document.getElementById('hours_per_school_div'));
@@ -31,7 +31,7 @@ google.load("visualization", "1", {packages:["corechart"]});
        ]);
 
        var options = {
-         title: 'Hours Per Student Per School'
+         title: '<%=@range%>: Hours Per Student Per School'
        };
 
        var chart = new google.visualization.ColumnChart(document.getElementById('hours_per_student_per_school_div'));
@@ -51,7 +51,7 @@ google.load("visualization", "1", {packages:["corechart"]});
        ]);
 
        var options = {
-         title: 'Students Per School'
+         title: '<%=@range%>: Number of Students Per School'
        };
 
        var chart = new google.visualization.ColumnChart(document.getElementById('students_per_school_div'));
