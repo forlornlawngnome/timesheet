@@ -32,7 +32,7 @@ Stats By School:
 
 # Screenshots
 The Homepage
-![Homepage](FRC900.github.com/timesheet/app/assets/images/Readme/Homepage.png)
+![Homepage](https://github.com/FRC900/timesheet/blob/master/app/assets/images/Readme/Homepage.png)
 
 # Installing/Running
 
