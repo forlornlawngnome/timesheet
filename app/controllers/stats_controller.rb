@@ -6,7 +6,7 @@ class StatsController < ApplicationController
       startDate = ApplicationHelper.getStartDate
     end
     
-    calculateHours1(startDate)
+    calculateHours(startDate)
     
     schoolArray
     @chartString = "['Date'"
@@ -57,7 +57,7 @@ class StatsController < ApplicationController
     end
     @schoolArray.push("Other Students")
   end
-  def calculateHours1(start)
+  def calculateHours(start)
     ismentor = School.where("lower(name) = ?","mentor").first
     @allHours = Hash.new{|h,k| h[k] = []}
     @allHoursSchools = Hash.new{|h,k| h[k] = {}}
@@ -113,7 +113,13 @@ class StatsController < ApplicationController
         end
         
         sum=sum/(60*60) #Convert from seconds to hours for the graph
-        schoolHours[school[0].name] << sum rescue schoolHours["Other Students"] << sum
+        if !school[0].nil?
+          schoolHours[school[0].name][0] = sum
+          schoolHours[school[0].name][1] = sum/school[0].num_students(start)
+        else
+          schoolHours["Other Students"][0] = sum
+          schoolHours["Other Students"][1] = calcNumber(start, sum)
+        end
       end
       totalsumper=totalsumper/(60*60) #Convert from seconds to hours for the graph
       
@@ -122,5 +128,15 @@ class StatsController < ApplicationController
       
     end
     
+  end
+  def calcNumber(start, sum)
+    count = 0
+    users = User.where("school_id IS NULL")
+    users.each do |user|
+      if user.has_hours(start)
+        count = count+1
+      end
+    end
+    return sum/count
   end
 end
