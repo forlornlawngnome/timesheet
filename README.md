@@ -31,8 +31,24 @@ Stats By School:
 </ul>
 
 # Screenshots
-The Homepage
+The Homepage (Administrators view)
 ![Homepage](https://github.com/FRC900/timesheet/blob/master/app/assets/images/Readme/Homepage.png)
+
+The Sign-In Page
+![Homepage](https://github.com/FRC900/timesheet/blob/master/app/assets/images/Readme/SignIn.png)
+
+A graph representing the total hours per week. Each school has a different line.
+![Homepage](https://github.com/FRC900/timesheet/blob/master/app/assets/images/Readme/HoursPerSchoolPerWeek.png)
+
+A graph representing the average hours per week. Each school has a different line and it's the total hours/student count.
+![Homepage](https://github.com/FRC900/timesheet/blob/master/app/assets/images/Readme/AverageHoursPerSchool.png)
+
+A graph representing the average hours per school. It's the total hours/student count.
+![Homepage](https://github.com/FRC900/timesheet/blob/master/app/assets/images/Readme/AverageHours.png)
+
+A graph representing the number of students per school. 
+![Homepage](https://github.com/FRC900/timesheet/blob/master/app/assets/images/Readme/StudentsPerSchool.png)
+
 
 # Installing/Running
 
