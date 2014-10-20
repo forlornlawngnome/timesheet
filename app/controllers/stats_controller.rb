@@ -137,6 +137,6 @@ class StatsController < ApplicationController
         count = count+1
       end
     end
-    return sum/count
+    return sum/count rescue 0
   end
 end
