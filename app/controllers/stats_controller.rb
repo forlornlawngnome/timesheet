@@ -113,7 +113,7 @@ class StatsController < ApplicationController
         end
         
         sum=sum/(60*60) #Convert from seconds to hours for the graph
-        if !school[0].nil?
+        if !school[0].nil? && !school[0].name.nil?
           schoolHours[school[0].name][0] = sum
           schoolHours[school[0].name][1] = sum/school[0].num_students(start)
         else
