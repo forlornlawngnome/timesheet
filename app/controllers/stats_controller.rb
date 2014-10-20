@@ -5,6 +5,7 @@ class StatsController < ApplicationController
     else
       startDate = ApplicationHelper.getStartDate
     end
+    @startDate = startDate.year
     
     @range = ApplicationHelper.dateRange(startDate)
     calculateHours(startDate)
@@ -22,6 +23,7 @@ class StatsController < ApplicationController
     else
       startDate = ApplicationHelper.getStartDate
     end
+    @startDate = startDate.year
     
     @range = ApplicationHelper.dateRange(startDate)
     

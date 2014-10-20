@@ -63,8 +63,12 @@ google.load("visualization", "1", {packages:["corechart"]});
 
 
 <%=form_tag do%>
-	<%= select_tag("year", options_for_select(yearDropdown,ApplicationHelper.getStartYear))%>
-  	<%= submit_tag("Filter") %>
+	<div class="form-group">
+		<div class="col-lg-4 col-md-4">
+			<%= select_tag("year", options_for_select(yearDropdown, ApplicationHelper.getYearStart(@startDate).year),{:class=>"form-control"})%>
+	  	</div>
+		<%= submit_tag("Filter", :class=>"btn btn-primary") %>
+	</div>
 <%end%>
 <p>
 	Total Number of Students: <%=@totalStudents%>
