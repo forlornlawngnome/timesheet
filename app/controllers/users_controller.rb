@@ -38,6 +38,8 @@ class UsersController < ApplicationController
   end
   def edit
     @user = User.find(params[:id])
+    
+    session[:return_to] ||= request.referer
   end
   def update
      params[:user][:form_ids] ||= []
@@ -46,7 +48,7 @@ class UsersController < ApplicationController
     if(!params[:user][:password].nil? && !params[:user][:password_confirmation].nil?)
       if(params[:user][:password] == params[:user][:password_confirmation])
         if @user.update_attributes(params[:user])
-          redirect_to users_path, notice: 'User was successfully updated.' 
+          redirect_to session.delete(:return_to), notice: 'User was successfully updated.' 
         else
           format.html { render action: "edit" }
           format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -58,7 +60,7 @@ class UsersController < ApplicationController
     else
       respond_to do |format|
         if @user.update_attributes(params[:user])
-          redirect_to users_path, notice: 'User was successfully updated.' 
+          redirect_to  session.delete(:return_to), notice: 'User was successfully updated.' 
         else
           format.html { render action: "edit" }
           format.json { render json: @user.errors, status: :unprocessable_entity }

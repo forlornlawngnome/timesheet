@@ -14,8 +14,12 @@
 	<h4>User Management</h4>
 		<li><%=link_to "All Users (Students)", users_path%></li>
 		<li><%=link_to "Current Users (Students)", students_path%></li>
+		<li><%=link_to "Student Forms", student_forms_path%></li>
 		<li><%=link_to "New User", new_user_path%></li>
 		<li><%=link_to "Profile", user_path(current_user)%></li>
+   	 <h4>Forms</h4>
+  		<li><%=link_to "Forms", forms_path%></li>
+   		<li><%=link_to "New Form", new_form_path%></li>
 	 <h4>Timelogs</h4>
    		<li><%=link_to "Timelogs", timelogs_path%></li>
 		<li><%=link_to "New Timelog", new_timelog_path%></li>

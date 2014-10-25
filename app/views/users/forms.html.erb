@@ -8,6 +8,9 @@
 					<%=form.name%>
 				</th>
 			<%end%>
+			<th>
+				Edit
+			</th>
 		</tr>
 		<%@users.each do |user|%>
 			<tr>
@@ -28,6 +31,7 @@
 						<%=has_form%>
 					</td>
 				<%end%>
+				<td><%=link_to '', edit_user_path(user), :class=>"glyphicon glyphicon-pencil" %></td>
 			</tr>
 		<%end%>
 	

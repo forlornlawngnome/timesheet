@@ -30,12 +30,6 @@
 		    <div><%= f.label "User ID Number" %><br />
 		    <%= f.text_field :userid, :class=>"input-small" %></div>
   
-		    <div><%= f.label "Tool Use Forms?" %>
-		    <%= f.check_box :tools %></div>
-  
-		    <div><%= f.label "Code of Conduct Forms?" %>
-		    <%= f.check_box :conduct %></div>
-  
 		    <%if current_user.try(:admin)%>
 		  		<div><%= f.label "Admin?" %>
 		  		<%=f.check_box :admin=%></div>
