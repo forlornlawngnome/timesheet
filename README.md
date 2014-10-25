@@ -30,6 +30,9 @@ Stats By School:
 	<li>Number of Students Per School</li>
 </ul>
 
+# Forms
+Forms allows you to add student requirements. They could be (but are not limited to) tool use forms, liability waivers, permission slips, or training on a specific machine. Anything which can have a "yes" or a "no" per student. 
+
 # Screenshots
 The Homepage (Administrators view)
 ![Homepage](https://github.com/FRC900/timesheet/blob/master/app/assets/images/Readme/Homepage.png)
