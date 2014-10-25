@@ -4,14 +4,14 @@ google.load("visualization", "1", {packages:["corechart"]});
      google.setOnLoadCallback(drawChart);
      function drawChart() {
        var data = google.visualization.arrayToDataTable([
-         ['School', 'Total Student hours'],
+         ['<%=SCHOOL_NAME_REPLACEMENT%>', 'Total Student hours'],
 		 <%@allSchools.each do |school|%>
          	['<%=school[0]%>', <%=school[1][1]%>],
 		 <%end%>
        ]);
 
        var options = {
-         title: '<%=@range%>: Total Hours Per School'
+         title: '<%=@range%>: Total Hours Per <%=SCHOOL_NAME_REPLACEMENT%>'
        };
 
        var chart = new google.visualization.ColumnChart(document.getElementById('hours_per_school_div'));
@@ -24,14 +24,14 @@ google.load("visualization", "1", {packages:["corechart"]});
      google.setOnLoadCallback(drawChart);
      function drawChart() {
        var data = google.visualization.arrayToDataTable([
-         ['School', 'Average Hours per Student' ],
+         ['<%=SCHOOL_NAME_REPLACEMENT%>', 'Average Hours per Student' ],
 		 <%@allSchools.each do |school|%>
          	['<%=school[0]%>', <%=school[1][2]%>],
 		 <%end%>
        ]);
 
        var options = {
-         title: '<%=@range%>: Average Hours Per Student Per School'
+         title: '<%=@range%>: Average Hours Per Student Per <%=SCHOOL_NAME_REPLACEMENT%>'
        };
 
        var chart = new google.visualization.ColumnChart(document.getElementById('hours_per_student_per_school_div'));
@@ -44,14 +44,14 @@ google.load("visualization", "1", {packages:["corechart"]});
      google.setOnLoadCallback(drawChart);
      function drawChart() {
        var data = google.visualization.arrayToDataTable([
-         ['School', 'Number of Students' ],
+         ['<%=SCHOOL_NAME_REPLACEMENT%>', 'Number of Students' ],
 		 <%@allSchools.each do |school|%>
          	['<%=school[0]%>',  <%=school[1][0]%>],
 		 <%end%>
        ]);
 
        var options = {
-         title: '<%=@range%>: Number of Students Per School'
+         title: '<%=@range%>: Number of Students Per <%=SCHOOL_NAME_REPLACEMENT%>'
        };
 
        var chart = new google.visualization.ColumnChart(document.getElementById('students_per_school_div'));

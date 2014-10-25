@@ -279,6 +279,26 @@ These can be found in config/initializers/constant.rb
 > 		Change the string to representing the team's number. 
 > 	</dd>
 > </dl>
+### School/Group Descripter
+> <dl>
+> 	<dt>Description</dt>
+> 	<dd>
+> 		A string representing the main "grouping" of students. Could be school, group, team, division, or any other descriptor your team uses.
+> 	</dd>
+> 	<dt>Variable</dt>
+> 	<dd>
+> 		SCHOOL_NAME_REPLACEMENT
+> 	</dd>
+> 	<dt>Default</dt>
+> 	<dd>
+> 		"School"
+> 	</dd>
+> 	<dt>Modification</dt>
+> 	<dd>
+> 		Change the string to representing the team's main organizational unit. 
+> 	</dd>
+> </dl>
+
 
 # Timezones
 * UTC -11:00 
