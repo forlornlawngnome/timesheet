@@ -1,4 +1,10 @@
 Timesheet::Application.routes.draw do
+  resources :forms_users
+
+
+  resources :forms
+
+
   get "stats/hours"
   post "stats/hours"
   get "stats/schools"
@@ -18,6 +24,7 @@ Timesheet::Application.routes.draw do
   match 'welcome/acknowledgements' => 'welcome#acknowledgements', :as=> :credits
   
   match 'currentStudents' => 'users#current', :as=>"students"
+  match 'studentForms' => 'users#forms', :as=>"student_forms"
   
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"

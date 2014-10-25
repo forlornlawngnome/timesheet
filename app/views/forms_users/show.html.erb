@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @forms_user.user.full_name %>
+</p>
+
+<p>
+  <b>Form:</b>
+  <%= @forms_user.form.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_forms_user_path(@forms_user) %> |
+<%= link_to 'Back', forms_users_path %>

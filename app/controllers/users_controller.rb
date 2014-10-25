@@ -40,6 +40,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   def update
+     params[:user][:form_ids] ||= []
+     
     @user = User.find(params[:id])
     if(!params[:user][:password].nil? && !params[:user][:password_confirmation].nil?)
       if(params[:user][:password] == params[:user][:password_confirmation])
@@ -97,5 +99,9 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
+  end
+  def forms
+    @forms = Form.active.order("name")
+    @users = User.active.order("name_first")
   end
 end

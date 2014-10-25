@@ -3,10 +3,11 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   has_many :timelogs
   belongs_to :school
-  
+  has_and_belongs_to_many :forms
+  has_many :forms_users
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :school, :school_id, :tools, :conduct, :email, :password, :password_confirmation, :name_first, :name_last, :phone, :admin, :userid, :archive
+  attr_accessible :school, :school_id, :tools, :conduct, :email, :password, :password_confirmation, :name_first, :name_last, :phone, :admin, :userid, :archive, :form_id, :form_ids, :forms_user_id
   # attr_accessible :title, :body
   attr_accessor :password
   

@@ -47,6 +47,13 @@
 		    <%end%>
 		    <div><%= f.label "Archive?" %>
 		    <%= f.check_box :archive %></div>
+			<hr />
+			<%Form.all.each do |form|%>
+				<div>
+			  		<%= check_box_tag "user[form_ids][]", form.id, @user.forms.include?(form) %>
+			  		<%= form.name %>
+				</div>
+			<%end%>
 			<div class="col-lg-2 pull-right"><%= f.submit "Save", :class=>"btn btn-primary btn-small btn-block" %></div>
 		</div>
   

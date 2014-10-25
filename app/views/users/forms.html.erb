@@ -1,0 +1,35 @@
+<%if current_user.try(:admin)%>
+	<table class="table table-hover">
+		<tr>
+			<th>User</th>
+			<th>Email</th>
+			<%@forms.each do |form|%>
+				<th>
+					<%=form.name%>
+				</th>
+			<%end%>
+		</tr>
+		<%@users.each do |user|%>
+			<tr>
+				<td>
+					<%=user.full_name%>
+				</td>
+				<td>
+					<%=user.email%>
+				</td>
+				<%@forms.each do |form|%>
+					<%has_form = user.forms.include?(form)%>
+					<%if has_form%>
+						<% cell_class="success"%>
+					<%else%>
+						<% cell_class="danger"%>
+					<%end%>
+					<td class=<%="#{cell_class}"%>>
+						<%=has_form%>
+					</td>
+				<%end%>
+			</tr>
+		<%end%>
+	
+	</table>
+<%end%>

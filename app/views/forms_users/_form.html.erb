@@ -1,0 +1,25 @@
+<%= form_for(@forms_user) do |f| %>
+  <% if @forms_user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@forms_user.errors.count, "error") %> prohibited this forms_user from being saved:</h2>
+
+      <ul>
+      <% @forms_user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user %><br />
+	<%= collection_select(:forms_user, :user_id, User.order("lower(name_first)"), :id, :full_name, :include_blank=> true, :class=>"input-small")  %>
+  </div>
+  <div class="field">
+    <%= f.label :form %><br />
+	<%= collection_select(:forms_user, :form_id, Form.order("lower(name)"), :id, :name, :include_blank=> true, :class=>"input-small")  %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
