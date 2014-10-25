@@ -241,6 +241,44 @@ These can be found in config/initializers/constant.rb
 > 		Change the string to the email of an account. (Must register account in system)
 > 	</dd>
 > </dl>
+### Team Name
+> <dl>
+> 	<dt>Description</dt>
+> 	<dd>
+> 		The team's name.
+> 	</dd>
+> 	<dt>Variable</dt>
+> 	<dd>
+> 		TEAM_NAME
+> 	</dd>
+> 	<dt>Default</dt>
+> 	<dd>
+> 		"Zebracorns"
+> 	</dd>
+> 	<dt>Modification</dt>
+> 	<dd>
+> 		Change the string to the team name.
+> 	</dd>
+> </dl>
+### Team Number
+> <dl>
+> 	<dt>Description</dt>
+> 	<dd>
+> 		A string representing the team's number. Shows up on the home screen. 
+> 	</dd>
+> 	<dt>Variable</dt>
+> 	<dd>
+> 		TEAM_NUMBER
+> 	</dd>
+> 	<dt>Default</dt>
+> 	<dd>
+> 		"900"
+> 	</dd>
+> 	<dt>Modification</dt>
+> 	<dd>
+> 		Change the string to representing the team's number. 
+> 	</dd>
+> </dl>
 
 # Timezones
 * UTC -11:00 
