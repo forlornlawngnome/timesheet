@@ -1,7 +1,7 @@
 
 <h1>Listing timelogs</h1>
 <%if current_user.try(:admin)%>
-<table>
+<table class="table table-hover">
   <tr>
     <th>User</th>
     <th>Timein</th>
@@ -17,8 +17,8 @@
     <td><%= local_time timelog.timein rescue ""%></td>
     <td><%= local_time timelog.timeout rescue ""%></td>
     <td><%= link_to 'Show', timelog %></td>
-    <td><%= link_to 'Edit', edit_timelog_path(timelog) %></td>
-    <td><%= link_to 'Destroy', timelog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%=link_to '', edit_timelog_path(timelog), :class=>"glyphicon glyphicon-pencil" %></td>
+	<td><%= link_to '', timelog, :class=>"glyphicon glyphicon-trash", method: :delete, data: { confirm: "Are you sure?"} %></td>
   </tr>
 <% end %>
 </table>

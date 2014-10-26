@@ -1,6 +1,6 @@
 <h1>Listing forms</h1>
 
-<table>
+<table class="table table-hover">
   <tr>
     <th>Name</th>
 	<th>Archive</th>
@@ -14,8 +14,8 @@
     <td><%= form.name %></td>
 	<td><%= form.archive %></td>
     <td><%= link_to 'Show', form %></td>
-    <td><%= link_to 'Edit', edit_form_path(form) %></td>
-    <td><%= link_to 'Destroy', form, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%=link_to '', edit_form_path(form), :class=>"glyphicon glyphicon-pencil" %></td>
+	<td><%= link_to '', form, :class=>"glyphicon glyphicon-trash", method: :delete, data: { confirm: "Are you sure?"} %></td>
   </tr>
 <% end %>
 </table>

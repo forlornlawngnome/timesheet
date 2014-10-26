@@ -1,6 +1,6 @@
 <h1>Listing <%=SCHOOL_NAME_REPLACEMENT%></h1>
 
-<table>
+<table class="table table-hover">
   <tr>
     <th>Name</th>
     <th></th>
@@ -12,8 +12,8 @@
   <tr>
     <td><%= school.name %></td>
     <td><%= link_to 'Show', school %></td>
-    <td><%= link_to 'Edit', edit_school_path(school) %></td>
-    <td><%= link_to 'Destroy', school, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%=link_to '', edit_school_path(school), :class=>"glyphicon glyphicon-pencil" %></td>
+	<td><%= link_to '', school, :class=>"glyphicon glyphicon-trash", method: :delete, data: { confirm: "Are you sure?"} %></td>
   </tr>
 <% end %>
 </table>
