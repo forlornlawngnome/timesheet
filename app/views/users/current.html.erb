@@ -9,8 +9,6 @@
 		    <th>Email</th>
 			<th>Phone Number</th>
 			<th><%=SCHOOL_NAME_REPLACEMENT%></th>
-			<th>Tool use Form</th>
-			<th>Code of Conduct</th>
 			<th>User ID Number</th>
 			<th>Total Hours in Build Season</th>
 			<th>Total Hours</th>
@@ -21,25 +19,12 @@
 	</thead>
 	<tbody>
 		<% @users.each do |user| %>
-		<%if user.tools %>
-			<%tools_in = "success"%>
-		<%else%>
-			<%tools_in = "danger"%>
-		<%end%>
-		<%if user.conduct%>
-			<%conduct_in="success"%>
-		<%else%>
-			<%conduct_in="danger"%>
-		<%end%>
-		
 		  <tr>
 		    <td><%= link_to user.full_name, user_path(user), method: :get %></td>
 			<td><%= user.admin?%></td>
 			<td><%= user.email %></td>
 			<td><%= number_to_phone(user.phone , area_code: true) %></td>
 			<td><%= user.school.name rescue ""%></td>
-			<td class=<%="#{tools_in}"%>><%= user.tools %></td>
-			<td class=<%="#{conduct_in}"%>><%= user.conduct %></td>
 			<td><%= user.userid %></td>
 			<td><%= user.build_hours %></td>
 			<td><%= user.total_hours %></td>
