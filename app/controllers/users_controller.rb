@@ -31,6 +31,8 @@ class UsersController < ApplicationController
   end
   def show
     @user = User.find(params[:id])
+    
+    @forms = Form.active.order("name")
 
     respond_to do |format|
       format.html # show.html.erb
@@ -38,6 +40,7 @@ class UsersController < ApplicationController
   end
   def edit
     @user = User.find(params[:id])
+    @forms = Form.active.order("name")
     
     session[:return_to] ||= request.referer
   end

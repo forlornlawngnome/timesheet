@@ -42,7 +42,7 @@
 		    <div><%= f.label "Archive?" %>
 		    <%= f.check_box :archive %></div>
 			<hr />
-			<%Form.all.each do |form|%>
+			<%@forms.each do |form|%>
 				<div>
 			  		<%= check_box_tag "user[form_ids][]", form.id, @user.forms.include?(form) %>
 			  		<%= form.name %>

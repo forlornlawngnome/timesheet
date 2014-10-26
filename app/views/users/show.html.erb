@@ -31,12 +31,32 @@
 		<b>Total Hours:</b>
 		<%= @user.total_hours %>
 	</p>
-	
-	<hr />
-	
-	
-	
-	<hr />
+
+	<br />
+	<table class="table table-condensed table-hover">
+		<tr>
+			<%@forms.each do |form|%>
+				<th>
+					<%=form.name%>
+				</th>
+			<%end%>
+		</tr>
+		<tr>
+			<%@forms.each do |form|%>
+				<%has_form = @user.forms.include?(form)%>
+				<%if has_form%>
+					<% cell_class="success"%>
+				<%else%>
+					<% cell_class="danger"%>
+				<%end%>
+				<td class=<%="#{cell_class}"%>>
+					<%=has_form%>
+				</td>
+			<%end%>
+		</tr>
+	</table>
+
+<br />
 	
 	<%all_logs = @user.grouped_logs%>
 	<table class="table table-hover">
