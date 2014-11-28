@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :forms_users
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :school, :school_id, :tools, :conduct, :email, :password, :password_confirmation, :name_first, :name_last, :phone, :admin, :userid, :archive, :form_id, :form_ids, :forms_user_id
+  attr_accessible :school, :school_id, :tools, :conduct, :email, :password, :password_confirmation, :name_first, :name_last, :phone,:location, :admin, :userid, :archive, :form_id, :form_ids, :forms_user_id
   # attr_accessible :title, :body
   attr_accessor :password
   
@@ -62,7 +62,8 @@ class User < ActiveRecord::Base
         total = total + log.time_logged
       end
     end
-    return Time.at(total).utc.strftime("%H:%M:%S")
+    time = Time.at(total).utc
+    return "#{'%02d' % (time.hour + (time.day-1)*24)}:#{'%02d' % time.min}:#{'%02d' % time.sec}"
   end
   def total_hours
     total = 0
@@ -71,7 +72,8 @@ class User < ActiveRecord::Base
         total = total + log.time_logged
       end
     end
-    return Time.at(total).utc.strftime("%H:%M:%S")
+    time = Time.at(total).utc
+    return "#{'%02d' % (time.hour + (time.day-1)*24)}:#{'%02d' % time.min}:#{'%02d' % time.sec}"
   end
   def total_hours_number(date)
     total = 0

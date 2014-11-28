@@ -22,6 +22,9 @@
 		    <div><%= f.label "#{SCHOOL_NAME_REPLACEMENT}" %><br />
 		    	<%= collection_select(:user, :school_id, School.order("lower(name)"), :id, :name, :include_blank=> true, :class=>"input-small")  %>
 			</div>
+			
+		    <div><%= f.label "Home Town" %><br />
+		    <%= f.text_field :location, :class=>"input-small" %></div>
 		
 		    <div><%= f.label "User ID Number" %><br />
 		    <%= f.text_field :userid, :class=>"input-small" %></div>

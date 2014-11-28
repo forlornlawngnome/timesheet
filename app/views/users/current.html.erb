@@ -9,6 +9,7 @@
 		    <th>Email</th>
 			<th>Phone Number</th>
 			<th><%=SCHOOL_NAME_REPLACEMENT%></th>
+			<th>Home Town</th>
 			<th>User ID Number</th>
 			<th>Total Hours in Build Season</th>
 			<th>Total Hours</th>
@@ -25,6 +26,7 @@
 			<td><%= user.email %></td>
 			<td><%= number_to_phone(user.phone , area_code: true) %></td>
 			<td><%= user.school.name rescue ""%></td>
+			<td><%= user.location%></td>
 			<td><%= user.userid %></td>
 			<td><%= user.build_hours %></td>
 			<td><%= user.total_hours %></td>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141025204914) do
+ActiveRecord::Schema.define(:version => 20141128190101) do
 
   create_table "forms", :force => true do |t|
     t.string   "name"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20141025204914) do
     t.string   "password_salt"
     t.string   "password_hash"
     t.boolean  "archive"
+    t.string   "location"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
