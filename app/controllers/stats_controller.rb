@@ -34,7 +34,7 @@ class StatsController < ApplicationController
     @totalStudents = 0
     
     School.order(:name).each do |school|
-      users = school.users
+      users = school.users.active
       
       totalHours = 0
       count = 0

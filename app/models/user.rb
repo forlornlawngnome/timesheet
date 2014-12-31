@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
     if Rails.env.production?
       where("users.archive IS NOT true")
     else
-      where("users.archive IS NOT 1")
+      where("users.archive IS NOT ?","t")
     end
   end
   def self.authenticate(email, password)
