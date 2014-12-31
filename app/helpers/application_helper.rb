@@ -80,8 +80,8 @@ module ApplicationHelper
     puts log.inspect
     if log.timein.month < getStartMonth
       puts "plus a year #{log.timein+1.year}"
-      puts "Before start month #{ApplicationHelper.getYearStart((log.timein.year+1.year))}"
-      ApplicationHelper.getYearStart((log.timein.year+1.year))
+      puts "Before start month #{ApplicationHelper.getYearStart((log.timein+1.year))}"
+      ApplicationHelper.getYearStart((log.timein+1.year))
     else
       ApplicationHelper.getYearStart(log.timein.year)
     end
