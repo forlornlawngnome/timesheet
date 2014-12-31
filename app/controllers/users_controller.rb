@@ -16,6 +16,17 @@ class UsersController < ApplicationController
       @users = User.active.order("name_first")
     end
 
+    @numMentors = 0
+    @numStudents = 0
+    
+    @users.each do |user|
+      if user.email == DEFAULT_LOGIN
+      elsif user.is_mentor
+        @numMentors = @numMentors + 1
+      else
+        @numStudents = @numStudents + 1
+      end
+    end 
     respond_to do |format|
       format.html # index.html.erb
     end

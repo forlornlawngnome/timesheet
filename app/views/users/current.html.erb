@@ -1,6 +1,9 @@
 <h1>Users</h1>
 
 <%if current_user.try(:admin)%>
+Number of Active Students: <%=@numStudents%>
+<br />
+Number of Active Mentors: <%=@numMentors%>
 <table class="table table-hover">
 	<thead>
   	  	<tr>
