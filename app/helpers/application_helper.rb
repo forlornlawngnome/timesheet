@@ -79,7 +79,7 @@ module ApplicationHelper
     log = Timelog.order("timein asc").first
     puts log.inspect
     if log.timein.month < getStartMonth
-      puts "Before start month #{ApplicationHelper.getYearStart((log.timein.year+1.year))}"
+      puts "Before start month #{ApplicationHelper.getYearStart((log.timein.year))}"
       ApplicationHelper.getYearStart((log.timein.year+1.year))
     else
       puts "After start month #{ApplicationHelper.getYearStart((log.timein.year))}"
