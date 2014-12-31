@@ -11,4 +11,11 @@ class School < ActiveRecord::Base
     end
     return count
   end
+  def self.active_students
+    if Rails.env.production?
+      where("users.archive IS NOT true")
+    else
+      where("users.archive IS NOT ?","t")
+    end
+  end
 end
