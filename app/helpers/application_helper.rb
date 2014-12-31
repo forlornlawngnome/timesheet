@@ -76,7 +76,7 @@ module ApplicationHelper
     "#{time.year}-#{(time+1.year).year}"
   end
   def self.rangeBeginning
-    log = Timelog.order("timein").first
+    log = Timelog.order("timein asc").first
     if log.timein.month < getStartMonth
       ApplicationHelper.getYearStart((log.timein.year+1.year))
     else
