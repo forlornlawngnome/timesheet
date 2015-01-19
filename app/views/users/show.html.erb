@@ -70,8 +70,10 @@
 							<%total = total+log.time_logged%>
 						<%end%>
 					<%end%>
+				    <%time = Time.at(total).utc%>
+				    <% totaltimeview = "#{'%02d' % (time.hour + (time.day-1)*24)}:#{'%02d' % time.min}:#{'%02d' % time.sec}"%>
 				<%if current_user.try(:admin)%>
-					<td><%=Time.at(total).utc.strftime("%H:%M:%S")%></td>
+					<td><%=totaltimeview%><%Time.at(total).utc.strftime("%H:%M:%S")%></td>
 					<%breakdown = logs.first[1].group_by{|a| a.timein.strftime("%m/%d/%Y")} rescue 0%>
 					<td><%=count = breakdown.count rescue 0%></td>
 				<%end%>
