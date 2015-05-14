@@ -119,12 +119,9 @@ google.load("visualization", "1", {packages:["line"]});
 
        var data = new google.visualization.DataTable();
        data.addColumn('string', 'Day of the Week');
-       data.addColumn('number', 'Week 1');
-       data.addColumn('number', 'Week 2');
-	   data.addColumn('number', 'Week 3');
-	   data.addColumn('number', 'Week 4');
-	   data.addColumn('number', 'Week 5');
-	   data.addColumn('number', 'Week 5');
+	   <%for i in 1..@monday.size%>
+       		data.addColumn('number', '<%="Week #{i}"%>');
+       <%end%>
 
        data.addRows([
          ['Monday',  
