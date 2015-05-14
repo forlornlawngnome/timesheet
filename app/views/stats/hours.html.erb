@@ -1,6 +1,6 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
-google.load("visualization", "1", {packages:["line","bar"]});
+google.load("visualization", "1", {packages:["line"]});
      google.setOnLoadCallback(drawChart);
      function drawChart() {
        var data = google.visualization.arrayToDataTable([
@@ -165,12 +165,11 @@ google.load("visualization", "1", {packages:["line","bar"]});
          },
          width: 900,
          height: 500,
-		 isStacked: true,
        };
 
-       var chart = new google.charts.Bar(document.getElementById('hours_by_day_of_week'));
+       var chart = new google.charts.Line(document.getElementById('hours_by_day_of_week'));
 
-       chart.draw(data, google.charts.Bar.convertOptions(options));
+       chart.draw(data, options);
      }
 </script>
 
