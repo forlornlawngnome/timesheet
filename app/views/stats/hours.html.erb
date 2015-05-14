@@ -1,6 +1,6 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
-google.load("visualization", "1", {packages:["line"]});
+google.load("visualization", "1", {packages:["line","bar"]});
      google.setOnLoadCallback(drawChart);
      function drawChart() {
        var data = google.visualization.arrayToDataTable([
@@ -31,8 +31,7 @@ google.load("visualization", "1", {packages:["line"]});
        chart.draw(data, options);
      }
 </script>
-<script type="text/javascript">
-google.load("visualization", "1", {packages:["line"]});
+	 <script type="text/javascript">
      google.setOnLoadCallback(drawChart);
      function drawChart() {
        var data = google.visualization.arrayToDataTable([
@@ -64,7 +63,6 @@ google.load("visualization", "1", {packages:["line"]});
      }
 </script>
 <script type="text/javascript">
-google.load("visualization", "1", {packages:["line"]});
      google.setOnLoadCallback(drawChart);
      function drawChart() {
        var data = google.visualization.arrayToDataTable([
@@ -88,7 +86,6 @@ google.load("visualization", "1", {packages:["line"]});
      }
 </script>
 <script type="text/javascript">
-google.load("visualization", "1", {packages:["line"]});
      google.setOnLoadCallback(drawChart);
      function drawChart() {
        var data = google.visualization.arrayToDataTable([
@@ -112,7 +109,6 @@ google.load("visualization", "1", {packages:["line"]});
      }
 </script>
  <script type="text/javascript">
-     google.load('visualization', '1.1', {packages: ['line']});
      google.setOnLoadCallback(drawChart);
 
      function drawChart() {
@@ -165,14 +161,16 @@ google.load("visualization", "1", {packages:["line"]});
        var options = {
          chart: {
            title: 'Number of Hours Per Day of the Week',
+			 
          },
          width: 900,
-         height: 500
+         height: 500,
+		 isStacked: true,
        };
 
-       var chart = new google.charts.Line(document.getElementById('hours_by_day_of_week'));
+       var chart = new google.charts.Bar(document.getElementById('hours_by_day_of_week'));
 
-       chart.draw(data, options);
+       chart.draw(data, google.charts.Bar.convertOptions(options));
      }
 </script>
 
