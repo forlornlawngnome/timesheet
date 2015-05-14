@@ -74,7 +74,7 @@ class StatsController < ApplicationController
     studentHours = 0
     
     studentlogs = Timelog.where("timein >= ? and timein < ?", start, start+1.year).order("timein ASC")
-    hoursbyweek = studentlogs = studentlogs.group_by{|a| a.timein.at_beginning_of_week}
+    studentlogs = studentlogs.group_by{|a| a.timein.at_beginning_of_week}
     studentlogs.each do |log|
       studentsum=0
       mentorsum=0
@@ -136,7 +136,8 @@ class StatsController < ApplicationController
     end
     
     ##Calculate the sum of hours per day of the week
-    #raise hoursbyweek.inspect
+    build_logs = Timelog.where("timein >= ? and timein < ?", (start+1.year).at_beginning_of_year, start+1.year).order("timein ASC")
+    hoursbyweek = build_logs.group_by{|a| a.timein.at_beginning_of_week}
     @monday = Array.new
     @tuesday = Array.new
     @wednesday = Array.new
