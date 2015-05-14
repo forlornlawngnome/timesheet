@@ -154,8 +154,8 @@ class StatsController < ApplicationController
       @wednesday.push(by_week['Wednesday'].nil? ? 0 : by_week['Wednesday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
       @thursday.push(by_week['Thursday'].nil? ? 0 : by_week['Thursday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
       @friday.push(by_week['Friday'].nil? ? 0 : by_week['Friday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
-      @saturday.push(by_week['Saturday'].nil? ? 0 : by_week['Saturday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60)
-      @sunday.push(by_week['Sunday'].nil? ? 0 : by_week['Sunday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60)
+      @saturday.push(by_week['Saturday'].nil? ? 0 : by_week['Saturday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
+      @sunday.push(by_week['Sunday'].nil? ? 0 : by_week['Sunday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
     end
   end
   def calcNumber(start, sum)
