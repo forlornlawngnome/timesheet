@@ -14,8 +14,9 @@ google.load("visualization", "1", {packages:["bar"]});
 		   chart:{
         	   title: '<%=@range%>: Total Hours Per <%=SCHOOL_NAME_REPLACEMENT%>'
 		   },
-         width: 550,
-         height: 500
+		   bars: 'horizontal',
+           width: 550,
+           height: 500
        };
 
        var chart = new google.charts.Bar(document.getElementById('hours_per_school_div'));
@@ -38,8 +39,9 @@ google.load("visualization", "1", {packages:["bar"]});
 		   chart:{
         	   title: '<%=@range%>: Average Hours Per Student Per <%=SCHOOL_NAME_REPLACEMENT%>'
 		   },
-         width: 550,
-         height: 500
+		   bars: 'horizontal',
+           width: 550,
+           height: 500
        };
 
        var chart = new google.charts.Bar(document.getElementById('hours_per_student_per_school_div'));
@@ -62,8 +64,9 @@ google.load("visualization", "1", {packages:["bar"]});
 		   chart:{
         	   title: '<%=@range%>: Number of Students Per <%=SCHOOL_NAME_REPLACEMENT%>'
 		   },
-         width: 900,
-         height: 500
+		   bars: 'horizontal',
+           width: 900,
+           height: 500
        };
 
        var chart = new google.charts.Bar(document.getElementById('students_per_school_div'));
