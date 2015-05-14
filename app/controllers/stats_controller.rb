@@ -149,13 +149,13 @@ class StatsController < ApplicationController
     hoursbyweek.each do |week|
       weeks_data = week[1]
       by_week = weeks_data.group_by{|a| a.timein.strftime("%A")}
-      @monday.push(by_week['Monday'].nil? ? 0 : by_week['Monday'].map {|s| s['time_logged']}.reduce(0, :+))
-      @tuesday.push(by_week['Tuesday'].nil? ? 0 : by_week['Tuesday'].map {|s| s['time_logged']}.reduce(0, :+))
-      @wednesday.push(by_week['Wednesday'].nil? ? 0 : by_week['Wednesday'].map {|s| s['time_logged']}.reduce(0, :+))
-      @thursday.push(by_week['Thursday'].nil? ? 0 : by_week['Thursday'].map {|s| s['time_logged']}.reduce(0, :+))
-      @friday.push(by_week['Friday'].nil? ? 0 : by_week['Friday'].map {|s| s['time_logged']}.reduce(0, :+))
-      @saturday.push(by_week['Saturday'].nil? ? 0 : by_week['Saturday'].map {|s| s['time_logged']}.reduce(0, :+))
-      @sunday.push(by_week['Sunday'].nil? ? 0 : by_week['Sunday'].map {|s| s['time_logged']}.reduce(0, :+))
+      @monday.push(by_week['Monday'].nil? ? 0 : by_week['Monday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
+      @tuesday.push(by_week['Tuesday'].nil? ? 0 : by_week['Tuesday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
+      @wednesday.push(by_week['Wednesday'].nil? ? 0 : by_week['Wednesday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
+      @thursday.push(by_week['Thursday'].nil? ? 0 : by_week['Thursday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
+      @friday.push(by_week['Friday'].nil? ? 0 : by_week['Friday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
+      @saturday.push(by_week['Saturday'].nil? ? 0 : by_week['Saturday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60)
+      @sunday.push(by_week['Sunday'].nil? ? 0 : by_week['Sunday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60)
     end
   end
   def calcNumber(start, sum)
