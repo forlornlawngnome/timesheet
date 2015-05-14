@@ -14,9 +14,8 @@ google.load("visualization", "1", {packages:["bar"]});
 		   chart:{
         	   title: '<%=@range%>: Total Hours Per <%=SCHOOL_NAME_REPLACEMENT%>'
 		   },
-		   bars: 'horizontal',
-           width: 550,
-           height: 500
+         width: 900,
+         height: 500
        };
 
        var chart = new google.charts.Bar(document.getElementById('hours_per_school_div'));
@@ -39,9 +38,8 @@ google.load("visualization", "1", {packages:["bar"]});
 		   chart:{
         	   title: '<%=@range%>: Average Hours Per Student Per <%=SCHOOL_NAME_REPLACEMENT%>'
 		   },
-		   bars: 'horizontal',
-           width: 550,
-           height: 500
+         width: 900,
+         height: 500
        };
 
        var chart = new google.charts.Bar(document.getElementById('hours_per_student_per_school_div'));
@@ -64,9 +62,8 @@ google.load("visualization", "1", {packages:["bar"]});
 		   chart:{
         	   title: '<%=@range%>: Number of Students Per <%=SCHOOL_NAME_REPLACEMENT%>'
 		   },
-		   bars: 'horizontal',
-           width: 900,
-           height: 500
+         width: 900,
+         height: 500
        };
 
        var chart = new google.charts.Bar(document.getElementById('students_per_school_div'));
@@ -91,12 +88,13 @@ google.load("visualization", "1", {packages:["bar"]});
 </p>
 <br />
 <div class="row">
-	<div class="col-md-6 col-lg-6">
-		<div id="hours_per_school_div" class="text-center"></div>
-	</div>
-	<div class="col-md-6 col-lg-6">
-		<div id="hours_per_student_per_school_div" class="text-center"></div>
-	</div>
+	<div id="hours_per_school_div" class="text-center"></div>
 </div>
+<br />
+<br />
+<div class="row">
+	<div id="hours_per_student_per_school_div" class="text-center"></div>
+</div>
+<br />
 <br />
 <div id="students_per_school_div" class="text-center"></div>
