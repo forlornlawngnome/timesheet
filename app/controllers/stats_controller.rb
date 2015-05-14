@@ -74,7 +74,7 @@ class StatsController < ApplicationController
     studentHours = 0
     
     studentlogs = Timelog.where("timein >= ? and timein < ?", start, start+1.year).order("timein ASC")
-    studentlogs = studentlogs.group_by{|a| a.timein.at_beginning_of_week}
+    hoursbyweek = studentlogs = studentlogs.group_by{|a| a.timein.at_beginning_of_week}
     studentlogs.each do |log|
       studentsum=0
       mentorsum=0
@@ -135,6 +135,27 @@ class StatsController < ApplicationController
       
     end
     
+    ##Calculate the sum of hours per day of the week
+    #raise hoursbyweek.inspect
+    @monday = Array.new
+    @tuesday = Array.new
+    @wednesday = Array.new
+    @thursday = Array.new
+    @friday = Array.new
+    @saturday = Array.new
+    @sunday = Array.new
+    
+    hoursbyweek.each do |week|
+      weeks_data = week[1]
+      by_week = weeks_data.group_by{|a| a.timein.strftime("%A")}
+      @monday.push(by_week['Monday'].nil? ? 0 : by_week['Monday'].map {|s| s['time_logged']}.reduce(0, :+))
+      @tuesday.push(by_week['Tuesday'].nil? ? 0 : by_week['Tuesday'].map {|s| s['time_logged']}.reduce(0, :+))
+      @wednesday.push(by_week['Wednesday'].nil? ? 0 : by_week['Wednesday'].map {|s| s['time_logged']}.reduce(0, :+))
+      @thursday.push(by_week['Thursday'].nil? ? 0 : by_week['Thursday'].map {|s| s['time_logged']}.reduce(0, :+))
+      @friday.push(by_week['Friday'].nil? ? 0 : by_week['Friday'].map {|s| s['time_logged']}.reduce(0, :+))
+      @saturday.push(by_week['Saturday'].nil? ? 0 : by_week['Saturday'].map {|s| s['time_logged']}.reduce(0, :+))
+      @sunday.push(by_week['Sunday'].nil? ? 0 : by_week['Sunday'].map {|s| s['time_logged']}.reduce(0, :+))
+    end
   end
   def calcNumber(start, sum)
     count = 0
