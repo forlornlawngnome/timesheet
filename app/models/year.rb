@@ -14,6 +14,7 @@ class Year < ActiveRecord::Base
     Year.where("year_start <= ? and year_end >= ?",Date.today,Date.today).first
   end
   def self.find_year(date)
+    raise "Here"
     Year.where("year_start <= ? and year_end >= ?",date,date).first
   end
   def year_range
