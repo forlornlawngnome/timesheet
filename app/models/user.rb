@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :forms_users
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :school, :school_id, :email, :password, :password_confirmation, :name_first, :name_last, :phone,:location, :admin, :userid, :archive, :form_id, :form_ids, :forms_user_id
+  attr_accessible :school, :school_id, :email, :password, :password_confirmation, :name_first, :name_last, :phone,:location, :admin, :userid, :archive, :form_id, :form_ids, :forms_user_id, :gender, :graduation_year, :student_leader
   # attr_accessible :title, :body
   attr_accessor :password
   

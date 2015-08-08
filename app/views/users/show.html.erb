@@ -3,6 +3,11 @@
 		<b>Name:</b>
 		<%= @user.full_name %>
 	</p>
+	
+	<p>
+		<b>Student Leader?</b>
+		<%= @user.student_leader %>
+	</p>
 
 	<p>
 		<b>Email:</b>
@@ -14,7 +19,21 @@
 		<%= @user.school.name %>
 	</p>
 	
-
+	<p>
+		<b>Hometown:</b>
+		<%= @user.location %>
+	</p>
+	
+	<p>
+		<b>Gender:</b>
+		<%= @user.gender %>
+	</p>
+	
+	<p>
+		<b>Graduation Year:</b>
+		<%= @user.graduation_year %>
+	</p>
+	
 	<p>
 		<b>Phone Number:</b>
 		<%= number_to_phone(@user.phone , area_code: true) %>

@@ -8,3 +8,4 @@ DEFAULT_LOGIN = "signup@team900.org"
 TEAM_NAME = 'Zebracorns'
 TEAM_NUMBER = '900'
 SCHOOL_NAME_REPLACEMENT = 'School'
+GENDERS = ['Male', 'Female', 'Other']

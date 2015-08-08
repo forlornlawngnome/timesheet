@@ -9,10 +9,13 @@ Number of Active Mentors: <%=@numMentors%>
   	  	<tr>
 		    <th>Name</th>
 			<th>Admin?</th>
+			<th>Student Leader?</th>
 		    <th>Email</th>
 			<th>Phone Number</th>
 			<th><%=SCHOOL_NAME_REPLACEMENT%></th>
 			<th>Home Town</th>
+			<th>Gender</th>
+			<th>Graduation Year</th>
 			<th>User ID Number</th>
 			<th>Total Hours in Build Season</th>
 			<th>Total Hours</th>
@@ -26,10 +29,13 @@ Number of Active Mentors: <%=@numMentors%>
 		  <tr>
 		    <td><%= link_to user.full_name, user_path(user), method: :get %></td>
 			<td><%= user.admin?%></td>
+			<td><%= user.student_leader?%></td>
 			<td><%= user.email %></td>
 			<td><%= number_to_phone(user.phone , area_code: true) %></td>
 			<td><%= user.school.name rescue ""%></td>
 			<td><%= user.location%></td>
+			<td><%= user.gender%></td>
+			<td><%= user.graduation_year%></td>
 			<td><%= user.userid %></td>
 			<td><%= user.build_hours %></td>
 			<td><%= user.total_hours %></td>
