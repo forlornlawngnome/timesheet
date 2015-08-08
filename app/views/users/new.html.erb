@@ -24,14 +24,14 @@
 		    <div><%= f.label :phone %><br /><small>Numbers Only Ex: 1112225555</small>
 		    <%= f.number_field :phone, :class=>"input-small" %></div>
   
-		    <div><%= f.label "#{SCHOOL_NAME_REPLACEMENT}" %><br />
+		    <div><%= f.label "#{Constants::SCHOOL_NAME_REPLACEMENT}" %><br />
 		    <%= collection_select(:user, :school_id, School.order("lower(name)"), :id, :name, :include_blank=> true, :class=>"input-small")  %></div>
 			
 		    <div><%= f.label "Home Town" %><br />
 		    <%= f.text_field :location, :class=>"input-small" %></div>
 			
 		    <div><%= f.label "Gender" %><br />
-		    <%= f.select(:gender, GENDERS, :include_blank=> true, :class=>"input-small")  %>
+		    <%= f.select(:gender, Constants::GENDERS, :include_blank=> true, :class=>"input-small")  %>
 			
 		    <div><%= f.label "Graduation Year" %><br />
 		    <%= f.text_field :graduation_year, :class=>"input-small" %></div>

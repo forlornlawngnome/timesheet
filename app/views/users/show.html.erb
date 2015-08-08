@@ -15,7 +15,7 @@
 	</p>
 	
 	<p>
-		<b><%=SCHOOL_NAME_REPLACEMENT%>:</b>
+		<b><%=Constants::SCHOOL_NAME_REPLACEMENT%>:</b>
 		<%= @user.school.name %>
 	</p>
 	
@@ -41,6 +41,10 @@
 	<p>
 		<b>ID Number:</b>
 		<%= @user.userid %>
+	</p>
+	<p>
+		<b>Hours Required:</b>
+		<%= @user.required_hours %>
 	</p>
 	<p>
 		<b>Build Season Hours:</b>
@@ -83,14 +87,14 @@
 			<tr>
 				<th><%=day[0]%></th>
 				<%logs = all_logs.select {|k,v| k.strftime("%m/%d/%Y") == day[0]}%>
-					<%total = 0%>
-					<%logs.each do |day|%>
-						<%day[1].each do |log|%>
-							<%total = total+log.time_logged%>
-						<%end%>
+				<%total = 0%>
+				<%logs.each do |day|%>
+					<%day[1].each do |log|%>
+						<%total = total+log.time_logged%>
 					<%end%>
-				    <%time = Time.at(total).utc%>
-				    <% totaltimeview = "#{'%02d' % (time.hour + (time.day-1)*24)}:#{'%02d' % time.min}:#{'%02d' % time.sec}"%>
+				<%end%>
+			    <%time = Time.at(total).utc%>
+			    <% totaltimeview = "#{'%02d' % (time.hour + (time.day-1)*24)}:#{'%02d' % time.min}:#{'%02d' % time.sec}"%>
 				<%if current_user.try(:admin)%>
 					<td><%=totaltimeview%><%Time.at(total).utc.strftime("%H:%M:%S")%></td>
 					<%breakdown = logs.first[1].group_by{|a| a.timein.strftime("%m/%d/%Y")} rescue 0%>
@@ -104,10 +108,10 @@
 						<td class="danger">False</td>
 					<%end%>
 				<%elsif isBuildSeason day[1][5]%>
-					<%if hoursBuildSeason(total) && !logs.first.nil? && meetingsBuildSeason(count)%>
-						<td class="success">True</td>
+					<%if time.hour >= @user.required_hours && meetingsBuildSeason(count)%>
+						<td class="success">True Build</td>
 					<%else%>
-						<td class="danger">False</td>
+						<td class="danger">False Build</td>
 					<%end%> 
 				<%else%>
 					<td></td>
@@ -146,6 +150,6 @@
 	</table>
 	<hr />
 
-	<%= link_to 'Edit', "edit_timelog_path(@timelog)" %> |
+	<%= link_to 'Edit', edit_user_path(@user) %> |
 	<%= link_to 'Back', users_path %>
 <%end%>

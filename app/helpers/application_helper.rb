@@ -52,8 +52,12 @@ module ApplicationHelper
     end
   end
   def getWeeks
-    start = ApplicationHelper.getStartDate
-    (start..(Date.today+1)).group_by{ |u| ApplicationHelper.toLocalTime(u).beginning_of_week.strftime("%m/%d/%Y") }
+    year = Year.current_year
+    if year.nil?
+      return 
+    end
+    start = year.year_start
+    (start..(Date.today+1)).group_by{ |u| u.beginning_of_week.strftime("%m/%d/%Y") }
   end
   
   def hoursBuildSeason(hours)
@@ -67,10 +71,26 @@ module ApplicationHelper
   end
   
   def isPreSeason(time)
-    Date.today.month > ApplicationHelper.getStartMonth 
+    if time.nil?
+      return false
+    end
+    year = Year.current_year
+    if time > year.year_start and time < year.build_season_start
+      return true
+    else
+      return false
+    end 
   end
   def isBuildSeason(time)
-    Date.today.month < ApplicationHelper.getStartMonth
+    if time.nil?
+      return false
+    end
+    year = Year.current_year
+    if time > year.build_season_start
+      return true
+    else
+      return false
+    end 
   end
   def self.dateRange(time)
     "#{time.year}-#{(time+1.year).year}"

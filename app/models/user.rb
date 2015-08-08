@@ -20,6 +20,24 @@ class User < ActiveRecord::Base
   scope :archived, :conditions => {:archive => true}
   #scope :active, where("users.archive IS NOT 1") ##Change back for production!!!
   
+  def required_hours 
+    if self.student_leader
+      return Constants::LEADERSHIP_HOURS
+    end
+    
+    case self.get_class
+    when "Freshman"
+      return Constants::FRESHMAN_HOURS
+    when "Sophomore"
+      return Constants::SOPHOMORE_HOURS
+    when "Junior"
+      return Constants::JUNIOR_HOURS
+    when "Senior"
+      return Constants::SENIOR_HOURS
+    end
+    
+    return 0
+  end
   def self.active
     if Rails.env.production?
       where("users.archive IS NOT true")
@@ -98,5 +116,22 @@ class User < ActiveRecord::Base
   end
   def grouped_logs
     self.timelogs.order('timein asc').group_by{ |u| ApplicationHelper.toLocalTime(u.timein).beginning_of_week }
+  end
+  
+  def get_class
+    if Year.current_year.nil?
+      return "No year"
+    end
+    
+    case
+    when (Year.current_year.year_end.year + 3).to_s == self.graduation_year
+      return "Freshman"
+    when (Year.current_year.year_end.year + 2).to_s == self.graduation_year
+      return "Sophomore"
+    when (Year.current_year.year_end.year + 1).to_s == self.graduation_year
+      return "Junior"
+    when (Year.current_year.year_end.year).to_s == self.graduation_year
+      return "Senior"
+    end
   end
 end

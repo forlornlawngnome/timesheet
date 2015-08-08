@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     @numStudents = 0
     
     @users.each do |user|
-      if user.email == DEFAULT_LOGIN
+      if user.email == Constants::DEFAULT_LOGIN
       elsif user.is_mentor
         @numMentors = @numMentors + 1
       else
