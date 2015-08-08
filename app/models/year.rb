@@ -2,7 +2,7 @@ class Year < ActiveRecord::Base
   attr_accessible :build_season_start, :year_end, :year_start
   
   def is_current_year?
-    if current_year.id == self.id
+    if !current_year.nil? && current_year.id == self.id
       return true
     end
     return false
