@@ -23,6 +23,6 @@ class Timelog < ActiveRecord::Base
     end
   end
   def setYear
-    self.year_id = Year.find_year(self.timein).id
+    self.year = Year.find_year(self.timein)
   end
 end
