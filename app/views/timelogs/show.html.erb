@@ -1,3 +1,6 @@
+<%@timelog.set_year%>
+<%puts @timelog.year.inspect%>
+<%@timelog.save!%>
 <p id="notice"><%= notice %></p>
 <%if current_user.try(:admin)%>
 <p>

@@ -1,6 +1,6 @@
 class Timelog < ActiveRecord::Base
   before_save :setTimeLogged
-  before_save :setYear
+  #before_save :setYear
   
   belongs_to :user
   belongs_to :year
