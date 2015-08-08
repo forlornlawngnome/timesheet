@@ -6,6 +6,7 @@
     <th>User</th>
     <th>Timein</th>
     <th>Timeout timestamp</th>
+	<th>Year</th>
     <th></th>
     <th></th>
     <th></th>
@@ -16,10 +17,12 @@
     <td><%= "#{timelog.user.name_first rescue ""} #{timelog.user.name_last rescue ""}" %></td>
     <td><%= local_time timelog.timein rescue ""%></td>
     <td><%= local_time timelog.timeout rescue ""%></td>
+	<td> <%=timelog.year.year_start.year rescue ""%> - <%=timelog.year.year_end.year  rescue ""%></td>
     <td><%= link_to 'Show', timelog %></td>
     <td><%=link_to '', edit_timelog_path(timelog), :class=>"glyphicon glyphicon-pencil" %></td>
 	<td><%= link_to '', timelog, :class=>"glyphicon glyphicon-trash", method: :delete, data: { confirm: "Are you sure?"} %></td>
   </tr>
+  <%timelog.save%>
 <% end %>
 </table>
 

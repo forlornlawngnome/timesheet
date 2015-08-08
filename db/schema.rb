@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150808182747) do
+ActiveRecord::Schema.define(:version => 20150808202127) do
 
   create_table "forms", :force => true do |t|
     t.string   "name"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20150808182747) do
     t.datetime "timeout"
     t.integer  "time_logged"
     t.datetime "updated_at"
+    t.integer  "year_id"
   end
 
   add_index "timelogs", ["user_id"], :name => "index_timelogs_on_user_id"

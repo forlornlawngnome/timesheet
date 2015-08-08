@@ -16,6 +16,11 @@
 </p>
 
 <p>
+  <b>Year:</b>
+  <%= @timelog.year.year_start.year rescue ""%> - <%= @timelog.year.year_end.year  rescue ""%>
+</p>
+
+<p>
   <b>Hours Logged:</b>
   <%= Time.at(@timelog.time_logged).utc.strftime("%H:%M:%S") %>
 </p>
