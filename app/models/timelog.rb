@@ -24,6 +24,5 @@ class Timelog < ActiveRecord::Base
   end
   def setYear
     self.year = Year.find_year(self.timein)
-    raise self.year.inspect
   end
 end
