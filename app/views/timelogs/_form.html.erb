@@ -16,10 +16,6 @@
 	<%= collection_select(:timelog, :user_id, User.all, :id, :full_name)%>
   </div>
   <div class="field">
-    <%= f.label :year %><br />
-	<%= collection_select(:timelog, :year_id, Year.all, :id, :year_range)%>
-  </div>
-  <div class="field">
     <%= f.label :timein %><br />
     <%= f.text_field :timein, :value=> ApplicationHelper.toLocalTime(@timelog.timein),  :'data-date-format'=>"YYYY-MM-DD HH:mm:ss #{ApplicationHelper.TimeOffset}"  rescue  f.text_field :timein,  :'data-date-format'=>"YYYY-MM-DD HH:mm:ss #{ApplicationHelper.TimeOffset}" %>
   </div>
