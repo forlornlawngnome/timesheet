@@ -1,12 +1,10 @@
 module StatsHelper
   def yearDropdown
-    start = ApplicationHelper.rangeBeginning.year
     years = Hash.new
     
-    (start..ApplicationHelper.getStartYear).each do |year|
-      years[ApplicationHelper.dateRange(ApplicationHelper.getYearStart(year))] = year
+    Year.order("year_start asc").each do |year|
+      years[year.year_range] = year.id
     end
-    puts years.inspect
     return years
   end
 end

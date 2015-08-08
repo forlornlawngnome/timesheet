@@ -98,17 +98,17 @@ class User < ActiveRecord::Base
     time = Time.at(total).utc
     return "#{'%02d' % (time.hour + (time.day-1)*24)}:#{'%02d' % time.min}:#{'%02d' % time.sec}"
   end
-  def total_hours_number(date)
+  def total_hours_number(year)
     total = 0
     self.timelogs.each do |log|
-      if log.timein>=date && log.timein < date+1.year
+      if log.timein>=year.year_start && log.timein < year.year_end
         total = total + log.time_logged
       end
     end
     total
   end
-  def has_hours(date)
-    logs = self.timelogs.where("timein >= ? and timein < ?",date,date+1.year)
+  def has_hours(year)
+    logs = self.timelogs.where("timein >= ? and timein < ?",year.year_start,year.year_end)
     if logs.size > 0
       return true
     end

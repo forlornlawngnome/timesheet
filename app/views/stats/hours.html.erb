@@ -20,7 +20,7 @@ google.load("visualization", "1", {packages:["line"]});
 
        var options = {
 		 chart:{
-       	  	title: '<%=@range%>: Total Hours Per <%=Constants::SCHOOL_NAME_REPLACEMENT%> Per Week'
+       	  	title: '<%=@selected_year.year_range%>: Total Hours Per <%=Constants::SCHOOL_NAME_REPLACEMENT%> Per Week'
 		 },
          width: 900,
          height: 500
@@ -51,7 +51,7 @@ google.load("visualization", "1", {packages:["line"]});
 
        var options = {
 		   chart:{
-        	   title: '<%=@range%>: Average Hours Per Student Per <%=Constants::SCHOOL_NAME_REPLACEMENT%> Per Week'
+        	   title: '<%=@selected_year.year_range%>: Average Hours Per Student Per <%=Constants::SCHOOL_NAME_REPLACEMENT%> Per Week'
 		   },
          width: 900,
          height: 500
@@ -74,7 +74,7 @@ google.load("visualization", "1", {packages:["line"]});
 
        var options = {
 		   chart:{
-        	   title: '<%=@range%>: Total Hours Per Week'
+        	   title: '<%=@selected_year.year_range%>: Total Hours Per Week'
 		   },
          width: 900,
          height: 500
@@ -97,7 +97,7 @@ google.load("visualization", "1", {packages:["line"]});
 
        var options = {
 		   chart:{
-        	   title: '<%=@range%>: Total Cumulative Hours'
+        	   title: '<%=@selected_year.year_range%>: Total Cumulative Hours'
 		   },
          width: 900,
          height: 500
@@ -176,7 +176,7 @@ google.load("visualization", "1", {packages:["line"]});
 <%=form_tag do%>
 	<div class="form-group">
 		<div class="col-lg-4 col-md-4">
-			<%= select_tag("year", options_for_select(yearDropdown, ApplicationHelper.getYearStart(@startDate).year),{:class=>"form-control"})%>
+			<%= select_tag("year", options_for_select(yearDropdown, @selected_year.id),{:class=>"form-control"})%>
 	  	</div>
 		<%= submit_tag("Filter", :class=>"btn btn-primary") %>
 	</div>

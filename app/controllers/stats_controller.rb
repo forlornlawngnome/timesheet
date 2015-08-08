@@ -1,14 +1,12 @@
 class StatsController < ApplicationController
   def hours
     if (!params[:year].nil? && ! params[:year].empty?)
-      startDate = ApplicationHelper.getYearStart(params[:year].to_i)
+      @selected_year = Year.find_by_id(params[:year])
     else
-      startDate = ApplicationHelper.getStartDate
+      @selected_year = Year.current_year
     end
-    @startDate = startDate.year
     
-    @range = ApplicationHelper.dateRange(startDate)
-    calculateHours(startDate)
+    calculateHours(@selected_year)
     
     schoolArray
     @chartString = "['Date'"
@@ -19,17 +17,14 @@ class StatsController < ApplicationController
   end
   def schools
     if (!params[:year].nil? && ! params[:year].empty?)
-      startDate = ApplicationHelper.getYearStart(params[:year].to_i)
+      @selected_year = Year.find_by_id(params[:year])
     else
-      startDate = ApplicationHelper.getStartDate
+      @selected_year = Year.current_year
     end
-    @startDate = startDate.year
     
-    @range = ApplicationHelper.dateRange(startDate)
+    @range = @selected_year.year_range
     
     @allSchools = Hash.new{|h,k| h[k] = {}}
-    
-    start = startDate
     
     @totalStudents = 0
     
@@ -41,8 +36,8 @@ class StatsController < ApplicationController
       totalHours = 0
       count = 0
       users.each do |user|
-        totalHours = totalHours + user.total_hours_number(start)
-        if user.has_hours(start)
+        totalHours = totalHours + user.total_hours_number(@selected_year)
+        if user.has_hours(@selected_year)
           count = count+1
         end
       end
@@ -64,7 +59,7 @@ class StatsController < ApplicationController
     end
     @schoolArray.push("Other Students")
   end
-  def calculateHours(start)
+  def calculateHours(year)
     ismentor = School.where("lower(name) = ?","mentor").first
     @allHours = Hash.new{|h,k| h[k] = []}
     @allHoursSchools = Hash.new{|h,k| h[k] = {}}
@@ -73,7 +68,7 @@ class StatsController < ApplicationController
     mentorHours = 0
     studentHours = 0
     
-    studentlogs = Timelog.where("timein >= ? and timein < ?", start, start+1.year).order("timein ASC")
+    studentlogs = Timelog.where("timein >= ? and timein < ?", year.year_start, year.year_end).order("timein ASC")
     studentlogs = studentlogs.group_by{|a| a.timein.at_beginning_of_week}
     studentlogs.each do |log|
       studentsum=0
@@ -122,10 +117,10 @@ class StatsController < ApplicationController
         sum=sum/(60*60) #Convert from seconds to hours for the graph
         if !school[0].nil? && !school[0].respond_to?(:to_str)
           schoolHours[school[0].name][0] = sum
-          schoolHours[school[0].name][1] = sum/school[0].num_students(start)
+          schoolHours[school[0].name][1] = sum/school[0].num_students(year)
         else
           schoolHours["Other Students"][0] = sum
-          schoolHours["Other Students"][1] = calcNumber(start, sum)
+          schoolHours["Other Students"][1] = calcNumber(year, sum)
         end
       end
       totalsumper=totalsumper/(60*60) #Convert from seconds to hours for the graph
@@ -136,7 +131,7 @@ class StatsController < ApplicationController
     end
     
     ##Calculate the sum of hours per day of the week
-    build_logs = Timelog.where("timein >= ? and timein < ?", (start+1.year).at_beginning_of_year, start+1.year).order("timein ASC")
+    build_logs = Timelog.where("timein >= ? and timein < ?", year.build_season_start, year.year_end).order("timein ASC")
     hoursbyweek = build_logs.group_by{|a| a.timein.at_beginning_of_week}
     @monday = Array.new
     @tuesday = Array.new
@@ -158,11 +153,11 @@ class StatsController < ApplicationController
       @sunday.push(by_week['Sunday'].nil? ? 0 : by_week['Sunday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
     end
   end
-  def calcNumber(start, sum)
+  def calcNumber(year, sum)
     count = 0
     users = User.where("school_id IS NULL")
     users.each do |user|
-      if user.has_hours(start)
+      if user.has_hours(year)
         count = count+1
       end
     end

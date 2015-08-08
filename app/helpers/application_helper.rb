@@ -19,27 +19,11 @@ module ApplicationHelper
   def self.toLocalTime(time)
     time.in_time_zone(ApplicationHelper.TimeZone)
   end
-  def self.getYearStart(year)
-    DateTime.new(year, ApplicationHelper.getStartMonth, 1, 0, 0, 0)
-  end
-  def self.getStartMonth
-    Constants::YEAR_START
-  end
-  def self.getStartYear
-    if Date.today.month > ApplicationHelper.getStartMonth
-      start = Date.today.year
-    else
-      start = Date.today.year-1
-    end
-    return start
-  end
   def self.getStartDate
-    ##This has the year starting at the beginning of July
-    DateTime.new(ApplicationHelper.getStartYear, ApplicationHelper.getStartMonth, 1, 0, 0, 0)
+    Year.current_year.year_start.to_datetime
   end
   def self.getStartBuildDate
-    ##This has the year starting at the beginning of July
-    date = DateTime.new(ApplicationHelper.getStartYear+1, 1, 1, 0, 0, 0)
+    Year.current_year.build_season_start.to_datetime
   end
   def self.today
   
@@ -71,7 +55,7 @@ module ApplicationHelper
       return false
     end
     year = Year.current_year
-    if time > year.year_start and time < year.build_season_start
+    if time > year.year_start and !isBuildSeason(time)
       return true
     else
       return false
@@ -87,12 +71,5 @@ module ApplicationHelper
     else
       return false
     end 
-  end
-  def self.dateRange(time)
-    "#{time.year}-#{(time+1.year).year}"
-  end
-  def self.rangeBeginning
-    log = Timelog.order("timein asc").first
-    ApplicationHelper.getYearStart(log.timein.year)
   end
 end
