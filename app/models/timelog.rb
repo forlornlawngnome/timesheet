@@ -2,9 +2,9 @@ class Timelog < ActiveRecord::Base
   before_save :setTimeLogged
   before_save :setYear
   
+  attr_accessible :timein, :timeout, :user_id, :time_logged,  :year_id, :year_id, :updated_at
   belongs_to :user
   belongs_to :year
-  attr_accessible :timein, :timeout, :user_id, :time_logged, :updated_at, :year, :year_id
   
   validates :timein, :presence => true
   
