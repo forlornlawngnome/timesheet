@@ -16,4 +16,7 @@ class Year < ActiveRecord::Base
   def self.find_year(date)
     Year.where("year_start <= ? and year_end >= ?",date,date).first
   end
+  def year_range
+    "#{self.year_start.year} - #{self.year_end.year}"
+  end
 end
