@@ -59,10 +59,6 @@ module ApplicationHelper
     start = year.year_start
     (start..(Date.today+1)).group_by{ |u| u.beginning_of_week.strftime("%m/%d/%Y") }
   end
-  
-  def hoursBuildSeason(hours)
-    hours>Constants::BUILD_HOURS.hours
-  end
   def meetingsBuildSeason(number)
     number>=Constants::BUILD_MEETINGS
   end

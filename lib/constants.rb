@@ -2,7 +2,6 @@ module Constants
   TIMEZONE = 'Eastern Time (US & Canada)'
   YEAR_START = 7
   DAY_END = 1
-  BUILD_HOURS = 6
   BUILD_MEETINGS = 2
   PRE_MEETINGS = 1
   DEFAULT_LOGIN = "signup@team900.org"

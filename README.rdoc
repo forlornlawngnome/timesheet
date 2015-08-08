@@ -32,12 +32,6 @@ These can be found in app/helpers/application_helper.rb
 [Modification]  Change the 1 in the partial line below to correspond with the number of hours after midnight to cut off
    Time.now.in_time_zone  ...  + 1.hours
 	
-==== Build Season Hours Required
-[Description]  The minimum number of hours required from a student during build season. This is used in the student view. Will show true/false based on meeting the different criteria
-[Method]  hoursBuildSeason(hours)
-[Default]  6 hours
-[Modification]  Change the 6 to the number of hours required
-	
 ==== Build Season Meetings Required
 [Description]  The minimum number of meetings required from a student during build season. This is used in the student view. Will show true/false based on meeting the different criteria
 [Method]  meetingsBuildSeason(hours)

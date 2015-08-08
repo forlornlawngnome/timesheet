@@ -165,26 +165,6 @@ These can be found in lib/constants.rb
 > 	</dd>
 > </dl>
 	
-### Build Season Hours Required
-> <dl>
-> 	<dt>Description</dt>
-> 	<dd>
-> 		The minimum number of hours required from a student during build season. This is used in the student view. Will show true/false based >on meeting the different criteria
-> 	</dd>
-> 	<dt>Variable</dt>
-> 	<dd>
-> 		BUILD_HOURS
-> 	</dd>
-> 	<dt>Default</dt>
-> 	<dd>
-> 		6 hours
-> 	</dd>
-> 	<dt>Modification</dt>
-> 	<dd>
-> 		Change the 6 to the number of hours required
-> 	</dd>
-> </dl>
-	
 ### Build Season Meetings Required
 > <dl>
 > 	<dt>Description</dt>
