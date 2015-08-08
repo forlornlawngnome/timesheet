@@ -125,26 +125,6 @@ These can be found in lib/constants.rb
 > 	</dd>
 > </dl>
 
-### Start of Year
-> <dl>
-> 	<dt>Description</dt>
-> 	<dd>
-> 		This is when the 'year' begins. Views of weeks start with the first day in the month
-> 	</dd>
-> 	<dt>Variable</dt>
-> 	<dd>
-> 		YEAR_START
-> 	</dd>
-> 	<dt>Default</dt>
-> 	<dd>
-> 		1st of July
-> 	</dd>
-> 	<dt>Modification</dt>
-> 	<dd>
-> 		Change the 7 (July) to the integer corresponding to the month you want to begin
-> 	</dd>
-> </dl>
-		
 ### Last Out
 > <dl>
 > 	<dt>Description</dt>
