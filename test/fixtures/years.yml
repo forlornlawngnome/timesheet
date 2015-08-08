@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  year_start: 2015-08-08
+  year_end: 2015-08-08
+  build_season_start: 2015-08-08
+
+two:
+  year_start: 2015-08-08
+  year_end: 2015-08-08
+  build_season_start: 2015-08-08

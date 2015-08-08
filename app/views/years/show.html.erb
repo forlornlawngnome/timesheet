@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Year start:</b>
+  <%= @year.year_start %>
+</p>
+
+<p>
+  <b>Year end:</b>
+  <%= @year.year_end %>
+</p>
+
+<p>
+  <b>Build season start:</b>
+  <%= @year.build_season_start %>
+</p>
+
+<p>
+  <b>Is Current Year?</b>
+  <%= @year.is_current_year? %>
+</p>
+
+<%= link_to 'Edit', edit_year_path(@year) %> |
+<%= link_to 'Back', years_path %>

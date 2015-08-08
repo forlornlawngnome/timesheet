@@ -1,0 +1,45 @@
+<%= form_for(@year) do |f| %>
+  <% if @year.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@year.errors.count, "error") %> prohibited this year from being saved:</h2>
+
+      <ul>
+      <% @year.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :year_start %><br />
+	<%= f.text_field :year_start,  :'data-date-format'=>"YYYY-MM-DD #{ApplicationHelper.TimeOffset}" rescue f.text_field :year_start,  :'data-date-format'=>"YYYY-MM-DD #{ApplicationHelper.TimeOffset}" %>
+  </div>
+  <div class="field">
+    <%= f.label :year_end %><br />
+	<%= f.text_field :year_end,  :'data-date-format'=>"YYYY-MM-DD #{ApplicationHelper.TimeOffset}" rescue f.text_field :year_end,  :'data-date-format'=>"YYYY-MM-DD #{ApplicationHelper.TimeOffset}" %>
+  </div>
+  <div class="field">
+    <%= f.label :build_season_start %><br />
+	<%= f.text_field :build_season_start,  :'data-date-format'=>"YYYY-MM-DD #{ApplicationHelper.TimeOffset}" rescue f.text_field :build_season_start,  :'data-date-format'=>"YYYY-MM-DD #{ApplicationHelper.TimeOffset}" %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(function () {
+      $('#year_year_start').datetimepicker();
+  });
+</script>
+<script type="text/javascript">
+  $(function () {
+      $('#year_year_end').datetimepicker();
+  });
+</script>
+<script type="text/javascript">
+  $(function () {
+      $('#year_build_season_start').datetimepicker();
+  });
+</script>
