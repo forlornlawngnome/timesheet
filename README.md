@@ -3,7 +3,7 @@ This project is designed to work as a time tracker for FIRST robotics teams. Onc
 
 # Licensing
 
-This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+This work can be reused and modified by teams but may not be sold. Credit must be given to the original author and any changes must be released under similar licencing. 
 
 #Live Example
 There is a live example running on heroku at [http://frctimesheet.herokuapp.com/](http://frctimesheet.herokuapp.com/). The admin user is "admin@900.com" with a password of "zebracorns". An example student user is "test@900.com" with a password of "zebra".

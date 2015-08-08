@@ -51,6 +51,7 @@ These can be found in app/helpers/application_helper.rb
 [Modification]  Change the 2 to the number of meetings required
 
 
+
 = Timezones
 * UTC -11:00 
   * American Samoa
