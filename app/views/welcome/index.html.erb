@@ -1,4 +1,4 @@
-<h1>Team <%=TEAM_NUMBER%> <%=TEAM_NAME%></h1>
+<h1>Team <%=Constants::TEAM_NUMBER%> <%=Constants::TEAM_NAME%></h1>
 <p>Please ask an Admin to log in if you would like to check in.</p>
 <p>Sign in your own account to update your account info</p>
 
@@ -24,13 +24,13 @@
    		<li><%=link_to "Timelogs", timelogs_path%></li>
 		<li><%=link_to "New Timelog", new_timelog_path%></li>
 	      
-	 <h4><%=SCHOOL_NAME_REPLACEMENT%></h4> 
-   		<li><%=link_to SCHOOL_NAME_REPLACEMENT, schools_path%></li>
-		<li><%=link_to "New #{SCHOOL_NAME_REPLACEMENT}", new_school_path%></li>
+	 <h4><%=Constants::SCHOOL_NAME_REPLACEMENT%></h4> 
+   		<li><%=link_to Constants::SCHOOL_NAME_REPLACEMENT, schools_path%></li>
+		<li><%=link_to "New #{Constants::SCHOOL_NAME_REPLACEMENT}", new_school_path%></li>
    	 <h4>Years</h4>
   		<li><%=link_to "Years", years_path%></li>
    		<li><%=link_to "New Year", new_year_path%></li>
 <%end%>
  <h4>Statistics</h4> 
 	<li><%=link_to "Stats by week", stats_hours_path%></li>
-	<li><%=link_to "Stats based on #{SCHOOL_NAME_REPLACEMENT}", stats_schools_path%></li>
+	<li><%=link_to "Stats based on #{Constants::SCHOOL_NAME_REPLACEMENT}", stats_schools_path%></li>

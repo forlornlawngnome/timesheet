@@ -4,7 +4,7 @@ google.load("visualization", "1", {packages:["bar"]});
      google.setOnLoadCallback(drawChart);
      function drawChart() {
        var data = google.visualization.arrayToDataTable([
-         ['<%=SCHOOL_NAME_REPLACEMENT%>', 'Total Student hours'],
+         ['<%=Constants::SCHOOL_NAME_REPLACEMENT%>', 'Total Student hours'],
 		 <%@allSchools.each do |school|%>
          	['<%=school[0]%>', <%=school[1][1]%>],
 		 <%end%>
@@ -12,7 +12,7 @@ google.load("visualization", "1", {packages:["bar"]});
 
        var options = {
 		   chart:{
-        	   title: '<%=@range%>: Total Hours Per <%=SCHOOL_NAME_REPLACEMENT%>'
+        	   title: '<%=@range%>: Total Hours Per <%=Constants::SCHOOL_NAME_REPLACEMENT%>'
 		   },
          width: 900,
          height: 500
@@ -27,7 +27,7 @@ google.load("visualization", "1", {packages:["bar"]});
      google.setOnLoadCallback(drawChart);
      function drawChart() {
        var data = google.visualization.arrayToDataTable([
-         ['<%=SCHOOL_NAME_REPLACEMENT%>', 'Average Hours per Student' ],
+         ['<%=Constants::SCHOOL_NAME_REPLACEMENT%>', 'Average Hours per Student' ],
 		 <%@allSchools.each do |school|%>
          	['<%=school[0]%>', <%=school[1][2]%>],
 		 <%end%>
@@ -35,7 +35,7 @@ google.load("visualization", "1", {packages:["bar"]});
 
        var options = {
 		   chart:{
-        	   title: '<%=@range%>: Average Hours Per Student Per <%=SCHOOL_NAME_REPLACEMENT%>'
+        	   title: '<%=@range%>: Average Hours Per Student Per <%=Constants::SCHOOL_NAME_REPLACEMENT%>'
 		   },
          width: 900,
          height: 500
@@ -50,7 +50,7 @@ google.load("visualization", "1", {packages:["bar"]});
      google.setOnLoadCallback(drawChart);
      function drawChart() {
        var data = google.visualization.arrayToDataTable([
-         ['<%=SCHOOL_NAME_REPLACEMENT%>', 'Number of Students' ],
+         ['<%=Constants::SCHOOL_NAME_REPLACEMENT%>', 'Number of Students' ],
 		 <%@allSchools.each do |school|%>
          	['<%=school[0]%>',  <%=school[1][0]%>],
 		 <%end%>
@@ -58,7 +58,7 @@ google.load("visualization", "1", {packages:["bar"]});
 
        var options = {
 		   chart:{
-        	   title: '<%=@range%>: Number of Students Per <%=SCHOOL_NAME_REPLACEMENT%>'
+        	   title: '<%=@range%>: Number of Students Per <%=Constants::SCHOOL_NAME_REPLACEMENT%>'
 		   },
          width: 900,
          height: 500

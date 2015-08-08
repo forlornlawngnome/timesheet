@@ -62,4 +62,6 @@ module Timesheet
     
     
   end
+  
+  require 'constants'
 end

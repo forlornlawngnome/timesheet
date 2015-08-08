@@ -97,7 +97,7 @@ Note: By default rails uses port 3000, that would make the url on a local machin
 # Changing settings
 
 There are some settings which can be changed to adapt this for your team.
-These can be found in config/initializers/constant.rb
+These can be found in lib/constants.rb
 
 
 ### Timezone
@@ -301,7 +301,101 @@ These can be found in config/initializers/constant.rb
 > 		Change the string to representing the team's main organizational unit. 
 > 	</dd>
 > </dl>
-
+### Freshman Hours
+> <dl>
+> 	<dt>Description</dt>
+> 	<dd>
+> 		An integer representing the required hours for freshman.
+> 	</dd>
+> 	<dt>Variable</dt>
+> 	<dd>
+> 		FRESHMAN_HOURS
+> 	</dd>
+> 	<dt>Default</dt>
+> 	<dd>
+> 		6
+> 	</dd>
+> 	<dt>Modification</dt>
+> 	<dd>
+> 		Change the integer to be your required hours for freshman.
+> 	</dd>
+> </dl>
+### Sophomores Hours
+> <dl>
+> 	<dt>Description</dt>
+> 	<dd>
+> 		An integer representing the required hours for sophomores.
+> 	</dd>
+> 	<dt>Variable</dt>
+> 	<dd>
+> 		SOPHOMORE_HOURS
+> 	</dd>
+> 	<dt>Default</dt>
+> 	<dd>
+> 		8
+> 	</dd>
+> 	<dt>Modification</dt>
+> 	<dd>
+> 		Change the integer to be your required hours for sophomores.
+> 	</dd>
+> </dl>
+### Junior Hours
+> <dl>
+> 	<dt>Description</dt>
+> 	<dd>
+> 		An integer representing the required hours for juniors.
+> 	</dd>
+> 	<dt>Variable</dt>
+> 	<dd>
+> 		JUNIOR_HOURS
+> 	</dd>
+> 	<dt>Default</dt>
+> 	<dd>
+> 		10
+> 	</dd>
+> 	<dt>Modification</dt>
+> 	<dd>
+> 		Change the integer to be your required hours for juniors.
+> 	</dd>
+> </dl>
+### Senior Hours
+> <dl>
+> 	<dt>Description</dt>
+> 	<dd>
+> 		An integer representing the required hours for senior.
+> 	</dd>
+> 	<dt>Variable</dt>
+> 	<dd>
+> 		SENIOR_HOURS
+> 	</dd>
+> 	<dt>Default</dt>
+> 	<dd>
+> 		10
+> 	</dd>
+> 	<dt>Modification</dt>
+> 	<dd>
+> 		Change the integer to be your required hours for senior.
+> 	</dd>
+> </dl>
+### Leadership Hours
+> <dl>
+> 	<dt>Description</dt>
+> 	<dd>
+> 		An integer representing the required hours for leadership students.
+> 	</dd>
+> 	<dt>Variable</dt>
+> 	<dd>
+> 		LEADERSHIP_HOURS
+> 	</dd>
+> 	<dt>Default</dt>
+> 	<dd>
+> 		15
+> 	</dd>
+> 	<dt>Modification</dt>
+> 	<dd>
+> 		Change the integer to be your required hours for leadership students.
+> 	</dd>
+> </dl>
 
 # Timezones
 * UTC -11:00 
