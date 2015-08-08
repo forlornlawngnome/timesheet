@@ -244,6 +244,7 @@ These can be found in lib/constants.rb
 > 		Change the string to the email of an account. (Must register account in system)
 > 	</dd>
 > </dl>
+
 ### Team Name
 > <dl>
 > 	<dt>Description</dt>
@@ -263,6 +264,7 @@ These can be found in lib/constants.rb
 > 		Change the string to the team name.
 > 	</dd>
 > </dl>
+
 ### Team Number
 > <dl>
 > 	<dt>Description</dt>
@@ -282,6 +284,7 @@ These can be found in lib/constants.rb
 > 		Change the string to representing the team's number. 
 > 	</dd>
 > </dl>
+
 ### School/Group Descripter
 > <dl>
 > 	<dt>Description</dt>
@@ -301,6 +304,7 @@ These can be found in lib/constants.rb
 > 		Change the string to representing the team's main organizational unit. 
 > 	</dd>
 > </dl>
+
 ### Freshman Hours
 > <dl>
 > 	<dt>Description</dt>
@@ -320,6 +324,7 @@ These can be found in lib/constants.rb
 > 		Change the integer to be your required hours for freshman.
 > 	</dd>
 > </dl>
+
 ### Sophomores Hours
 > <dl>
 > 	<dt>Description</dt>
@@ -339,6 +344,7 @@ These can be found in lib/constants.rb
 > 		Change the integer to be your required hours for sophomores.
 > 	</dd>
 > </dl>
+
 ### Junior Hours
 > <dl>
 > 	<dt>Description</dt>
@@ -358,6 +364,7 @@ These can be found in lib/constants.rb
 > 		Change the integer to be your required hours for juniors.
 > 	</dd>
 > </dl>
+
 ### Senior Hours
 > <dl>
 > 	<dt>Description</dt>
@@ -377,6 +384,7 @@ These can be found in lib/constants.rb
 > 		Change the integer to be your required hours for senior.
 > 	</dd>
 > </dl>
+
 ### Leadership Hours
 > <dl>
 > 	<dt>Description</dt>
