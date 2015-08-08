@@ -365,6 +365,10 @@ These can be found in lib/constants.rb
 > 	</dd>
 > </dl>
 
+# Initial Creation
+You now need to be sure that you create "years" before a season starts. A year consists of a start date, end date, and build season start date. The time logs are associated with these years as are the statistics. 
+
+
 # Timezones
 * UTC -11:00 
   * American Samoa
