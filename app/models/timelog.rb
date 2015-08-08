@@ -1,6 +1,6 @@
 class Timelog < ActiveRecord::Base
   before_save :setTimeLogged
-  #before_save :setYear
+  before_save :setYear
   
   belongs_to :user
   belongs_to :year
@@ -14,10 +14,6 @@ class Timelog < ActiveRecord::Base
   scope :today, where("timein >= ? ",ApplicationHelper.today.utc).order("updated_at DESC")
 
   
-  def setYear
-    self.year = Year.find_year(self.timein)
-  end
-  
   private
   def setTimeLogged
     if self.timeout.nil?
@@ -26,5 +22,7 @@ class Timelog < ActiveRecord::Base
       self.time_logged = self.timeout - self.timein
     end
   end
-  
+  def setYear
+    self.year = Year.find_year(self.timein)
+  end
 end
