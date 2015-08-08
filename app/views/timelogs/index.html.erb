@@ -14,7 +14,6 @@
 	  </tr>
 
 	<% @timelogs.each do |timelog| %>
-	<%=timelog.save!%>
 	  <tr>
 	    <td><%= "#{timelog.user.name_first rescue ""} #{timelog.user.name_last rescue ""}" %></td>
 	    <td><%= local_time timelog.timein rescue ""%></td>
