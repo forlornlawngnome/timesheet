@@ -1,32 +1,33 @@
 
 <h1>Listing timelogs</h1>
 <%if current_user.try(:admin)%>
-<table class="table table-hover">
-  <tr>
-    <th>User</th>
-    <th>Timein</th>
-    <th>Timeout timestamp</th>
-	<th>Year</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+	<%= paginate @timelogs %>
+	<table class="table table-hover">
+	  <tr>
+	    <th>User</th>
+	    <th>Timein</th>
+	    <th>Timeout timestamp</th>
+		<th>Year</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
 
-<% @timelogs.each do |timelog| %>
-  <tr>
-    <td><%= "#{timelog.user.name_first rescue ""} #{timelog.user.name_last rescue ""}" %></td>
-    <td><%= local_time timelog.timein rescue ""%></td>
-    <td><%= local_time timelog.timeout rescue ""%></td>
-	<td><%=timelog.year.year_range rescue ""%></td>
-    <td><%= link_to 'Show', timelog %></td>
-    <td><%=link_to '', edit_timelog_path(timelog), :class=>"glyphicon glyphicon-pencil" %></td>
-	<td><%= link_to '', timelog, :class=>"glyphicon glyphicon-trash", method: :delete, data: { confirm: "Are you sure?"} %></td>
-  </tr>
-  <%timelog.save%>
-<% end %>
-</table>
+	<% @timelogs.each do |timelog| %>
+	  <tr>
+	    <td><%= "#{timelog.user.name_first rescue ""} #{timelog.user.name_last rescue ""}" %></td>
+	    <td><%= local_time timelog.timein rescue ""%></td>
+	    <td><%= local_time timelog.timeout rescue ""%></td>
+		<td><%=timelog.year.year_range rescue ""%></td>
+	    <td><%= link_to 'Show', timelog %></td>
+	    <td><%=link_to '', edit_timelog_path(timelog), :class=>"glyphicon glyphicon-pencil" %></td>
+		<td><%= link_to '', timelog, :class=>"glyphicon glyphicon-trash", method: :delete, data: { confirm: "Are you sure?"} %></td>
+	  </tr>
+	  <%timelog.save%>
+	<% end %>
+	</table>
 
-<br />
+	<br />
 
-<%= link_to 'New Timelog', new_timelog_path %>
+	<%= link_to 'New Timelog', new_timelog_path %>
 <%end%>
