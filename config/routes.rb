@@ -1,4 +1,7 @@
 Timesheet::Application.routes.draw do
+  resources :hour_exceptions
+
+
   resources :hour_overrides
 
 

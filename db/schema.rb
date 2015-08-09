@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150809003307) do
+ActiveRecord::Schema.define(:version => 20150809004751) do
 
   create_table "forms", :force => true do |t|
     t.string   "name"
@@ -27,6 +27,20 @@ ActiveRecord::Schema.define(:version => 20150809003307) do
 
   add_index "forms_users", ["form_id"], :name => "index_forms_users_on_form_id"
   add_index "forms_users", ["user_id"], :name => "index_forms_users_on_user_id"
+
+  create_table "hour_exceptions", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "submitter"
+    t.date     "date_applicable"
+    t.date     "date_sent"
+    t.string   "reason"
+    t.integer  "year_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "hour_exceptions", ["user_id"], :name => "index_hour_exceptions_on_user_id"
+  add_index "hour_exceptions", ["year_id"], :name => "index_hour_exceptions_on_year_id"
 
   create_table "hour_overrides", :force => true do |t|
     t.integer  "user_id"

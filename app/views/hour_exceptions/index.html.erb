@@ -1,0 +1,33 @@
+<h1>Listing hour_exceptions</h1>
+
+<table class="table table-hover">
+  <tr>
+    <th>User</th>
+    <th>Submitter</th>
+    <th>Date applicable</th>
+    <th>Date sent</th>
+    <th>Reason</th>
+    <th>Year</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @hour_exceptions.each do |hour_exception| %>
+  <tr>
+    <td><%= link_to hour_exception.user.full_name, hour_exception.user %></td>
+    <td><%= hour_exception.submitter %></td>
+    <td><%= hour_exception.date_applicable %></td>
+    <td><%= hour_exception.date_sent %></td>
+    <td><%= hour_exception.reason %></td>
+    <td><%= hour_exception.year.year_range %></td>
+    <td><%= link_to 'Show', hour_exception %></td>
+    <td><%= link_to 'Edit', edit_hour_exception_path(hour_exception) %></td>
+    <td><%= link_to 'Destroy', hour_exception, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Hour exception', new_hour_exception_path %>

@@ -1,0 +1,50 @@
+<%= form_for(@hour_exception) do |f| %>
+  <% if @hour_exception.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hour_exception.errors.count, "error") %> prohibited this hour_exception from being saved:</h2>
+
+      <ul>
+      <% @hour_exception.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user %><br />
+     <%= collection_select(:hour_exception, :user_id, User.order("lower(name_first)"), :id, :full_name, :include_blank=> true, :class=>"input-small")  %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :submitter, :value=>current_user.email %>
+  </div>
+  <div class="field">
+    <%= f.label :date_applicable %><br />
+    <%= f.text_field :date_applicable,  :'data-date-format'=>"YYYY-MM-DD HH:mm:ss #{ApplicationHelper.TimeOffset}"  rescue  f.text_field :date_applicable,  :'data-date-format'=>"YYYY-MM-DD HH:mm:ss #{ApplicationHelper.TimeOffset}" %>
+  </div>
+  <div class="field">
+    <%= f.label :date_sent %><br />
+    <%= f.text_field :date_sent,  :'data-date-format'=>"YYYY-MM-DD HH:mm:ss #{ApplicationHelper.TimeOffset}"  rescue  f.text_field :date_sent,  :'data-date-format'=>"YYYY-MM-DD HH:mm:ss #{ApplicationHelper.TimeOffset}" %>
+  </div>
+  <div class="field">
+    <%= f.label :reason %><br />
+    <%= f.text_field :reason %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :year_id, :value=>Year.current_year.id%>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+  <script type="text/javascript">
+      $(function () {
+          $('#hour_exception_date_applicable').datetimepicker();
+      });
+  </script>
+  <script type="text/javascript">
+      $(function () {
+          $('#hour_exception_date_sent').datetimepicker();
+      });
+  </script>

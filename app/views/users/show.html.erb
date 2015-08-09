@@ -109,6 +109,15 @@
 	<br />
 	<%all_logs = @user.grouped_logs%>
 	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Beginning of Week</th>
+				<th>Hours</th>
+				<th>Different Meetings</th>
+				<th>Meet Requirements?</th>
+				<th>Exceptions <%if current_user.try(:admin)%><%=link_to fa_icon("plus"), new_hour_exception_path, :class=>"pull-right"%><%end%></th>
+			</tr>
+		</thead>
 		<%getWeeks.each do |day|%>	
 			<tr>
 				<th><%=day[0]%></th>
@@ -127,13 +136,13 @@
 					<td><%=count = breakdown.count rescue 0%></td>
 				<%end%>
 				<%#This part has to do with requirements. Change based on your requirements. Methods can be found in Application Helper%>
-				<%if isPreSeason day[1][5]%>
+				<%if isPreSeason day[1][0]%>
 					<%if !logs.first.nil? && meetingsPreSeason(count)%>
 						<td class="success">True</td>
 					<%else%>
 						<td class="danger">False</td>
 					<%end%>
-				<%elsif isBuildSeason day[1][5]%>
+				<%elsif isBuildSeason day[1][0]%>
 					<%if time.hour >= @user.required_hours && meetingsBuildSeason(count)%>
 						<td class="success">True</td>
 					<%else%>
@@ -142,6 +151,14 @@
 				<%else%>
 					<td></td>
 				<%end%>
+				<td>
+					<%exceptions =  @user.hour_exceptions.where("date_applicable >= ? and date_applicable <= ?", day[1][0], (day[1].last))%>
+					<%if !exceptions.empty?%>
+						<%exceptions.order("date_applicable").each do |ex|%>
+							<%=link_to ex.reason, ex%><br />
+						<%end%>
+					<%end%>
+				</td>
 			<tr>
 		<%end%>
 	</table>

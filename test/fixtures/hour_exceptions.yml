@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  submitter: MyString
+  date_applicable: 2015-08-08
+  date_sent: 2015-08-08
+  reason: MyString
+  year: 
+
+two:
+  user: 
+  submitter: MyString
+  date_applicable: 2015-08-08
+  date_sent: 2015-08-08
+  reason: MyString
+  year: 

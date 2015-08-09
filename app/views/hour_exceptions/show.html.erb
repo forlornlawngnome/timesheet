@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= link_to @hour_exception.user.full_name, @hour_exception.user %>
+</p>
+
+<p>
+  <b>Submitter:</b>
+  <%= @hour_exception.submitter %>
+</p>
+
+<p>
+  <b>Date applicable:</b>
+  <%= @hour_exception.date_applicable %>
+</p>
+
+<p>
+  <b>Date sent:</b>
+  <%= @hour_exception.date_sent %>
+</p>
+
+<p>
+  <b>Reason:</b>
+  <%= @hour_exception.reason %>
+</p>
+
+<p>
+  <b>Year:</b>
+  <%= @hour_exception.year.year_range %>
+</p>
+
+
+<%= link_to 'Edit', edit_hour_exception_path(@hour_exception) %> |
+<%= link_to 'Back', hour_exceptions_path %>
