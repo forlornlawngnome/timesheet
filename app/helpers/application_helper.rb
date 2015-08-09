@@ -43,13 +43,7 @@ module ApplicationHelper
     start = year.year_start
     (start..(Date.today+1+1.year)).group_by{ |u| u.beginning_of_week.strftime("%m/%d/%Y") }
   end
-  def meetingsBuildSeason(number)
-    number>=Constants::BUILD_MEETINGS
-  end
-  def meetingsPreSeason(number)
-    number>=Constants::PRE_MEETINGS
-  end
-  
+
   def isPreSeason(time)
     if time.nil?
       return false
