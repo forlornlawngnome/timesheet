@@ -43,6 +43,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     
+    @years = @user.years.order("year_start desc").uniq
     @forms = Form.active.order("name")
 
     respond_to do |format|
