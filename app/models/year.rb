@@ -5,6 +5,7 @@ class Year < ActiveRecord::Base
   has_many :users, :through => :timelogs
   has_many :hour_overrides
   has_many :hour_exceptions
+  has_many :week_exceptions
   
   def is_current_year?
     if !Year.current_year.nil? && Year.current_year.id == self.id

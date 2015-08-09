@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  date: 2015-08-09
+  weight: 9.99
+  reason: MyText
+  year: 
+
+two:
+  date: 2015-08-09
+  weight: 9.99
+  reason: MyText
+  year: 

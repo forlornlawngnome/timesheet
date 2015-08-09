@@ -1,0 +1,29 @@
+<h1>Listing week_exceptions</h1>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Weight</th>
+    <th>Reason</th>
+    <th>Year</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @week_exceptions.each do |week_exception| %>
+  <tr>
+    <td><%= week_exception.date %></td>
+    <td><%= week_exception.weight %></td>
+    <td><%= week_exception.reason %></td>
+    <td><%= week_exception.year.year_range %></td>
+    <td><%= link_to 'Show', week_exception %></td>
+    <td><%= link_to 'Edit', edit_week_exception_path(week_exception) %></td>
+    <td><%= link_to 'Destroy', week_exception, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Week exception', new_week_exception_path %>

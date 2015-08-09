@@ -1,4 +1,7 @@
 Timesheet::Application.routes.draw do
+  resources :week_exceptions
+
+
   resources :hour_exceptions
 
 

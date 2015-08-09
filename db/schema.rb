@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150809004751) do
+ActiveRecord::Schema.define(:version => 20150809183511) do
 
   create_table "forms", :force => true do |t|
     t.string   "name"
@@ -104,6 +104,17 @@ ActiveRecord::Schema.define(:version => 20150809004751) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "week_exceptions", :force => true do |t|
+    t.date     "date"
+    t.decimal  "weight"
+    t.text     "reason"
+    t.integer  "year_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "week_exceptions", ["year_id"], :name => "index_week_exceptions_on_year_id"
 
   create_table "years", :force => true do |t|
     t.date     "year_start"

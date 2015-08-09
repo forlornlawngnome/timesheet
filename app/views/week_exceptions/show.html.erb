@@ -1,0 +1,23 @@
+<p>
+  <b>Date:</b>
+  <%= @week_exception.date %>
+</p>
+
+<p>
+  <b>Weight:</b>
+  <%= @week_exception.weight %>
+</p>
+
+<p>
+  <b>Reason:</b>
+  <%= @week_exception.reason %>
+</p>
+
+<p>
+  <b>Year:</b>
+  <%= @week_exception.year.year_range %>
+</p>
+
+
+<%= link_to 'Edit', edit_week_exception_path(@week_exception) %> |
+<%= link_to 'Back', week_exceptions_path %>
