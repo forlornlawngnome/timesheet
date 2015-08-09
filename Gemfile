@@ -29,11 +29,13 @@ end
 gem 'therubyracer'  # If using Ruby
 gem 'jquery-rails'
 gem 'less-rails-bootstrap', '~> 3.0.0.wip', github: 'sinfin/less-rails-bootstrap-3'
+gem "font-awesome-rails"
 
 gem 'local_time'
 
 gem 'momentjs-rails', '>= 2.8.1'
 gem 'bootstrap3-datetimepicker-rails', '~> 3.1.1'
+
 
 gem 'kaminari'
 
