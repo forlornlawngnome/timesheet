@@ -20,11 +20,11 @@
   </div>
   <div class="field">
     <%= f.label :date_applicable %><br />
-    <%= f.text_field :date_applicable,  :'data-date-format'=>"YYYY-MM-DD HH:mm:ss #{ApplicationHelper.TimeOffset}"  rescue  f.text_field :date_applicable,  :'data-date-format'=>"YYYY-MM-DD HH:mm:ss #{ApplicationHelper.TimeOffset}" %>
+    <%= f.text_field :date_applicable,  :'data-date-format'=>"YYYY-MM-DD"  rescue  f.text_field :date_applicable,  :'data-date-format'=>"YYYY-MM-DD" %>
   </div>
   <div class="field">
     <%= f.label :date_sent %><br />
-    <%= f.text_field :date_sent,  :'data-date-format'=>"YYYY-MM-DD HH:mm:ss #{ApplicationHelper.TimeOffset}"  rescue  f.text_field :date_sent,  :'data-date-format'=>"YYYY-MM-DD HH:mm:ss #{ApplicationHelper.TimeOffset}" %>
+    <%= f.text_field :date_sent,  :'data-date-format'=>"YYYY-MM-DD"  rescue  f.text_field :date_sent,  :'data-date-format'=>"YYYY-MM-DD" %>
   </div>
   <div class="field">
     <%= f.label :reason %><br />
