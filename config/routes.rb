@@ -1,4 +1,7 @@
 Timesheet::Application.routes.draw do
+  resources :hour_overrides
+
+
   resources :years
 
 

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @hour_override.user.full_name %>
+</p>
+
+<p>
+  <b>Year:</b>
+  <%= @hour_override.year.year_range %>
+</p>
+
+<p>
+  <b>Hours required:</b>
+  <%= @hour_override.hours_required %>
+</p>
+
+<p>
+  <b>Reason:</b>
+  <%= @hour_override.reason %>
+</p>
+
+
+<%= link_to 'Edit', edit_hour_override_path(@hour_override) %> |
+<%= link_to 'Back', hour_overrides_path %>

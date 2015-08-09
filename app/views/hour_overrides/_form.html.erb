@@ -1,0 +1,33 @@
+<%= form_for(@hour_override) do |f| %>
+  <% if @hour_override.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hour_override.errors.count, "error") %> prohibited this hour_override from being saved:</h2>
+
+      <ul>
+      <% @hour_override.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user %><br />
+    <%= collection_select(:hour_override, :user_id, User.order("lower(name_first)"), :id, :full_name, :include_blank=> true, :class=>"input-small")  %>
+  </div>
+  <div class="field">
+    <%= f.label :year %><br />
+  	<%= collection_select(:hour_override, :year_id, Year.order("lower(year_start)"), :id, :year_range, :include_blank=> true, :class=>"input-small")  %>
+  </div>
+  <div class="field">
+    <%= f.label :hours_required %><br />
+    <%= f.number_field :hours_required %>
+  </div>
+  <div class="field">
+    <%= f.label :reason %><br />
+    <%= f.text_area :reason %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

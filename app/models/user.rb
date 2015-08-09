@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :forms
   has_many :forms_users
   has_many :years, :through=>:timelogs
+  has_one :hour_override, :conditions => { :year_id => Year.current_year.id}
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :school, :school_id, :email, :password, :password_confirmation, :name_first, :name_last, :phone,:location, :admin, :userid, :archive, :form_id, :form_ids, :forms_user_id, :gender, :graduation_year, :student_leader
@@ -22,6 +23,9 @@ class User < ActiveRecord::Base
   #scope :active, where("users.archive IS NOT 1") ##Change back for production!!!
   
   def required_hours 
+    if !self.hour_override.nil?
+      return self.hour_override.hours_required
+    end
     if self.student_leader
       return Constants::LEADERSHIP_HOURS
     end

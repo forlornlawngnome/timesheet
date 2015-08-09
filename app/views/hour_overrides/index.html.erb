@@ -1,0 +1,29 @@
+<h1>Listing hour_overrides</h1>
+
+<table class="table table-hover">
+  <tr>
+    <th>User</th>
+    <th>Year</th>
+    <th>Hours required</th>
+    <th>Reason</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @hour_overrides.each do |hour_override| %>
+  <tr>
+    <td><%= link_to hour_override.user.full_name, hour_override.user%></td>
+    <td><%= hour_override.year.year_range %></td>
+    <td><%= hour_override.hours_required %></td>
+    <td><%= hour_override.reason %></td>
+    <td><%= link_to 'Show', hour_override %></td>
+    <td><%= link_to 'Edit', edit_hour_override_path(hour_override) %></td>
+    <td><%= link_to 'Destroy', hour_override, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Hour override', new_hour_override_path %>

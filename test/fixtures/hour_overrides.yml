@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  year: 
+  hours_required: 1
+  reason: MyText
+
+two:
+  user: 
+  year: 
+  hours_required: 1
+  reason: MyText
