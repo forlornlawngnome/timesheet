@@ -30,6 +30,7 @@
 			<th>Name</th>
 			<th>In/Out</th>
 			<th>Time</th>
+			<th>Weekly Requirements Met?</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -42,6 +43,21 @@
 				<%else%>
 					<td>Out</td>
 					<td><%=local_time log.timeout, "%I:%M:%S %p"%></td>
+				<%end%>
+				<%if isPreSeason(Date.today)%>
+					<%if log.user.meetingsPreSeason(Date.today)%>
+						<td class="success">True</td>
+					<%else%>
+						<td class="danger">False</td>
+					<%end%>
+				<%elsif isBuildSeason(Date.today)%>
+					<%if log.user.met_build_season_reqs(Date.today)%>
+						<td class="success">True</td>
+					<%else%>
+						<td class="danger">False</td>
+					<%end%> 
+				<%else%>
+					<td></td>
 				<%end%>
 			</tr>
 		<%end%>
