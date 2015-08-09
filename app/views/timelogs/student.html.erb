@@ -45,7 +45,7 @@
 					<td><%=local_time log.timeout, "%I:%M:%S %p"%></td>
 				<%end%>
 				<%if isPreSeason(Date.today)%>
-					<%if log.user.meetingsPreSeason(Date.today)%>
+					<%if log.user.met_preseason_reqs(Date.today)%>
 						<td class="success">True</td>
 					<%else%>
 						<td class="danger">False</td>

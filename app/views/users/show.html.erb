@@ -130,7 +130,7 @@
 				<%#This part has to do with requirements. Change based on your requirements. Methods can be found in Application Helper%>
 				<%if isPreSeason date%>
 					<td></td>
-					<%if meetingsPreSeason(date)%>
+					<%if @user.met_preseason_reqs(date)%>
 						<td class="success">True</td>
 					<%else%>
 						<td class="danger">False</td>
