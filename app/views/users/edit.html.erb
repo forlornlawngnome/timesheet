@@ -1,4 +1,4 @@
-<%if current_user.try(:admin)%>
+<%if current_user.try(:admin) || current_user.id == params[:id].to_f%>
 	<%= form_for @user do |f| %>
 
 	<div class="row">
@@ -49,16 +49,16 @@
 		  		<%=f.check_box :student_leader%></div>
 		  		<div><%= f.label "Admin?" %>
 		  		<%=f.check_box :admin%></div>
+			    <div><%= f.label "Archive?" %>
+			    <%= f.check_box :archive %></div>
+				<%@forms.each do |form|%>
+					<div>
+				  		<%= check_box_tag "user[form_ids][]", form.id, @user.forms.include?(form) %>
+				  		<%= form.name %>
+					</div>
+				<%end%>
 		    <%end%>
-		    <div><%= f.label "Archive?" %>
-		    <%= f.check_box :archive %></div>
 			<hr />
-			<%@forms.each do |form|%>
-				<div>
-			  		<%= check_box_tag "user[form_ids][]", form.id, @user.forms.include?(form) %>
-			  		<%= form.name %>
-				</div>
-			<%end%>
 			<div class="col-lg-2 pull-right"><%= f.submit "Save", :class=>"btn btn-primary btn-small btn-block" %></div>
 		</div>
   
