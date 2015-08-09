@@ -36,7 +36,7 @@ class StatsController < ApplicationController
       totalHours = 0
       count = 0
       users.each do |user|
-        totalHours = totalHours + user.total_hours_number(@selected_year)
+        totalHours = totalHours + user.total_hours(@selected_year)
         if user.has_hours(@selected_year)
           count = count+1
         end

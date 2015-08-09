@@ -1,86 +1,112 @@
 <%if current_user.try(:admin) || current_user.id == params[:id].to_f%>
-	<p>
-		<b>Name:</b>
-		<%= @user.full_name %>
-	</p>
+	<div class="row">
+		<div class="col-lg-8 col-md-8">
+			<h2><%=@user.full_name%></h2>
+		</div>
+		<div class="col-lg-1 col-md-1 pull-right">
+			<%= link_to fa_icon("pencil"), edit_user_path(@user) %>
+		</div>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-lg-3 col-md-3">
+			<p>
+				<b>Name:</b>
+				<%= @user.full_name %>
+			</p>
 	
-	<p>
-		<b>Student Leader?</b>
-		<%= @user.student_leader %>
-	</p>
+			<p>
+				<b>Student Leader?</b>
+				<%= @user.student_leader %>
+			</p>
 
-	<p>
-		<b>Email:</b>
-		<%= @user.email %>
-	</p>
+			<p>
+				<b>Email:</b>
+				<%= @user.email %>
+			</p>
 	
-	<p>
-		<b><%=Constants::SCHOOL_NAME_REPLACEMENT%>:</b>
-		<%= @user.school.name %>
-	</p>
+			<p>
+				<b><%=Constants::SCHOOL_NAME_REPLACEMENT%>:</b>
+				<%= @user.school.name %>
+			</p>
 	
-	<p>
-		<b>Hometown:</b>
-		<%= @user.location %>
-	</p>
+			<p>
+				<b>Hometown:</b>
+				<%= @user.location %>
+			</p>
 	
-	<p>
-		<b>Gender:</b>
-		<%= @user.gender %>
-	</p>
+			<p>
+				<b>Gender:</b>
+				<%= @user.gender %>
+			</p>
 	
-	<p>
-		<b>Graduation Year:</b>
-		<%= @user.graduation_year %>
-	</p>
+			<p>
+				<b>Graduation Year:</b>
+				<%= @user.graduation_year %>
+			</p>
 	
-	<p>
-		<b>Phone Number:</b>
-		<%= number_to_phone(@user.phone , area_code: true) %>
-	</p>
-	<p>
-		<b>ID Number:</b>
-		<%= @user.userid %>
-	</p>
-	<p>
-		<b>Hours Required:</b>
-		<%= @user.required_hours %>
-	</p>
-	<p>
-		<b>Build Season Hours:</b>
-		<%= @user.build_hours %>
-	</p>
-	<p>
-		<b>Total Hours:</b>
-		<%= @user.total_hours %>
-	</p>
-
-	<br />
-	<table class="table table-condensed table-hover">
-		<tr>
-			<%@forms.each do |form|%>
-				<th>
-					<%=form.name%>
-				</th>
-			<%end%>
-		</tr>
-		<tr>
-			<%@forms.each do |form|%>
-				<%has_form = @user.forms.include?(form)%>
-				<%if has_form%>
-					<% cell_class="success"%>
-				<%else%>
-					<% cell_class="danger"%>
+			<p>
+				<b>Phone Number:</b>
+				<%= number_to_phone(@user.phone , area_code: true) %>
+			</p>
+			<p>
+				<b>ID Number:</b>
+				<%= @user.userid %>
+			</p>
+			<p>
+				<b>Hours Required:</b>
+				<%= @user.required_hours %>
+			</p>
+		</div>
+		<div class="col-lg-4 col-md-4">
+			<table class="table table-condensed table-hover">
+				<tr>
+					<th>Year</th>
+					<th>Total Hours</th>
+					<th>Build Season Hours</th>
+				</tr>
+				<%@years.each do |year|%>
+					<tr>
+						<td>
+							<%=year.year_range%>
+						</td>
+						<td>
+							<%=@user.total_hours_formatted(year)%>
+						</td>
+						<td>
+							<%=@user.build_hours_formatted(year)%>
+						</td>
+					</tr>
 				<%end%>
-				<td class=<%="#{cell_class}"%>>
-					<%=has_form%>
-				</td>
-			<%end%>
-		</tr>
-	</table>
-
-<br />
-	
+			</table>
+		</div>
+		<div class="col-lg-4 col-md-4">
+			<table class="table table-condensed table-hover">
+				<tr>
+					<%@forms.each do |form|%>
+						<th>
+							<%=form.name%>
+						</th>
+					<%end%>
+				</tr>
+				<tr>
+					<%@forms.each do |form|%>
+						<%has_form = @user.forms.include?(form)%>
+						<%if has_form%>
+							<% cell_class="success"%>
+						<%else%>
+							<% cell_class="danger"%>
+						<%end%>
+						<td class=<%="#{cell_class}"%>>
+							<%=has_form%>
+						</td>
+					<%end%>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<br />
+	<br />
 	<%all_logs = @user.grouped_logs%>
 	<table class="table table-hover">
 		<%getWeeks.each do |day|%>	
@@ -120,36 +146,38 @@
 		<%end%>
 	</table>
 
-	<hr />
-	<h3>All Timelogs</h3>
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>Time In</th>
-				<th>Time Out</th>
-				<th>Total Time</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%if !@user.timelogs.empty?%>
-				<%@user.timelogs.where("timein >= ?", ApplicationHelper.getStartDate).order("timein ASC").each do |log|%>
-					<tr>
-						<td>
-							<%=local_time log.timein rescue ""%>
-						</td>
-						<td>
-							<%=local_time log.timeout rescue ""%>
-						</td>
-						<td>
-							<%=Time.at(log.time_logged).utc.strftime("%H:%M:%S")%>
-						</td>
-					</tr>
+	<%if current_user.try(:admin)%>
+		<hr />
+		<h3>All Timelogs</h3>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Time In</th>
+					<th>Time Out</th>
+					<th>Total Time</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%if !@user.timelogs.empty?%>
+					<%@user.timelogs.where("timein >= ?", ApplicationHelper.getStartDate).order("timein ASC").each do |log|%>
+						<tr>
+							<td>
+								<%=local_time log.timein rescue ""%>
+							</td>
+							<td>
+								<%=local_time log.timeout rescue ""%>
+							</td>
+							<td>
+								<%=Time.at(log.time_logged).utc.strftime("%H:%M:%S")%>
+							</td>
+						</tr>
+					<%end%>
 				<%end%>
-			<%end%>
-		</tbody>
-	</table>
+			</tbody>
+		</table>
+	<%end%>
 	<hr />
-
-	<%= link_to 'Edit', edit_user_path(@user) %> |
 	<%= link_to 'Back', users_path %>
+<%else%>
+<i>You don't have permission to view this page.</i>
 <%end%>

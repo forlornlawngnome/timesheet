@@ -37,8 +37,8 @@ Number of Active Mentors: <%=@numMentors%>
 			<td><%= user.gender%></td>
 			<td><%= user.graduation_year%></td>
 			<td><%= user.userid %></td>
-			<td><%= user.build_hours %></td>
-			<td><%= user.total_hours %></td>
+			<td><%= user.build_hours_formatted(Year.current_year) %></td>
+			<td><%= user.total_hours_formatted(Year.current_year)%></td>
 			<td><%=link_to '', edit_user_path(user), :class=>"glyphicon glyphicon-pencil" %></td>
 		    <td><%= link_to '', user, :class=>"glyphicon glyphicon-trash", method: :delete, data: { confirm: "You sure? #{user.email}" } %></td>
 		  </tr>

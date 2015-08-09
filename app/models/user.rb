@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   belongs_to :school
   has_and_belongs_to_many :forms
   has_many :forms_users
+  has_many :years, :through=>:timelogs
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :school, :school_id, :email, :password, :password_confirmation, :name_first, :name_last, :phone,:location, :admin, :userid, :archive, :form_id, :form_ids, :forms_user_id, :gender, :graduation_year, :student_leader
@@ -78,34 +79,25 @@ class User < ActiveRecord::Base
   def full_name
     return "#{self.name_first} #{self.name_last}"
   end
-  def build_hours
+  def build_hours(year)
     total = 0
-    self.timelogs.each do |log|
-      if log.timein > ApplicationHelper.getStartBuildDate
-        total = total + log.time_logged
-      end
+    self.timelogs.where("year_id = ? and timein >= ?",year.id, year.build_season_start).each do |log|
+      total = total + log.time_logged
     end
-    time = Time.at(total).utc
-    return "#{'%02d' % (time.hour + (time.day-1)*24)}:#{'%02d' % time.min}:#{'%02d' % time.sec}"
+    return total
   end
-  def total_hours
-    total = 0
-    self.timelogs.each do |log|
-      if log.timein>ApplicationHelper.getStartDate
-        total = total + log.time_logged
-      end
-    end
-    time = Time.at(total).utc
-    return "#{'%02d' % (time.hour + (time.day-1)*24)}:#{'%02d' % time.min}:#{'%02d' % time.sec}"
+  def build_hours_formatted(seconds)
+    return User.format_time(build_hours(seconds))
   end
-  def total_hours_number(year)
+  def total_hours(year)
     total = 0
-    self.timelogs.each do |log|
-      if log.timein>=year.year_start && log.timein < year.year_end
+    self.timelogs.where(:year_id => year.id).each do |log|
         total = total + log.time_logged
-      end
     end
     total
+  end
+  def total_hours_formatted(seconds)
+    return User.format_time(total_hours(seconds))
   end
   def has_hours(year)
     logs = self.timelogs.where("timein >= ? and timein < ?",year.year_start,year.year_end)
@@ -117,7 +109,10 @@ class User < ActiveRecord::Base
   def grouped_logs
     self.timelogs.order('timein asc').group_by{ |u| ApplicationHelper.toLocalTime(u.timein).beginning_of_week }
   end
-  
+  def self.format_time(total)
+    time = Time.at(total).utc
+    return "#{'%02d' % (time.hour + (time.day-1)*24)}:#{'%02d' % time.min}:#{'%02d' % time.sec}"
+  end
   def get_class
     if Year.current_year.nil?
       return "No year"

@@ -14,10 +14,7 @@
 			<th>Gender</th>
 			<th>Graduation Year</th>
 			<th>User ID Number</th>
-			<th>Total Hours in Build Season</th>
-			<th>Total Hours</th>
 			<th>Archived?</th>
-		    <th></th>
 		    <th></th>
 		    <th></th>
   		</tr>
@@ -35,8 +32,6 @@
 			<td><%= user.gender%></td>
 			<td><%= user.graduation_year%></td>
 			<td><%= user.userid %></td>
-			<td><%= user.build_hours %></td>
-			<td><%= user.total_hours %></td>
 			<td><%= user.archive %></td>
 			<td><%=link_to '', edit_user_path(user), :class=>"glyphicon glyphicon-pencil" %></td>
 		    <td><%= link_to '', user, :class=>"glyphicon glyphicon-trash", method: :delete, data: { confirm: "You sure? #{user.email}" } %></td>
