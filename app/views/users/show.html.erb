@@ -107,52 +107,47 @@
 	</div>
 	<br />
 	<br />
-	<%all_logs = @user.grouped_logs%>
 	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>Beginning of Week</th>
 				<th>Hours</th>
-				<th>Different Meetings</th>
-				<th>Meet Requirements?</th>
+				<th># Meetings</th>
+				<th>Required Hours</th>
+				<th>Met Requirements?</th>
 				<th>Exceptions <%if current_user.try(:admin)%><%=link_to fa_icon("plus"), new_hour_exception_path, :class=>"pull-right"%><%end%></th>
 			</tr>
 		</thead>
-		<%getWeeks.each do |day|%>	
+		<%getWeeks.each do |days|%>
 			<tr>
-				<th><%=day[0]%></th>
-				<%logs = all_logs.select {|k,v| k.strftime("%m/%d/%Y") == day[0]}%>
-				<%total = 0%>
-				<%logs.each do |day|%>
-					<%day[1].each do |log|%>
-						<%total = total+log.time_logged%>
-					<%end%>
-				<%end%>
-			    <%time = Time.at(total).utc%>
-			    <% totaltimeview = "#{'%02d' % (time.hour + (time.day-1)*24)}:#{'%02d' % time.min}:#{'%02d' % time.sec}"%>
+				<th><%=days[0]%></th>
+				<%date = days[1][0]%>
+			    <%time = @user.get_weeks_hours_in_time(date)%>
 				<%if current_user.try(:admin)%>
-					<td><%=totaltimeview%><%Time.at(total).utc.strftime("%H:%M:%S")%></td>
-					<%breakdown = logs.first[1].group_by{|a| a.timein.strftime("%m/%d/%Y")} rescue 0%>
-					<td><%=count = breakdown.count rescue 0%></td>
+					<td><%=User.format_time(time)%></td>
+					<td><%=count = @user.get_weeks_log_count(date)%></td>
 				<%end%>
 				<%#This part has to do with requirements. Change based on your requirements. Methods can be found in Application Helper%>
-				<%if isPreSeason day[1][0]%>
-					<%if !logs.first.nil? && meetingsPreSeason(count)%>
+				<%if isPreSeason date%>
+					<td></td>
+					<%if meetingsPreSeason(date)%>
 						<td class="success">True</td>
 					<%else%>
 						<td class="danger">False</td>
 					<%end%>
-				<%elsif isBuildSeason day[1][0]%>
-					<%if time.hour >= @user.required_hours && meetingsBuildSeason(count)%>
+				<%elsif isBuildSeason date%>
+					<td><%=@user.weekly_required_hours(date)%></td>
+					<%if @user.met_build_season_reqs(date)%>
 						<td class="success">True</td>
 					<%else%>
 						<td class="danger">False</td>
 					<%end%> 
 				<%else%>
 					<td></td>
+					<td></td>
 				<%end%>
 				<td>
-					<%exceptions =  @user.hour_exceptions.where("date_applicable >= ? and date_applicable <= ?", day[1][0], (day[1].last))%>
+					<%exceptions =  @user.hour_exceptions.where("date_applicable >= ? and date_applicable <= ?", date, (days[1].last))%>
 					<%if !exceptions.empty?%>
 						<%exceptions.order("date_applicable").each do |ex|%>
 							<%=link_to ex.reason, ex%><br />

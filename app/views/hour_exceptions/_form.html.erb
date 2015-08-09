@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :user %><br />
-     <%= collection_select(:hour_exception, :user_id, User.order("lower(name_first)"), :id, :full_name, :include_blank=> true, :class=>"input-small")  %>
+    <%= collection_select(:hour_exception, :user_id, User.order("lower(name_first)"), :id, :full_name, :include_blank=> true, :class=>"input-small")  %>
   </div>
   <div class="field">
     <%= f.hidden_field :submitter, :value=>current_user.email %>
