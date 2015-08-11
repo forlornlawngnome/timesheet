@@ -2,8 +2,8 @@ class TimelogsController < ApplicationController
   # GET /timelogs
   # GET /timelogs.json
   def index
-    @timelogs = Timelog.page(params[:page]).per(500)
-    
+    @search = Timelog.search(params[:q])
+    @timelogs = @search.result.page(params[:page]).per(100)
 
     respond_to do |format|
       format.html # index.html.erb

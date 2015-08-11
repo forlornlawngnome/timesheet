@@ -38,6 +38,7 @@ gem 'bootstrap3-datetimepicker-rails', '~> 3.1.1'
 
 
 gem 'kaminari'
+gem 'ransack' #filtering/pagination
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

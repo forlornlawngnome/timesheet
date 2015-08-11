@@ -1,13 +1,57 @@
+<div class="row">
+	<%= search_form_for @search, :class=>"form-horizontal" do |f| %>
+		<div class="form-inline">
+			<div class="form-group">
+			    <%= f.label :user_name_first_cont, "First Name contains", :class=>"col-sm-2 control-label" %>
+				<div class="col-sm-2">
+			   		<%= f.text_field :user_name_first_cont, :class=>"form-control" %>
+				</div>
+			</div>
+			<div class="form-group">
+			    <%= f.label :user_name_last_cont, "Last Name contains", :class=>"col-sm-2 control-label" %>
+				<div class="col-sm-2">
+			    	<%= f.text_field :user_name_last_cont, :class=>"form-control", :id=>"user_name_last" %>
+				</div>
+			</div>
+			<div class="form-group">
+		    	<%= f.label :year_id_eq, "Year", :class=>"col-sm-2 control-label" %>
+				<div class="col-sm-2">
+			    	<%= f.select :year_id_eq,  Year.order("year_start asc").collect{|c| [c.year_range, c.id]}, :include_blank=>true, :class=>"form-control", :id=>"year" %>
+				</div>
+		  	</div>
+		</div>
+		<br />
+		<br />
+		<br />
+		<div class="form-inline">
+		  	<div class="form-group">
+			    <%= f.label :timein_gteq, "Date between", :class=>"col-sm-2 control-label" %>
+				<div class="col-sm-2">
+			    	<%= f.text_field :timein_gteq %>
+				</div>
+			    <%= f.label :timein_lteq, "and", :class=>"col-sm-2 control-label" %>
+				<div class="col-sm-2">
+			    	<%= f.text_field :timein_lteq %> 
+				</div>   
+			</div>
+		</div>
+		<div class="col-sm-2">
+		</div>
+		<div class="form-group  col-sm-2">
+			<%= f.submit "Search", :class=>"btn btn-primary col-sm-12" %>
+		</div>
+	<% end %>
+</div>
 
-<h1>Listing timelogs</h1>
+<hr />
 <%if current_user.try(:admin)%>
 	<%= paginate @timelogs %>
 	<table class="table table-hover">
 	  <tr>
-	    <th>User</th>
-	    <th>Timein</th>
-	    <th>Timeout timestamp</th>
-		<th>Year</th>
+		<th><%= sort_link(@search, :user_name_first, "User") %></th>
+		<th><%= sort_link(@search, :timein, "Time in") %></th>
+		<th><%= sort_link(@search, :timeout, "Time out") %></th>
+		<th><%= sort_link(@search, :year_year_start, "Year") %></th>
 	    <th></th>
 	    <th></th>
 	    <th></th>
