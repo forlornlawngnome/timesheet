@@ -14,3 +14,7 @@
  *= require bootstrap-datetimepicker
  *= require font-awesome
  */
+ table {
+     table-layout: fixed;
+     word-wrap: break-word;
+ }

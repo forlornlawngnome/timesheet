@@ -4,7 +4,7 @@
 			<h2><%=@user.full_name%></h2>
 		</div>
 		<div class="col-lg-1 col-md-1 pull-right">
-			<%= link_to fa_icon("pencil"), edit_user_path(@user) %>
+			<%= link_to fa_icon("pencil"), edit_user_path(@user) %> <%= link_to '', @user, :class=>"glyphicon glyphicon-trash", method: :delete, data: { confirm: "You sure? #{@user.email}" } %>
 		</div>
 	</div>
 	<hr />
