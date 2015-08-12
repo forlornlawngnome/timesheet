@@ -27,7 +27,7 @@
 	
 			<p>
 				<b><%=Constants::SCHOOL_NAME_REPLACEMENT%>:</b>
-				<%= @user.school.name %>
+				<%= @user.school.name rescue ""%>
 			</p>
 	
 			<p>
