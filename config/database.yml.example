@@ -19,7 +19,11 @@ test:
   timeout: 5000
 
 production:
-  adapter: postgres
-  database: timehseet
-  pool: 5
-  timeout: 5000
+  adapter: postgresql
+  encoding: unicode
+  database: timesheet
+  host: localhost
+  pool: 10
+  timeout: 10000
+  username: user
+  password: password
