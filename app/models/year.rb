@@ -14,7 +14,10 @@ class Year < ActiveRecord::Base
     return false
   end
   def self.current_year
-    Year.where("year_start <= ? and year_end >= ?",Date.today,Date.today).first
+    year = Year.where("year_start <= ? and year_end >= ?",Date.today,Date.today).first
+    if year.nil?
+      return Year.new
+    end
   end
   def self.find_year(date)
     year = Year.where("year_start <= ? and year_end >= ?",date,date).first
