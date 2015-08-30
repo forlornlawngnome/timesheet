@@ -3,7 +3,9 @@
 <p>Sign in your own account to update your account info</p>
 
 <hr />
-
+<%if Year.current_year.id.nil?%>
+	There isn't a year for today's date. Please create a year immediately. 
+<%end%>
 <%if !current_user.nil? && current_user.try(:admin)%>
 	<h2>Important Links</h2>
 	<%if current_user.email == "signup@team900.org"%>
