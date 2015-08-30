@@ -18,6 +18,7 @@ class Year < ActiveRecord::Base
     if year.nil?
       return Year.new
     end
+    return year
   end
   def self.find_year(date)
     year = Year.where("year_start <= ? and year_end >= ?",date,date).first
