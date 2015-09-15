@@ -5,12 +5,13 @@ gem 'rails'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-group :development do
-	gem 'sqlite3'
-end
-group :production do
-	gem 'pg'
-end
+#group :development do
+#	gem 'sqlite3'
+#end
+#group :production do
+#	gem 'pg'
+#end
+gem 'pg'
 
 gem 'rails_12factor'
 gem "bcrypt-ruby", :require => "bcrypt"

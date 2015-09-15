@@ -120,6 +120,9 @@ class TimelogsController < ApplicationController
   def student
     @timelog = Timelog.new
     @logs = Timelog.today.all
+    puts "Date/time"
+    puts ApplicationHelper.today.utc.inspect
+    puts ApplicationHelper.today.end_of_day.utc.inspect
     
     respond_to do |format|
       format.html # new.html.erb

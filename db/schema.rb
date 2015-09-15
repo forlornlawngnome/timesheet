@@ -90,8 +90,6 @@ ActiveRecord::Schema.define(:version => 20150809183511) do
     t.string   "name_last"
     t.string   "userid"
     t.integer  "school_id"
-    t.boolean  "tools"
-    t.boolean  "conduct"
     t.boolean  "basicSafety"
     t.string   "password_salt"
     t.string   "password_hash"
