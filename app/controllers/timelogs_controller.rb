@@ -121,6 +121,7 @@ class TimelogsController < ApplicationController
     @timelog = Timelog.new
     @logs = Timelog.today.all
     puts "Date/time"
+    puts Timelog.today.to_sql
     puts ApplicationHelper.today.utc.inspect
     puts ApplicationHelper.today.end_of_day.utc.inspect
     
