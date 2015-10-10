@@ -1,6 +1,14 @@
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<<script type="text/javascript"
+          src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+          }">
+</script>
+		  
 <script type="text/javascript">
-google.load("visualization", "1", {packages:["bar"]});
      google.setOnLoadCallback(drawChart);
      function drawChart() {
        var data = google.visualization.arrayToDataTable([
@@ -18,7 +26,7 @@ google.load("visualization", "1", {packages:["bar"]});
          height: 500
        };
 
-       var chart = new google.charts.Bar(document.getElementById('hours_per_school_div'));
+       var chart = new google.visualization.BarChart(document.getElementById('hours_per_school_div'));
 
        chart.draw(data, options);
      }
@@ -41,7 +49,7 @@ google.load("visualization", "1", {packages:["bar"]});
          height: 500
        };
 
-       var chart = new google.charts.Bar(document.getElementById('hours_per_student_per_school_div'));
+       var chart = new google.visualization.BarChart(document.getElementById('hours_per_student_per_school_div'));
 
        chart.draw(data, options);
      }
@@ -64,7 +72,7 @@ google.load("visualization", "1", {packages:["bar"]});
          height: 500
        };
 
-       var chart = new google.charts.Bar(document.getElementById('students_per_school_div'));
+       var chart = new google.visualization.BarChart(document.getElementById('students_per_school_div'));
 
        chart.draw(data, options);
      }

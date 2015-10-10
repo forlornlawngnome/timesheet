@@ -1,11 +1,21 @@
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript"
+          src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+          }">
+</script>
+		  
 <script type="text/javascript">
-google.load("visualization", "1", {packages:["line"]});
-     google.setOnLoadCallback(drawChart);
-     function drawChart() {
-       var data = google.visualization.arrayToDataTable([
-		 <%=@chartString%>
-		 <%@allHoursSchools.each do |week|%>
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+		
+		//Draw the chart which represents how many hours per week per school
+       	var PerWeekPerSchoolData = google.visualization.arrayToDataTable([
+		<%=@chartString%>
+		<%@allHoursSchools.each do |week|%>
          	['<%=week[0]%>',  
 			<%@schoolArray.each do |school|%>
 				<%if week[1]['students'][school][0].nil?%>
@@ -17,24 +27,18 @@ google.load("visualization", "1", {packages:["line"]});
 			],
 		 <%end%>
        ]);
-
-       var options = {
+       var PerWeekPerSchooloptions = {
 		 chart:{
        	  	title: '<%=@selected_year.year_range%>: Total Hours Per <%=Constants::SCHOOL_NAME_REPLACEMENT%> Per Week'
 		 },
          width: 900,
          height: 500
        };
-
-       var chart = new google.charts.Line(document.getElementById('per_week_per_school_div'));
-
-       chart.draw(data, options);
-     }
-</script>
-	 <script type="text/javascript">
-     google.setOnLoadCallback(drawChart);
-     function drawChart() {
-       var data = google.visualization.arrayToDataTable([
+       var PerWeekPerSchoolchart = new google.visualization.LineChart(document.getElementById('per_week_per_school_div'));
+       PerWeekPerSchoolchart.draw(PerWeekPerSchoolData, PerWeekPerSchooloptions);
+	   
+	   //Draw the chart which represents the number of hours per week per student per school
+       var PerWeekPerStudentdata = google.visualization.arrayToDataTable([
 		 <%=@chartString%>
 		 <%@allHoursSchools.each do |week|%>
          	['<%=week[0]%>',  
@@ -48,78 +52,67 @@ google.load("visualization", "1", {packages:["line"]});
 			],
 		 <%end%>
        ]);
-
-       var options = {
+       var PerWeekPerStudentoptions = {
 		   chart:{
         	   title: '<%=@selected_year.year_range%>: Average Hours Per Student Per <%=Constants::SCHOOL_NAME_REPLACEMENT%> Per Week'
 		   },
          width: 900,
          height: 500
        };
-
-       var chart = new google.charts.Line(document.getElementById('per_week_per_student_per_school_div'));
-
-       chart.draw(data, options);
-     }
-</script>
-<script type="text/javascript">
-     google.setOnLoadCallback(drawChart);
-     function drawChart() {
-       var data = google.visualization.arrayToDataTable([
+       var PerWeekPerStudentchart = new google.visualization.LineChart(document.getElementById('per_week_per_student_per_school_div'));
+       PerWeekPerStudentchart.draw(PerWeekPerStudentdata, PerWeekPerStudentoptions);
+	   
+	   //Draw the chart which represents the total number of hours per week
+       var PerWeekdata = google.visualization.arrayToDataTable([
          ['Date', 'Students', 'Mentors', 'All'],
 		 <%@allHours.each do |week|%>
          	['<%=week[0]%>',  <%=week[1][0]%>, <%=week[1][1]%>, <%=week[1][2]%>],
 		 <%end%>
        ]);
-
-       var options = {
+       var PerWeekoptions = {
 		   chart:{
         	   title: '<%=@selected_year.year_range%>: Total Hours Per Week'
 		   },
          width: 900,
          height: 500
        };
-
-       var chart = new google.charts.Line(document.getElementById('per_week_div'));
-
-       chart.draw(data, options);
-     }
-</script>
-<script type="text/javascript">
-     google.setOnLoadCallback(drawChart);
-     function drawChart() {
-       var data = google.visualization.arrayToDataTable([
+       var PerWeekchart = new google.visualization.LineChart(document.getElementById('per_week_div'));
+       PerWeekchart.draw(PerWeekdata, PerWeekoptions);
+	   
+	   //Draw the chart which represents the cumulative hours per week
+       var Cumulativedata = google.visualization.arrayToDataTable([
          ['Date', 'Students', 'Mentors', 'All'],
 		 <%@allHours.each do |week|%>
          	['<%=week[0]%>',  <%=week[1][3]%>, <%=week[1][4]%>, <%=week[1][5]%>],
 		 <%end%>
        ]);
-
-       var options = {
+       var Cumulativeoptions = {
 		   chart:{
         	   title: '<%=@selected_year.year_range%>: Total Cumulative Hours'
 		   },
          width: 900,
          height: 500
        };
-
-       var chart = new google.charts.Line(document.getElementById('cumulative_div'));
-
-       chart.draw(data, options);
+       var Cumulativechart = new google.visualization.LineChart(document.getElementById('cumulative_div'));
+       Cumulativechart.draw(Cumulativedata, Cumulativeoptions);
      }
+	 
+	 //Draw chart for number of hours per da of the week
+</script>
+
 </script>
  <script type="text/javascript">
      google.setOnLoadCallback(drawChart);
 
      function drawChart() {
 
-       var data = new google.visualization.DataTable();
-       data.addColumn('string', 'Day of the Week');
+       var ByDaydata = new google.visualization.DataTable();
+       ByDaydata.addColumn('string', 'Day of the Week');
 	   <%for i in 1..@monday.size%>
-       		data.addColumn('number', '<%="Week #{i}"%>');
+       		ByDaydata.addColumn('number', '<%="Week #{i}"%>');
        <%end%>
 
-       data.addRows([
+       ByDaydata.addRows([
          ['Monday',  
 		   <%@monday.each do |value|%>
 		   		<%=value%>,
@@ -158,7 +151,7 @@ google.load("visualization", "1", {packages:["line"]});
      
        ]);
 
-       var options = {
+       var ByDayoptions = {
          chart: {
            title: 'Number of Hours Per Day of the Week',
 			 
@@ -167,9 +160,9 @@ google.load("visualization", "1", {packages:["line"]});
          height: 500,
        };
 
-       var chart = new google.charts.Line(document.getElementById('hours_by_day_of_week'));
+       var ByDaychart = new google.visualization.LineChart(document.getElementById('hours_by_day_of_week'));
 
-       chart.draw(data, options);
+       ByDaychart.draw(ByDaydata, ByDayoptions);
      }
 </script>
 

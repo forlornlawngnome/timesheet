@@ -131,7 +131,7 @@ class StatsController < ApplicationController
     end
     
     ##Calculate the sum of hours per day of the week
-    build_logs = Timelog.where("timein >= ? and timein < ?", year.build_season_start, year.year_end).order("timein ASC")
+    build_logs = Timelog.where("timein >= ? and timein < ?", year.year_start, year.year_end).order("timein ASC")
     hoursbyweek = build_logs.group_by{|a| a.timein.at_beginning_of_week}
     @monday = Array.new
     @tuesday = Array.new
@@ -152,6 +152,7 @@ class StatsController < ApplicationController
       @saturday.push(by_week['Saturday'].nil? ? 0 : by_week['Saturday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
       @sunday.push(by_week['Sunday'].nil? ? 0 : by_week['Sunday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
     end
+    
   end
   def calcNumber(year, sum)
     count = 0
