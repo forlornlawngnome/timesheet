@@ -1,0 +1,109 @@
+<script type="text/javascript"
+          src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1.1',
+              'packages':['bar']
+            }]
+          }">
+</script>	  
+<script type="text/javascript">
+  	google.setOnLoadCallback(drawChart);
+    function drawChart() {
+  		chart1(function(){
+			chart2(function(){
+				chart3();
+			});
+		});
+    }
+    function chart1(chartReady) {
+		//Draw the chart which represents how many hours per week per gender
+       	var data = google.visualization.arrayToDataTable([
+		['Gender', 'Count'],
+		<%@genderNumbers.each do |gender|%>
+			<%users = gender[1].group_by{|a| a.id}%>
+         	['<%=gender[0]%>',<%=users.count%>],
+		<%end%>
+		]);
+       var options = {
+		 chart:{
+       	  	title: '<%=@selected_year.year_range%>: Gender Diversity'
+		 },
+         //width: 900,
+         height: 500,
+		 bars: 'horizontal'
+       };
+       var chart = new google.charts.Bar(document.getElementById('by_gender'));
+	   if (typeof chartReady !== 'undefined') google.visualization.events.addOneTimeListener(chart, 'ready', chartReady);
+       chart.draw(data, options);
+   	}
+    function chart2(chartReady) {
+		//Draw the chart which represents how many hours per week per gender
+       	var data = google.visualization.arrayToDataTable([
+		['Gender', 'Hours'],
+		<%@genderNumbers.each do |gender|%>
+			<%users = gender[1].group_by{|a| a.id}%>
+			<%sum = 0%>
+			<%users.each do |user|%>
+				<%sum = sum + User.find_by_id(user[0]).years_total_hours(@selected_year)%>
+			<%end%>
+			<%sum=sum/(60*60)%>
+         	['<%=gender[0]%>',<%=sum%>],
+		<%end%>
+		]);
+       var options = {
+		 chart:{
+       	  	title: '<%=@selected_year.year_range%>: Hours Per Gender'
+		 },
+         //width: 900,
+         height: 500,
+		 bars: 'horizontal'
+       };
+       var chart = new google.charts.Bar(document.getElementById('total_hours_by_gender'));
+	   if (typeof chartReady !== 'undefined') google.visualization.events.addOneTimeListener(chart, 'ready', chartReady);
+       chart.draw(data, options);
+   	}
+    function chart3(chartReady) {
+		//Draw the chart which represents how many hours per week per gender
+       	var data = google.visualization.arrayToDataTable([
+		['Gender', 'Average Hours'],
+		<%@genderNumbers.each do |gender|%>
+			<%users = gender[1].group_by{|a| a.id}%>
+			<%sum = 0%>
+			<%users.each do |user|%>
+				<%sum = sum + User.find_by_id(user[0]).years_total_hours(@selected_year)%>
+			<%end%>
+			<%sum=sum/(60*60)%>
+			<%average = sum/users.count%>
+         	['<%=gender[0]%>',<%=average%>],
+		<%end%>
+		]);
+       var options = {
+		 chart:{
+       	  	title: '<%=@selected_year.year_range%>: Average Hours Per Person Per Gender'
+		 },
+         //width: 900,
+         height: 500,
+		 bars: 'horizontal'
+       };
+       var chart = new google.charts.Bar(document.getElementById('avg_hours_by_gender'));
+	   if (typeof chartReady !== 'undefined') google.visualization.events.addOneTimeListener(chart, 'ready', chartReady);
+       chart.draw(data, options);
+   	}
+</script>
+
+
+<%=form_tag do%>
+	<div class="form-group">
+		<div class="col-lg-4 col-md-4">
+			<%= select_tag("year", options_for_select(yearDropdown, @selected_year.id),{:class=>"form-control"})%>
+	  	</div>
+		<%= submit_tag("Filter", :class=>"btn btn-primary") %>
+	</div>
+<%end%>
+
+<br />
+
+<div id="by_gender" class="text-center" width="100%"></div> <br /><br />
+<div id="total_hours_by_gender" class="text-center" width="100%"></div> <br /><br />
+<div id="avg_hours_by_gender" class="text-center" width="100%"></div> <br /><br />

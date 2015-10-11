@@ -52,6 +52,19 @@ class StatsController < ApplicationController
       @allSchools[school.name][2] = perStudentHours
     end
   end
+  def gender
+    if (!params[:year].nil? && ! params[:year].empty?)
+      @selected_year = Year.find_by_id(params[:year])
+    else
+      @selected_year = Year.current_year
+    end
+    
+    users = User.allStudentsForYear(@selected_year)
+    @genderNumbers = users.group_by{|a| a.gender}
+
+    
+    #calculateHoursGender(@selected_year)
+  end
   def schoolArray
     @schoolArray = []
     School.order(:name).each do |school|
@@ -128,6 +141,81 @@ class StatsController < ApplicationController
       @allHoursSchools[log[0].strftime("%m/%d/%Y")]["students"] = schoolHours
       @allHoursSchools[log[0].strftime("%m/%d/%Y")]["all"] = totalsumper
       
+    end
+    
+    ##Calculate the sum of hours per day of the week
+    build_logs = Timelog.where("timein >= ? and timein < ?", year.year_start, year.year_end).order("timein ASC")
+    hoursbyweek = build_logs.group_by{|a| a.timein.at_beginning_of_week}
+    @monday = Array.new
+    @tuesday = Array.new
+    @wednesday = Array.new
+    @thursday = Array.new
+    @friday = Array.new
+    @saturday = Array.new
+    @sunday = Array.new
+    
+    hoursbyweek.each do |week|
+      weeks_data = week[1]
+      by_week = weeks_data.group_by{|a| a.timein.strftime("%A")}
+      @monday.push(by_week['Monday'].nil? ? 0 : by_week['Monday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
+      @tuesday.push(by_week['Tuesday'].nil? ? 0 : by_week['Tuesday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
+      @wednesday.push(by_week['Wednesday'].nil? ? 0 : by_week['Wednesday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
+      @thursday.push(by_week['Thursday'].nil? ? 0 : by_week['Thursday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
+      @friday.push(by_week['Friday'].nil? ? 0 : by_week['Friday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
+      @saturday.push(by_week['Saturday'].nil? ? 0 : by_week['Saturday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
+      @sunday.push(by_week['Sunday'].nil? ? 0 : by_week['Sunday'].map {|s| s['time_logged']}.reduce(0, :+)/(60*60))
+    end
+    
+  end
+  def calculateHoursGender(year)
+    ismentor = School.where("lower(name) = ?","mentor").first
+    @allHours = Hash.new{|h,k| h[k] = []}
+    
+    overallHours = 0
+    maleHours = 0
+    femaleHours = 0
+    otherHours = 0
+    
+    studentlogs = Timelog.where("timein >= ? and timein < ?", year.year_start, year.year_end).order("timein ASC")
+    studentlogs = studentlogs.group_by{|a| a.timein.at_beginning_of_week}
+    studentlogs.each do |log|
+      malesum=0
+      femalesum=0
+      othersum=0
+      totalsum=0
+
+      log[1].each do |timelog|
+        totalsum = totalsum+timelog.time_logged
+        
+        if !timelog.user.nil? && timelog.user.gender.downcase == "male"
+          malesum = malesum + timelog.time_logged
+        elsif !timelog.user.nil? && timelog.user.gender.downcase == "female"
+          femalesum = femalesum + timelog.time_logged
+        else
+          othersum = othersum + timelog.time_logged
+        end
+      end
+      
+      
+      malesum=malesum/(60*60) #Convert from seconds to hours for the graph
+      femalesum=femalesum/(60*60) #Convert from seconds to hours for the graph
+      othersum=othersum/(60*60) #Convert from seconds to hours for the graph
+      totalsum=totalsum/(60*60) #Convert from seconds to hours for the graph
+      
+      maleHours = maleHours + malesum
+      femaleHours = femaleHours + femalesum
+      otherHours = otherHours + othersum
+      overallHours = overallHours + totalsum
+    
+      @allHours[log[0].strftime("%m/%d/%Y")][0] = malesum
+      @allHours[log[0].strftime("%m/%d/%Y")][1] = femalesum
+      @allHours[log[0].strftime("%m/%d/%Y")][1] = othersum
+      @allHours[log[0].strftime("%m/%d/%Y")][2] = totalsum
+      
+      @allHours[log[0].strftime("%m/%d/%Y")][3] = maleHours
+      @allHours[log[0].strftime("%m/%d/%Y")][4] = femaleHours
+      @allHours[log[0].strftime("%m/%d/%Y")][4] = otherHours
+      @allHours[log[0].strftime("%m/%d/%Y")][5] = overallHours      
     end
     
     ##Calculate the sum of hours per day of the week

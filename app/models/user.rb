@@ -18,6 +18,9 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
   validates_presence_of :email
+  validates_presence_of :userid
+  validates_presence_of :gender
+  validates_presence_of :location
   validates_uniqueness_of :email
   
   scope :archived, :conditions => {:archive => true}
@@ -103,6 +106,10 @@ class User < ActiveRecord::Base
   end
   def total_hours_formatted(seconds)
     return User.format_time(years_total_hours(seconds))
+  end
+  def self.allStudentsForYear(year)
+    users = User.joins(:timelogs).where("timein >= ? and timein < ?",year.year_start,year.year_end)
+    return users
   end
   def has_hours(year)
     logs = self.timelogs.where("timein >= ? and timein < ?",year.year_start,year.year_end)
