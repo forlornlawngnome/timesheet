@@ -53,7 +53,7 @@
 		]);
        var options = {
 		 chart:{
-       	  	title: '<%=@selected_year.year_range%>: Hours Per Gender'
+       	  	title: '<%=@selected_year.year_range%>: Total Hours Per Gender'
 		 },
          //width: 900,
          height: 500,
@@ -93,17 +93,52 @@
 </script>
 
 
-<%=form_tag do%>
-	<div class="form-group">
-		<div class="col-lg-4 col-md-4">
-			<%= select_tag("year", options_for_select(yearDropdown, @selected_year.id),{:class=>"form-control"})%>
-	  	</div>
-		<%= submit_tag("Filter", :class=>"btn btn-primary") %>
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="nav nav-pills sidebar-nav nav-stacked" role="tablist">
+			<li role="presentation"><a href="#">Top</a></li>
+			<li role="presentation"><a href="#Graph1"># Students Per Gender</a></li>
+		    <li role="presentation"><a href="#Graph2">Total Hours Per Gender</a></li>
+		    <li role="presentation"><a href="#Graph3">Average Hours Per Gender</a></li>
+        </ul>
+    </div>
+    <div id="page-content-wrapper">
+        <div class="row col-md-12">
+			<div>
+				<%=form_tag do%>
+					<div class="form-group">
+						<div class="col-lg-4 col-md-4">
+							<%= select_tag("year", options_for_select(yearDropdown, @selected_year.id),{:class=>"form-control"})%>
+					  	</div>
+						<%= submit_tag("Filter", :class=>"btn btn-primary") %>
+					</div>
+				<%end%>
+				<br />
+			</div>
+			<div>
+				<div style="position:relative;">
+					<a name="Graph1" style="position:absolute; top:-70px;"></a>
+				</div>
+				<div id="by_gender" class="text-center" width="100%"></div>
+				<br />
+				<br />
+			</div>
+			<div>
+				<div style="position:relative;">
+					<a name="Graph2" style="position:absolute; top:-70px;"></a>
+				</div>
+				<div id="total_hours_by_gender" class="text-center" width="100%"></div>
+				<br />
+				<br />
+			</div>
+			<div>
+				<div style="position:relative;">
+					<a name="Graph3" style="position:absolute; top:-70px;"></a>
+				</div>
+				<div id="avg_hours_by_gender" class="text-center" width="100%"></div>
+				<br />
+				<br />
+			</div>
+		</div>
 	</div>
-<%end%>
-
-<br />
-
-<div id="by_gender" class="text-center" width="100%"></div> <br /><br />
-<div id="total_hours_by_gender" class="text-center" width="100%"></div> <br /><br />
-<div id="avg_hours_by_gender" class="text-center" width="100%"></div> <br /><br />
+</div>

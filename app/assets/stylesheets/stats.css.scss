@@ -1,3 +1,55 @@
 // Place all the styles related to the stats controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#wrapper {
+  padding-left: 150px;
+  transition: all 0.4s ease 0s;
+}
+
+#sidebar-wrapper {
+  margin-left: -150px;
+  left: 150px;
+  width: 150px;
+  //background: #000;
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: all 0.4s ease 0s;
+}
+
+#page-content-wrapper {
+  width: 100%;
+}
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 150px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width:767px) {
+
+    #wrapper {
+      padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+      left: 0;
+    }
+
+    #wrapper.active {
+      position: relative;
+      left: 150px;
+    }
+
+    #wrapper.active #sidebar-wrapper {
+      left: 150px;
+      width: 150px;
+      transition: all 0.4s ease 0s;
+    }
+
+}

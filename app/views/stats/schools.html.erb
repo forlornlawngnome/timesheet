@@ -81,30 +81,55 @@
        chart.draw(data, options);
      }
 </script>
-
-
-
-<%=form_tag do%>
-	<div class="form-group">
-		<div class="col-lg-4 col-md-4">
-			<%= select_tag("year", options_for_select(yearDropdown, @selected_year.id),{:class=>"form-control"})%>
-	  	</div>
-		<%= submit_tag("Filter", :class=>"btn btn-primary") %>
-	</div>
-<%end%>
-<br />
-<p>
-	Total Number of Students/Mentors: <%=@totalStudents%>
-</p>
-<br />
-<div class="row">
-	<div id="hours_per_school_div" class="text-center" width="100%"></div>
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <ul class="nav nav-pills sidebar-nav nav-stacked" role="tablist">
+			<li role="presentation"><a href="#">Top</a></li>
+			<li role="presentation"><a href="#Graph1">Students Per School</a></li>
+		    <li role="presentation"><a href="#Graph2">Hours Per School</a></li>
+		    <li role="presentation"><a href="#Graph3">Hours Per Student Per School</a></li>
+        </ul>
+    </div>
+    <div id="page-content-wrapper">
+        <div class="row col-md-12">
+			<div>
+				<%=form_tag do%>
+					<div class="form-group">
+						<div class="col-lg-4 col-md-4">
+							<%= select_tag("year", options_for_select(yearDropdown, @selected_year.id),{:class=>"form-control"})%>
+					  	</div>
+						<%= submit_tag("Filter", :class=>"btn btn-primary") %>
+					</div>
+				<%end%>
+				<br />
+				<p>
+					Total Number of Students/Mentors: <%=@totalStudents%>
+				</p>
+				<br />
+			</div>
+		
+			<div>
+				<div style="position:relative;">
+					<a name="Graph1" style="position:absolute; top:-70px;"></a>
+				</div>
+				<div id="students_per_school_div" class="text-center" width="100%"></div>
+				<br />
+				<br />
+			</div>
+			<div>
+				<div style="position:relative;">
+					<a name="Graph2" style="position:absolute; top:-70px;"></a>
+				</div>
+				<div id="hours_per_school_div" class="text-center" width="100%"></div>
+			<br />
+			<br />
+			</div>
+			<div>
+				<div style="position:relative;">
+					<a name="Graph3" style="position:absolute; top:-70px;"></a>
+				</div>
+				<div id="hours_per_student_per_school_div" class="text-center" width="100%"></div>
+			</div>
+		</div>
+    </div>
 </div>
-<br />
-<br />
-<div class="row">
-	<div id="hours_per_student_per_school_div" class="text-center" width="100%"></div>
-</div>
-<br />
-<br />
-<div id="students_per_school_div" class="text-center" width="100%"></div>
