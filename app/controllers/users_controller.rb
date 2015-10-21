@@ -10,11 +10,9 @@ class UsersController < ApplicationController
   end
   
   def current
-    if Rails.env.development? 
-      @users = User.where("archive is not ?",true).order("name_first")
-    else
-      @users = User.active.order("name_first")
-    end
+    
+    @users = User.active.order("name_first")
+    
 
     @numMentors = 0
     @numStudents = 0

@@ -29,11 +29,7 @@ class User < ActiveRecord::Base
   
   ###################### General Info ##########################
   def self.active
-    if Rails.env.production?
-      where("users.archive IS NOT true")
-    else
-      where("users.archive IS NOT ?","t")
-    end
+    where("users.archive IS NOT true")
   end
   def is_mentor
     if !self.school.nil? && self.school.name=="Mentor"
