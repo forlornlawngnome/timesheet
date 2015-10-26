@@ -1,5 +1,5 @@
 class Year < ActiveRecord::Base
-  attr_accessible :build_season_start, :year_end, :year_start
+  #attr_accessible :build_season_start, :year_end, :year_start
   
   has_many :timelogs
   has_many :users, :through => :timelogs

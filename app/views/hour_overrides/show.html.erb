@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>User:</b>
   <%= @hour_override.user.full_name %>
@@ -20,6 +18,9 @@
   <%= @hour_override.reason %>
 </p>
 
-
-<%= link_to 'Edit', edit_hour_override_path(@hour_override) %> |
-<%= link_to 'Back', hour_overrides_path %>
+<div class="row">
+	<%if current_user.try(:admin)%>
+		<%=link_to fa_icon("pencil"), edit_hour_override_path(@hour_override), :class=>"btn btn-primary"%>
+	<%end%>
+	<%= link_to 'Back', hour_overrides_path, :class=>"btn btn-danger pull-right" %>
+</div>

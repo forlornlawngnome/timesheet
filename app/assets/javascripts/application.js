@@ -16,5 +16,8 @@
 //= require_tree .
 //= require local_time
 //= require moment
-//= require bootstrap-datetimepicker
-
+//= require turbolinks
+//= require jquery.ui.datepicker
+//= require jquery-ui-timepicker-addon
+//= require jquery.ui.slider
+//= require cocoon

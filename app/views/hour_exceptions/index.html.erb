@@ -1,4 +1,11 @@
-<h1>Listing hour_exceptions</h1>
+<div class="row">
+	<div class="col-md-9">
+		<h1>Listing Hour Exceptions</h1>
+	</div>
+	<div class="col-md-3 pull-right">
+		<%= link_to "#{fa_icon("plus")} New Hour Exception".html_safe, new_hour_exception_path, :class=>"btn btn-primary" %>
+	</div>
+</div>
 
 <table class="table table-hover">
   <tr>
@@ -22,12 +29,8 @@
     <td><%= hour_exception.reason %></td>
     <td><%= hour_exception.year.year_range %></td>
     <td><%= link_to 'Show', hour_exception %></td>
-    <td><%= link_to 'Edit', edit_hour_exception_path(hour_exception) %></td>
-    <td><%= link_to 'Destroy', hour_exception, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to '', edit_hour_exception_path(hour_exception) , :class=>"glyphicon glyphicon-pencil" %></td>
+    <td><%= link_to '', hour_exception, :class=>"glyphicon glyphicon-trash", method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Hour exception', new_hour_exception_path %>

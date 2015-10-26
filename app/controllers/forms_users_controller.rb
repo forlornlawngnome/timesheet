@@ -80,4 +80,7 @@ class FormsUsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def forms_user_params
+    params.requires(:forms_user).permit(:user_id, :user, :form_id, :form)
+  end
 end

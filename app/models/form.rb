@@ -1,5 +1,5 @@
 class Form < ActiveRecord::Base
-  attr_accessible :name, :archive
+  #attr_accessible :name, :archive
   has_and_belongs_to_many :users
   has_many :forms_users, :dependent => :destroy
   

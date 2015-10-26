@@ -55,29 +55,14 @@ class UsersController < ApplicationController
     session[:return_to] ||= request.referer
   end
   def update
-     params[:user][:form_ids] ||= []
-     
     @user = User.find(params[:id])
-    if(!params[:user][:password].nil? && !params[:user][:password_confirmation].nil?)
-      if(params[:user][:password] == params[:user][:password_confirmation])
-        if @user.update_attributes(params[:user])
-          redirect_to session.delete(:return_to), notice: 'User was successfully updated.' rescue redirect_to users_path, notice: 'User was successfully updated.'
-        else
-          format.html { render action: "edit" }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
-        end
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to @user, notice: 'Person was successfully updated.' }
+        format.json { render :show, status: :ok, location: @user }
       else
-        format.html { render action: "edit" }
+        format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    else
-      respond_to do |format|
-        if @user.update_attributes(params[:user])
-          redirect_to  session.delete(:return_to), notice: 'User was successfully updated.' rescue redirect_to users_path, notice: 'User was successfully updated.'
-        else
-          format.html { render action: "edit" }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
-        end
       end
     end
   end
@@ -90,7 +75,7 @@ class UsersController < ApplicationController
     end
   end
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
     
     if(User.all.count<1)
       @user.admin = true
@@ -118,5 +103,12 @@ class UsersController < ApplicationController
   def forms
     @forms = Form.active.order("name")
     @users = User.active.order("name_first")
+  end
+  def user_params
+    params.require(:user).permit(:school, :school_id, :email, :password, :password_confirmation, 
+    :name_first, :name_last, :phone,:location, :admin, :userid, 
+    :archive, :gender, :graduation_year, :student_leader, 
+    :form_id, :forms_user_id, :form_ids=>[])
+    
   end
 end

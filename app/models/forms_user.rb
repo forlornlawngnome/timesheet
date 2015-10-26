@@ -1,7 +1,7 @@
 class FormsUser < ActiveRecord::Base
   belongs_to :user
   belongs_to :form
-  attr_accessible :user_id, :user, :form_id, :form
+  #attr_accessible :user_id, :user, :form_id, :form
   
   validates_presence_of :user
   validates_presence_of :form

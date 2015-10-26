@@ -40,7 +40,7 @@ class HourOverridesController < ApplicationController
   # POST /hour_overrides
   # POST /hour_overrides.json
   def create
-    @hour_override = HourOverride.new(params[:hour_override])
+    @hour_override = HourOverride.new(hour_override_params)
 
     respond_to do |format|
       if @hour_override.save
@@ -59,7 +59,7 @@ class HourOverridesController < ApplicationController
     @hour_override = HourOverride.find(params[:id])
 
     respond_to do |format|
-      if @hour_override.update_attributes(params[:hour_override])
+      if @hour_override.update_attributes(hour_override_params)
         format.html { redirect_to @hour_override, notice: 'Hour override was successfully updated.' }
         format.json { head :no_content }
       else
@@ -79,5 +79,8 @@ class HourOverridesController < ApplicationController
       format.html { redirect_to hour_overrides_url }
       format.json { head :no_content }
     end
+  end
+  def hour_override_params
+    params.require(:hour_override).permit(:hours_required, :reason, :user, :user_id, :year, :year_id)
   end
 end

@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>User:</b>
   <%= @forms_user.user.full_name %>
@@ -10,6 +8,9 @@
   <%= @forms_user.form.name %>
 </p>
 
-
-<%= link_to 'Edit', edit_forms_user_path(@forms_user) %> |
-<%= link_to 'Back', forms_users_path %>
+<div class="row">
+	<%if current_user.try(:admin)%>
+		<%=link_to fa_icon("pencil"), edit_forms_user_path(@forms_user), :class=>"btn btn-primary"%>
+	<%end%>
+	<%= link_to 'Back', forms_users_path, :class=>"btn btn-danger pull-right" %>
+</div>

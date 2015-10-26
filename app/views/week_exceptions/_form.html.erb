@@ -1,38 +1,33 @@
-<%= form_for(@week_exception) do |f| %>
-  <% if @week_exception.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@week_exception.errors.count, "error") %> prohibited this week_exception from being saved:</h2>
-
-      <ul>
-      <% @week_exception.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :date %><br />
-	<%= f.text_field :date, :'data-date-format'=>"YYYY-MM-DD"  rescue  f.text_field :date,  :'data-date-format'=>"YYYY-MM-DD" %>
-  </div>
-  <div class="field">
-    <%= f.label :weight %><br />
-    <%= f.text_field :weight %>
-  </div>
-  <div class="field">
-    <%= f.label :year %><br />
-	<%= collection_select(:week_exception, :year_id, Year.order("lower(year_start)"), :id, :year_range, :include_blank=> true, :class=>"input-small")  %>
-  </div>
-  <div class="field">
-    <%= f.label :reason %><br />
-    <%= f.text_area :reason %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%=simple_form_for(@week_exception, html: { class: 'form-horizontal' },wrapper: :horizontal_form,
+wrapper_mappings: {
+  check_boxes: :horizontal_radio_and_checkboxes,
+  radio_buttons: :horizontal_radio_and_checkboxes,
+  file: :horizontal_file_input,
+  boolean: :horizontal_boolean
+}) do |f|%>
+<div class="col-md-2">
+</div>
+<div class="col-md-8">
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			Form Form
+		</div>
+		<div class="panel-body">
+			<%= f.error_notification %>
+			<%= f.input :date, as: :string%>
+			<%= f.input :weight%>
+			<%= f.input :year_id, collection:Year.order("year_start"),:label_method =>:year_range, input_html: {:include_blank => true}%>
+			<%= f.input :reason%>
+			<div class="form-group">
+				<div class="col-sm-offset-3 col-sm-8">
+					<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', forms_path, :class=>"btn btn-danger pull-right" %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <% end %>
-  <script type="text/javascript">
-      $(function () {
-          $('#week_exception_date').datetimepicker();
-      });
-  </script>
+<script>
+$('#week_exception_date').datepicker({
+	dateFormat: 'yy-mm-dd'});
+</script>

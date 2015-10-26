@@ -45,14 +45,17 @@ class TimelogsController < ApplicationController
       student = User.find_by_userid(params[:owner_userid].downcase)
       if student.nil?
         redirect_to studentlogin_path, alert: "No Student Exists with this ID"
+        return
       elsif student.signed_in
         timelog = student.signed_in
         timelog.timeout = Time.now
         timelog.updated_at = Time.now
         if timelog.save
           redirect_to studentlogin_path, notice: "Signed Out: #{student.full_name}" 
+          return
         else
           redirect_to studentlogin_path, alert: "Failed to Sign Out: #{student.full_name}" 
+          return
         end
       else
         timelog = Timelog.new
@@ -60,20 +63,25 @@ class TimelogsController < ApplicationController
         timelog.timein = Time.now
         timelog.updated_at = Time.now
         
-        student.archive=false
-        if !student.save
-          redirect_to studentlogin_path, alert: "Failed to Sign In: #{student.full_name}" 
+        if student.archive ==true
+          student.archive=false
+          if !student.save
+            redirect_to studentlogin_path, alert: "Failed to Sign In: #{student.full_name}" 
+            return
+          end
         end
         
         if timelog.save
           redirect_to studentlogin_path, notice: "Signed In: #{student.full_name}" 
+          return
         else
           redirect_to studentlogin_path, alert: "Failed to Sign In: #{student.full_name}" 
+          return
         end
         
       end
     elsif params[:single]
-      @timelog = Timelog.new(params[:timelog])
+      @timelog = Timelog.new(timelog_params)
     
       respond_to do |format|
         if @timelog.save
@@ -95,8 +103,10 @@ class TimelogsController < ApplicationController
 
     @timelog.updated_at = Time.now
     
+    
     respond_to do |format|
-      if @timelog.update_attributes(params[:timelog])
+      if @timelog.update_attributes(timelog_params)
+
         format.html { redirect_to @timelog, notice: 'Timelog was successfully updated.' }
         format.json { head :no_content }
       else
@@ -129,5 +139,8 @@ class TimelogsController < ApplicationController
       format.html # new.html.erb
       format.json { render json: @timelog }
     end
+  end
+  def timelog_params
+    params.require(:timelog).permit(:timein, :timeout, :user_id, :time_logged,  :year_id, :year_id, :updated_at)
   end
 end

@@ -1,21 +1,26 @@
-<%= form_for(@school) do |f| %>
-  <% if @school.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@school.errors.count, "error") %> prohibited this school from being saved:</h2>
-
-      <ul>
-      <% @school.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%=simple_form_for(@school, html: { class: 'form-horizontal' },wrapper: :horizontal_form,
+wrapper_mappings: {
+  check_boxes: :horizontal_radio_and_checkboxes,
+  radio_buttons: :horizontal_radio_and_checkboxes,
+  file: :horizontal_file_input,
+  boolean: :horizontal_boolean
+}) do |f|%>
+<div class="col-md-2">
+</div>
+<div class="col-md-8">
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			Form Form
+		</div>
+		<div class="panel-body">
+			<%= f.error_notification %>
+			<%= f.input :name%>
+			<div class="form-group">
+				<div class="col-sm-offset-3 col-sm-8">
+					<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', forms_path, :class=>"btn btn-danger pull-right" %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <% end %>

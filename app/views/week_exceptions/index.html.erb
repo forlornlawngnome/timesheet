@@ -1,6 +1,12 @@
-<h1>Listing week_exceptions</h1>
-
-<table>
+<div class="row">
+	<div class="col-md-9">
+		<h1>Listing Week Exceptions</h1>
+	</div>
+	<div class="col-md-3 pull-right">
+		<%= link_to "#{fa_icon("plus")} New Week exception".html_safe, new_week_exception_path, :class=>"btn btn-primary" %>
+	</div>
+</div>
+<table class="table table-hover">
   <tr>
     <th>Date</th>
     <th>Weight</th>

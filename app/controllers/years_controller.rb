@@ -40,7 +40,7 @@ class YearsController < ApplicationController
   # POST /years
   # POST /years.json
   def create
-    @year = Year.new(params[:year])
+    @year = Year.new(year_params)
 
     respond_to do |format|
       if @year.save
@@ -59,7 +59,7 @@ class YearsController < ApplicationController
     @year = Year.find(params[:id])
 
     respond_to do |format|
-      if @year.update_attributes(params[:year])
+      if @year.update_attributes(year_params)
         format.html { redirect_to @year, notice: 'Year was successfully updated.' }
         format.json { head :no_content }
       else
@@ -79,5 +79,8 @@ class YearsController < ApplicationController
       format.html { redirect_to years_url }
       format.json { head :no_content }
     end
+  end
+  def year_params
+    params.require(:year).permit(:build_season_start, :year_end, :year_start)
   end
 end

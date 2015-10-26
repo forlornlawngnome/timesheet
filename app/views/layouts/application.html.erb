@@ -3,8 +3,8 @@
 	<head>
 	  <title>Timesheet</title>
 	  <%= favicon_link_tag 'zebracorn-32.ico' %>
-	  <%= stylesheet_link_tag    "application", :media => "all" %>
-	  <%= javascript_include_tag "application" %>
+	  <%= stylesheet_link_tag    'application', media: 'all' %>
+	  <%= javascript_include_tag 'application', "data-turbolinks-track" => true %>
 	  <%= csrf_meta_tags %>
 	</head>
 	<body style = "padding-top: 70px;">
@@ -16,9 +16,15 @@
 			<%end%>
 			
 			<%if notice%>
-				<div class="alert alert-success"><%= notice %></div>
+				<div class="alert alert-success" data-dismiss="alert">
+					<%= notice %>
+					<span aria-hidden="true" class="pull-right"><%=fa_icon("close")%></span>
+				</div>
 			<%elsif alert%>
-				<div class="alert alert-danger"><%= alert %></div>
+				<div class="alert alert-danger" data-dismiss="alert">
+					<%= alert %>
+					<span aria-hidden="true" class="pull-right"><%=fa_icon("close")%></span>
+				</div>
 			<%end%>
 		
 			<%= yield %>

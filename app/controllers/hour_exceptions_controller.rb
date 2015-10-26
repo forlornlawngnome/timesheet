@@ -40,7 +40,7 @@ class HourExceptionsController < ApplicationController
   # POST /hour_exceptions
   # POST /hour_exceptions.json
   def create
-    @hour_exception = HourException.new(params[:hour_exception])
+    @hour_exception = HourException.new(hour_exception_params)
 
     respond_to do |format|
       if @hour_exception.save
@@ -59,7 +59,7 @@ class HourExceptionsController < ApplicationController
     @hour_exception = HourException.find(params[:id])
 
     respond_to do |format|
-      if @hour_exception.update_attributes(params[:hour_exception])
+      if @hour_exception.update_attributes(hour_exception_params)
         format.html { redirect_to @hour_exception, notice: 'Hour exception was successfully updated.' }
         format.json { head :no_content }
       else
@@ -79,5 +79,8 @@ class HourExceptionsController < ApplicationController
       format.html { redirect_to hour_exceptions_url }
       format.json { head :no_content }
     end
+  end
+  def hour_exception_params
+    params.require(:hour_exception).permit(:date_applicable, :date_sent, :reason, :submitter, :year, :year_id, :user, :user_id)
   end
 end

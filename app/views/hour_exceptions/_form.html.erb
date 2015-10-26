@@ -1,50 +1,38 @@
-<%= form_for(@hour_exception) do |f| %>
-  <% if @hour_exception.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@hour_exception.errors.count, "error") %> prohibited this hour_exception from being saved:</h2>
-
-      <ul>
-      <% @hour_exception.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :user %><br />
-    <%= collection_select(:hour_exception, :user_id, User.order("lower(name_first)"), :id, :full_name, :include_blank=> true, :class=>"input-small")  %>
-  </div>
-  <div class="field">
-    <%= f.hidden_field :submitter, :value=>current_user.email %>
-  </div>
-  <div class="field">
-    <%= f.label :date_applicable %><br />
-    <%= f.text_field :date_applicable,  :'data-date-format'=>"YYYY-MM-DD"  rescue  f.text_field :date_applicable,  :'data-date-format'=>"YYYY-MM-DD" %>
-  </div>
-  <div class="field">
-    <%= f.label :date_sent %><br />
-    <%= f.text_field :date_sent,  :'data-date-format'=>"YYYY-MM-DD"  rescue  f.text_field :date_sent,  :'data-date-format'=>"YYYY-MM-DD" %>
-  </div>
-  <div class="field">
-    <%= f.label :reason %><br />
-    <%= f.text_field :reason %>
-  </div>
-  <div class="field">
-    <%= f.hidden_field :year_id, :value=>Year.current_year.id%>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%=simple_form_for(@hour_exception, html: { class: 'form-horizontal' },wrapper: :horizontal_form,
+wrapper_mappings: {
+  check_boxes: :horizontal_radio_and_checkboxes,
+  radio_buttons: :horizontal_radio_and_checkboxes,
+  file: :horizontal_file_input,
+  boolean: :horizontal_boolean
+}) do |f|%>
+<div class="col-md-2">
+</div>
+<div class="col-md-8">
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			Form Form
+		</div>
+		<div class="panel-body">
+			<%= f.error_notification %>
+			<%= f.input :user_id, collection: User.order("lower(name_first)"),:label_method =>:full_name, input_html: {:include_blank => true}%>
+			<%= f.input :date_applicable, as: :string%>
+			<%= f.input :date_sent, as: :string%>
+			<%= f.input :reason%>
+			<%= f.input :submitter, :as=>:hidden, :input_html => { :value => current_user.email }%>
+			<%= f.input :year_id, :as=>:hidden, :input_html => { :value => Year.current_year.id }%>
+			<div class="form-group">
+				<div class="col-sm-offset-3 col-sm-8">
+					<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', forms_path, :class=>"btn btn-danger pull-right" %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <% end %>
 
-  <script type="text/javascript">
-      $(function () {
-          $('#hour_exception_date_applicable').datetimepicker();
-      });
-  </script>
-  <script type="text/javascript">
-      $(function () {
-          $('#hour_exception_date_sent').datetimepicker();
-      });
-  </script>
+<script>
+$('#hour_exception_date_sent').datepicker({
+	dateFormat: 'yy-mm-dd'});
+$('#hour_exception_date_applicable').datepicker({
+	dateFormat: 'yy-mm-dd'});
+</script>

@@ -40,7 +40,7 @@ class FormsController < ApplicationController
   # POST /forms
   # POST /forms.json
   def create
-    @form = Form.new(params[:form])
+    @form = Form.new(form_params)
 
     respond_to do |format|
       if @form.save
@@ -59,7 +59,7 @@ class FormsController < ApplicationController
     @form = Form.find(params[:id])
 
     respond_to do |format|
-      if @form.update_attributes(params[:form])
+      if @form.update_attributes(form_params)
         format.html { redirect_to @form, notice: 'Form was successfully updated.' }
         format.json { head :no_content }
       else
@@ -79,5 +79,8 @@ class FormsController < ApplicationController
       format.html { redirect_to forms_url }
       format.json { head :no_content }
     end
+  end
+  def form_params
+    params.require(:form).permit(:name, :archive)
   end
 end

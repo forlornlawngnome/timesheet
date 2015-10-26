@@ -1,44 +1,34 @@
 <div class="row">
 	<%= search_form_for @search, :class=>"form-horizontal" do |f| %>
-		<div class="form-inline">
-			<div class="form-group">
-			    <%= f.label :user_name_first_cont, "First Name contains", :class=>"col-sm-2 control-label" %>
-				<div class="col-sm-2">
-			   		<%= f.text_field :user_name_first_cont, :class=>"form-control" %>
-				</div>
+		<div class="form-group row">
+			<div class="form-group col-md-4">
+			    <%= f.label :user_name_first_cont, "First Name contains", :class=>"control-label" %>
+				<%= f.text_field :user_name_first_cont, :class=>"form-control" %>
+
 			</div>
-			<div class="form-group">
-			    <%= f.label :user_name_last_cont, "Last Name contains", :class=>"col-sm-2 control-label" %>
-				<div class="col-sm-2">
-			    	<%= f.text_field :user_name_last_cont, :class=>"form-control", :id=>"user_name_last" %>
-				</div>
+			<div class="form-group col-md-4">
+			    <%= f.label :user_name_last_cont, "Last Name contains", :class=>"control-label" %>
+				<%= f.text_field :user_name_last_cont, :class=>"form-control", :id=>"user_name_last" %>
 			</div>
-			<div class="form-group">
-		    	<%= f.label :year_id_eq, "Year", :class=>"col-sm-2 control-label" %>
-				<div class="col-sm-2">
-			    	<%= f.select :year_id_eq,  Year.order("year_start asc").collect{|c| [c.year_range, c.id]}, :include_blank=>true, :class=>"form-control", :id=>"year" %>
-				</div>
+			<div class="form-group col-md-4">
+		    	<%= f.label :year_id_eq, "Year", :class=>"control-label" %>
+			<%= f.select :year_id_eq,  Year.order("year_start asc").collect{|c| [c.year_range, c.id]}, {:include_blank=>true},{ :class=>"form-control", :id=>"year" }%>
 		  	</div>
 		</div>
-		<br />
-		<br />
-		<br />
-		<div class="form-inline">
-		  	<div class="form-group">
-			    <%= f.label :timein_gteq, "Date between", :class=>"col-sm-2 control-label" %>
-				<div class="col-sm-2">
-			    	<%= f.text_field :timein_gteq %>
-				</div>
-			    <%= f.label :timein_lteq, "and", :class=>"col-sm-2 control-label" %>
-				<div class="col-sm-2">
-			    	<%= f.text_field :timein_lteq %> 
-				</div>   
+		<div class="form-group row">
+		  	<div class="form-group col-md-4">
+			    <%= f.label :timein_gteq, "Date between", :class=>"control-label" %>
+			    <%= f.text_field :timein_gteq, :class=>"form-control" %>
+			</div>
+			<div class="form-group col-md-4">
+			    <%= f.label :timein_lteq, "and", :class=>"control-label" %>
+				<%= f.text_field :timein_lteq, :class=>"form-control" %>   
 			</div>
 		</div>
-		<div class="col-sm-2">
-		</div>
-		<div class="form-group  col-sm-2">
-			<%= f.submit "Search", :class=>"btn btn-primary col-sm-12" %>
+		<div class="row">
+			<div class="form-group  col-sm-3 pull-right">
+				<%= f.submit "Search", :class=>"btn btn-primary col-sm-12" %>
+			</div>
 		</div>
 	<% end %>
 </div>
@@ -74,3 +64,9 @@
 
 	<%= link_to 'New Timelog', new_timelog_path %>
 <%end%>
+<script>
+$('#q_timein_gteq').datepicker({
+	dateFormat: 'yy-mm-dd'});
+$('#q_timein_lteq').datepicker({
+	dateFormat: 'yy-mm-dd'});
+</script>

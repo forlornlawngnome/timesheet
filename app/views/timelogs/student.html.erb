@@ -1,21 +1,9 @@
 <h1>New timelog</h1>
 <%if current_user.try(:admin) || current_user.email == "signup@team900.org"%>
 <%= form_for @timelog do |f| %>
-  <% if @timelog.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@timelog.errors.count, "error") %> prohibited this timelog from being saved:</h2>
-
-      <ul>
-      <% @timelog.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  
   <div class="field">
     <%="User Number" %><br />
-    <%= text_field_tag :owner_userid%>
+    <%= text_field_tag :owner_userid, "", :class=>"form-control"%>
 	<%= javascript_tag "$('#owner_userid').focus()" %>
   </div>
   <div class="actions">

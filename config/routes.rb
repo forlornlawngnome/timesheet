@@ -33,12 +33,11 @@ Timesheet::Application.routes.draw do
 
   get "welcome/index"
   
-  match 'studentlogin' => 'timelogs#student'
-  match 'studentLogin' => 'timelogs#student'
-  match 'welcome/acknowledgements' => 'welcome#acknowledgements', :as=> :credits
+  match 'studentlogin' => 'timelogs#student', via: [:get, :post]
+  get 'welcome/acknowledgements' => 'welcome#acknowledgements', :as=> :credits
   
-  match 'currentStudents' => 'users#current', :as=>"students"
-  match 'studentForms' => 'users#forms', :as=>"student_forms"
+  get 'currentStudents' => 'users#current', :as=>"students"
+  match 'studentForms' => 'users#forms', :as=>"student_forms", via: [:get, :post]
   
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"

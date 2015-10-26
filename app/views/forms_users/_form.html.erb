@@ -1,25 +1,27 @@
-<%= form_for(@forms_user) do |f| %>
-  <% if @forms_user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@forms_user.errors.count, "error") %> prohibited this forms_user from being saved:</h2>
-
-      <ul>
-      <% @forms_user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :user %><br />
-	<%= collection_select(:forms_user, :user_id, User.order("lower(name_first)"), :id, :full_name, :include_blank=> true, :class=>"input-small")  %>
-  </div>
-  <div class="field">
-    <%= f.label :form %><br />
-	<%= collection_select(:forms_user, :form_id, Form.order("lower(name)"), :id, :name, :include_blank=> true, :class=>"input-small")  %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%=simple_form_for(@forms_user, html: { class: 'form-horizontal' },wrapper: :horizontal_form,
+  wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  }) do |f|%>
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-8">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				Form Form
+			</div>
+			<div class="panel-body">
+ 				<%= f.error_notification %>
+				<%=f.input :user_id, collection: User.order("lower(name_first)"),:label_method =>:full_name, input_html: {:include_blank => true}%>
+				<%=f.input :form_id, collection: Form.order("lower(name)"), input_html: {:include_blank => true}%>
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-8">
+						<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', forms_path, :class=>"btn btn-danger pull-right" %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 <% end %>

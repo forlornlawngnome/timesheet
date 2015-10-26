@@ -40,7 +40,7 @@ class WeekExceptionsController < ApplicationController
   # POST /week_exceptions
   # POST /week_exceptions.json
   def create
-    @week_exception = WeekException.new(params[:week_exception])
+    @week_exception = WeekException.new(week_exception_params)
 
     respond_to do |format|
       if @week_exception.save
@@ -59,7 +59,7 @@ class WeekExceptionsController < ApplicationController
     @week_exception = WeekException.find(params[:id])
 
     respond_to do |format|
-      if @week_exception.update_attributes(params[:week_exception])
+      if @week_exception.update_attributes(week_exception_params)
         format.html { redirect_to @week_exception, notice: 'Week exception was successfully updated.' }
         format.json { head :no_content }
       else
@@ -79,5 +79,8 @@ class WeekExceptionsController < ApplicationController
       format.html { redirect_to week_exceptions_url }
       format.json { head :no_content }
     end
+  end
+  def week_exception_params
+    params.require(:week_exception).permit(:date, :reason, :weight, :year, :year_id)
   end
 end
