@@ -71,7 +71,7 @@
 			<%users = gender[1].group_by{|a| a.id}%>
 			<%sum = 0%>
 			<%users.each do |user|%>
-				<%sum = sum + User.where(id: user[0])).first.years_total_hours(@selected_year)%>
+				<%sum = sum + User.where(id: user[0]).first.years_total_hours(@selected_year)%>
 			<%end%>
 			<%sum=sum/(60*60)%>
 			<%average = sum/users.count%>
