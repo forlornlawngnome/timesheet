@@ -23,8 +23,6 @@ Number of Active Mentors: <%=@numMentors%>
 			<th>Gender</th>
 			<th>Graduation Year</th>
 			<th>User ID Number</th>
-			<th>Total Hours in Build Season</th>
-			<th>Total Hours</th>
   		</tr>
 	</thead>
 	<tbody>
@@ -40,8 +38,6 @@ Number of Active Mentors: <%=@numMentors%>
 			<td><%= user.gender%></td>
 			<td><%= user.graduation_year%></td>
 			<td style="max-width:150px"><%= user.userid %></td>
-			<td><%= user.build_hours_formatted(Year.current_year) %></td>
-			<td><%= user.total_hours_formatted(Year.current_year)%></td>
 		  </tr>
 		<% end %>
 	</tbody>
