@@ -1,0 +1,40 @@
+<div class="row">
+	<div class="col-md-9">
+		<h1>Users</h1>
+	</div>
+	<div class="col-md-3 pull-right">
+		<%= link_to "#{fa_icon("plus")} New Form".html_safe, new_user_path, :class=>"btn btn-primary" %>
+	</div>
+</div>
+<%if current_user.try(:admin)%>
+	Number of Active Students: <%=@numStudents%>
+	<br />
+	Number of Active Mentors: <%=@numMentors%>
+	<table class="table table-hover">
+		<thead>
+	  	  	<tr>
+			    <th>Name</th>
+				<th><%=Constants::SCHOOL_NAME_REPLACEMENT%></th>
+				<th># Meetings Pre-Season</th>
+				<th>Total Hours in Build Season</th>
+				<th>Total Hours</th>
+				<th></th>
+	  		</tr>
+		</thead>
+		<tbody>
+			<% @users.each do |user| %>
+			  <tr>
+			    <td style="max-width:150px"><%= link_to user.full_name, user_path(user), method: :get %></td>
+				<td><%= user.school.name rescue ""%></td>
+				<td><%= user.preseason_meetings%></td>
+				<td><%= user.build_hours_formatted(Year.current_year) %></td>
+				<td><%= user.total_hours_formatted(Year.current_year)%></td>
+				<td><%=link_to '', edit_user_path(user), :class=>"glyphicon glyphicon-pencil" %></td>
+			  </tr>
+			<% end %>
+		</tbody>
+	</table>
+
+
+	<br />
+<%end%>

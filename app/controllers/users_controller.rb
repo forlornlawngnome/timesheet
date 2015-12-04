@@ -8,12 +8,26 @@ class UsersController < ApplicationController
       format.html # index.html.erb
     end
   end
-  
+  def hours
+    @users = User.active.order("name_first")
+    @numMentors = 0
+    @numStudents = 0
+    
+    @users.each do |user|
+      if user.email == Constants::DEFAULT_LOGIN
+      elsif user.is_mentor
+        @numMentors = @numMentors + 1
+      else
+        @numStudents = @numStudents + 1
+      end
+    end 
+    respond_to do |format|
+      format.html # index.html.erb
+    end
+  end
   def current
     
     @users = User.active.order("name_first")
-    
-
     @numMentors = 0
     @numStudents = 0
     

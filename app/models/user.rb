@@ -117,6 +117,13 @@ class User < ActiveRecord::Base
     end
     return false
   end
+  def preseason_meetings
+    #Number of pre season meetings for the year
+    logs = self.timelogs.where("year_id = ? and timein <= ?",Year.current_year.id, Year.current_year.build_season_start)
+    
+    logs_grouped = logs.group_by{|a| a.timein.strftime("%m/%d/%Y")} rescue 0
+    return logs_grouped.count rescue 0
+  end
   ###################### END Yearly Totals##########################
   ###################### Logging/Formatting ##########################
   def grouped_logs
