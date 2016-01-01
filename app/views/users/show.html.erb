@@ -1,4 +1,4 @@
-<%if current_user.try(:admin) || current_user.id == params[:id].to_f%>
+<%if current_user.try(:admin) || current_user.id == params[:id].to_f || current_user.student_leader%>
 	<div class="row">
 		<div class="col-lg-8 col-md-8">
 			<h2><%=@user.full_name%></h2>
@@ -54,7 +54,7 @@
 				<%= @user.userid %>
 			</p>
 			<p>
-				<b>Hours Required:</b>
+				<b>Build Season Hours Required:</b>
 				<%= @user.required_hours %>
 			</p>
 		</div>
@@ -63,6 +63,7 @@
 				<tr>
 					<th>Year</th>
 					<th>Total Hours</th>
+					<th>Total PreSeason Meetings</th>
 					<th>Build Season Hours</th>
 				</tr>
 				<%@years.each do |year|%>
@@ -72,6 +73,9 @@
 						</td>
 						<td>
 							<%=@user.total_hours_formatted(year)%>
+						</td>
+						<td>
+							<%=@user.past_preseason_meetings(year)%>
 						</td>
 						<td>
 							<%=@user.build_hours_formatted(year)%>
@@ -123,10 +127,8 @@
 				<th><%=days[0]%></th>
 				<%date = days[1][0]%>
 			    <%time = @user.get_weeks_hours_in_time(date)%>
-				<%if current_user.try(:admin)%>
-					<td><%=User.format_time(time)%></td>
-					<td><%=count = @user.get_weeks_log_count(date)%></td>
-				<%end%>
+				<td><%=User.format_time(time)%></td>
+				<td><%=count = @user.get_weeks_log_count(date)%></td>
 				<%#This part has to do with requirements. Change based on your requirements. Methods can be found in Application Helper%>
 				<%if isPreSeason date%>
 					<td></td>
@@ -146,14 +148,18 @@
 					<td></td>
 					<td></td>
 				<%end%>
-				<td>
-					<%exceptions =  @user.hour_exceptions.where("date_applicable >= ? and date_applicable <= ?", date, (days[1].last))%>
-					<%if !exceptions.empty?%>
-						<%exceptions.order("date_applicable").each do |ex|%>
-							<%=link_to ex.reason, ex%><br />
+				<%if current_user.try(:admin)%>
+					<td>
+						<%exceptions =  @user.hour_exceptions.where("date_applicable >= ? and date_applicable <= ?", date, (days[1].last))%>
+						<%if !exceptions.empty?%>
+							<%exceptions.order("date_applicable").each do |ex|%>
+								<%=link_to ex.reason, ex%><br />
+							<%end%>
 						<%end%>
-					<%end%>
-				</td>
+					</td>
+				<%else%>
+					<td></td>
+				<%end%>
 			<tr>
 		<%end%>
 	</table>
