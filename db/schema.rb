@@ -9,58 +9,62 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150809183511) do
+ActiveRecord::Schema.define(version: 20160101221321) do
 
-  create_table "forms", :force => true do |t|
-    t.string   "name"
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "forms", force: :cascade do |t|
+    t.string   "name",       limit: 255
     t.boolean  "archive"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.boolean  "required"
   end
 
-  create_table "forms_users", :force => true do |t|
+  create_table "forms_users", force: :cascade do |t|
     t.integer "user_id"
     t.integer "form_id"
   end
 
-  add_index "forms_users", ["form_id"], :name => "index_forms_users_on_form_id"
-  add_index "forms_users", ["user_id"], :name => "index_forms_users_on_user_id"
+  add_index "forms_users", ["form_id"], name: "index_forms_users_on_form_id", using: :btree
+  add_index "forms_users", ["user_id"], name: "index_forms_users_on_user_id", using: :btree
 
-  create_table "hour_exceptions", :force => true do |t|
+  create_table "hour_exceptions", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "submitter"
+    t.string   "submitter",       limit: 255
     t.date     "date_applicable"
     t.date     "date_sent"
-    t.string   "reason"
+    t.string   "reason",          limit: 255
     t.integer  "year_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
-  add_index "hour_exceptions", ["user_id"], :name => "index_hour_exceptions_on_user_id"
-  add_index "hour_exceptions", ["year_id"], :name => "index_hour_exceptions_on_year_id"
+  add_index "hour_exceptions", ["user_id"], name: "index_hour_exceptions_on_user_id", using: :btree
+  add_index "hour_exceptions", ["year_id"], name: "index_hour_exceptions_on_year_id", using: :btree
 
-  create_table "hour_overrides", :force => true do |t|
+  create_table "hour_overrides", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "year_id"
     t.integer  "hours_required"
     t.text     "reason"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
-  add_index "hour_overrides", ["user_id"], :name => "index_hour_overrides_on_user_id"
-  add_index "hour_overrides", ["year_id"], :name => "index_hour_overrides_on_year_id"
+  add_index "hour_overrides", ["user_id"], name: "index_hour_overrides_on_user_id", using: :btree
+  add_index "hour_overrides", ["year_id"], name: "index_hour_overrides_on_year_id", using: :btree
 
-  create_table "schools", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "schools", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  create_table "timelogs", :force => true do |t|
+  create_table "timelogs", force: :cascade do |t|
     t.integer  "user_id"
     t.datetime "timein"
     t.datetime "timeout"
@@ -69,57 +73,59 @@ ActiveRecord::Schema.define(:version => 20150809183511) do
     t.integer  "year_id"
   end
 
-  add_index "timelogs", ["user_id"], :name => "index_timelogs_on_user_id"
+  add_index "timelogs", ["user_id"], name: "index_timelogs_on_user_id", using: :btree
 
-  create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
-    t.string   "reset_password_token"
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
+    t.integer  "sign_in_count",                      default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.boolean  "admin"
-    t.string   "phone"
-    t.string   "name_first"
-    t.string   "name_last"
-    t.string   "userid"
+    t.string   "phone",                  limit: 255
+    t.string   "name_first",             limit: 255
+    t.string   "name_last",              limit: 255
+    t.string   "userid",                 limit: 255
     t.integer  "school_id"
+    t.boolean  "tools"
+    t.boolean  "conduct"
     t.boolean  "basicSafety"
-    t.string   "password_salt"
-    t.string   "password_hash"
+    t.string   "password_salt",          limit: 255
+    t.string   "password_hash",          limit: 255
     t.boolean  "archive"
-    t.string   "location"
-    t.string   "gender"
-    t.string   "graduation_year"
+    t.string   "location",               limit: 255
+    t.string   "gender",                 limit: 255
+    t.string   "graduation_year",        limit: 255
     t.boolean  "student_leader"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "week_exceptions", :force => true do |t|
+  create_table "week_exceptions", force: :cascade do |t|
     t.date     "date"
     t.decimal  "weight"
     t.text     "reason"
     t.integer  "year_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "week_exceptions", ["year_id"], :name => "index_week_exceptions_on_year_id"
+  add_index "week_exceptions", ["year_id"], name: "index_week_exceptions_on_year_id", using: :btree
 
-  create_table "years", :force => true do |t|
+  create_table "years", force: :cascade do |t|
     t.date     "year_start"
     t.date     "year_end"
     t.date     "build_season_start"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
 end

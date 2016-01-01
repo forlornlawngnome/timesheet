@@ -10,6 +10,7 @@
 <table class="table table-hover">
   <tr>
     <th>Name</th>
+	<th>Required</th>
 	<th>Archive</th>
     <th></th>
     <th></th>
@@ -19,6 +20,7 @@
 <% @forms.each do |form| %>
   <tr>
     <td><%= form.name %></td>
+	<td><%= form.required%></td>
 	<td><%= form.archive %></td>
     <td><%= link_to 'Show', form %></td>
     <td><%= link_to '', edit_form_path(form), :class=>"glyphicon glyphicon-pencil" %></td>

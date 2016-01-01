@@ -2,7 +2,7 @@ class FormsController < ApplicationController
   # GET /forms
   # GET /forms.json
   def index
-    @forms = Form.all
+    @forms = Form.order("name")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -81,6 +81,6 @@ class FormsController < ApplicationController
     end
   end
   def form_params
-    params.require(:form).permit(:name, :archive)
+    params.require(:form).permit(:name, :archive, :required)
   end
 end
