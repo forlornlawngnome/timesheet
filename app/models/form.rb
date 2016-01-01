@@ -6,4 +6,7 @@ class Form < ActiveRecord::Base
   def self.active
     where(:archive=>false)
   end
+  def self.all_required
+    where(:archive=>false,:required=>true)
+  end
 end

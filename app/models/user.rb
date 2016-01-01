@@ -156,6 +156,15 @@ class User < ActiveRecord::Base
       return false
     end
   end
+  def all_forms_in
+    users_forms = self.forms.map{|x| x.id}
+    all_forms = Form.all_required.reject{|x| users_forms.include? x.id}
+    if all_forms.empty?
+      return true
+    else
+      return false
+    end
+  end
   ###################### PreSeason ##########################
   def met_preseason_meetings(date)
     self.get_weeks_log_count(date)>=Constants::PRE_MEETINGS

@@ -2,6 +2,7 @@
 	<table class="table table-hover">
 		<tr>
 			<th>User</th>
+			<th>All Required Forms</th>
 			<th>Email</th>
 			<%@forms.each do |form|%>
 				<th>
@@ -16,6 +17,15 @@
 			<tr>
 				<td>
 					<%=user.full_name%>
+				</td>
+				<%required_forms = user.all_forms_in%>
+				<%if required_forms%>
+					<% required_cell_class="success"%>
+				<%else%>
+					<% required_cell_class="danger"%>
+				<%end%>
+				<td class=<%="#{required_cell_class}"%>>
+					<%=required_forms%>
 				</td>
 				<td>
 					<%=user.email%>
