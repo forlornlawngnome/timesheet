@@ -6,7 +6,7 @@
 		<%= link_to "#{fa_icon("plus")} New Form".html_safe, new_user_path, :class=>"btn btn-primary" %>
 	</div>
 </div>
-<%if current_user.try(:admin)%>
+<%if current_user.try(:admin) || current_user.student_leader%>
 	Number of Active Students: <%=@numStudents%>
 	<br />
 	Number of Active Mentors: <%=@numMentors%>
@@ -15,6 +15,7 @@
 	  	  	<tr>
 			    <th>Name</th>
 				<th><%=Constants::SCHOOL_NAME_REPLACEMENT%></th>
+				<th>All Required Forms In?</th>
 				<th># Meetings Pre-Season</th>
 				<th>Total Hours in Build Season</th>
 				<th>Total Hours</th>
@@ -26,6 +27,15 @@
 			  <tr>
 			    <td style="max-width:150px"><%= link_to user.full_name, user_path(user), method: :get %></td>
 				<td><%= user.school.name rescue ""%></td>
+				<%required_forms = user.all_forms_in%>
+				<%if required_forms%>
+					<% required_cell_class="success"%>
+				<%else%>
+					<% required_cell_class="danger"%>
+				<%end%>
+				<td class=<%="#{required_cell_class}"%>>
+					<%=required_forms%>
+				</td>
 				<td><%= user.preseason_meetings%></td>
 				<td><%= user.build_hours_formatted(Year.current_year) %></td>
 				<td><%= user.total_hours_formatted(Year.current_year)%></td>
