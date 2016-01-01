@@ -31,7 +31,7 @@ wrapper_mappings: {
 					<%= f.input :admin%>
 					<%= f.input :archive%>
 					<div role="tabpanel" class="tab-pane" id="forms">
-						<%= f.association :forms,   as: :check_boxes %>
+						<%= f.association :forms,   as: :check_boxes, collection: Form.active.order("name")%>
 					</div>
 				<%end%>
 				<div class="form-group">
