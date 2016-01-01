@@ -2,3 +2,4 @@ tmp/
 db/*.sqlite3
 *.dump
 config/database.yml
+._*
