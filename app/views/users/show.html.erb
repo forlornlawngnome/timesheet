@@ -62,6 +62,7 @@
 			<table class="table table-condensed table-hover">
 				<tr>
 					<th>Year</th>
+					<th>All Required Forms?</th>
 					<th>Total Hours</th>
 					<th>Total PreSeason Meetings</th>
 					<th>Build Season Hours</th>
@@ -70,6 +71,15 @@
 					<tr>
 						<td>
 							<%=year.year_range%>
+						</td>
+						<%required_forms = @user.all_forms_in%>
+						<%if required_forms%>
+							<% required_cell_class="success"%>
+						<%else%>
+							<% required_cell_class="danger"%>
+						<%end%>
+						<td class=<%="#{required_cell_class}"%>>
+							<%=required_forms%>
 						</td>
 						<td>
 							<%=@user.total_hours_formatted(year)%>
