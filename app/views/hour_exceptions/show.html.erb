@@ -28,6 +28,10 @@
   <%= @hour_exception.year.year_range %>
 </p>
 
+<p>
+  <b>Week:</b>
+  <%= link_to @hour_exception.week.week_range, @hour_exception.week rescue ""%> 
+</p>
 
 <div class="row">
 	<%if current_user.try(:admin)%>

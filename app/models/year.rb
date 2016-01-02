@@ -6,12 +6,13 @@ class Year < ActiveRecord::Base
   has_many :hour_overrides
   has_many :hour_exceptions
   has_many :week_exceptions
-  has_many :weeks
+  has_many :weeks, dependent: :delete_all
   
   accepts_nested_attributes_for :weeks
   
   before_create :setup_weeks
   before_save :update_weeks
+  after_save :update_week_associated
   
   def is_current_year?
     if !Year.current_year.nil? && Year.current_year.id == self.id
@@ -57,5 +58,14 @@ class Year < ActiveRecord::Base
         self.weeks.destroy_all
       end
       setup_weeks
+    end
+    def update_week_associated
+      update_hour_exceptions
+    end
+    def update_hour_exceptions
+      exceptions = HourException.all
+      exceptions.each do |ex|
+        ex.save
+      end
     end
 end
