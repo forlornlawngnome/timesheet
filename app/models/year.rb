@@ -62,6 +62,7 @@ class Year < ActiveRecord::Base
     def update_week_associated
       update_hour_exceptions
       update_week_exceptions
+      update_timelogs
     end
     def update_hour_exceptions
       exceptions = HourException.where(:week_id=>nil)
@@ -73,6 +74,12 @@ class Year < ActiveRecord::Base
       exceptions = WeekException.where(:week_id=>nil)
       exceptions.each do |ex|
         ex.save
+      end
+    end
+    def update_timelogs
+      logs = Timelog.where(:week_id=>nil)
+      logs.each do |log|
+        log.save
       end
     end
 end

@@ -5,8 +5,10 @@ class Timelog < ActiveRecord::Base
   #attr_accessible :timein, :timeout, :user_id, :time_logged,  :year_id, :year_id, :updated_at
   belongs_to :user
   belongs_to :year
+  belongs_to :week
   
   validates :timein, :presence => true
+  before_save :setWeek
   
   
   ##It views today as the current day UNLESS it is before 1am. If it is before 1am, then it defaults to the previous day as "today"
@@ -28,5 +30,8 @@ class Timelog < ActiveRecord::Base
   end
   def setYear
     self.year = Year.find_year(self.timein)
+  end
+  def setWeek
+    self.week = Week.find_week(self.timein)
   end
 end

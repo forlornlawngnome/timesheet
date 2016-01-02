@@ -2,6 +2,7 @@ class Week < ActiveRecord::Base
   belongs_to :year
   has_many :hour_exceptions, dependent: :nullify
   has_many :week_exceptions, dependent: :nullify
+  has_many :timelogs, dependent: :nullify
   
   scope :summer, -> { where(:season=>"Summer")}
   scope :preseason, -> { where(:season=>"Preseason")}

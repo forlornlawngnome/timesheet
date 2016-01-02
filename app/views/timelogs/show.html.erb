@@ -22,6 +22,11 @@
 </p>
 
 <p>
+  <b>Week:</b>
+  <%= link_to @timelog.week.week_range, @timelog.week rescue ""%> 
+</p>
+
+<p>
   <b>Hours Logged:</b>
   <%= Time.at(@timelog.time_logged).utc.strftime("%H:%M:%S") %>
 </p>
