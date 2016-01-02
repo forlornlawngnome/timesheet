@@ -31,5 +31,6 @@ class Year < ActiveRecord::Base
     logs = Timelog.pre_season_hours(year)
     logs_grouped = logs.group_by{ |u| ApplicationHelper.toLocalTime(u.timein).beginning_of_week} rescue 0
     logs_grouped.count
+    logger.debug( logs_grouped.inspect)
   end
 end
