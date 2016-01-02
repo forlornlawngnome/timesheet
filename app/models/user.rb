@@ -87,7 +87,7 @@ class User < ActiveRecord::Base
   def years_build_hours(year)
     #Number of build season hours for the year
     total = 0
-    self.timelogs.where("year_id = ? and timein >= ?",year.id, year.build_season_start).each do |log|
+    self.timelogs.build_season_hours(year).each do |log|
       total = total + log.time_logged
     end
     return total
@@ -98,7 +98,7 @@ class User < ActiveRecord::Base
   end
   def years_total_hours(year)
     total = 0
-    self.timelogs.where(:year_id => year.id).each do |log|
+    self.timelogs.in_year(year).each do |log|
         total = total + log.time_logged
     end
     total
@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
     return users
   end
   def has_hours(year)
-    logs = self.timelogs.where("timein >= ? and timein < ?",year.year_start,year.year_end)
+    logs = self.timelogs.in_year(year)
     if logs.size > 0
       return true
     end
@@ -119,14 +119,11 @@ class User < ActiveRecord::Base
   end
   def preseason_meetings
     #Number of pre season meetings for the year
-    logs = self.timelogs.where("year_id = ? and timein <= ?",Year.current_year.id, Year.current_year.build_season_start)
-    
-    logs_grouped = logs.group_by{|a| a.timein.strftime("%m/%d/%Y")} rescue 0
-    return logs_grouped.count rescue 0
+    return past_preseason_meetings(Year.current_year)
   end
   def past_preseason_meetings(year)
     #Number of pre season meetings for the year
-    logs = self.timelogs.where("year_id = ? and timein <= ?",year.id, year.build_season_start)
+    logs = self.timelogs.pre_season_hours(year)
     
     logs_grouped = logs.group_by{|a| a.timein.strftime("%m/%d/%Y")} rescue 0
     return logs_grouped.count rescue 0
@@ -233,7 +230,7 @@ class User < ActiveRecord::Base
     return count
   end
   def get_weeks_logs(date)
-    logs = self.timelogs.where("timein >= ? and timein <= ?",date.beginning_of_week,date.end_of_week)
+    logs = self.timelogs.in_week(date)
     return logs
   end
   
