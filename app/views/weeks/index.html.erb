@@ -7,16 +7,51 @@
 	</div>
 </div>
 
+<div class="row">
+	<%= search_form_for @search, :class=>"form-horizontal" do |f| %>
+		<div class="form-group row">
+			<div class="form-group col-md-4">
+			    <%= f.label :season_cont, "Season contains", :class=>"control-label" %>
+				<%= f.text_field :season_cont, :class=>"form-control" %>
+			</div>
+			<div class="form-group col-md-4">
+		    	<%= f.label :year_id_eq, "Year", :class=>"control-label" %>
+			<%= f.select :year_id_eq,  Year.order("year_start asc").collect{|c| [c.year_range, c.id]}, {:include_blank=>true},{ :class=>"form-control", :id=>"year" }%>
+		  	</div>
+		</div>
+		<div class="form-group row">
+		  	<div class="form-group col-md-4">
+			    <%= f.label :week_start_gteq, "Date between", :class=>"control-label" %>
+			    <%= f.text_field :week_start_gteq, :class=>"form-control" %>
+			</div>
+			<div class="form-group col-md-4">
+			    <%= f.label :week_start_lteq, "and", :class=>"control-label" %>
+				<%= f.text_field :week_start_lteq, :class=>"form-control" %>   
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group  col-sm-3 pull-right">
+				<%= f.submit "Search", :class=>"btn btn-primary col-sm-12" %>
+			</div>
+		</div>
+	<% end %>
+</div>
+
+<hr />
+
+<%= paginate @weeks %>
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Week start</th>
-      <th>Week end</th>
-      <th>Season</th>
-      <th>Year</th>
+      <th><%= sort_link(@search, :week_start, "Week Start") %></th>
+      <th><%= sort_link(@search, :week_end, "Week End") %></th>
+      <th><%= sort_link(@search, :season, "Season") %></th>
+      <th><%= sort_link(@search, :year_id, "Year") %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
+  
+  
 
   <tbody>
     <% @weeks.each do |week| %>
