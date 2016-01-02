@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160102215643) do
+ActiveRecord::Schema.define(version: 20160102223359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 20160102215643) do
     t.integer  "year_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "week_id"
   end
 
   add_index "week_exceptions", ["year_id"], name: "index_week_exceptions_on_year_id", using: :btree

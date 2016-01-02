@@ -18,6 +18,11 @@
   <%= @week_exception.year.year_range %>
 </p>
 
+<p>
+  <b>Week:</b>
+  <%= link_to @week_exception.week.week_range, @week_exception.week rescue ""%> 
+</p>
+
 
 <%= link_to 'Edit', edit_week_exception_path(@week_exception) %> |
 <%= link_to 'Back', week_exceptions_path %>
