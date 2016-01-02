@@ -49,7 +49,18 @@ module ApplicationHelper
       return false
     end
     year = Year.current_year
-    if time > year.year_start and !isBuildSeason(time)
+    if time > year.year_start and !isBuildSeason(time) and isPreSeason(time)
+      return true
+    else
+      return false
+    end 
+  end
+  def isPreSeason (time)
+    if time.nil?
+      return false
+    end
+    year = Year.current_year
+    if time > year.preseason_start and time < year.build_season_start
       return true
     else
       return false
@@ -60,7 +71,7 @@ module ApplicationHelper
       return false
     end
     year = Year.current_year
-    if time > year.build_season_start
+    if time >= year.build_season_start
       return true
     else
       return false

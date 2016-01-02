@@ -81,6 +81,6 @@ class YearsController < ApplicationController
     end
   end
   def year_params
-    params.require(:year).permit(:build_season_start, :year_end, :year_start)
+    params.require(:year).permit(:build_season_start, :year_end, :year_start, :preseason_start)
   end
 end

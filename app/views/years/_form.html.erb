@@ -16,6 +16,7 @@ wrapper_mappings: {
 			<%= f.error_notification %>
 			<%= f.input :year_start, as: :string%>
 			<%= f.input :year_end, as: :string%>
+			<%= f.input :preseason_start, as: :string%>
 			<%= f.input :build_season_start, as: :string%>
 			<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-8">
@@ -31,6 +32,8 @@ wrapper_mappings: {
 $('#year_year_start').datepicker({
 	dateFormat: 'yy-mm-dd'});
 $('#year_year_end').datepicker({
+	dateFormat: 'yy-mm-dd'});
+$('#year_preseason_start').datepicker({
 	dateFormat: 'yy-mm-dd'});
 $('#year_build_season_start').datepicker({
 	dateFormat: 'yy-mm-dd'});

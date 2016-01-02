@@ -15,7 +15,7 @@ class Timelog < ActiveRecord::Base
   scope :in_year, -> (year){where(:year_id => year.id)}
   scope :in_week, -> (date){where("timein >= ? and timein <= ?",date.beginning_of_week,date.end_of_week)}
   scope :build_season_hours, -> (year){ where("year_id = ? and timein >= ?",year.id, year.build_season_start)}
-  scope :pre_season_hours, -> (year){ where("year_id = ? and timein < ?",year.id, year.build_season_start)}
+  scope :pre_season_hours, -> (year){ where("year_id = ? and timein >=? and timein < ?",year.id, year.preseason_start ,year.build_season_start)}
 
 
   private
