@@ -10,6 +10,8 @@
 	Number of Active Students: <%=@numStudents%>
 	<br />
 	Number of Active Mentors: <%=@numMentors%>
+	<br />
+	Number of Weeks in PreSeason: <%=@preseasonMin%>
 	<table class="table table-hover">
 		<thead>
 	  	  	<tr>
@@ -36,7 +38,16 @@
 				<td class=<%="#{required_cell_class}"%>>
 					<%=required_forms%>
 				</td>
-				<td><%= user.preseason_meetings%></td>
+				<%preseason_req = (user.preseason_meetings >= @preseasonMin)%>
+				<%if preseason_req%>
+					<% preseason_req_class="success"%>
+				<%else%>
+					<% preseason_req_class="danger"%>
+				<%end%>
+				<td class=<%="#{preseason_req_class}"%>>
+					<%= user.preseason_meetings%>
+				</td>
+				
 				<td><%= user.build_hours_formatted(Year.current_year) %></td>
 				<td><%= user.total_hours_formatted(Year.current_year)%></td>
 				<td><%=link_to '', edit_user_path(user), :class=>"glyphicon glyphicon-pencil" %></td>

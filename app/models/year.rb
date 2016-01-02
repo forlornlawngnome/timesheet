@@ -26,4 +26,10 @@ class Year < ActiveRecord::Base
   def year_range
     "#{self.year_start.year} - #{self.year_end.year}"
   end
+  def self.preseason_weeks
+    year = Year.current_year
+    logs = Timelog.pre_season_hours(year)
+    logs_grouped = logs.group_by{|a| a.timein.strftime("%m/%d/%Y")} rescue 0
+    logs_grouped.count
+  end
 end

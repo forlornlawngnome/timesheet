@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     @users = User.active.order("name_first")
     @numMentors = 0
     @numStudents = 0
+    @preseasonMin = Year.preseason_weeks
     
     @users.each do |user|
       if user.email == Constants::DEFAULT_LOGIN
