@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  week_start: 2016-01-02
+  week_end: 2016-01-02
+  season: MyString
+  year_id: 
+
+two:
+  week_start: 2016-01-02
+  week_end: 2016-01-02
+  season: MyString
+  year_id: 

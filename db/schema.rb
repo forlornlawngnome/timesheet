@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160102142754) do
+ActiveRecord::Schema.define(version: 20160102165936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,17 @@ ActiveRecord::Schema.define(version: 20160102142754) do
 
   add_index "week_exceptions", ["year_id"], name: "index_week_exceptions_on_year_id", using: :btree
 
+  create_table "weeks", force: :cascade do |t|
+    t.date     "week_start"
+    t.date     "week_end"
+    t.string   "season"
+    t.integer  "year_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "weeks", ["year_id"], name: "index_weeks_on_year_id", using: :btree
+
   create_table "years", force: :cascade do |t|
     t.date     "year_start"
     t.date     "year_end"
@@ -129,4 +140,5 @@ ActiveRecord::Schema.define(version: 20160102142754) do
     t.date     "preseason_start"
   end
 
+  add_foreign_key "weeks", "years"
 end

@@ -73,7 +73,7 @@ class YearsController < ApplicationController
   # DELETE /years/1.json
   def destroy
     @year = Year.find(params[:id])
-    @year.destroy
+    @year.destroy_all
 
     respond_to do |format|
       format.html { redirect_to years_url }

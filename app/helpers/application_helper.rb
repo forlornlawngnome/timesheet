@@ -44,17 +44,6 @@ module ApplicationHelper
     (start..(Date.today+1)).group_by{ |u| u.beginning_of_week.strftime("%m/%d/%Y") }
   end
 
-  def isPreSeason(time)
-    if time.nil?
-      return false
-    end
-    year = Year.current_year
-    if time > year.year_start and !isBuildSeason(time) and isPreSeason(time)
-      return true
-    else
-      return false
-    end 
-  end
   def isPreSeason (time)
     if time.nil?
       return false
