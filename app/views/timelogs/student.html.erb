@@ -19,6 +19,7 @@
 			<th>In/Out</th>
 			<th>Time</th>
 			<th>Weekly Requirements Met?</th>
+			<th>Required Forms In?</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -46,6 +47,11 @@
 					<%end%> 
 				<%else%>
 					<td></td>
+				<%end%>
+				<%if log.user.all_forms_in%>
+					<td class="success">True</td>
+				<%else%>
+					<td class="danger">False</td>
 				<%end%>
 			</tr>
 		<%end%>
