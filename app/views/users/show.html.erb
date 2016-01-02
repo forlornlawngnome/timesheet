@@ -140,27 +140,41 @@
 				<td><%=User.format_time(time)%></td>
 				<td><%=count = @user.get_weeks_log_count(date)%></td>
 				<%#This part has to do with requirements. Change based on your requirements. Methods can be found in Application Helper%>
+				<%exceptions =  @user.hour_exceptions.in_range(date, (days[1].last))%>
 				<%if isPreSeason date%>
 					<td></td>
-					<%if @user.met_preseason_reqs(date)%>
-						<td class="success">True</td>
+					<%preseason_req = @user.met_preseason_reqs(date)%>
+					<%if preseason_req%>
+						<%preseason_req_class = "success"%>
 					<%else%>
-						<td class="danger">False</td>
+						<%preseason_req_class = "danger"%>
 					<%end%>
+					<td class=<%="#{preseason_req_class}"%>>
+						<%=preseason_req.to_s.titleize%>
+						<%if !exceptions.empty?%>
+							*
+						<%end%>
+					</td>
 				<%elsif isBuildSeason date%>
 					<td><%=@user.weekly_required_hours(date)%></td>
-					<%if @user.met_build_season_reqs(date)%>
-						<td class="success">True</td>
+					<%build_season_req = @user.met_build_season_reqs(date)%>
+					<%if build_season_req%>
+						<%build_season_req_class = "success"%>
 					<%else%>
-						<td class="danger">False</td>
-					<%end%> 
+						<%build_season_req_class = "danger"%>
+					<%end%>
+					<td class=<%="#{build_season_req_class}"%>>
+						<%=build_season_req.to_s.titleize%>
+						<%if !exceptions.empty?%>
+							*
+						<%end%>
+					</td>
 				<%else%>
 					<td></td>
 					<td></td>
 				<%end%>
 				<%if current_user.try(:admin)%>
 					<td>
-						<%exceptions =  @user.hour_exceptions.where("date_applicable >= ? and date_applicable <= ?", date, (days[1].last))%>
 						<%if !exceptions.empty?%>
 							<%exceptions.order("date_applicable").each do |ex|%>
 								<%=link_to ex.reason, ex%><br />
