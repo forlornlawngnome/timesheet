@@ -199,7 +199,7 @@
 			</thead>
 			<tbody>
 				<%if !@user.timelogs.empty?%>
-					<%@user.timelogs.where("timein >= ?", ApplicationHelper.getStartDate).order("timein ASC").each do |log|%>
+					<%@user.timelogs.where("timein >= ?", Year.current_year.year_start).order("timein ASC").each do |log|%>
 						<tr>
 							<td>
 								<%=local_time log.timein rescue ""%>

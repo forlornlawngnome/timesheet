@@ -122,11 +122,11 @@ class User < ActiveRecord::Base
     return past_preseason_meetings(Year.current_year)
   end
   def past_preseason_meetings(year)
-    #Number of pre season meetings for the year
-    logs = self.timelogs.pre_season_hours(year)
-    
-    logs_grouped = logs.group_by{|a| a.timein.strftime("%m/%d/%Y")} rescue 0
-    return logs_grouped.count rescue 0
+    total = 0
+    year.weeks.preseason.each do |week|
+      total = total + week.num_meetings_by_user(self)
+    end
+    return total
   end
   ###################### END Yearly Totals##########################
   ###################### Logging/Formatting ##########################

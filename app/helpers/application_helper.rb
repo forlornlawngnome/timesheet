@@ -19,12 +19,6 @@ module ApplicationHelper
   def self.toLocalTime(time)
     time.in_time_zone(ApplicationHelper.TimeZone)
   end
-  def self.getStartDate
-    Year.current_year.year_start.to_datetime
-  end
-  def self.getStartBuildDate
-    Year.current_year.build_season_start.to_datetime
-  end
   def self.today
   
     #If it's before 1am...
@@ -34,36 +28,5 @@ module ApplicationHelper
     else
       Time.now.in_time_zone(ApplicationHelper.TimeZone).beginning_of_day
     end
-  end
-  def getWeeks
-    year = Year.current_year
-    if year.nil?
-      return 
-    end
-    start = year.year_start
-    (start..(Date.today+1)).group_by{ |u| u.beginning_of_week.strftime("%m/%d/%Y") }
-  end
-
-  def isPreSeason (time)
-    if time.nil?
-      return false
-    end
-    year = Year.current_year
-    if time > year.preseason_start and time < year.build_season_start
-      return true
-    else
-      return false
-    end 
-  end
-  def isBuildSeason(time)
-    if time.nil?
-      return false
-    end
-    year = Year.current_year
-    if time >= year.build_season_start
-      return true
-    else
-      return false
-    end 
   end
 end

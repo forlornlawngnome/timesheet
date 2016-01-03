@@ -37,7 +37,7 @@
 				<%year = Year.current_year%>
 				<%if week.is_preseason%>
 					<td><i><small>Check Handbook for preseason requirements.</small></i></td>
-				<%elsif isBuildSeason(Date.today)%>
+				<%elsif week.is_build_season%>
 					<%if week.user_met_all_weekly_build_reqs(log.user)%>
 						<td class="success">True</td>
 					<%else%>
