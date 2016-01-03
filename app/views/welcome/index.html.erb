@@ -37,10 +37,12 @@
    		<li><%=link_to "New Year", new_year_path%></li>
   	 <h4>Weeks</h4>
  		<li><%=link_to "Weeks", weeks_path%></li>
-  	 <h4>Hour Overrides</h4>
+ 		<li><%=link_to "Week Exceptions", week_exceptions_path%></li>
+  		<li><%=link_to "New Week Exceptions", new_week_exception_path%></li>
+  	 <h4>Hour Overrides <small>Manually updates a user's required build hours</small></h4>
  		<li><%=link_to "Hour Overrides", hour_overrides_path%></li>
   		<li><%=link_to "New Hour Override", new_hour_override_path%></li>
- 	 <h4>Hour Exceptions</h4>
+ 	 <h4>Hour Exceptions <small>Add a reason for missing hours</small></h4>
 		<li><%=link_to "Hour Exceptions", hour_exceptions_path%></li>
  		<li><%=link_to "New Hour Exception", new_hour_exception_path%></li>
 <%end%>
