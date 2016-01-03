@@ -20,7 +20,6 @@
 				<th>All Required Forms In?</th>
 				<th># Meetings Pre-Season</th>
 				<th>Total Hours in Build Season</th>
-				<th>Total Hours</th>
 				<th></th>
 	  		</tr>
 		</thead>
@@ -47,9 +46,15 @@
 				<td class=<%="#{preseason_req_class}"%>>
 					<%= user.preseason_meetings%>
 				</td>
-				
-				<td><%= user.build_hours_formatted(Year.current_year) %></td>
-				<td><%= user.total_hours_formatted(Year.current_year)%></td>
+				<%build_season_req = user.build_season_met%>
+				<%if build_season_req%>
+					<% build_season_req_class="success"%>
+				<%else%>
+					<% build_season_req_class="danger"%>
+				<%end%>
+				<td class=<%="#{build_season_req_class}"%>>
+					<%= user.build_hours_formatted(Year.current_year)%>
+				</td>
 				<td><%=link_to '', edit_user_path(user), :class=>"glyphicon glyphicon-pencil" %></td>
 			  </tr>
 			<% end %>
