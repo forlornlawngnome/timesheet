@@ -55,6 +55,9 @@
 				<%end%>
 				<td class=<%="#{build_season_req_class}"%>>
 					<%= user.build_hours_formatted(Year.current_year)%>
+					<%if !user.hour_exceptions.this_year.empty?%>
+						*
+					<%end%>
 				</td>
 				<%all_req = required_forms && build_season_req%>
 				<%if all_req%>
