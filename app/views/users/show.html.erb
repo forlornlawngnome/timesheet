@@ -125,6 +125,7 @@
 		<thead>
 			<tr>
 				<th>Beginning of Week</th>
+				<th>Season</th>
 				<th>Hours</th>
 				<th># Meetings</th>
 				<th>Required Hours</th>
@@ -132,18 +133,15 @@
 				<th>Exceptions <%if current_user.try(:admin)%><%=link_to fa_icon("plus"), new_hour_exception_path, :class=>"pull-right"%><%end%></th>
 			</tr>
 		</thead>
-		<%getWeeks.each do |days|%>
+		<%Year.current_year.weeks.past.order("week_start asc").each do |week|%>
 			<tr>
-				<th><%=days[0]%></th>
-				<%date = days[1][0]%>
-			    <%time = @user.get_weeks_hours_in_time(date)%>
-				<td><%=User.format_time(time)%></td>
-				<td><%=count = @user.get_weeks_log_count(date)%></td>
-				<%#This part has to do with requirements. Change based on your requirements. Methods can be found in Application Helper%>
-				<%exceptions =  @user.hour_exceptions.in_range(date, (days[1].last))%>
-				<%if isPreSeason date%>
+				<th><%=week.week_start.strftime("%m/%d/%Y")%></th>
+				<td><%=week.season%></td>
+				<td><%=User.format_time(week.get_users_hours_as_time(@user))%></td>
+				<td><%=week.num_meetings_by_user(@user)%></td>
+				<%if week.is_preseason%>
 					<td></td>
-					<%preseason_req = @user.met_preseason_reqs(date)%>
+					<%preseason_req = week.user_met_all_weekly_pre_reqs(@user)%>
 					<%if preseason_req%>
 						<%preseason_req_class = "success"%>
 					<%else%>
@@ -151,13 +149,13 @@
 					<%end%>
 					<td class=<%="#{preseason_req_class}"%>>
 						<%=preseason_req.to_s.titleize%>
-						<%if !exceptions.empty?%>
+						<%if !week.hour_exceptions.empty?%>
 							*
 						<%end%>
 					</td>
-				<%elsif isBuildSeason date%>
-					<td><%=@user.weekly_required_hours(date)%></td>
-					<%build_season_req = @user.met_build_season_reqs(date)%>
+				<%elsif week.is_build_season%>
+					<td><%=week.get_users_required_build_hours(@user)%></td>
+					<%build_season_req = week.user_met_all_weekly_build_reqs(@user)%>
 					<%if build_season_req%>
 						<%build_season_req_class = "success"%>
 					<%else%>
@@ -165,7 +163,7 @@
 					<%end%>
 					<td class=<%="#{build_season_req_class}"%>>
 						<%=build_season_req.to_s.titleize%>
-						<%if !exceptions.empty?%>
+						<%if !week.hour_exceptions.empty?%>
 							*
 						<%end%>
 					</td>
@@ -175,8 +173,8 @@
 				<%end%>
 				<%if current_user.try(:admin)%>
 					<td>
-						<%if !exceptions.empty?%>
-							<%exceptions.order("date_applicable").each do |ex|%>
+						<%if !week.hour_exceptions.empty?%>
+							<%week.hour_exceptions.order("date_applicable").each do |ex|%>
 								<%=link_to ex.reason, ex%><br />
 							<%end%>
 						<%end%>
@@ -184,7 +182,7 @@
 				<%else%>
 					<td></td>
 				<%end%>
-			<tr>
+			</tr>
 		<%end%>
 	</table>
 

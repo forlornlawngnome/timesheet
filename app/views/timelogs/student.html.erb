@@ -33,14 +33,12 @@
 					<td>Out</td>
 					<td><%=local_time log.timeout, "%I:%M:%S %p"%></td>
 				<%end%>
-				<%if isPreSeason(Date.today)%>
-					<%if log.user.met_preseason_reqs(Date.today)%>
-						<td class="success">True</td>
-					<%else%>
-						<td class="danger">False</td>
-					<%end%>
+				<%week = Week.current_week%>
+				<%year = Year.current_year%>
+				<%if week.is_preseason%>
+					<td><i><small>Check Handbook for preseason requirements.</small></i></td>
 				<%elsif isBuildSeason(Date.today)%>
-					<%if log.user.met_build_season_reqs(Date.today)%>
+					<%if week.user_met_all_weekly_build_reqs(log.user)%>
 						<td class="success">True</td>
 					<%else%>
 						<td class="danger">False</td>

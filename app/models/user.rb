@@ -130,29 +130,12 @@ class User < ActiveRecord::Base
   end
   ###################### END Yearly Totals##########################
   ###################### Logging/Formatting ##########################
-  def grouped_logs
-    self.timelogs.order('timein asc').group_by{ |u| ApplicationHelper.toLocalTime(u.timein).beginning_of_week }
-  end
   def self.format_time(total)
     time = Time.at(total).utc
     return "#{'%02d' % (time.hour + (time.day-1)*24)}:#{'%02d' % time.min}:#{'%02d' % time.sec}"
   end
   
   ###################### Requirements ##########################
-  def met_build_season_reqs(date)
-		if met_build_season_hours(date) && met_build_season_meetings(date)
-			return true
-		else
-			return false
-		end
-  end
-  def met_preseason_reqs(date)
-    if met_preseason_meetings(date)
-      return true
-    else
-      return false
-    end
-  end
   def all_forms_in
     users_forms = self.forms.map{|x| x.id}
     all_forms = Form.all_required.reject{|x| users_forms.include? x.id}
@@ -162,32 +145,7 @@ class User < ActiveRecord::Base
       return false
     end
   end
-  ###################### PreSeason ##########################
-  def met_preseason_meetings(date)
-    self.get_weeks_log_count(date)>=Constants::PRE_MEETINGS
-  end
-  ###################### End PreSeason ##########################
   ###################### Build Season ##########################
-  def met_build_season_meetings(date)
-    self.get_weeks_log_count(date)>=Constants::BUILD_MEETINGS
-  end
-  def met_build_season_hours(date)
-		if self.get_weeks_hours_in_time(date).hour >= self.weekly_required_hours(date)
-			return true
-		else
-			return false
-		end
-  end
-  def weekly_required_hours(date)
-    #Takes any day in the week
-    exceptions = Year.current_year.week_exceptions.where("date >= ? and date <= ?",date.beginning_of_week,date.end_of_week).uniq
-		if !exceptions.empty?
-			exceptions.order("date").each do |ex|
-				return (self.required_hours*ex.weight).round(2)
-			end
-		end
-    return self.required_hours
-  end
   def required_hours 
     if !self.hour_override.nil?
       return self.hour_override.hours_required
@@ -210,31 +168,6 @@ class User < ActiveRecord::Base
     return 0
   end
   ###################### End Build Season ##########################
-  ###################### Weekly Hour Calculations ##########################
-  def get_weeks_hours(date)
-    logs = self.get_weeks_logs(date)
-		total = 0
-		logs.each do |log|
-		  total = total+log.time_logged
-		end
-    return total
-  end
-  def get_weeks_hours_in_time(date)
-    Time.at(self.get_weeks_hours(date)).utc
-  end
-  def get_weeks_log_count(date)
-    logs = self.get_weeks_logs(date)
-		
-    logs_grouped = logs.group_by{|a| a.timein.strftime("%m/%d/%Y")} rescue 0
-    count = logs_grouped.count rescue 0
-    return count
-  end
-  def get_weeks_logs(date)
-    logs = self.timelogs.in_week(date)
-    return logs
-  end
-  
-  ###################### End Weekly Hour Calculations ##########################
   
   
   private 
