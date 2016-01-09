@@ -41,6 +41,7 @@
 		<th><%= sort_link(@search, :user_name_first, "User") %></th>
 		<th><%= sort_link(@search, :timein, "Time in") %></th>
 		<th><%= sort_link(@search, :timeout, "Time out") %></th>
+		<th><%= sort_link(@search, :duration, "Duration") %></th>
 		<th><%= sort_link(@search, :year_year_start, "Year") %></th>
 	    <th></th>
 	    <th></th>
@@ -52,6 +53,7 @@
 	    <td><%= "#{timelog.user.name_first rescue ""} #{timelog.user.name_last rescue ""}" %></td>
 	    <td><%= local_time timelog.timein rescue ""%></td>
 	    <td><%= local_time timelog.timeout rescue ""%></td>
+		<td><%= Time.at(timelog.time_logged).utc.strftime("%H:%M:%S") rescue ""%></td>
 		<td><%= timelog.year.year_range rescue ""%></td>
 	    <td><%= link_to 'Show', timelog %></td>
 	    <td><%= link_to '', edit_timelog_path(timelog), :class=>"glyphicon glyphicon-pencil" %></td>
