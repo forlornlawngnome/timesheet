@@ -10,6 +10,7 @@ class HourException < ActiveRecord::Base
   
   scope :in_range, -> (date_start, date_end){where("date_applicable >= ? and date_applicable <= ?",date_start,date_end)}
   scope :this_year, -> {where(:year_id => Year.current_year.id)}
+  scope :build_season, -> {joins(:week).merge(Week.build_season)}
   
   def setWeek
     self.week = Week.find_week(self.date_applicable)
