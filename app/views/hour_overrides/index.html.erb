@@ -19,7 +19,7 @@
 
 <% @hour_overrides.each do |hour_override| %>
   <tr>
-    <td><%= link_to hour_override.user.full_name, hour_override.user%></td>
+    <td><%= link_to hour_override.user.full_name, hour_override.user rescue "None"%></td>
     <td><%= hour_override.year.year_range %></td>
     <td><%= hour_override.hours_required %></td>
     <td><%= hour_override.reason %></td>
