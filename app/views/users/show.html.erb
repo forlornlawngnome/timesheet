@@ -1,4 +1,4 @@
-<%if current_user.try(:admin) || current_user.id == params[:id].to_f || current_user.student_leader%>
+<%if current_user.try(:admin) || current_user.id == @user.id || current_user.student_leader%>
 	<div class="row">
 		<div class="col-lg-8 col-md-8">
 			<h2><%=@user.full_name%></h2>
