@@ -48,7 +48,9 @@ class Week < ActiveRecord::Base
     end
   end
   def user_met_build_hour_reqs(user)
-    if get_users_hours_as_time(user).hour >= get_users_required_build_hours(user)
+    time = get_users_hours_as_time(user)
+    hours = time.hour + time.day*24
+    if hours >= get_users_required_build_hours(user)
       return true
     else
       return false
