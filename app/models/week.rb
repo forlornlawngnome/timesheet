@@ -50,7 +50,9 @@ class Week < ActiveRecord::Base
   def user_met_build_hour_reqs(user)
     time = get_users_hours_as_time(user)
     hours = time.hour + time.day*24
-    logger.warn hours.inspect
+    logger.warn "hours: #{time.hour}"
+    logger.warn "days: #{time.day}"
+    logger.warn "total hours: #{hours.inspect}"
     if hours >= get_users_required_build_hours(user)
       return true
     else
