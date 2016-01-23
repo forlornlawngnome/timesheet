@@ -149,7 +149,7 @@ class User < ActiveRecord::Base
     year = Year.current_year
     weeks = year.weeks.past.build_season
     weeks.each do |week|
-      if !week.user_met_all_weekly_build_reqs(self)
+      if !week.met_weekly_reqs(self)
         return false
       end
     end

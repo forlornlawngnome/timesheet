@@ -23,7 +23,7 @@
 				<td><%= user.email%></td>
 				<td><%=user.required_hours%></td>
 				<%@weeks.each do |week|%>
-					<%build_season_req = week.user_met_all_weekly_build_reqs(user)%>
+					<%build_season_req = week.met_weekly_reqs(user)%>
 					<%if build_season_req%>
 						<% build_season_req_class="success"%>
 					<%else%>

@@ -42,6 +42,15 @@ class Week < ActiveRecord::Base
     end
   end
   ########### Week Requirements ##########
+  def met_weekly_reqs(user)
+    if is_preseason
+      return user_met_all_weekly_pre_reqs(user)
+    elsif is_build_season
+      return user_met_all_weekly_build_reqs(user)
+    else
+      return true
+    end
+  end
   ### Build Season Reqs #####
   def user_met_all_weekly_build_reqs(user)
     if user.is_mentor

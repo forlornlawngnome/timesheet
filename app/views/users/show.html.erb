@@ -141,7 +141,7 @@
 				<td><%=week.num_meetings_by_user(@user)%></td>
 				<%if week.is_preseason%>
 					<td></td>
-					<%preseason_req = week.user_met_all_weekly_pre_reqs(@user)%>
+					<%preseason_req = week.met_weekly_reqs(@user)%>
 					<%if preseason_req%>
 						<%preseason_req_class = "success"%>
 					<%else%>
@@ -149,13 +149,13 @@
 					<%end%>
 					<td class=<%="#{preseason_req_class}"%>>
 						<%=preseason_req.to_s.titleize%>
-						<%if !week.hour_exceptions.where(:user_id => @user.id).empty?%>
+						<%if !week.get_users_hour_exceptions(@user).empty?%>
 							*
 						<%end%>
 					</td>
 				<%elsif week.is_build_season%>
 					<td><%=week.get_users_required_build_hours(@user)%></td>
-					<%build_season_req = week.user_met_all_weekly_build_reqs(@user)%>
+					<%build_season_req = week.met_weekly_reqs(@user)%>
 					<%if build_season_req%>
 						<%build_season_req_class = "success"%>
 					<%else%>
@@ -163,7 +163,7 @@
 					<%end%>
 					<td class=<%="#{build_season_req_class}"%>>
 						<%=build_season_req.to_s.titleize%>
-						<%if !week.get_users_hour_exceptions.empty?%>
+						<%if !week.get_users_hour_exceptions(@user).empty?%>
 							*
 						<%end%>
 					</td>
@@ -174,7 +174,7 @@
 				<%if current_user.try(:admin)%>
 					<td>
 						<%if !week.get_users_hour_exceptions(@user).empty?%>
-							<%week.get_users_hour_exceptions.order("date_applicable").each do |ex|%>
+							<%week.get_users_hour_exceptions(@user).order("date_applicable").each do |ex|%>
 								<%=link_to ex.reason, ex%><br />
 							<%end%>
 						<%end%>
