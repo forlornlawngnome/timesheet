@@ -163,7 +163,7 @@
 					<%end%>
 					<td class=<%="#{build_season_req_class}"%>>
 						<%=build_season_req.to_s.titleize%>
-						<%if !week.hour_exceptions.where(:user_id => @user.id).empty?%>
+						<%if !week.get_users_hour_exceptions.empty?%>
 							*
 						<%end%>
 					</td>
@@ -173,8 +173,8 @@
 				<%end%>
 				<%if current_user.try(:admin)%>
 					<td>
-						<%if !week.hour_exceptions.empty?%>
-							<%week.hour_exceptions.where(:user_id => @user.id).order("date_applicable").each do |ex|%>
+						<%if !week.get_users_hour_exceptions(@user).empty?%>
+							<%week.get_users_hour_exceptions.order("date_applicable").each do |ex|%>
 								<%=link_to ex.reason, ex%><br />
 							<%end%>
 						<%end%>

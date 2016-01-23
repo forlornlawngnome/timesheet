@@ -20,6 +20,7 @@ wrapper_mappings: {
 			<%= f.input :reason%>
 			<%= f.input :submitter, :as=>:hidden, :input_html => { :value => current_user.email }%>
 			<%= f.input :year_id, :as=>:hidden, :input_html => { :value => Year.current_year.id }%>
+			<%= f.input :made_up_hours%>
 			<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-8">
 					<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', forms_path, :class=>"btn btn-danger pull-right" %>

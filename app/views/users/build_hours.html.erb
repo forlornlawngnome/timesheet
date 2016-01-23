@@ -31,7 +31,7 @@
 					<%end%>
 					<td class=<%="#{build_season_req_class}"%>>
 						<%=User.format_time(week.get_users_hours_as_time(user))%>
-						<%if !week.hour_exceptions.where(:user_id => user.id).empty?%>
+						<%if !week.get_users_hour_exceptions(user).empty?%>
 							*
 						<%end%>
 					</td>

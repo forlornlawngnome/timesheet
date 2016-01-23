@@ -33,6 +33,11 @@
   <%= link_to @hour_exception.week.week_range, @hour_exception.week rescue ""%> 
 </p>
 
+<p>
+  <b>Made up hours?</b>
+  <%= @hour_exception.made_up_hours %>
+</p>
+
 <div class="row">
 	<%if current_user.try(:admin)%>
 		<%=link_to fa_icon("pencil"), edit_hour_exception_path(@hour_exception), :class=>"btn btn-primary"%>

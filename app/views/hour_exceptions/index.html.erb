@@ -15,6 +15,7 @@
     <th>Date sent</th>
     <th>Reason</th>
     <th>Year</th>
+	<th>Made up hours?</th>
     <th></th>
     <th></th>
     <th></th>
@@ -28,6 +29,7 @@
     <td><%= hour_exception.date_sent %></td>
     <td><%= hour_exception.reason %></td>
     <td><%= hour_exception.year.year_range %></td>
+	<td><%= hour_exception.made_up_hours%></td>
     <td><%= link_to 'Show', hour_exception %></td>
     <td><%= link_to '', edit_hour_exception_path(hour_exception) , :class=>"glyphicon glyphicon-pencil" %></td>
     <td><%= link_to '', hour_exception, :class=>"glyphicon glyphicon-trash", method: :delete, data: { confirm: 'Are you sure?' } %></td>

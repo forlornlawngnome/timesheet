@@ -46,10 +46,19 @@ class Week < ActiveRecord::Base
   def user_met_all_weekly_build_reqs(user)
     if user.is_mentor
       return true
-    elsif user_met_build_hour_reqs(user) && user_met_build_meeting_reqs(user)
-      return true
     else
-      return false
+      exception = get_users_hour_exceptions(user)
+      if !exception.nil? && !exception.empty?
+        ex = exception.first
+        if ex.made_up_hours
+          return true
+        end
+      end
+      if user_met_build_hour_reqs(user) && user_met_build_meeting_reqs(user)
+        return true
+      else
+        return false
+      end
     end
   end
   def user_met_build_hour_reqs(user)
@@ -118,5 +127,8 @@ class Week < ActiveRecord::Base
   end 
   def user_logs(user)
     self.timelogs.where(:user_id=>user.id)
+  end
+  def get_users_hour_exceptions(user)
+    self.hour_exceptions.where(:user_id=>user.id)
   end
 end
