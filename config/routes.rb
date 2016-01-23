@@ -40,6 +40,7 @@ Timesheet::Application.routes.draw do
   get 'currentStudents' => 'users#current', :as=>"students"
   match 'studentForms' => 'users#forms', :as=>"student_forms", via: [:get, :post]
   get 'currentStudentHours' => 'users#hours', :as=>"current_hours"
+  get 'buildHours' => 'users#build_hours', :as=>"build_hours"
   
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"

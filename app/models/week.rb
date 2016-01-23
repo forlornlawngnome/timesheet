@@ -13,6 +13,9 @@ class Week < ActiveRecord::Base
   def week_range
     "#{self.week_start.strftime("%m/%d/%y") } - #{self.week_end.strftime("%m/%d/%y") }"
   end
+  def short_week_range
+    "#{self.week_start.strftime("%m/%d") } - #{self.week_end.strftime("%m/%d") }"
+  end
   def self.find_week(date)
     week = Week.where("week_start <= ? and week_end >= ?",date,date).first
   end

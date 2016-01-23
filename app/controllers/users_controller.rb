@@ -26,6 +26,13 @@ class UsersController < ApplicationController
       format.html # index.html.erb
     end
   end
+  def build_hours
+    @users = User.active.order("name_first")
+    @weeks = Year.current_year.weeks.build_season.where("week_start <= ?",Date.today)
+    respond_to do |format|
+      format.html # index.html.erb
+    end
+  end
   def current
     
     @users = User.active.order("name_first")
