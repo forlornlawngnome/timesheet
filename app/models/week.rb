@@ -11,7 +11,7 @@ class Week < ActiveRecord::Base
   scope :build_season, -> { where(:season=>"Build Season")}
   
   def week_range
-    "#{self.week_start.strftime("%m/%d/%Y") } - #{self.week_end.strftime("%m/%d/%Y") }"
+    "#{self.week_start.strftime("%m/%d/%y") } - #{self.week_end.strftime("%m/%d/%y") }"
   end
   def self.find_week(date)
     week = Week.where("week_start <= ? and week_end >= ?",date,date).first
@@ -41,7 +41,9 @@ class Week < ActiveRecord::Base
   ########### Week Requirements ##########
   ### Build Season Reqs #####
   def user_met_all_weekly_build_reqs(user)
-    if user_met_build_hour_reqs(user) && user_met_build_meeting_reqs(user)
+    if user.is_mentor
+      return true
+    elsif user_met_build_hour_reqs(user) && user_met_build_meeting_reqs(user)
       return true
     else
       return false
