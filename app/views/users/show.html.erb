@@ -130,7 +130,7 @@
 				<th># Meetings</th>
 				<th>Required Hours</th>
 				<th>Met Requirements?</th>
-				<th>Exceptions <%if current_user.try(:admin)%><%=link_to fa_icon("plus"), new_hour_exception_path, :class=>"pull-right"%><%end%></th>
+				<th>Exceptions <%if current_user.try(:admin)%><%=link_to fa_icon("plus"), new_hour_exception_path(:user_id=>@user.id), :target=>"_blank", :class=>"pull-right"%><%end%></th>
 			</tr>
 		</thead>
 		<%Year.current_year.weeks.past.order("week_start asc").each do |week|%>

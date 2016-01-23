@@ -25,6 +25,11 @@ class HourExceptionsController < ApplicationController
   # GET /hour_exceptions/new.json
   def new
     @hour_exception = HourException.new
+    if params["user_id"]
+      @user = params["user_id"].to_i
+    else
+      @user = nil
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +40,7 @@ class HourExceptionsController < ApplicationController
   # GET /hour_exceptions/1/edit
   def edit
     @hour_exception = HourException.find(params[:id])
+    @user = @hour_exception.user.id
   end
 
   # POST /hour_exceptions
