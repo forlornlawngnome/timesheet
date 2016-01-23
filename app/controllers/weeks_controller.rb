@@ -3,7 +3,7 @@ class WeeksController < ApplicationController
 
   # GET /weeks
   def index
-    @search = Week.search(params[:q])
+    @search = Week.order("week_start desc").search(params[:q])
     @weeks = @search.result.page(params[:page]).per(100)
     #Week.delete_all
   end
