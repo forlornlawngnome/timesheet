@@ -2,6 +2,11 @@
 <p>Please ask an Admin to log in if you would like to check in.</p>
 <p>Sign in your own account to update your account info</p>
 
+<%if !current_user.nil? %>
+	<hr />
+	<p>If you would like to check your hours, see your <%=link_to "Profile", user_path(current_user)%></p>
+<%end%>
+
 <hr />
 <%if !current_user.nil? && current_user.try(:admin)%>
 	<%if Year.current_year.id.nil?%>
