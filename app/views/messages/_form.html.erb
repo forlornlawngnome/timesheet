@@ -1,0 +1,13 @@
+<%= simple_form_for(@message) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :user_id, collection: User.active.order("lower(name_first)"),:label_method =>:full_name, input_html: {:include_blank => true}%>
+    <%= f.input :message %>
+    <%= f.input :color %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

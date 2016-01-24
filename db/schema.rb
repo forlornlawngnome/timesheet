@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160123191805) do
+ActiveRecord::Schema.define(version: 20160124164457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,16 @@ ActiveRecord::Schema.define(version: 20160123191805) do
 
   add_index "hour_overrides", ["user_id"], name: "index_hour_overrides_on_user_id", using: :btree
   add_index "hour_overrides", ["year_id"], name: "index_hour_overrides_on_year_id", using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "message"
+    t.string   "color"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "schools", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -144,5 +154,6 @@ ActiveRecord::Schema.define(version: 20160123191805) do
     t.date     "preseason_start"
   end
 
+  add_foreign_key "messages", "users"
   add_foreign_key "weeks", "years"
 end

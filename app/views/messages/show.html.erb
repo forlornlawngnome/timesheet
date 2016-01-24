@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= link_to @message.user.full_name, @messages.user %>
+</p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @message.message %>
+</p>
+
+<p>
+  <strong>Color:</strong>
+  <%= @message.color %>
+</p>
+Preview:
+<%=render "/messages/alert", :message=>@message%>
+
+<div class="row">
+	<%if current_user.try(:admin)%>
+		<%=link_to fa_icon("pencil"), edit_message_path(@message), :class=>"btn btn-primary"%>
+		<%= link_to '', @message, :class=>"glyphicon glyphicon-trash btn btn-danger ", method: :delete, data: { confirm: 'Are you sure?' } %>
+	<%end%>
+	<%= link_to 'Back', messages_path, :class=>"btn btn-danger pull-right" %>
+</div>

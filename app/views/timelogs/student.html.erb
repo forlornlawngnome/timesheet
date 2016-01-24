@@ -12,6 +12,12 @@
   
 <%end%>
 <hr />
+<%student=User.find_by_id(params[:user_id])%>
+<%if !student.nil?%>
+	<%student.messages.each do |message|%>
+		<%=render "/messages/alert", :message=>message%>
+	<%end%>
+<%end%>
 <table class="table table-hover">
 	<thead>
 		<tr>

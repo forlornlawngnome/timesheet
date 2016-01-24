@@ -1,0 +1,8 @@
+<div class=<%="'alert alert-#{message.status}'".html_safe%>>
+	<div class="span4">
+		<h4><%=message.user.name_first%></h4>
+	</div>
+	<div class="span7">
+		<%=message.message%>
+	</div>
+</div>

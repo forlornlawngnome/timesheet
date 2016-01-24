@@ -51,10 +51,10 @@ class TimelogsController < ApplicationController
         timelog.timeout = Time.now
         timelog.updated_at = Time.now
         if timelog.save
-          redirect_to studentlogin_path, notice: "Signed Out: #{student.full_name}" 
+          redirect_to studentlogin_path(:user_id=>student.id), notice: "Signed Out: #{student.full_name}"
           return
         else
-          redirect_to studentlogin_path, alert: "Failed to Sign Out: #{student.full_name}" 
+          redirect_to studentlogin_path(:user_id=>student.id), alert: "Failed to Sign Out: #{student.full_name}" 
           return
         end
       else
@@ -66,16 +66,16 @@ class TimelogsController < ApplicationController
         if student.archive ==true
           student.archive=false
           if !student.save
-            redirect_to studentlogin_path, alert: "Failed to Sign In: #{student.full_name}" 
+            redirect_to studentlogin_path(:user_id=>student.id), alert: "Failed to Sign In: #{student.full_name}" 
             return
           end
         end
         
         if timelog.save
-          redirect_to studentlogin_path, notice: "Signed In: #{student.full_name}" 
+          redirect_to studentlogin_path(:user_id=>student.id), notice: "Signed In: #{student.full_name}" 
           return
         else
-          redirect_to studentlogin_path, alert: "Failed to Sign In: #{student.full_name}" 
+          redirect_to studentlogin_path(:user_id=>student.id), alert: "Failed to Sign In: #{student.full_name}" 
           return
         end
         
