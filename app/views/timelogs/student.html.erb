@@ -1,5 +1,5 @@
 <h1>New timelog</h1>
-<%if current_user.try(:admin) || current_user.email == "signup@team900.org"%>
+<%if current_user.try(:admin) || current_user.is_default_user%>
 <%= form_for @timelog do |f| %>
   <div class="field">
     <%="User Number" %><br />

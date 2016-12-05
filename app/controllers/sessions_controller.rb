@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       if user.try(:admin)
         redirect_to root_url, :notice => "Logged in!"
-      elsif user.email == Constants::DEFAULT_LOGIN
+      elsif user.is_default_user
         redirect_to studentlogin_path
       else
         redirect_to user_path(user.id), :notice => "Logged in!"
