@@ -15,7 +15,7 @@
 		</div>
 	<%end%>
 	<h2>Important Links</h2>
-	<%if current_user.email == "signup@team900.org"%>
+	<%if current_user.is_default_user%>
 		<h4>Check-in Page</h4>
 		<li><%=link_to "Student Login", studentlogin_path%></li>
 	<%end%>
