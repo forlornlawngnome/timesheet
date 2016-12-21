@@ -7,6 +7,7 @@ class Year < ActiveRecord::Base
   has_many :hour_exceptions
   has_many :week_exceptions
   has_many :weeks, dependent: :delete_all
+  has_one :requirement
   
   accepts_nested_attributes_for :weeks
   

@@ -1,0 +1,34 @@
+<%=simple_form_for(@requirement, html: { class: 'form-horizontal' },wrapper: :horizontal_form,
+wrapper_mappings: {
+  check_boxes: :horizontal_radio_and_checkboxes,
+  radio_buttons: :horizontal_radio_and_checkboxes,
+  file: :horizontal_file_input,
+  boolean: :horizontal_boolean
+}) do |f|%>
+<div class="col-md-2">
+</div>
+<div class="col-md-8">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      Hour Requirement Form
+    </div>
+    <div class="panel-body">
+      <%= f.error_notification %>
+      <%= f.input :pre_meetings%>
+      <%= f.input :pre_hours %>
+      <%= f.input :build_meetings %>
+      <%= f.input :freshman_hours %>
+      <%= f.input :sophomore_hours %>
+      <%= f.input :junior_hours %>
+      <%= f.input :senior_hours %>
+      <%= f.input :leadership_hours %>
+      <%= f.input :year_id, collection: Year.order("year_start"),:label_method =>:year_range, input_html: {:include_blank => true}%>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-8">
+          <%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', forms_path, :class=>"btn btn-danger pull-right" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

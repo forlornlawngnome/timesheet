@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160124164457) do
+ActiveRecord::Schema.define(version: 20161221170806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,22 @@ ActiveRecord::Schema.define(version: 20160124164457) do
   end
 
   add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
+
+  create_table "requirements", force: :cascade do |t|
+    t.integer  "pre_meetings"
+    t.integer  "pre_hours"
+    t.integer  "build_meetings"
+    t.integer  "freshman_hours"
+    t.integer  "sophomore_hours"
+    t.integer  "junior_hours"
+    t.integer  "senior_hours"
+    t.integer  "leadership_hours"
+    t.integer  "year_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "requirements", ["year_id"], name: "index_requirements_on_year_id", using: :btree
 
   create_table "schools", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -155,5 +171,6 @@ ActiveRecord::Schema.define(version: 20160124164457) do
   end
 
   add_foreign_key "messages", "users"
+  add_foreign_key "requirements", "years"
   add_foreign_key "weeks", "years"
 end

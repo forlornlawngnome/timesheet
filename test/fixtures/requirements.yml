@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pre_meetings: 1
+  pre_hours: 1
+  build_meetings: 1
+  freshman_hours: 1
+  sophomore_hours: 1
+  junior_hours: 1
+  senior_hours: 1
+  leadership_hours: 1
+
+two:
+  pre_meetings: 1
+  pre_hours: 1
+  build_meetings: 1
+  freshman_hours: 1
+  sophomore_hours: 1
+  junior_hours: 1
+  senior_hours: 1
+  leadership_hours: 1
