@@ -11,7 +11,7 @@ class Year < ActiveRecord::Base
   
   accepts_nested_attributes_for :weeks
   
-  before_create :setup_weeks
+  #before_create :setup_weeks
   before_save :update_weeks
   after_save :update_week_associated
   
