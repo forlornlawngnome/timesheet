@@ -23,9 +23,9 @@ wrapper_mappings: {
 				<%= f.input :location%>
 				<%= f.input :gender, collection: Constants::GENDERS%>
 				<%= f.input :graduation_year%>
-				<%= f.input :userid%>
 				<%= f.input :password%>
 				<%= f.input :password_confirmation%>
+				<%= f.input :userid%>
 				<%if !current_user.nil? && current_user.try(:admin)%>
 					<%= f.input :student_leader%>
 					<%= f.input :admin%>
