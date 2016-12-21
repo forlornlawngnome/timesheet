@@ -12,7 +12,8 @@ class UsersController < ApplicationController
     @users = User.active.order("name_first")
     @numMentors = 0
     @numStudents = 0
-    @preseasonMin = Year.preseason_weeks
+    @preseasonMin = Year.preseason_meetings_req
+    @preseasonHoursMin = (Year.preseason_hours_req*60*60)
     
     @users.each do |user|
       if user.is_default_user

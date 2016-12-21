@@ -8,15 +8,16 @@
 	<br />
 	Number of Active Mentors: <%=@numMentors%>
 	<br />
-	Number of Weeks in PreSeason: <%=@preseasonMin%>
+	Number of Weeks in PreSeason: <%=Year.preseason_weeks%>
 	<table class="table table-hover">
 		<thead>
 	  	  	<tr>
 			    <th>Name</th>
 				<th>Email</th>
-				<th>Build Hours Required Per Week</th>
 				<th>All Required Forms In?</th>
 				<th># Meetings Pre-Season</th>
+				<th># Hours Pre-Season</th>
+				<th>Build Hours Required Per Week</th>
 				<th>Total Hours in Build Season</th>
 				<th>All Requirements Met?</th>
 				<th></th>
@@ -27,7 +28,6 @@
 			  <tr>
 			    <td style="max-width:150px"><%= link_to user.full_name, user_path(user), method: :get %></td>
 				<td><%= user.email%></td>
-				<td><%=user.required_hours%></td>
 				<%required_forms = user.all_forms_in%>
 				<%if required_forms%>
 					<% required_cell_class="success"%>
@@ -46,6 +46,16 @@
 				<td class=<%="#{preseason_req_class}"%>>
 					<%= user.preseason_meetings%>
 				</td>
+				<%preseason_req_hours = (user.years_preseason_hours(Year.current_year) >= @preseasonHoursMin)%>
+				<%if preseason_req_hours%>
+					<% preseason_req_hours_class="success"%>
+				<%else%>
+					<% preseason_req_hours_class="danger"%>
+				<%end%>
+				<td class=<%="#{preseason_req_hours_class}"%>>
+					<%= user.pre_hours_formatted(Year.current_year)%>
+				</td>
+				<td><%=user.required_build_hours%></td>
 				<%build_season_req = user.build_season_met%>
 				<%if build_season_req%>
 					<% build_season_req_class="success"%>

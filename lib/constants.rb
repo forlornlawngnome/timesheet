@@ -3,6 +3,7 @@ module Constants
   DAY_END = 1
   BUILD_MEETINGS = 2
   PRE_MEETINGS = 1
+  PRE_HOURS = 25
   DEFAULT_LOGIN = "signup@team900.org"
   TEAM_NAME = 'Zebracorns'
   TEAM_NUMBER = '900'

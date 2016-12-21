@@ -90,25 +90,25 @@ class User < ActiveRecord::Base
   ######################Yearly Totals##########################
   def years_build_hours(year)
     #Number of build season hours for the year
-    total = 0
-    self.timelogs.build_season_hours(year).each do |log|
-      total = total + log.time_logged
+    total=0
+    year.weeks.build_season.each do |week|
+      total=total+week.get_users_hours(self)
     end
     return total
   end
-  def build_hours_formatted(seconds)
+  def build_hours_formatted(year)
     #format the build season hours
-    return User.format_time(years_build_hours(seconds))
+    return User.format_time(years_build_hours(year))
   end
   def years_total_hours(year)
     total = 0
-    self.timelogs.in_year(year).each do |log|
-        total = total + log.time_logged
+    year.weeks.each do |week|
+      total=total+week.get_users_hours(self)
     end
     total
   end
-  def total_hours_formatted(seconds)
-    return User.format_time(years_total_hours(seconds))
+  def total_hours_formatted(year)
+    return User.format_time(years_total_hours(year))
   end
   def self.allStudentsForYear(year)
     users = User.joins(:timelogs).where("timein >= ? and timein < ?",year.year_start,year.year_end)
@@ -120,6 +120,17 @@ class User < ActiveRecord::Base
       return true
     end
     return false
+  end
+  def years_preseason_hours(year)
+    total = 0
+    year.weeks.preseason.each do |week|
+      total=total+week.get_users_hours(self)
+    end
+    return total
+  end
+  def pre_hours_formatted(year)
+    #format the build season hours
+    return User.format_time(years_preseason_hours(year))
   end
   def preseason_meetings
     #Number of pre season meetings for the year
@@ -159,25 +170,78 @@ class User < ActiveRecord::Base
     end
     return true
   end
+
   ###################### Build Season ##########################
-  def required_hours 
+  def required_build_meetings
+    if !Year.current_year.requirement.nil?
+      req=Year.current_year.requirement
+      if req.build_meetings.nil?
+        return 0
+      else
+        return req.build_meetings
+      end
+    else  
+      return Constants::BUILD_MEETINGS
+    end
+  end
+  def required_build_hours 
     if !self.hour_override.nil?
       return self.hour_override.hours_required
     end
-    if self.student_leader
-      return Constants::LEADERSHIP_HOURS
+
+    if !Year.current_year.requirement.nil?
+      req=Year.current_year.requirement
+      if self.student_leader
+        if req.leadership_hours.nil?
+          return 0
+        else
+          return req.leadership_hours
+        end
+      end
+        
+      case self.get_class
+      when "Freshman"
+        if req.freshman_hours.nil?
+          return 0
+        else
+          return req.freshman_hours
+        end
+      when "Sophomore"
+        if req.sophomore_hours.nil?
+          return 0
+        else
+          return req.sophomore_hours
+        end
+      when "Junior"
+         if req.junior_hours.nil?
+          return 0
+        else
+          return req.junior_hours
+        end
+      when "Senior"
+         if req.senior_hours.nil?
+          return 0
+        else
+          return req.senior_hours
+        end
+      end
+    else  
+      if self.student_leader
+        return Constants::LEADERSHIP_HOURS
+      end
+      
+      case self.get_class
+      when "Freshman"
+        return Constants::FRESHMAN_HOURS
+      when "Sophomore"
+        return Constants::SOPHOMORE_HOURS
+      when "Junior"
+        return Constants::JUNIOR_HOURS
+      when "Senior"
+        return Constants::SENIOR_HOURS
+      end
     end
-    
-    case self.get_class
-    when "Freshman"
-      return Constants::FRESHMAN_HOURS
-    when "Sophomore"
-      return Constants::SOPHOMORE_HOURS
-    when "Junior"
-      return Constants::JUNIOR_HOURS
-    when "Senior"
-      return Constants::SENIOR_HOURS
-    end
+   
     
     return 0
   end

@@ -40,6 +40,30 @@ class Year < ActiveRecord::Base
     logs_grouped = logs.group_by{ |u| ApplicationHelper.toLocalTime(u.timein).beginning_of_week} rescue 0
     logs_grouped.count
   end
+  def self.preseason_meetings_req
+    if !Year.current_year.requirement.nil?
+      req=Year.current_year.requirement
+      if req.pre_meetings.nil?
+        return 0
+      else
+        return req.pre_meetings
+      end
+    else  
+      return Constants::PRE_MEETINGS
+    end
+  end
+  def self.preseason_hours_req
+    if !Year.current_year.requirement.nil?
+      req=Year.current_year.requirement
+      if req.pre_hours.nil?
+        return 0
+      else
+        return req.pre_hours
+      end
+    else  
+      return Constants::PRE_HOURS
+    end
+  end
   private
     def setup_weeks
       #raise  (self.year_start..self.preseason_start).group_by{ |u| u.beginning_of_week}.inspect
