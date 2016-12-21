@@ -10,7 +10,7 @@ wrapper_mappings: {
 	<div class="col-md-8">
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				Form Form
+				User Form
 			</div>
 			<div class="panel-body">
 				<%= f.error_notification %>
@@ -19,7 +19,7 @@ wrapper_mappings: {
 				<%= f.input :email, :as=>:email%>
 			
 				<%= f.input :phone, :label=>"Phone Number"%>
-				<%= f.input :school_id, collection: School.order("lower(name)"),:label_method =>:name, input_html: {:include_blank => true}%>
+				<%= f.input :school_id, collection: School.order("lower(name)"),:label=>Constants::SCHOOL_NAME_REPLACEMENT, input_html: {:include_blank => true}%>
 				<%= f.input :location%>
 				<%= f.input :gender, collection: Constants::GENDERS%>
 				<%= f.input :graduation_year%>
