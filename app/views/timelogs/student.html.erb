@@ -1,65 +1,65 @@
 <h1>New timelog</h1>
 <%if current_user.try(:admin) || current_user.email == "signup@team900.org"%>
-<%= form_for @timelog do |f| %>
-  <div class="field">
-    <%="User Number" %><br />
-    <%= text_field_tag :owner_userid, "", :class=>"form-control"%>
-	<%= javascript_tag "$('#owner_userid').focus()" %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Submit", :name => 'multi' %>
-  </div>
+	<%= form_for @timelog do |f| %>
+	  <div class="field">
+	    <%="User Number" %><br />
+	    <%= text_field_tag :owner_userid, "", :class=>"form-control"%>
+		<%= javascript_tag "$('#owner_userid').focus()" %>
+	  </div>
+	  <div class="actions">
+	    <%= f.submit "Submit", :name => 'multi' %>
+	  </div>
   
-<%end%>
-<hr />
-<%student=User.find_by_id(params[:user_id])%>
-<%if !student.nil?%>
-	<%student.messages.each do |message|%>
-		<%=render "/messages/alert", :message=>message%>
 	<%end%>
-<%end%>
-<table class="table table-hover">
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>In/Out</th>
-			<th>Time</th>
-			<th>Weekly Requirements Met?</th>
-			<th>Required Forms In?</th>
-		</tr>
-	</thead>
-	<tbody>
-		<%@logs.each do |log|%>
+	<hr />
+	<%student=User.find_by_id(params[:user_id])%>
+	<%if !student.nil?%>
+		<%student.messages.each do |message|%>
+			<%=render "/messages/alert", :message=>message%>
+		<%end%>
+	<%end%>
+	<table class="table table-hover">
+		<thead>
 			<tr>
-				<td><%=log.user.full_name%></td>
-				<%if log.timeout.nil?%>
-					<td>In</td>
-					<td><%=local_time log.timein, "%I:%M:%S %p"%></td>
-				<%else%>
-					<td>Out</td>
-					<td><%=local_time log.timeout, "%I:%M:%S %p"%></td>
-				<%end%>
-				<%week = Week.current_week%>
-				<%year = Year.current_year%>
-				<%if week.is_preseason%>
-					<td><i><small>Check Handbook for preseason requirements.</small></i></td>
-				<%elsif week.is_build_season%>
-					<%if week.user_met_all_weekly_build_reqs(log.user)%>
+				<th>Name</th>
+				<th>In/Out</th>
+				<th>Time</th>
+				<th>Weekly Requirements Met?</th>
+				<th>Required Forms In?</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%@logs.each do |log|%>
+				<tr>
+					<td><%=log.user.full_name%></td>
+					<%if log.timeout.nil?%>
+						<td>In</td>
+						<td><%=local_time log.timein, "%I:%M:%S %p"%></td>
+					<%else%>
+						<td>Out</td>
+						<td><%=local_time log.timeout, "%I:%M:%S %p"%></td>
+					<%end%>
+					<%week = Week.current_week%>
+					<%year = Year.current_year%>
+					<%if week.is_preseason%>
+						<td><i><small>Check Handbook for preseason requirements.</small></i></td>
+					<%elsif week.is_build_season%>
+						<%if week.user_met_all_weekly_build_reqs(log.user)%>
+							<td class="success">True</td>
+						<%else%>
+							<td class="danger">False</td>
+						<%end%> 
+					<%else%>
+						<td></td>
+					<%end%>
+					<%if log.user.all_forms_in%>
 						<td class="success">True</td>
 					<%else%>
 						<td class="danger">False</td>
-					<%end%> 
-				<%else%>
-					<td></td>
-				<%end%>
-				<%if log.user.all_forms_in%>
-					<td class="success">True</td>
-				<%else%>
-					<td class="danger">False</td>
-				<%end%>
-			</tr>
-		<%end%>
-	</tbody>
-</table>
+					<%end%>
+				</tr>
+			<%end%>
+		</tbody>
+	</table>
 
 <%end%>
