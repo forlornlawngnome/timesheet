@@ -10,14 +10,14 @@ wrapper_mappings: {
 <div class="col-md-8">
 	<div class="panel panel-info">
 		<div class="panel-heading">
-			School Form
+			<%= Constants::SCHOOL_NAME_REPLACEMENT %> Form
 		</div>
 		<div class="panel-body">
 			<%= f.error_notification %>
 			<%= f.input :name%>
 			<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-8">
-					<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', forms_path, :class=>"btn btn-danger pull-right" %>
+					<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', schools_path, :class=>"btn btn-danger pull-right" %>
 				</div>
 			</div>
 		</div>

@@ -19,7 +19,7 @@ wrapper_mappings: {
 			<%= f.input :timeout, :as => :string, :input_html => {:value => @timelog.try(:timeout) ? ApplicationHelper.toLocalTime(@timelog.timeout).strftime("%Y-%m-%d %l:%M %p") : ""}%>
 			<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-8">
-					<%= f.submit "Submit", :class=>"btn btn-success", :id=>"commit", :name=>"single"%> <%= link_to 'Back', forms_path, :class=>"btn btn-danger pull-right" %>
+					<%= f.submit "Submit", :class=>"btn btn-success", :id=>"commit", :name=>"single"%> <%= link_to 'Back', timelogs_path, :class=>"btn btn-danger pull-right" %>
 				</div>
 			</div>
 		</div>
