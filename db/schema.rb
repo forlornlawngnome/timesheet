@@ -18,10 +18,10 @@ ActiveRecord::Schema.define(version: 20160124164457) do
 
   create_table "forms", force: :cascade do |t|
     t.string   "name",       limit: 255
-    t.boolean  "archive"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-    t.boolean  "required"
+    t.boolean  "archive",    default: false, null: false
+    t.boolean  "required",   default: false, null: false
   end
 
   create_table "forms_users", force: :cascade do |t|
@@ -101,21 +101,21 @@ ActiveRecord::Schema.define(version: 20160124164457) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
-    t.boolean  "admin"
     t.string   "phone",                  limit: 255
     t.string   "name_first",             limit: 255
     t.string   "name_last",              limit: 255
     t.string   "userid",                 limit: 255
+    t.boolean  "admin",                  default: false, null: false
     t.integer  "school_id"
     t.boolean  "tools"
     t.boolean  "conduct"
     t.boolean  "basicSafety"
     t.string   "password_salt",          limit: 255
     t.string   "password_hash",          limit: 255
-    t.boolean  "archive"
     t.string   "location",               limit: 255
     t.string   "gender",                 limit: 255
     t.string   "graduation_year",        limit: 255
+    t.boolean  "archive",                default: false, null: false
     t.boolean  "student_leader"
   end
 
