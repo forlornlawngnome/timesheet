@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20160124164457) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "week_id"
-    t.boolean  "made_up_hours"
+    t.boolean  "made_up_hours",   default: false, null: false
   end
 
   add_index "hour_exceptions", ["user_id"], name: "index_hour_exceptions_on_user_id", using: :btree
