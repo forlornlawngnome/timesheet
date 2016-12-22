@@ -19,13 +19,13 @@ wrapper_mappings: {
 				<%= f.input :email, :as=>:email%>
 			
 				<%= f.input :phone, :label=>"Phone Number"%>
-				<%= f.input :school_id, collection: School.order("lower(name)"),:label_method =>:name, input_html: {:include_blank => true}%>
+				<%= f.input :school_id, collection: School.order("lower(name)"),:label=>Constants::SCHOOL_NAME_REPLACEMENT, input_html: {:include_blank => true}%>
 				<%= f.input :location%>
 				<%= f.input :gender, collection: Constants::GENDERS%>
 				<%= f.input :graduation_year%>
-				<%= f.input :userid%>
 				<%= f.input :password%>
 				<%= f.input :password_confirmation%>
+				<%= f.input :userid%>
 				<%if !current_user.nil? && current_user.try(:admin)%>
 					<%= f.input :student_leader%>
 					<%= f.input :admin%>

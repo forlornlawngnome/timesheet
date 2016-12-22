@@ -3,7 +3,7 @@
 		<h1>Users</h1>
 	</div>
 	<div class="col-md-3 pull-right">
-		<%= link_to "#{fa_icon("plus")} New Form".html_safe, new_user_path, :class=>"btn btn-primary" %>
+		<%= link_to "#{fa_icon("plus")} New User".html_safe, new_user_path, :class=>"btn btn-primary" %>
 	</div>
 </div>
 <%if current_user.try(:admin)%>
