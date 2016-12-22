@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @preseasonMin = Year.preseason_weeks
     
     @users.each do |user|
-      if user.email == Constants::DEFAULT_LOGIN
+      if user.is_default_user
       elsif user.is_mentor
         @numMentors = @numMentors + 1
       else
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
     @numStudents = 0
     
     @users.each do |user|
-      if user.email == Constants::DEFAULT_LOGIN
+      if user.is_default_user
       elsif user.is_mentor
         @numMentors = @numMentors + 1
       else

@@ -40,6 +40,9 @@ class User < ActiveRecord::Base
     end
     return false
   end
+  def is_default_user
+    self.email == Constants::DEFAULT_LOGIN
+  end
   def full_name
     return "#{self.name_first} #{self.name_last}"
   end
