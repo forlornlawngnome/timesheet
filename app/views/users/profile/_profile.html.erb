@@ -45,7 +45,7 @@
     </p>
     <p>
       <b>Build Season Hours Required:</b>
-      <%= @user.required_hours %>
+      <%= @user.required_build_hours %>
     </p>
   </div>
   <div class="col-lg-4 col-md-4">
@@ -54,7 +54,8 @@
         <th>Year</th>
         <th>All Required Forms?</th>
         <th>Total Hours</th>
-        <th>Total PreSeason Meetings</th>
+        <th>PreSeason Meetings</th>
+        <th>PreSeason Hours</th>
         <th>Build Season Hours</th>
       </tr>
       <%@years.each do |year|%>
@@ -76,6 +77,9 @@
             </td>
             <td>
               <%=@user.past_preseason_meetings(year)%>
+            </td>
+            <td>
+              <%=@user.pre_hours_formatted(year)%>
             </td>
             <td>
               <%=@user.build_hours_formatted(year)%>
