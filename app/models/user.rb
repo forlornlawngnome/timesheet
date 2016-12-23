@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   
   ###################### General Info ##########################
   def self.active
-    where("users.archive IS NOT true")
+    where(:archive => false)
   end
   def is_mentor
     if !self.school.nil? && self.school.name=="Mentor"
