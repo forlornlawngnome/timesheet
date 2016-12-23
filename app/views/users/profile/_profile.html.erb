@@ -48,7 +48,40 @@
       <%= @user.required_build_hours %>
     </p>
   </div>
-  <div class="col-lg-4 col-md-4">
+  <div class="col-lg-2 col-md-2">
+    <table class="table table-condensed table-hover">
+      <tr>
+          <th></th>
+          <th>
+            Forms
+          </th>
+      </tr>
+      
+      <%@forms.each do |form|%>
+        <tr>
+            <%has_form = @user.forms.include?(form)%>
+            <%if has_form%>
+              <td class="success">
+                <%=fa_icon("check")%>
+              </td>
+              <td class="success">
+                <%=form.name%>
+              </td>
+            <%else%>
+              <td class="danger">
+                <%=fa_icon("times")%>
+              </td>
+              <td class="danger">
+                <%=form.name%>
+              </td>
+            <%end%>
+            
+          </tr>
+      <%end%>
+      
+    </table>
+  </div>
+  <div class="col-lg-6 col-md-6">
     <table class="table table-condensed table-hover">
       <tr>
         <th>Year</th>
@@ -86,30 +119,6 @@
             </td>
           </tr>
       <%end%>
-    </table>
-  </div>
-  <div class="col-lg-4 col-md-4">
-    <table class="table table-condensed table-hover">
-      <tr>
-        <%@forms.each do |form|%>
-            <th>
-              <%=form.name%>
-            </th>
-        <%end%>
-      </tr>
-      <tr>
-        <%@forms.each do |form|%>
-            <%has_form = @user.forms.include?(form)%>
-            <%if has_form%>
-                <% cell_class="success"%>
-            <%else%>
-                <% cell_class="danger"%>
-            <%end%>
-            <td class=<%="#{cell_class}"%>>
-              <%=has_form%>
-            </td>
-        <%end%>
-      </tr>
     </table>
   </div>
 </div>
