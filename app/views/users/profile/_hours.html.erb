@@ -1,0 +1,64 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Beginning of Week</th>
+    <th>Season</th>
+    <th>Hours</th>
+    <th># Meetings</th>
+    <th>Required Hours</th>
+    <th>Met Requirements?</th>
+    <th>Exceptions <%if current_user.try(:admin)%><%=link_to fa_icon("plus"), new_hour_exception_path(:user_id=>@user.id), :target=>"_blank", :class=>"pull-right"%><%end%></th>
+  </tr>
+  </thead>
+  <%Year.current_year.weeks.past.order("week_start asc").each do |week|%>
+      <tr>
+        <th><%=week.week_start.strftime("%m/%d/%Y")%></th>
+        <td><%=week.season%></td>
+        <td><%=User.format_time(week.get_users_hours_as_time(@user))%></td>
+        <td><%=week.num_meetings_by_user(@user)%></td>
+        <%if week.is_preseason%>
+            <td></td>
+            <%preseason_req = week.met_weekly_reqs(@user)%>
+            <%if preseason_req%>
+                <%preseason_req_class = "success"%>
+            <%else%>
+                <%preseason_req_class = "danger"%>
+            <%end%>
+            <td class=<%="#{preseason_req_class}"%>>
+              <%=preseason_req.to_s.titleize%>
+              <%if !week.get_users_hour_exceptions(@user).empty?%>
+                  *
+              <%end%>
+            </td>
+        <%elsif week.is_build_season%>
+            <td><%=week.get_users_required_build_hours(@user)%></td>
+            <%build_season_req = week.met_weekly_reqs(@user)%>
+            <%if build_season_req%>
+                <%build_season_req_class = "success"%>
+            <%else%>
+                <%build_season_req_class = "danger"%>
+            <%end%>
+            <td class=<%="#{build_season_req_class}"%>>
+              <%=build_season_req.to_s.titleize%>
+              <%if !week.get_users_hour_exceptions(@user).empty?%>
+                  *
+              <%end%>
+            </td>
+        <%else%>
+            <td></td>
+            <td></td>
+        <%end%>
+        <%if current_user.try(:admin)%>
+            <td>
+              <%if !week.get_users_hour_exceptions(@user).empty?%>
+                  <%week.get_users_hour_exceptions(@user).order("date_applicable").each do |ex|%>
+                      <%=link_to ex.reason, ex%><br />
+                  <%end%>
+              <%end%>
+            </td>
+        <%else%>
+            <td></td>
+        <%end%>
+      </tr>
+  <%end%>
+</table>

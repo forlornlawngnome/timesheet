@@ -11,218 +11,38 @@
 		</div>
 	</div>
 	<hr />
+
 	<%@user.messages.each do |message|%>
 		<%=render "/messages/alert", :message=>message%>
 	<%end%>
-	<div class="row">
-		<div class="col-lg-3 col-md-3">
-			<p>
-				<b>Name:</b>
-				<%= @user.full_name %>
-			</p>
-	
-			<p>
-				<b>Student Leader?</b>
-				<%= @user.student_leader %>
-			</p>
 
-			<p>
-				<b>Email:</b>
-				<%= @user.email %>
-			</p>
-	
-			<p>
-				<b><%=Constants::SCHOOL_NAME_REPLACEMENT%>:</b>
-				<%= @user.school.name rescue ""%>
-			</p>
-	
-			<p>
-				<b>Hometown:</b>
-				<%= @user.location %>
-			</p>
-	
-			<p>
-				<b>Gender:</b>
-				<%= @user.gender %>
-			</p>
-	
-			<p>
-				<b>Graduation Year:</b>
-				<%= @user.graduation_year %>
-			</p>
-	
-			<p>
-				<b>Phone Number:</b>
-				<%= number_to_phone(@user.phone , area_code: true) %>
-			</p>
-			<p>
-				<b>ID Number:</b>
-				<%= @user.userid %>
-			</p>
-			<p>
-				<b>Build Season Hours Required:</b>
-				<%= @user.required_build_hours %>
-			</p>
-		</div>
-		<div class="col-lg-4 col-md-4">
-			<table class="table table-condensed table-hover">
-				<tr>
-					<th>Year</th>
-					<th>All Required Forms?</th>
-					<th>Total Hours</th>
-					<th>Total PreSeason Meetings</th>
-					<th>Build Season Hours</th>
-				</tr>
-				<%@years.each do |year|%>
-					<tr>
-						<td>
-							<%=year.year_range%>
-						</td>
-						<%required_forms = @user.all_forms_in%>
-						<%if required_forms%>
-							<% required_cell_class="success"%>
-						<%else%>
-							<% required_cell_class="danger"%>
-						<%end%>
-						<td class=<%="#{required_cell_class}"%>>
-							<%=required_forms%>
-						</td>
-						<td>
-							<%=@user.total_hours_formatted(year)%>
-						</td>
-						<td>
-							<%=@user.past_preseason_meetings(year)%>
-						</td>
-						<td>
-							<%=@user.build_hours_formatted(year)%>
-						</td>
-					</tr>
-				<%end%>
-			</table>
-		</div>
-		<div class="col-lg-4 col-md-4">
-			<table class="table table-condensed table-hover">
-				<tr>
-					<%@forms.each do |form|%>
-						<th>
-							<%=form.name%>
-						</th>
-					<%end%>
-				</tr>
-				<tr>
-					<%@forms.each do |form|%>
-						<%has_form = @user.forms.include?(form)%>
-						<%if has_form%>
-							<% cell_class="success"%>
-						<%else%>
-							<% cell_class="danger"%>
-						<%end%>
-						<td class=<%="#{cell_class}"%>>
-							<%=has_form%>
-						</td>
-					<%end%>
-				</tr>
-			</table>
-		</div>
-	</div>
-	<br />
-	<br />
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>Beginning of Week</th>
-				<th>Season</th>
-				<th>Hours</th>
-				<th># Meetings</th>
-				<th>Required Hours</th>
-				<th>Met Requirements?</th>
-				<th>Exceptions <%if current_user.try(:admin)%><%=link_to fa_icon("plus"), new_hour_exception_path(:user_id=>@user.id), :target=>"_blank", :class=>"pull-right"%><%end%></th>
-			</tr>
-		</thead>
-		<%Year.current_year.weeks.past.order("week_start asc").each do |week|%>
-			<tr>
-				<th><%=week.week_start.strftime("%m/%d/%Y")%></th>
-				<td><%=week.season%></td>
-				<td><%=User.format_time(week.get_users_hours_as_time(@user))%></td>
-				<td><%=week.num_meetings_by_user(@user)%></td>
-				<%if week.is_preseason%>
-					<td></td>
-					<%preseason_req = week.met_weekly_reqs(@user)%>
-					<%if preseason_req%>
-						<%preseason_req_class = "success"%>
-					<%else%>
-						<%preseason_req_class = "danger"%>
-					<%end%>
-					<td class=<%="#{preseason_req_class}"%>>
-						<%=preseason_req.to_s.titleize%>
-						<%if !week.get_users_hour_exceptions(@user).empty?%>
-							*
-						<%end%>
-					</td>
-				<%elsif week.is_build_season%>
-					<td><%=week.get_users_required_build_hours(@user)%></td>
-					<%build_season_req = week.met_weekly_reqs(@user)%>
-					<%if build_season_req%>
-						<%build_season_req_class = "success"%>
-					<%else%>
-						<%build_season_req_class = "danger"%>
-					<%end%>
-					<td class=<%="#{build_season_req_class}"%>>
-						<%=build_season_req.to_s.titleize%>
-						<%if !week.get_users_hour_exceptions(@user).empty?%>
-							*
-						<%end%>
-					</td>
-				<%else%>
-					<td></td>
-					<td></td>
-				<%end%>
-				<%if current_user.try(:admin)%>
-					<td>
-						<%if !week.get_users_hour_exceptions(@user).empty?%>
-							<%week.get_users_hour_exceptions(@user).order("date_applicable").each do |ex|%>
-								<%=link_to ex.reason, ex%><br />
-							<%end%>
-						<%end%>
-					</td>
-				<%else%>
-					<td></td>
-				<%end%>
-			</tr>
-		<%end%>
-	</table>
+  <ul class="nav nav-tabs">
+    <li role="presentation" class="active"><a href="#profile" role="tab" data-toggle="tab">Profile</a></li>
 
-	<%if current_user.try(:admin)%>
-		<hr />
-		<h3>All Timelogs</h3>
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>Time In</th>
-					<th>Time Out</th>
-					<th>Total Time</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%if !@user.timelogs.empty?%>
-					<%@user.timelogs.where("timein >= ?", Year.current_year.year_start).order("timein ASC").each do |log|%>
-						<tr>
-							<td>
-								<%=local_time log.timein rescue ""%>
-							</td>
-							<td>
-								<%=local_time log.timeout rescue ""%>
-							</td>
-							<td>
-								<%=Time.at(log.time_logged).utc.strftime("%H:%M:%S")%>
-							</td>
-						</tr>
-					<%end%>
-				<%end%>
-			</tbody>
-		</table>
-	<%end%>
-	<hr />
+    <li role="presentation"><a href="#hours" role="tab" data-toggle="tab">Hours</a></li>
+
+    <%if current_user.admin%>
+        <li role="presentation"><a href="#timelogs" role="tab" data-toggle="tab">Timelogs</a></li>
+    <%end%>
+  </ul>
+  <br />
+
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="profile">
+      <%= render "users/profile/profile"%>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="hours">
+      <%=render "users/profile/hours"%>
+    </div>
+
+    <%if current_user.admin%>
+        <div role="tabpanel" class="tab-pane" id="timelogs">
+          <%=render "users/profile/timelogs"%>
+        </div>
+    <%end%>
+  </div>
+
 	<%= link_to 'Back', users_path %>
 <%else%>
 <i>You don't have permission to view this page.</i>
