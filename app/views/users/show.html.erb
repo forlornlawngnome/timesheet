@@ -21,6 +21,8 @@
 
     <li role="presentation"><a href="#hours" role="tab" data-toggle="tab">Hours</a></li>
 
+    <li role="presentation"><a href="#exceptions" role="tab" data-toggle="tab">Missing Hours</a></li>
+
     <%if current_user.admin%>
         <li role="presentation"><a href="#timelogs" role="tab" data-toggle="tab">Timelogs</a></li>
     <%end%>
@@ -36,14 +38,19 @@
       <%=render "users/profile/hours"%>
     </div>
 
+    <div role="tabpanel" class="tab-pane" id="exceptions">
+      <%=render "users/profile/exceptions"%>
+    </div>
+
     <%if current_user.admin%>
         <div role="tabpanel" class="tab-pane" id="timelogs">
           <%=render "users/profile/timelogs"%>
         </div>
     <%end%>
+    <%= link_to 'Back', users_path %>
   </div>
 
-	<%= link_to 'Back', users_path %>
+	
 <%else%>
 <i>You don't have permission to view this page.</i>
 <%end%>
