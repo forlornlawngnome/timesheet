@@ -10,6 +10,7 @@
   </tr>
   </thead>
   <tbody>
+    <%=render "welcome/hour_exception"%>
     <%@user.hour_exceptions.joins(:week).order("weeks.week_start").each do |ex|%>
         <tr>
           <td>
