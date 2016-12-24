@@ -57,7 +57,7 @@ A graph representing the number of students per school.
 
 #### Prerequisites 
 * PostgreSQL
-* Ruby on Rails 3.2.13
+* Ruby on Rails 4.2.4
 
 #### Heroku Setup
 I suggest using [heroku](https://www.heroku.com/) to host it. It's free (as long as you use no more than 1 thread a month), it allows access from any computer, and has postgres and RoR installed by default.
@@ -99,6 +99,8 @@ Note: By default rails uses port 3000, that would make the url on a local machin
 There are some settings which can be changed to adapt this for your team.
 These can be found in lib/constants.rb
 
+The hour requirements settings can be overridden by creating year specific hour requirements in the App. You can find the links under "Timelogs > Hour Requirements"
+If no value is put in one of those fields, it will assume there is no requirement for that attribute. 
 
 ### Timezone
 > <dl>
@@ -363,6 +365,26 @@ These can be found in lib/constants.rb
 > 	<dd>
 > 		Change the integer to be your required hours for leadership students.
 > 	</dd>
+> </dl>
+
+### Preseason Hours
+> <dl>
+>   <dt>Description</dt>
+>   <dd>
+>     An integer representing the required hours for preseason.
+>   </dd>
+>   <dt>Variable</dt>
+>   <dd>
+>     PRE_HOURS
+>   </dd>
+>   <dt>Default</dt>
+>   <dd>
+>     25
+>   </dd>
+>   <dt>Modification</dt>
+>   <dd>
+>     Change the integer to be your required hours for preseason.
+>   </dd>
 > </dl>
 
 # Initial Creation
