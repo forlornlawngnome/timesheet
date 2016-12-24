@@ -12,6 +12,7 @@
   	  	<tr>
 		    <th>Name</th>
 			<th>Admin?</th>
+			<th>Read Only?</th>
 			<th>Student Leader?</th>
 		    <th>Email</th>
 			<th><%=Constants::SCHOOL_NAME_REPLACEMENT%></th>
@@ -27,6 +28,7 @@
 		  <tr>
 		    <td style="max-width:150px"><%= link_to user.full_name, user_path(user), method: :get %></td>
 			<td><%= user.admin?%></td>
+			<td><%= user.read_only?%></td>
 			<td><%= user.student_leader?%></td>
 			<td style="max-width:150px"><%= user.email %></td>
 			<td><%= user.school.name rescue ""%></td>

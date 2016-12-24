@@ -26,9 +26,10 @@ wrapper_mappings: {
 				<%= f.input :password%>
 				<%= f.input :password_confirmation%>
 				<%= f.input :userid, :label=> "Barcode"%>
-				<%if !current_user.nil? && current_user.try(:admin)%>
+				<%if !current_user.nil? && current_user.admin? && !current_user.read_only?%>
 					<%= f.input :student_leader%>
 					<%= f.input :admin%>
+					<%= f.input :read_only%>
 					<%= f.input :archive%>
 					<div role="tabpanel" class="tab-pane" id="forms">
 						<%= f.association :forms,   as: :check_boxes, collection: Form.active.order("name")%>

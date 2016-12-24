@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user
-  before_filter :must_be_admin, only: [:edit, :destroy, :index]
+  before_filter :must_be_admin, only: [:edit, :destroy, :index, :new]
+  before_filter :read_only, only: [:edit, :destroy, :new]
   
   private
     def current_user
@@ -12,5 +13,10 @@ class ApplicationController < ActionController::Base
     	unless current_user && current_user.admin?
     		redirect_to root_path, alert: "You don't have permission to view that page"
     	end
+    end
+    def read_only
+      unless current_user && !current_user.read_only?
+        redirect_to root_path, alert: "You don't have permission to view that page"
+      end
     end
 end

@@ -1,5 +1,5 @@
 class HourExceptionsController < ApplicationController
-  skip_before_filter :must_be_admin, only: :edit
+  skip_before_filter :must_be_admin, only: [:edit, :new]
   # GET /hour_exceptions
   # GET /hour_exceptions.json
   def index

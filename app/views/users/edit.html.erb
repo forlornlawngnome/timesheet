@@ -1,4 +1,6 @@
 <h1>Editing User</h1>
-<%if current_user.try(:admin) || current_user.id == params[:id].to_f%>
+<%if (current_user.try(:admin) && !current_user.read_only?) || current_user.id == params[:id].to_f%>
 	<%=render "form"%>
+<%else%>
+	You don't have permission to edit this user. <%=link_to "Back", @user%>	
 <%end%>

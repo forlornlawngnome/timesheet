@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_filter :must_be_admin, only: :edit
+  skip_before_filter :must_be_admin, only: [:edit, :new]
+  skip_before_filter :read_only, only: [:edit, :new]
   # GET /timelogs
   # GET /timelogs.json
   def index
@@ -131,7 +132,7 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:school, :school_id, :email, :password, :password_confirmation, 
     :name_first, :name_last, :phone,:location, :admin, :userid, 
-    :archive, :gender, :graduation_year, :student_leader, 
+    :archive, :gender, :graduation_year, :student_leader, :read_only,
     :form_id, :forms_user_id, :form_ids=>[])
     
   end
