@@ -9,11 +9,8 @@
 
 <hr />
 
-<h4>Not going to make your hours?</h4>
-<p>Let us know ahead of time!</p>
-
 <%if !current_user.nil?%>
-	<%=render "hour_exception"%>
+	<%=render "hour_exception", :user=>current_user.id%>
 <%end%>
 <%if !current_user.nil? && current_user.try(:admin)%>
 	<%if Year.current_year.id.nil?%>
