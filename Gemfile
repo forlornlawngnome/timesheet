@@ -13,7 +13,7 @@ gem 'rails'
 #end
 gem 'pg'
 
-#gem 'rails_12factor'
+gem 'rails_12factor'
 gem "bcrypt", :require => "bcrypt"
 
 # Gems used only for assets and not required
