@@ -53,6 +53,13 @@
       <b>Build Season Hours Required:</b>
       <%= @user.required_build_hours %>
     </p>
+    <p>
+      <b>College: </b>
+      <%@user.colleges.each do |college|%>
+        <%=college.name%>,
+      <%end%>
+      <%=link_to fa_icon("plus"), new_college_path(:user_id=>@user.id), :target=>"_blank"%></b>
+    </p>
   </div>
   <div class="col-lg-2 col-md-2">
     <table class="table table-condensed table-hover">

@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_one :hour_override, -> {where(year_id: Year.current_year.id)},  dependent: :destroy
   has_many :hour_exceptions, -> {where(year_id: Year.current_year.id)}, dependent: :destroy
   has_many :messages
+  has_many :colleges
 
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :school, :school_id, :email, :password, :password_confirmation, :name_first, :name_last, :phone,:location, :admin, :userid, :archive, :form_id, :form_ids, :forms_user_id, :gender, :graduation_year, :student_leader

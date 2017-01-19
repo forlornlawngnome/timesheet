@@ -10,5 +10,9 @@
   <%= @college.user %>
 </p>
 
-<%= link_to 'Edit', edit_college_path(@college) %> |
-<%= link_to 'Back', colleges_path %>
+<div class="row">
+	<%if current_user.try(:admin)%>
+		<%=link_to fa_icon("pencil"), edit_college_path(@college), :class=>"btn btn-primary"%>
+	<%end%>
+	<%= link_to 'Back', colleges_path, :class=>"btn btn-danger pull-right" %>
+</div>

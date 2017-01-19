@@ -13,6 +13,11 @@ class CollegesController < ApplicationController
   # GET /colleges/new
   def new
     @college = College.new
+    if params["user_id"]
+      @user = params["user_id"].to_i
+    else
+      @user = nil
+    end
   end
 
   # GET /colleges/1/edit
