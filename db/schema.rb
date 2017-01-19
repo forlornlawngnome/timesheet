@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161224182841) do
+ActiveRecord::Schema.define(version: 20170119010522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "colleges", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "colleges", ["user_id"], name: "index_colleges_on_user_id", using: :btree
 
   create_table "forms", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -134,6 +143,7 @@ ActiveRecord::Schema.define(version: 20161224182841) do
     t.string   "graduation_year",        limit: 255
     t.boolean  "student_leader"
     t.boolean  "read_only",                          default: false, null: false
+    t.boolean  "member"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -171,6 +181,7 @@ ActiveRecord::Schema.define(version: 20161224182841) do
     t.date     "preseason_start"
   end
 
+  add_foreign_key "colleges", "users"
   add_foreign_key "messages", "users"
   add_foreign_key "requirements", "years"
   add_foreign_key "weeks", "years"
