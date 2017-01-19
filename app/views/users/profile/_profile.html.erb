@@ -6,9 +6,15 @@
     </p>
 
     <p>
-      <b>Student Leader?</b>
-      <%= @user.student_leader %>
+      <b>Earned Membership?</b>
+      <%= @user.member %>
     </p>
+    <%if current_user.admin?%>
+      <p>
+        <b>Student Leader?</b>
+        <%= @user.student_leader %>
+      </p>
+    <%end%>
 
     <p>
       <b>Email:</b>

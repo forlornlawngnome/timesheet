@@ -27,6 +27,7 @@ wrapper_mappings: {
 				<%= f.input :password_confirmation%>
 				<%= f.input :userid, :label=> "Barcode"%>
 				<%if !current_user.nil? && current_user.admin? && !current_user.read_only?%>
+					<%= f.input :member%>
 					<%= f.input :student_leader%>
 					<%= f.input :admin%>
 					<%= f.input :read_only%>

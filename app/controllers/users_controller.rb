@@ -133,7 +133,7 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:school, :school_id, :email, :password, :password_confirmation, 
     :name_first, :name_last, :phone,:location, :admin, :userid, 
-    :archive, :gender, :graduation_year, :student_leader, :read_only,
+    :archive, :gender, :graduation_year, :student_leader, :read_only, :member,
     :form_id, :forms_user_id, :form_ids=>[])
     
   end
