@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails'
 
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -30,6 +31,8 @@ end
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+
+gem 'rails_12factor'
 
 gem 'therubyracer'  # If using Ruby
 gem 'jquery-rails'
