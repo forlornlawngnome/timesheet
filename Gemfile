@@ -47,6 +47,8 @@ gem 'jquery-timepicker-addon-rails'
 gem 'kaminari'
 gem 'ransack' #filtering/pagination
 
+gem 'rails_12factor'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
