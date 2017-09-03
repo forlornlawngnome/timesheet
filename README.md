@@ -71,6 +71,7 @@ $ git clone [repository url] <br />
 Note: The repository url can be found on the side of the github page 
 2.  Modify code/[settings](#changing-settings) to fit your needs
 3.  [Push to Heroku](https://devcenter.heroku.com/articles/getting-started-with-ruby#deploy-the-app)
+4.  Migrate the DB to Heroku: heroku run rake db:migrate
 
 
 #### Install elsewhere
