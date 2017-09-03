@@ -69,6 +69,7 @@ To install on heroku:
 $ git clone [repository url] <br />
 </blockquote>
 Note: The repository url can be found on the side of the github page 
+
 2.  Modify code/[settings](#changing-settings) to fit your needs
 3.  [Push to Heroku](https://devcenter.heroku.com/articles/getting-started-with-ruby#deploy-the-app)
 4.  Migrate the DB to Heroku: heroku run rake db:migrate
@@ -86,6 +87,7 @@ $ cd timesheet <br />
 $ bundle install <br />
 </blockquote>
 Note: The repository url can be found on the side of the github page
+
 4. Modify code/[settings](#changing-settings) to fit your needs (you should probably modify config/database.yml to password protect your database)
 5. Start the server
 <blockquote>
