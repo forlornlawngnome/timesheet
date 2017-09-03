@@ -180,6 +180,7 @@ DEPENDENCIES
   momentjs-rails (>= 2.9.0)
   pg
   rails
+  rails_12factor
   ransack
   sass-rails
   simple_form
