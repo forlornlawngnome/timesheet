@@ -1,12 +1,12 @@
 module Constants
-  TIMEZONE = 'Eastern Time (US & Canada)'
+  TIMEZONE = 'Mountain Time (US & Canada)'
   DAY_END = 1
   BUILD_MEETINGS = 2
   PRE_MEETINGS = 1
   PRE_HOURS = 25
-  DEFAULT_LOGIN = "signup@team900.org"
-  TEAM_NAME = 'Zebracorns'
-  TEAM_NUMBER = '900'
+  DEFAULT_LOGIN = "signup@team1339.com"
+  TEAM_NAME = 'Angelbotics'
+  TEAM_NUMBER = '1339'
   SCHOOL_NAME_REPLACEMENT = 'School'
   GENDERS = ['Male', 'Female', 'Other']
   FRESHMAN_HOURS = 6
