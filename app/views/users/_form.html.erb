@@ -25,7 +25,7 @@ wrapper_mappings: {
 				<%= f.input :graduation_year%>
 				<%= f.input :password%>
 				<%= f.input :password_confirmation%>
-				<%= f.input :userid, :label=> "Barcode"%>
+				<%= f.input :userid, :label=> "Student ID"%>
 				<%if !current_user.nil? && current_user.admin? && !current_user.read_only?%>
 					<%= f.input :member%>
 					<%= f.input :student_leader%>
