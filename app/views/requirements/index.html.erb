@@ -6,7 +6,7 @@
     <%= link_to "#{fa_icon("plus")} New Hour Requirement".html_safe, new_requirement_path, :class=>"btn btn-primary" %>
   </div>
 </div>
-<table class="table table-hover">
+<table class="table table-hover data_table">
   <thead>
     <tr>
       <th>Year</th>
@@ -18,7 +18,10 @@
       <th>Junior hours</th>
       <th>Senior hours</th>
       <th>Leadership hours</th>
-      <th colspan="3"></th>
+      <th>Maximum Flex Hours</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -34,6 +37,7 @@
         <td><%= requirement.junior_hours %></td>
         <td><%= requirement.senior_hours %></td>
         <td><%= requirement.leadership_hours %></td>
+        <td><%= requirement.max_flex_hours%></td>
         <td><%= link_to 'Show', requirement %></td>
         <td><%= link_to '', edit_requirement_path(requirement), :class=>"glyphicon glyphicon-pencil" %></td>
         <td><%= link_to '', requirement, :class=>"glyphicon glyphicon-trash", method: :delete, data: { confirm: "Are you sure?"}  %></td>

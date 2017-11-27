@@ -53,6 +53,6 @@ class RequirementsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def requirement_params
-      params.require(:requirement).permit(:pre_meetings, :pre_hours, :build_meetings, :freshman_hours, :sophomore_hours, :junior_hours, :senior_hours, :leadership_hours, :year, :year_id)
+      params.require(:requirement).permit(:pre_meetings, :pre_hours, :build_meetings, :freshman_hours, :sophomore_hours, :junior_hours, :senior_hours, :leadership_hours, :year, :year_id, :max_flex_hours)
     end
 end

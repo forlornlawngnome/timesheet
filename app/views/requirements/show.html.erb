@@ -44,6 +44,10 @@
   <strong>Years:</strong>
   <%= @requirement.year.year_range%>
 </p>
+<p>
+  <strong>Max Flex Hours</strong>
+  <%= @requirement.max_flex_hours%>
+</p>
 
 <div class="row">
   <%if current_user.try(:admin)%>

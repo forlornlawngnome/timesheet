@@ -22,6 +22,7 @@ wrapper_mappings: {
       <%= f.input :junior_hours %>
       <%= f.input :senior_hours %>
       <%= f.input :leadership_hours %>
+      <%= f.input :max_flex_hours %>
       <%= f.input :year_id, collection: Year.order("year_start"),:label_method =>:year_range, input_html: {:include_blank => true}%>
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-8">

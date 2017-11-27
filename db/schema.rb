@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170119010522) do
+ActiveRecord::Schema.define(version: 20171127200701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20170119010522) do
     t.integer  "year_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "max_flex_hours"
   end
 
   add_index "requirements", ["year_id"], name: "index_requirements_on_year_id", using: :btree
