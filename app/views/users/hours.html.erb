@@ -77,7 +77,9 @@
 				<td class=<%="#{all_req_class}"%>>
 					<%= all_req.to_s.titleize%>
 				</td>
-				<td><%=link_to '', edit_user_path(user), :class=>"glyphicon glyphicon-pencil" %></td>
+				<%if current_user.try(:admin)%>
+					<td><%=link_to '', edit_user_path(user), :class=>"glyphicon glyphicon-pencil" %></td>
+				<%end%>
 			  </tr>
 			<% end %>
 		</tbody>
