@@ -1,49 +1,53 @@
-<%if current_user.try(:admin)%>
-	<table class="table table-hover">
-		<tr>
-			<th>User</th>
-			<th>All Required Forms</th>
-			<th>Email</th>
-			<%@forms.each do |form|%>
-				<th>
-					<%=form.name%>
-				</th>
-			<%end%>
-			<th>
-				Edit
-			</th>
-		</tr>
-		<%@users.each do |user|%>
+<%if current_user.try(:admin) || current_user.student_leader%>
+	<table class="table table-hover data_table">
+		<thead>
 			<tr>
-				<td>
-					<%=link_to user.full_name, user%>
-				</td>
-				<%required_forms = user.all_forms_in%>
-				<%if required_forms%>
-					<% required_cell_class="success"%>
-				<%else%>
-					<% required_cell_class="danger"%>
-				<%end%>
-				<td class=<%="#{required_cell_class}"%>>
-					<%=required_forms%>
-				</td>
-				<td>
-					<%=user.email%>
-				</td>
+				<th>User</th>
+				<th>All Required Forms</th>
+				<th>Email</th>
 				<%@forms.each do |form|%>
-					<%has_form = user.forms.include?(form)%>
-					<%if has_form%>
-						<% cell_class="success"%>
-					<%else%>
-						<% cell_class="danger"%>
-					<%end%>
-					<td class=<%="#{cell_class}"%>>
-						<%=has_form%>
-					</td>
+					<th>
+						<%=form.name%>
+					</th>
 				<%end%>
-				<td><%=link_to '', edit_user_path(user), :class=>"glyphicon glyphicon-pencil" %></td>
+				<th>
+					Edit
+				</th>
 			</tr>
-		<%end%>
+		</thead>
+		<tbody>
+			<%@users.each do |user|%>
+				<tr>
+					<td>
+						<%=link_to user.full_name, user%>
+					</td>
+					<%required_forms = user.all_forms_in%>
+					<%if required_forms%>
+						<% required_cell_class="success"%>
+					<%else%>
+						<% required_cell_class="danger"%>
+					<%end%>
+					<td class=<%="#{required_cell_class}"%>>
+						<%=required_forms%>
+					</td>
+					<td>
+						<%=user.email%>
+					</td>
+					<%@forms.each do |form|%>
+						<%has_form = user.forms.include?(form)%>
+						<%if has_form%>
+							<% cell_class="success"%>
+						<%else%>
+							<% cell_class="danger"%>
+						<%end%>
+						<td class=<%="#{cell_class}"%>>
+							<%=has_form%>
+						</td>
+					<%end%>
+					<td><%=link_to '', edit_user_path(user), :class=>"glyphicon glyphicon-pencil" %></td>
+				</tr>
+			<%end%>
+		</tbody>
 	
 	</table>
 <%end%>
