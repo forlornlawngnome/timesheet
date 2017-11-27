@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
   ###################### Authentication ##########################
   def self.authenticate(email, password)
     #user = find_by_email(email)
-    user = User.where(email: email).first
+    user = User.where("lower(email) like ?", email.downcase).first
     if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
       user
     else
