@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_filter :must_be_admin, only: [:edit, :new]
+  skip_before_filter :read_only, only: [:edit, :new]
   # GET /timelogs
   # GET /timelogs.json
   def index
@@ -12,7 +14,8 @@ class UsersController < ApplicationController
     @users = User.active.order("name_first")
     @numMentors = 0
     @numStudents = 0
-    @preseasonMin = Year.preseason_weeks
+    @preseasonMin = Year.preseason_meetings_req
+    @preseasonHoursMin = (Year.preseason_hours_req*60*60)
     
     @users.each do |user|
       if user.is_default_user
@@ -65,6 +68,7 @@ class UsersController < ApplicationController
     
     @years = @user.years.order("year_start desc").uniq
     @forms = Form.active.order("name")
+    @hour_exception = HourException.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -129,7 +133,7 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:school, :school_id, :email, :password, :password_confirmation, 
     :name_first, :name_last, :phone,:location, :admin, :userid, 
-    :archive, :gender, :graduation_year, :student_leader, 
+    :archive, :gender, :graduation_year, :student_leader, :read_only, :member,
     :form_id, :forms_user_id, :form_ids=>[])
     
   end

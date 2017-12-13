@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-9">
+    <h1>Listing College/User Associations</h1>
+  </div>
+  <div class="col-md-3 pull-right">
+    <%= link_to "#{fa_icon("plus")} New College/User Association".html_safe, new_college_path, :class=>"btn btn-primary" %>
+  </div>
+</div>
+<table class="table table-hover">
+  <tr>
+    <th>User</th>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @colleges.each do |college| %>
+  <tr>
+    <td><%= link_to college.user.full_name, college.user rescue "None"%></td>
+    <td><%= college.name %></td>
+    <td><%= link_to 'Show', college %></td>
+    <td><%= link_to '', edit_college_path(college), :class=>"glyphicon glyphicon-pencil" %></td>
+    <td><%= link_to '', college, method: :delete, :class=>"glyphicon glyphicon-trash" , data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>

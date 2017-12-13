@@ -1,0 +1,41 @@
+<%=simple_form_for(@college, html: { class: 'form-horizontal' },wrapper: :horizontal_form,
+wrapper_mappings: {
+  check_boxes: :horizontal_radio_and_checkboxes,
+  radio_buttons: :horizontal_radio_and_checkboxes,
+  file: :horizontal_file_input,
+  boolean: :horizontal_boolean
+}) do |f|%>
+<div class="col-md-2">
+</div>
+<div class="col-md-8">
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			College/User Form
+		</div>
+		<div class="panel-body">
+			<%= f.error_notification %>
+			<%= f.input :user_id, collection: User.order("lower(name_first)"),:label_method =>:full_name, :selected=>@user, input_html: {:include_blank => true}%>
+			<div class="form-group">
+				<label class="text optional col-sm-3 control-label" for="college_name">College</label>
+				 <div class="col-sm-9">
+					<div class="input-group">
+				      <input type="text" class="form-control" name="college[name]" id="college_name" aria-describedby="basic-addon2" list="college">
+				      <div class="input-group-addon"><%=fa_icon("arrow-down")%></div>
+				    </div>
+				</div>
+			</div>
+			
+			<datalist id="college">
+				<%College.select("name").distinct.each do |college|%>
+					<option value="<%= college.name %>"></option>
+				<%end%>
+			</datalist>
+			<div class="form-group">
+				<div class="col-sm-offset-3 col-sm-8">
+					<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', colleges_path, :class=>"btn btn-danger pull-right" %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<% end %>

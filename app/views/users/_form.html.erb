@@ -20,15 +20,17 @@ wrapper_mappings: {
 			
 				<%= f.input :phone, :label=>"Phone Number"%>
 				<%= f.input :school_id, collection: School.order("lower(name)"),:label=>Constants::SCHOOL_NAME_REPLACEMENT, input_html: {:include_blank => true}%>
-				<%= f.input :location%>
+				<%= f.input :location, :label=> "Home Town"%>
 				<%= f.input :gender, collection: Constants::GENDERS%>
 				<%= f.input :graduation_year%>
 				<%= f.input :password%>
 				<%= f.input :password_confirmation%>
-				<%= f.input :userid%>
-				<%if !current_user.nil? && current_user.try(:admin)%>
+				<%= f.input :userid, :label=> "Barcode"%>
+				<%if !current_user.nil? && current_user.admin? && !current_user.read_only?%>
+					<%= f.input :member%>
 					<%= f.input :student_leader%>
 					<%= f.input :admin%>
+					<%= f.input :read_only%>
 					<%= f.input :archive%>
 					<div role="tabpanel" class="tab-pane" id="forms">
 						<%= f.association :forms,   as: :check_boxes, collection: Form.active.order("name")%>
@@ -36,7 +38,7 @@ wrapper_mappings: {
 				<%end%>
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-8">
-						<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', forms_path, :class=>"btn btn-danger pull-right" %>
+						<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', users_path, :class=>"btn btn-danger pull-right" %>
 					</div>
 				</div>
 			</div>

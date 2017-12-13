@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pre meetings:</strong>
+  <%= @requirement.pre_meetings %>
+</p>
+
+<p>
+  <strong>Pre hours:</strong>
+  <%= @requirement.pre_hours %>
+</p>
+
+<p>
+  <strong>Build meetings:</strong>
+  <%= @requirement.build_meetings %>
+</p>
+
+<p>
+  <strong>Freshman hours:</strong>
+  <%= @requirement.freshman_hours %>
+</p>
+
+<p>
+  <strong>Sophomore hours:</strong>
+  <%= @requirement.sophomore_hours %>
+</p>
+
+<p>
+  <strong>Junior hours:</strong>
+  <%= @requirement.junior_hours %>
+</p>
+
+<p>
+  <strong>Senior hours:</strong>
+  <%= @requirement.senior_hours %>
+</p>
+
+<p>
+  <strong>Leadership hours:</strong>
+  <%= @requirement.leadership_hours %>
+</p>
+
+<p>
+  <strong>Years:</strong>
+  <%= @requirement.year.year_range%>
+</p>
+
+<div class="row">
+  <%if current_user.try(:admin)%>
+    <%=link_to fa_icon("pencil"), edit_requirement_path(@requirement), :class=>"btn btn-primary"%>
+  <%end%>
+  <%= link_to 'Back', requirements_path, :class=>"btn btn-danger pull-right" %>
+</div>

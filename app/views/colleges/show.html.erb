@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @college.name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @college.user %>
+</p>
+
+<div class="row">
+	<%if current_user.try(:admin)%>
+		<%=link_to fa_icon("pencil"), edit_college_path(@college), :class=>"btn btn-primary"%>
+	<%end%>
+	<%= link_to 'Back', colleges_path, :class=>"btn btn-danger pull-right" %>
+</div>

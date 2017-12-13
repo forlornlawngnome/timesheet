@@ -14,12 +14,12 @@ wrapper_mappings: {
 		</div>
 		<div class="panel-body">
 			<%= f.error_notification %>
-			<%= f.input :user_id, collection: User.order("lower(name_first)"),:label_method =>:full_name, input_html: {:include_blank => true}%>
+			<%= f.input :user_id, collection: User.active.order("lower(name_first)"),:label_method =>:full_name, input_html: {:include_blank => true}%>
 			<%= f.input :timein, :as => :string, :input_html => {:value => @timelog.try(:timein) ? ApplicationHelper.toLocalTime(@timelog.timein).strftime("%Y-%m-%d %l:%M %p"): ""}%>
 			<%= f.input :timeout, :as => :string, :input_html => {:value => @timelog.try(:timeout) ? ApplicationHelper.toLocalTime(@timelog.timeout).strftime("%Y-%m-%d %l:%M %p") : ""}%>
 			<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-8">
-					<%= f.submit "Submit", :class=>"btn btn-success", :id=>"commit", :name=>"single"%> <%= link_to 'Back', forms_path, :class=>"btn btn-danger pull-right" %>
+					<%= f.submit "Submit", :class=>"btn btn-success", :id=>"commit", :name=>"single"%> <%= link_to 'Back', timelogs_path, :class=>"btn btn-danger pull-right" %>
 				</div>
 			</div>
 		</div>

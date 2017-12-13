@@ -44,7 +44,7 @@ class Week < ActiveRecord::Base
   ########### Week Requirements ##########
   def met_weekly_reqs(user)
     if is_preseason
-      return user_met_all_weekly_pre_reqs(user)
+      return true
     elsif is_build_season
       return user_met_all_weekly_build_reqs(user)
     else
@@ -83,14 +83,14 @@ class Week < ActiveRecord::Base
     end
   end
   def user_met_build_meeting_reqs(user)
-    if num_meetings_by_user(user)>=Constants::BUILD_MEETINGS
+    if num_meetings_by_user(user)>=user.required_build_meetings
       return true
     else
       return false
     end
   end
   def get_users_required_build_hours(user)
-    user_hours = user.required_hours
+    user_hours = user.required_build_hours
     
     exceptions = self.week_exceptions
 		if !exceptions.empty?
@@ -100,21 +100,7 @@ class Week < ActiveRecord::Base
 		end
     return user_hours
   end
-  ### PreSeason Reqs #####
-  def user_met_all_weekly_pre_reqs(user)
-    if user_met_build_meeting_reqs(user)
-      return true
-    else
-      return false
-    end
-  end
-  def user_met_pre_meeting_reqs(user)
-    if num_meetings_by_user(user)>=Constants::PRE_MEETINGS
-      return true
-    else
-      return false
-    end
-  end
+  
   ##################### Helper Methods
   def get_users_hours_as_time(user)
     Time.at(self.get_users_hours(user)).utc

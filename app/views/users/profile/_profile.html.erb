@@ -1,0 +1,137 @@
+<div class="row">
+  <div class="col-lg-3 col-md-3">
+    <p>
+      <b>Name:</b>
+      <%= @user.full_name %>
+    </p>
+
+    <p>
+      <b>Earned Membership?</b>
+      <%= @user.member %>
+    </p>
+    <%if current_user.admin?%>
+      <p>
+        <b>Student Leader?</b>
+        <%= @user.student_leader %>
+      </p>
+    <%end%>
+
+    <p>
+      <b>Email:</b>
+      <%= @user.email %>
+    </p>
+
+    <p>
+      <b><%=Constants::SCHOOL_NAME_REPLACEMENT%>:</b>
+      <%= @user.school.name rescue ""%>
+    </p>
+
+    <p>
+      <b>Hometown:</b>
+      <%= @user.location %>
+    </p>
+
+    <p>
+      <b>Gender:</b>
+      <%= @user.gender %>
+    </p>
+
+    <p>
+      <b>Graduation Year:</b>
+      <%= @user.graduation_year %>
+    </p>
+
+    <p>
+      <b>Phone Number:</b>
+      <%= number_to_phone(@user.phone , area_code: true) %>
+    </p>
+    <p>
+      <b>ID Number:</b>
+      <%= @user.userid %>
+    </p>
+    <p>
+      <b>Build Season Hours Required:</b>
+      <%= @user.required_build_hours %>
+    </p>
+    <p>
+      <b>College: </b>
+      <%@user.colleges.each do |college|%>
+        <%=college.name%>,
+      <%end%>
+      <%=link_to fa_icon("plus"), new_college_path(:user_id=>@user.id), :target=>"_blank"%></b>
+    </p>
+  </div>
+  <div class="col-lg-2 col-md-2">
+    <table class="table table-condensed table-hover">
+      <tr>
+          <th></th>
+          <th>
+            Forms
+          </th>
+      </tr>
+      
+      <%@forms.each do |form|%>
+        <tr>
+            <%has_form = @user.forms.include?(form)%>
+            <%if has_form%>
+              <td class="success">
+                <%=fa_icon("check")%>
+              </td>
+              <td class="success">
+                <%=form.name%>
+              </td>
+            <%else%>
+              <td class="danger">
+                <%=fa_icon("times")%>
+              </td>
+              <td class="danger">
+                <%=form.name%>
+              </td>
+            <%end%>
+            
+          </tr>
+      <%end%>
+      
+    </table>
+  </div>
+  <div class="col-lg-6 col-md-6">
+    <table class="table table-condensed table-hover">
+      <tr>
+        <th>Year</th>
+        <th>All Required Forms?</th>
+        <th>Total Hours</th>
+        <th>PreSeason Meetings</th>
+        <th>PreSeason Hours</th>
+        <th>Build Season Hours</th>
+      </tr>
+      <%@years.each do |year|%>
+          <tr>
+            <td>
+              <%=year.year_range%>
+            </td>
+            <%required_forms = @user.all_forms_in%>
+            <%if required_forms%>
+                <% required_cell_class="success"%>
+            <%else%>
+                <% required_cell_class="danger"%>
+            <%end%>
+            <td class=<%="#{required_cell_class}"%>>
+              <%=required_forms%>
+            </td>
+            <td>
+              <%=@user.total_hours_formatted(year)%>
+            </td>
+            <td>
+              <%=@user.past_preseason_meetings(year)%>
+            </td>
+            <td>
+              <%=@user.pre_hours_formatted(year)%>
+            </td>
+            <td>
+              <%=@user.build_hours_formatted(year)%>
+            </td>
+          </tr>
+      <%end%>
+    </table>
+  </div>
+</div>

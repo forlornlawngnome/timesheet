@@ -1,4 +1,6 @@
 Timesheet::Application.routes.draw do
+  resources :colleges
+  resources :requirements
   resources :messages
   resources :weeks
   resources :week_exceptions

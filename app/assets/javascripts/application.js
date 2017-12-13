@@ -12,12 +12,21 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require twitter/bootstrap
 //= require_tree .
 //= require local_time
 //= require moment
-//= require turbolinks
+// require turbolinks
 //= require jquery.ui.datepicker
 //= require jquery-ui-timepicker-addon
 //= require jquery.ui.slider
 //= require cocoon
+
+jQuery(function(){
+	return $('.data_table').dataTable({
+		"dom": "<'small-6 columns float-left datatables_style'f><'small-4 columns'><'small-6 columns float-right datatables_style'li>r"+"t"+"<'float-right'p>",
+		"lengthMenu": [[20,35,50,-1], [20,35,50,"All"]]
+	});
+});;

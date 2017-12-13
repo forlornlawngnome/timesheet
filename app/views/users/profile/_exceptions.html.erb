@@ -1,0 +1,35 @@
+<%=render "welcome/hour_exception", :user=>@user.id%>
+
+<h3>Missed Hours Explainations</h3>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Week</th>
+    <th>Submitter</th>
+    <th>Reason</th>
+    <th>Made up?</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+    <%@user.hour_exceptions.joins(:week).order("weeks.week_start").each do |ex|%>
+        <tr>
+          <td>
+            <%=ex.week.week_range%>
+          </td>
+          <td>
+            <%=ex.submitter%>
+          </td>
+          <td>
+            <%=ex.reason%>
+          </td>
+          <td>
+            <%=ex.made_up_hours%>
+          </td>
+          <td>
+            <%= link_to fa_icon("pencil"), edit_hour_exception_path(ex)%>
+          </td>
+        </tr>
+    <%end%>
+  </tbody>
+</table>
