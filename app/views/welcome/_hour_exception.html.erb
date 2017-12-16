@@ -19,7 +19,7 @@
 					<%= f.error_notification %>
 					<%= f.input :user_id,  :as=>:hidden, :input_html => { :value => user }%>
 					<%= f.input :date_applicable, as: :string%>
-					<%= f.input :date_sent,  :as=>:hidden, :input_html => { :value => Date.today }%>
+					<%= f.input :date_sent,  :as=>:hidden, :input_html => { :value => Date.current }%>
 					<%= f.input :reason%>
 					<%= f.input :submitter, :as=>:hidden, :input_html => { :value => current_user.email }%>
 					<%= f.input :year_id, :as=>:hidden, :input_html => { :value => Year.current_year.id }%>

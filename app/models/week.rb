@@ -20,7 +20,7 @@ class Week < ActiveRecord::Base
     week = Week.where("week_start <= ? and week_end >= ?",date,date).first
   end
   def self.current_week
-    week = Week.where("week_start <= ? and week_end >= ?",Date.today,Date.today).first
+    week = Week.where("week_start <= ? and week_end >= ?",Date.current,Date.current).first
     if week.nil?
       return Week.new
     end
