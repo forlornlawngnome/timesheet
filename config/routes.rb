@@ -1,4 +1,5 @@
 Timesheet::Application.routes.draw do
+  resources :flex_hours
   resources :colleges
   resources :requirements
   resources :messages

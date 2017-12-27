@@ -3,9 +3,11 @@ class Week < ActiveRecord::Base
   has_many :hour_exceptions, dependent: :nullify
   has_many :week_exceptions, dependent: :nullify
   has_many :timelogs, dependent: :nullify
+  has_many :flex_hours, dependent: :nullify
   
   
   scope :past, -> { where("year_id = ? AND week_start <= ?", Year.current_year, ApplicationHelper.today)}
+  scope :future, -> { where("year_id = ? AND week_end >=?", Year.current_year, ApplicationHelper.today)}
   scope :summer, -> { where(:season=>"Summer")}
   scope :preseason, -> { where(:season=>"Preseason")}
   scope :build_season, -> { where(:season=>"Build Season")}
@@ -56,6 +58,7 @@ class Week < ActiveRecord::Base
     if user.is_mentor
       return true
     else
+      #
       exception = get_users_hour_exceptions(user)
       if !exception.nil? && !exception.empty?
         ex = exception.first
@@ -73,6 +76,13 @@ class Week < ActiveRecord::Base
   def user_met_build_hour_reqs(user)
     time = get_users_hours_as_time(user)
     hours = time.hour + (time.day-1)*24
+    flex = get_users_flex_hours(user)
+
+    if !flex.nil? and !flex.empty?
+      flex.each do |flex_hour|
+        hours = hours+(flex_hour.num_minutes/60.0)
+      end
+    end
     logger.warn "hours: #{time.hour}"
     logger.warn "days: #{time.day-1}"
     logger.warn "total hours: #{hours.inspect}"
@@ -83,7 +93,12 @@ class Week < ActiveRecord::Base
     end
   end
   def user_met_build_meeting_reqs(user)
-    if num_meetings_by_user(user)>=user.required_build_meetings
+    meetings_required = user.required_build_meetings
+    if get_users_flex_hours(user).size >=1
+      meetings_required = 0
+    end
+
+    if num_meetings_by_user(user)>=meetings_required
       return true
     else
       return false
@@ -125,5 +140,8 @@ class Week < ActiveRecord::Base
   end
   def get_users_hour_exceptions(user)
     self.hour_exceptions.where(:user_id=>user.id)
+  end
+  def get_users_flex_hours(user)
+    self.flex_hours.where(:user_id=>user.id)
   end
 end

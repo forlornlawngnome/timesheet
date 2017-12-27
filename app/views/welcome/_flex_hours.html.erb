@@ -1,0 +1,37 @@
+<h4>Looking to use your flex hours?</h4>
+<p>Flex hours are hours you can use if you won't make hours in a week, they don't need to be made up. They must be submitted BEFORE the week is done.</p>
+<div class="row">
+	<%=simple_form_for(@flex_hour, html: { class: 'form-horizontal' },wrapper: :horizontal_form,
+	wrapper_mappings: {
+	  check_boxes: :horizontal_radio_and_checkboxes,
+	  radio_buttons: :horizontal_radio_and_checkboxes,
+	  file: :horizontal_file_input,
+	  boolean: :horizontal_boolean
+	}) do |f|%>
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					Flex Hour Form
+				</div>
+				<div class="panel-body">
+					<%= f.error_notification %>
+					<%= f.input :user_id,  :as=>:hidden, :input_html => { :value => user }%>
+					<%= f.association :week, label_method: :week_range, collection: Week.future.build_season.order(:week_start) %>
+					<%= f.input :reason%>
+					<%= f.input :num_minutes, label: "Number of minutes of Flex time you want to use"%>
+					<div class="form-group">
+						<div class="col-sm-offset-3 col-sm-8">
+							<%= f.submit "Submit", :class=>"btn btn-success"%> 
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<% end %>
+	</div>
+	<script>
+	$('#hour_exception_date_applicable').datepicker({
+		dateFormat: 'yy-mm-dd'});
+	</script>

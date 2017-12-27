@@ -1,5 +1,5 @@
-<h4>Not going to make your hours?</h4>
-<p>Let us know ahead of time!</p>
+<h4>Have hours you will be making up?</h4>
+<p>Let us know ahead of time! Hour exceptions can be used any time and are used to let us know you are making up hours. Please be sure to let us know as soon as possible and make the hours up promptly.</p>
 <div class="row">
 	<%=simple_form_for(@hour_exception, html: { class: 'form-horizontal' },wrapper: :horizontal_form,
 	wrapper_mappings: {
@@ -20,7 +20,7 @@
 					<%= f.input :user_id,  :as=>:hidden, :input_html => { :value => user }%>
 					<%= f.input :date_applicable, as: :string%>
 					<%= f.input :date_sent,  :as=>:hidden, :input_html => { :value => Date.today }%>
-					<%= f.input :reason%>
+					<%= f.input :reason, hint: "The more you tell us, the more understanding we can be"%>
 					<%= f.input :submitter, :as=>:hidden, :input_html => { :value => current_user.email }%>
 					<%= f.input :year_id, :as=>:hidden, :input_html => { :value => Year.current_year.id }%>
 					<div class="form-group">

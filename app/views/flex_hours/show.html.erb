@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= link_to @flex_hour.user.full_name, @flex_hour.user %>
+</p>
+
+<p>
+  <strong>Week:</strong>
+  <%= @flex_hour.week.week_range rescue "" %>
+</p>
+
+<p>
+  <strong>Reason:</strong>
+  <%= @flex_hour.reason %>
+</p>
+
+<p>
+  <strong>Num minutes:</strong>
+  <%= @flex_hour.num_minutes %>
+</p>
+
+<%= link_to 'Edit', edit_flex_hour_path(@flex_hour) %> |
+<%= link_to 'Back', flex_hours_path %>

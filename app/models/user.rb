@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :years, :through=>:timelogs
   has_one :hour_override, -> {where(year_id: Year.current_year.id)},  dependent: :destroy
   has_many :hour_exceptions, -> {where(year_id: Year.current_year.id)}, dependent: :destroy
+  has_many :flex_hours, -> {joins(:week).where("weeks.year_id = ?", Year.current_year.id)}, dependent: :destroy
   has_many :messages
   has_many :colleges
 

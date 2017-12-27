@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Flex Hours</h1>
+
+<table class="table table-hover data_table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Week</th>
+      <th>Reason</th>
+      <th>Num minutes</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @flex_hours.each do |flex_hour| %>
+      <tr>
+        <td><%= link_to flex_hour.user.full_name, flex_hour.user%></td>
+        <td><%= flex_hour.week.week_range %></td>
+        <td><%= flex_hour.reason %></td>
+        <td><%= flex_hour.num_minutes %></td>
+        <td><%= link_to 'Show', flex_hour %></td>
+        <td><%= link_to fa_icon("pencil"), edit_flex_hour_path(flex_hour) %></td>
+        <td><%= link_to fa_icon("trash"), flex_hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Flex hour', new_flex_hour_path %>

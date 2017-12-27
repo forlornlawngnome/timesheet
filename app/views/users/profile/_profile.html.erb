@@ -4,12 +4,11 @@
       <b>Name:</b>
       <%= @user.full_name %>
     </p>
-
-    <p>
-      <b>Earned Membership?</b>
-      <%= @user.member %>
-    </p>
-    <%if current_user.admin?%>
+    <%if current_user.admin%>
+        <p>
+          <b>Earned Membership?</b>
+          <%= @user.member %>
+        </p>
       <p>
         <b>Student Leader?</b>
         <%= @user.student_leader %>
@@ -52,6 +51,14 @@
     <p>
       <b>Build Season Hours Required:</b>
       <%= @user.required_build_hours %>
+    </p>
+    <p>
+      <b>Flex Hours Used:</b>
+      <%= @user.flex_hours.sum(:num_minutes)/60.0 %>
+    </p>
+    <p>
+      <b>Flex Hours Left:</b>
+      <%= Year.max_flex_hours - @user.flex_hours.sum(:num_minutes)/60.0 %>
     </p>
     <p>
       <b>College: </b>

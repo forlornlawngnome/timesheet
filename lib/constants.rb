@@ -14,4 +14,5 @@ module Constants
   JUNIOR_HOURS = 10
   SENIOR_HOURS = 10
   LEADERSHIP_HOURS = 15
+  FLEX_HOURS = 15
 end

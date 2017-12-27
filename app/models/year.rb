@@ -8,6 +8,7 @@ class Year < ActiveRecord::Base
   has_many :week_exceptions
   has_many :weeks, dependent: :delete_all
   has_one :requirement
+  has_many :flex_hours, :through=>:weeks
   
   accepts_nested_attributes_for :weeks
   
@@ -62,6 +63,18 @@ class Year < ActiveRecord::Base
       end
     else  
       return Constants::PRE_HOURS
+    end
+  end
+  def self.max_flex_hours
+    if !Year.current_year.requirement.nil?
+      req=Year.current_year.requirement
+      if req.max_flex_hours.nil?
+        return 0
+      else
+        return req.max_flex_hours
+      end
+    else  
+      return Constants::FLEX_HOURS
     end
   end
   private

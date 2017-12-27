@@ -1,0 +1,16 @@
+<%= simple_form_for(@flex_hour) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%if current_user.admin?%>
+      <%= f.input :user_id, collection: User.active.order("lower(name_first)"),:label_method =>:full_name, input_html: {:include_blank => true}%>
+    <%end%>
+    <%= f.association :week, label_method: :week_range, collection: Week.future.build_season.order(:week_start) %>
+    <%= f.input :reason, hint: "The more you tell us, the more understanding we can be"%>
+    <%= f.input :num_minutes, label: "Number of minutes of Flex time you want to use" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

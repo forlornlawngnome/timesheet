@@ -10,6 +10,9 @@
 <hr />
 
 <%if !current_user.nil?%>
+	<%if Constants::FLEX_HOURS>0%>
+		<%=render "flex_hours", :user=>current_user.id%>
+	<%end%>
 	<%=render "hour_exception", :user=>current_user.id%>
 <%end%>
 <%if !current_user.nil? && current_user.try(:admin)%>
@@ -50,6 +53,9 @@
  		<li><%=link_to "Weeks", weeks_path%></li>
  		<li><%=link_to "Week Exceptions", week_exceptions_path%></li>
   		<li><%=link_to "New Week Exceptions", new_week_exception_path%></li>
+  	 <h4>Flex Hours</h4>
+  	 	<li><%=link_to "Flex Hours", flex_hours_path%></li>
+  	 	<li><%=link_to "New Flex Hour", new_flex_hour_path%></li>
   	 <h4>Hour Requirements <small>Set the hour requirements for build/pre season</small></h4>
   	 	<li><%=link_to "Hour Requirements", requirements_path%></li>
   	 	<li><%=link_to "New Hour Requirement", new_requirement_path%></li>

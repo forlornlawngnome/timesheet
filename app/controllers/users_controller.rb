@@ -69,6 +69,7 @@ class UsersController < ApplicationController
     @years = @user.years.order("year_start desc").uniq
     @forms = Form.active.order("name")
     @hour_exception = HourException.new
+    @flex_hour = FlexHour.new
 
     respond_to do |format|
       format.html # show.html.erb

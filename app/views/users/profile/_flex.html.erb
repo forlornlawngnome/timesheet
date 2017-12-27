@@ -1,0 +1,28 @@
+<%=render "welcome/flex_hours", :user=>@user.id%>
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Week</th>
+    <th>Minutes Used</th>
+    <th>Reason</th>
+    <%if current_user.try(:admin)%>
+    <th></th>
+    <%end%>
+
+  </tr>
+  </thead>
+  <%@user.flex_hours.each do |flex|%>
+      <tr>
+        <th><%=flex.week.week_range%></th>
+        <td><%=flex.num_minutes%></td>
+        <td><%=flex.reason%></td>
+        
+        <%if current_user.try(:admin)%>
+            <td>
+              <%=link_to fa_icon("pencil"), edit_flex_hour_path(flex)%>
+            </td>
+        <%end%>
+      </tr>
+  <%end%>
+</table>

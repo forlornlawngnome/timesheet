@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127200701) do
+ActiveRecord::Schema.define(version: 20171127201551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,18 @@ ActiveRecord::Schema.define(version: 20171127200701) do
   end
 
   add_index "colleges", ["user_id"], name: "index_colleges_on_user_id", using: :btree
+
+  create_table "flex_hours", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "week_id"
+    t.text     "reason"
+    t.integer  "num_minutes"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "flex_hours", ["user_id"], name: "index_flex_hours_on_user_id", using: :btree
+  add_index "flex_hours", ["week_id"], name: "index_flex_hours_on_week_id", using: :btree
 
   create_table "forms", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -183,6 +195,8 @@ ActiveRecord::Schema.define(version: 20171127200701) do
   end
 
   add_foreign_key "colleges", "users"
+  add_foreign_key "flex_hours", "users"
+  add_foreign_key "flex_hours", "weeks"
   add_foreign_key "messages", "users"
   add_foreign_key "requirements", "years"
   add_foreign_key "weeks", "years"
