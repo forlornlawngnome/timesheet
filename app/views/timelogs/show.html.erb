@@ -28,7 +28,7 @@
 
 <p>
   <b>Hours Logged:</b>
-  <%= Time.at(@timelog.time_logged).utc.strftime("%H:%M:%S") %>
+  <%= duration_format(@timelog.time_logged) %>
 </p>
 
 
