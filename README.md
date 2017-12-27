@@ -96,6 +96,11 @@ $ rails server -p [port] -e production
 Note: This app uses the default rails server, you probably want to switch to thin, passenger or unicorn for better options and stability. Heroku has this by default <br />
 Note: By default rails uses port 3000, that would make the url on a local machine localhost:3000 by default websites normally run on 80 (http) or 443 (https). Some machines don't allow servers open on these ports and Apache or custom routing tables can be used. 
 
+# Misc. Features
+## Messages
+You can leave messages for students which will appear in both their profile and on the login page when they sign in/out. Several color options are available. 
+## Hour Exceptions
+This allows students to enter their reasons for missing requirements, facilitating communication. Once the hours are made up, admins can mark them as such and the requirements pages will show the requirements as met. 
 
 # Changing settings
 
