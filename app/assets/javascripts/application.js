@@ -16,7 +16,7 @@
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require twitter/bootstrap
 //= require_tree .
-//= require local_time
+//= require local-time
 //= require moment
 // require turbolinks
 //= require jquery.ui.datepicker

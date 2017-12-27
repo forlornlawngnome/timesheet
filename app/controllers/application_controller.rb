@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user
-  before_filter :must_be_admin, only: [:edit, :destroy, :index, :new]
-  before_filter :read_only, only: [:edit, :destroy, :new]
+  before_action :must_be_admin, only: [:edit, :destroy, :index, :new]
+  before_action :read_only, only: [:edit, :destroy, :new]
   
   private
     def current_user

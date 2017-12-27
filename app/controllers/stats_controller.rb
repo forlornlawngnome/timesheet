@@ -30,7 +30,7 @@ class StatsController < ApplicationController
     
     
     
-    School.joins(:users).uniq.order(:name).each do |school|
+    School.joins(:users).order(:name).uniq.each do |school|
       users = school.users
       
       totalHours = 0

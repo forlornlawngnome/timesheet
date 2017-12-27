@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_filter :must_be_admin, only: [:edit, :new]
-  skip_before_filter :read_only, only: [:edit, :new]
+  skip_before_action :must_be_admin, only: [:edit, :new]
+  skip_before_action :read_only, only: [:edit, :new]
   # GET /timelogs
   # GET /timelogs.json
   def index

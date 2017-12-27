@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-  skip_before_filter :must_be_admin
-  skip_before_filter :read_only
+  skip_before_action :must_be_admin
+  skip_before_action :read_only
 
   def new
   end
