@@ -18,7 +18,7 @@
               <%=local_time log.timeout rescue ""%>
             </td>
             <td>
-              <%=Time.at(log.time_logged).utc.strftime("%H:%M:%S")%>
+              <%= duration_format(log.time_logged)%>
             </td>
           </tr>
       <%end%>

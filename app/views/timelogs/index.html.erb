@@ -53,7 +53,7 @@
 	    <td><%= "#{timelog.user.name_first rescue ""} #{timelog.user.name_last rescue ""}" %></td>
 	    <td><%= local_time timelog.timein rescue ""%></td>
 	    <td><%= local_time timelog.timeout rescue ""%></td>
-		<td><%= Time.at(timelog.time_logged).utc.strftime("%H:%M:%S") rescue ""%></td>
+		<td><%= duration_format(timelog.time_logged) rescue ""%></td>
 		<td><%= timelog.year.year_range rescue ""%></td>
 	    <td><%= link_to 'Show', timelog %></td>
 	    <td><%= link_to '', edit_timelog_path(timelog), :class=>"glyphicon glyphicon-pencil" %></td>
