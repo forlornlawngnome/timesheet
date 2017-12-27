@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   end
   def build_hours
     @users = User.active.order("name_first")
-    @weeks = Year.current_year.weeks.build_season.where("week_start <= ?",Date.today)
+    @weeks = Year.current_year.weeks.build_season.where("week_start <= ?",Date.current)
     respond_to do |format|
       format.html # index.html.erb
     end
