@@ -57,7 +57,7 @@ A graph representing the number of students per school.
 
 #### Prerequisites 
 * PostgreSQL
-* Ruby on Rails 4.2.4
+* Ruby on Rails 5.1.4
 
 #### Heroku Setup
 I suggest using [heroku](https://www.heroku.com/) to host it. It's free (as long as you use no more than 1 thread a month), it allows access from any computer, and has postgres and RoR installed by default.
@@ -387,6 +387,26 @@ If no value is put in one of those fields, it will assume there is no requiremen
 >   <dt>Modification</dt>
 >   <dd>
 >     Change the integer to be your required hours for preseason.
+>   </dd>
+> </dl>
+
+### Build Season Maximum Flex Hours
+> <dl>
+>   <dt>Description</dt>
+>   <dd>
+>     The default number of flex hours given per year. If set to 0, these panels are hidden from students. Flex hours are hours which don't need to be made up, they can be used when students have tests, sickness, etc. They must be submitted before the week is over. 
+>   </dd>
+>   <dt>Variable</dt>
+>   <dd>
+>     FLEX_HOURS
+>   </dd>
+>   <dt>Default</dt>
+>   <dd>
+>     15 Hours
+>   </dd>
+>   <dt>Modification</dt>
+>   <dd>
+>     Change the 15 to the number of flex hours per year (0 to disable feature)
 >   </dd>
 > </dl>
 
