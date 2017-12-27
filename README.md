@@ -98,7 +98,7 @@ Note: By default rails uses port 3000, that would make the url on a local machin
 
 # Misc. Features
 ## Messages
-You can leave messages for students which will appear in both their profile and on the login page when they sign in/out. Several color options are available. 
+You can leave messages for students which will appear in both their profile and on the login page when they sign in/out. Several color options are available. Messages can be found under the "Users" menu
 ## Hour Exceptions
 This allows students to enter their reasons for missing requirements, facilitating communication. Once the hours are made up, admins can mark them as such and the requirements pages will show the requirements as met. 
 
