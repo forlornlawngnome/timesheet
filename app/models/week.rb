@@ -8,6 +8,7 @@ class Week < ActiveRecord::Base
   
   scope :past, -> { where("year_id = ? AND week_start <= ?", Year.current_year, ApplicationHelper.today)}
   scope :future, -> { where("year_id = ? AND week_end >=?", Year.current_year, ApplicationHelper.today)}
+  scope :this_year, -> { where("year_id = ?", Year.current_year)}
   scope :summer, -> { where(:season=>"Summer")}
   scope :preseason, -> { where(:season=>"Preseason")}
   scope :build_season, -> { where(:season=>"Build Season")}

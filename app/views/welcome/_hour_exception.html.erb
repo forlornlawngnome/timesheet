@@ -18,7 +18,7 @@
 				<div class="panel-body">
 					<%= f.error_notification %>
 					<%= f.input :user_id,  :as=>:hidden, :input_html => { :value => user }%>
-					<%= f.input :date_applicable, as: :string%>
+					<%= f.association :week, label_method: :week_range, collection: Week.this_year.build_season.order(:week_start) %>
 					<%= f.input :date_sent,  :as=>:hidden, :input_html => { :value => Date.current }%>
 					<%= f.input :reason, hint: "The more you tell us, the more understanding we can be"%>
 					<%= f.input :submitter, :as=>:hidden, :input_html => { :value => current_user.email }%>

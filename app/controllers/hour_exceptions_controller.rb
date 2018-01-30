@@ -88,6 +88,6 @@ class HourExceptionsController < ApplicationController
     end
   end
   def hour_exception_params
-    params.require(:hour_exception).permit(:date_applicable, :date_sent, :reason, :submitter, :year, :year_id, :user, :user_id, :made_up_hours)
+    params.require(:hour_exception).permit(:date_applicable, :date_sent, :reason, :submitter, :year, :year_id, :user, :user_id, :made_up_hours, :week, :week_id)
   end
 end
