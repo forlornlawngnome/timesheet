@@ -1,4 +1,4 @@
-class CreateTimelogs < ActiveRecord::Migration
+class CreateTimelogs < ActiveRecord::Migration[5.1]
   def change
     create_table :timelogs do |t|
       t.references :user

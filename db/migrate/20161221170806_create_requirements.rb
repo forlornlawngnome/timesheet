@@ -1,4 +1,4 @@
-class CreateRequirements < ActiveRecord::Migration
+class CreateRequirements < ActiveRecord::Migration[5.1]
   def change
     create_table :requirements do |t|
       t.integer :pre_meetings

@@ -1,4 +1,4 @@
-class CreateHourExceptions < ActiveRecord::Migration
+class CreateHourExceptions < ActiveRecord::Migration[5.1]
   def change
     create_table :hour_exceptions do |t|
       t.references :user

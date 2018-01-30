@@ -1,4 +1,4 @@
-class CreateFormsUsers < ActiveRecord::Migration
+class CreateFormsUsers < ActiveRecord::Migration[5.1]
   def change
     create_table :forms_users do |t|
       t.references :user

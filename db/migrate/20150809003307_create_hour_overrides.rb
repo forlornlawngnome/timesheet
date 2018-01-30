@@ -1,4 +1,4 @@
-class CreateHourOverrides < ActiveRecord::Migration
+class CreateHourOverrides < ActiveRecord::Migration[5.1]
   def change
     create_table :hour_overrides do |t|
       t.references :user

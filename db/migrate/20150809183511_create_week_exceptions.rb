@@ -1,4 +1,4 @@
-class CreateWeekExceptions < ActiveRecord::Migration
+class CreateWeekExceptions < ActiveRecord::Migration[5.1]
   def change
     create_table :week_exceptions do |t|
       t.date :date
