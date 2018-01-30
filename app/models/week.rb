@@ -77,13 +77,15 @@ class Week < ActiveRecord::Base
   def user_met_build_hour_reqs(user)
     time = get_users_hours_as_time(user)
     hours = time.hour + (time.day-1)*24
+    minutes = time.min
     flex = get_users_flex_hours(user)
 
     if !flex.nil? and !flex.empty?
       flex.each do |flex_hour|
-        hours = hours+(flex_hour.num_minutes/60.0)
+        minutes = minutes+(flex_hour.num_minutes)
       end
     end
+    hours = hours + minutes/60.0
     logger.warn "hours: #{time.hour}"
     logger.warn "days: #{time.day-1}"
     logger.warn "total hours: #{hours.inspect}"
@@ -92,6 +94,20 @@ class Week < ActiveRecord::Base
     else
       return false
     end
+  end
+  def hours_calc(user)
+    time = get_users_hours_as_time(user)
+    hours = time.hour + (time.day-1)*24
+    minutes = time.min
+    flex = get_users_flex_hours(user)
+
+    if !flex.nil? and !flex.empty?
+      flex.each do |flex_hour|
+        minutes = minutes+(flex_hour.num_minutes)
+      end
+    end
+    hours = hours + minutes/60.0
+    return hours
   end
   def user_met_build_meeting_reqs(user)
     meetings_required = user.required_build_meetings

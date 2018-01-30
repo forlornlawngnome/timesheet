@@ -33,6 +33,8 @@
         <%elsif week.is_build_season%>
             <td><%=week.get_users_required_build_hours(@user)%></td>
             <%build_season_req = week.met_weekly_reqs(@user)%>
+            <td><%=week.user_met_build_hour_reqs(@user)%></td>
+            <td><%=week.hours_calc(@user).inspect%></td>
             <%if build_season_req%>
                 <%build_season_req_class = "success"%>
             <%else%>
