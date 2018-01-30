@@ -8,7 +8,7 @@ class CreateHourOverrides < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_index :hour_overrides, :user_id
-    add_index :hour_overrides, :year_id
+    #add_index :hour_overrides, :user_id
+    #add_index :hour_overrides, :year_id
   end
 end

@@ -8,6 +8,6 @@ class CreateWeekExceptions < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_index :week_exceptions, :year_id
+    #add_index :week_exceptions, :year_id
   end
 end

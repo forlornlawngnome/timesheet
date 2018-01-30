@@ -10,7 +10,7 @@ class CreateHourExceptions < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_index :hour_exceptions, :user_id
-    add_index :hour_exceptions, :year_id
+    #add_index :hour_exceptions, :user_id
+    #add_index :hour_exceptions, :year_id
   end
 end
