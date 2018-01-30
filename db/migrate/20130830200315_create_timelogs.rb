@@ -7,6 +7,6 @@ class CreateTimelogs < ActiveRecord::Migration[5.1]
       t.integer :time_logged
 
     end
-    add_index :timelogs, :user_id
+    #add_index :timelogs, :user_id
   end
 end
