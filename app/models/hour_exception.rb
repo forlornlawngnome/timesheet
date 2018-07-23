@@ -19,7 +19,7 @@ class HourException < ActiveRecord::Base
     end
   end
   def setDateApplicable
-    if date_applicable.nil?
+    if date_applicable.nil?  && !self.week.nil?
       self.date_applicable = self.week.week_start
     end
   end
