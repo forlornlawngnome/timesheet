@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
+  has_secure_password
   before_save :lowercaseID
-  before_save :encrypt_password
+  #before_save :encrypt_password
   before_save :clean_phone_number
   has_many :timelogs
   belongs_to :school
@@ -16,7 +17,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :school, :school_id, :email, :password, :password_confirmation, :name_first, :name_last, :phone,:location, :admin, :userid, :archive, :form_id, :form_ids, :forms_user_id, :gender, :graduation_year, :student_leader
   # attr_accessible :title, :body
-  attr_accessor :password
+  attr_accessor :password, :password_confirmation
 
   validates_format_of :email, :with => /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i, :message=>"Please enter a valid email."
   validates_uniqueness_of :userid
@@ -69,7 +70,7 @@ class User < ActiveRecord::Base
   def self.authenticate(email, password)
     #user = find_by_email(email)
     user = User.where("lower(email) like ?", email.downcase).first
-    if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
+    if user && user.authenticate(params[:password])
       user
     else
       nil
@@ -77,10 +78,8 @@ class User < ActiveRecord::Base
   end
   def encrypt_password
     if password.present?
-      self.password_salt = "password"
-      self.password_hash = "password"
-      #self.password_salt = BCrypt::Engine.generate_salt
-      #self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+      self.password_salt = BCrypt::Engine.generate_salt
+      self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     end
   end
   def signed_in
