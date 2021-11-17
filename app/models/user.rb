@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   #attr_accessible :school, :school_id, :email, :password, :password_confirmation, :name_first, :name_last, :phone,:location, :admin, :userid, :archive, :form_id, :form_ids, :forms_user_id, :gender, :graduation_year, :student_leader
   # attr_accessible :title, :body
   attr_accessor :password
-  
+
   validates_format_of :email, :with => /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i, :message=>"Please enter a valid email."
   validates_uniqueness_of :userid
   validates_confirmation_of :password
@@ -27,11 +27,11 @@ class User < ActiveRecord::Base
   validates_presence_of :gender
   validates_presence_of :location
   validates_uniqueness_of :email
-  
+
   scope :archived, -> {where(:archive => true)}
   #scope :active, where("users.archive IS NOT 1") ##Change back for production!!!
-  
-  
+
+
   ###################### General Info ##########################
   def self.active
     where(:archive => false)
@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
     if Year.current_year.nil?
       return "No year"
     end
-    
+
     case
     when (Year.current_year.year_end.year + 3).to_s == self.graduation_year
       return "Freshman"
@@ -77,8 +77,10 @@ class User < ActiveRecord::Base
   end
   def encrypt_password
     if password.present?
-      self.password_salt = BCrypt::Engine.generate_salt
-      self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+      self.password_salt = "password"
+      self.password_hash = "password"
+      #self.password_salt = BCrypt::Engine.generate_salt
+      #self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     end
   end
   def signed_in
@@ -151,7 +153,7 @@ class User < ActiveRecord::Base
     time = Time.at(total).utc
     return "#{'%02d' % (time.hour + (time.day-1)*24)}:#{'%02d' % time.min}:#{'%02d' % time.sec}"
   end
-  
+
   ###################### Requirements ##########################
   def all_forms_in
     users_forms = self.forms.map{|x| x.id}
@@ -182,11 +184,11 @@ class User < ActiveRecord::Base
       else
         return req.build_meetings
       end
-    else  
+    else
       return Constants::BUILD_MEETINGS
     end
   end
-  def required_build_hours 
+  def required_build_hours
     if !self.hour_override.nil?
       return self.hour_override.hours_required
     end
@@ -200,7 +202,7 @@ class User < ActiveRecord::Base
           return req.leadership_hours
         end
       end
-        
+
       case self.get_class
       when "Freshman"
         if req.freshman_hours.nil?
@@ -227,11 +229,11 @@ class User < ActiveRecord::Base
           return req.senior_hours
         end
       end
-    else  
+    else
       if self.student_leader
         return Constants::LEADERSHIP_HOURS
       end
-      
+
       case self.get_class
       when "Freshman"
         return Constants::FRESHMAN_HOURS
@@ -243,14 +245,14 @@ class User < ActiveRecord::Base
         return Constants::SENIOR_HOURS
       end
     end
-   
-    
+
+
     return 0
   end
   ###################### End Build Season ##########################
-  
-  
-  private 
+
+
+  private
     def lowercaseID
       self.userid = self.userid.downcase
     end
