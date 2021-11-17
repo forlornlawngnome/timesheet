@@ -70,16 +70,10 @@ class User < ActiveRecord::Base
   def self.authenticate_custom(email, password)
     #user = find_by_email(email)
     user = User.where("lower(email) like ?", email.downcase).first
-    if user && user.authenticate(params[:password])
+    if user && user.authenticate(password)
       user
     else
       nil
-    end
-  end
-  def encrypt_password
-    if password.present?
-      self.password_salt = BCrypt::Engine.generate_salt
-      self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     end
   end
   def signed_in
