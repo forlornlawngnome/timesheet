@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :school, :school_id, :email, :password, :password_confirmation, :name_first, :name_last, :phone,:location, :admin, :userid, :archive, :form_id, :form_ids, :forms_user_id, :gender, :graduation_year, :student_leader
   # attr_accessible :title, :body
-  attr_accessor :password, :password_confirmation
+  #attr_accessor :password, :password_confirmation
 
   validates_format_of :email, :with => /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i, :message=>"Please enter a valid email."
   validates_uniqueness_of :userid
