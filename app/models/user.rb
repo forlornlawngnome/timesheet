@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
   end
   ###################### END General Info ##########################
   ###################### Authentication ##########################
-  def self.authenticate(email, password)
+  def self.authenticate_custom(email, password)
     #user = find_by_email(email)
     user = User.where("lower(email) like ?", email.downcase).first
     if user && user.authenticate(params[:password])
