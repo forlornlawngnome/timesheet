@@ -14,7 +14,7 @@ gem 'rails'
 gem 'pg'
 
 #gem 'rails_12factor'
-gem "bcrypt", :require => "bcrypt", ">=3.1.15"
+gem "bcrypt",  ">= 3.1.15"
 
 # Gems used only for assets and not required
 # in production environments by default.
