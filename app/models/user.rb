@@ -21,8 +21,8 @@ class User < ActiveRecord::Base
 
   validates_format_of :email, :with => /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i, :message=>"Please enter a valid email."
   validates_uniqueness_of :userid
-  validates_confirmation_of :password
-  validates_presence_of :password, :on => :create
+  #validates_confirmation_of :password
+  #validates_presence_of :password, :on => :create
   validates_presence_of :email
   validates_presence_of :userid
   validates_presence_of :gender
