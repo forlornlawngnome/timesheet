@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails'
 
 # Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+# gem 'rails', :git => 'git://github.com/rails/rails.git', "5.1.4"
 
 #group :development do
 #	gem 'sqlite3'
